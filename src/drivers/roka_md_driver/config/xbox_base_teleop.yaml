@@ -1,0 +1,18 @@
+roka_xbox_teleop:
+  ros__parameters:
+    joy_topic: /joy
+    cmd_vel_topic: /cmd_vel_joy_raw
+    linear_axis: 1
+    angular_axis: 0
+    enable_button: 4
+    # Xbox 360 Controller under SDL: LT is axis 2, +1 released and -1 pressed.
+    # Treat LT as a discrete turbo switch, never as a speed axis.
+    turbo_axis: 2
+    turbo_pressed_threshold: -0.5
+    normal_linear_speed_mps: 0.30
+    turbo_linear_speed_mps: 1.00
+    angular_speed_rps: 0.60
+    axis_deadzone: 0.05
+    joy_timeout_sec: 0.30
+    publish_rate_hz: 20.0
+

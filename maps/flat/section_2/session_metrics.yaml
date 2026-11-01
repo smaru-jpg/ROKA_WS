@@ -1,0 +1,11 @@
+schema_version: 2
+environment: flat
+mapping_backend: slam_toolbox_2d
+acquisition_odometry_topic: /wheel/odom
+recorded_size_bytes: 3826216
+odom_cumulative_distance_m: 2.1394972774219605
+maximum_map_odom_translation_jump_m: 0.05531937811047577
+maximum_map_odom_yaw_jump_deg: 3.599320869011827
+md_disconnect_count: 0
+md_disconnect_total_sec: 0.0
+md_disconnect_max_sec: 0.0

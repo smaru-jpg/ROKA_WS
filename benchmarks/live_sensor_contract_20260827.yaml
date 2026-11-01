@@ -1,0 +1,51 @@
+schema_version: 2
+result: FAIL
+failures:
+- /wheel/odom rate 0.00Hz is below 10.00Hz
+- wheel odometry pose covariance is missing
+- wheel odometry twist covariance is missing
+- /wheel/odom must have exactly one publisher, got 0
+topics:
+  /velodyne_points:
+    count: 80
+    rate_hz: 9.915
+    header_backwards: 0
+    invalid_values: 0
+  /imu/data:
+    count: 800
+    rate_hz: 100.0
+    header_backwards: 0
+    invalid_values: 0
+  /wheel/odom:
+    count: 0
+    rate_hz: 0.0
+    header_backwards: 0
+    invalid_values: 0
+velodyne_fields:
+  x: 7
+  y: 7
+  z: 7
+  intensity: 7
+  ring: 4
+  time: 7
+velodyne_point_time_sec:
+  minimum: 0.03026048094034195
+  maximum: 0.08614348620176315
+  valid: true
+publisher_counts:
+  /velodyne_points: 1
+  /imu/data: 1
+  /wheel/odom: 0
+  /tf: 0
+imu_quality:
+  acceleration_norm_mps2_median: 9.7316
+  quaternion_norm_minimum: 1.0
+  quaternion_norm_maximum: 1.0
+  covariance_valid_fraction: 1
+wheel_odometry_covariance:
+  pose_valid_fraction: null
+  twist_valid_fraction: null
+lidar_imu_nearest_timestamp_p95_ms: 4.827
+tf_parents:
+  velodyne:
+  - base_footprint

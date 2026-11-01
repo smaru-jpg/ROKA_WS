@@ -1,0 +1,20 @@
+traffic_signal_route_gate:
+  ros__parameters:
+    result_topic: /roka/vision/result
+    command_topic: /cmd_vel_mission
+    status_topic: /roka/mission/traffic/status
+    stop_active_topic: /roka/mission/traffic/stop_active
+    route_stop_service: /track_path_follower/stop
+    route_start_service: /track_path_follower/start
+    autonomy_status_topic: /autonomy/control_status
+    stop_labels: [RED]
+    # traffic_0831.pt uses BLUE as the deployed go-signal class name.
+    go_labels: [BLUE]
+    # mission_vision already applies a 3-of-5 temporal vote. Stop immediately
+    # on that accepted RED, but require two accepted BLUE outputs to restart.
+    stop_confirmations: 1
+    go_confirmations: 2
+    zero_publish_rate_hz: 20.0
+    service_retry_sec: 0.50
+    service_timeout_sec: 2.0
+

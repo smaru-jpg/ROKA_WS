@@ -1,0 +1,142 @@
+[ROKA] D435 spring 비전 관찰 | 핵심 로그: /home/ryoo/roka_ws/reports/latest_runtime.log
+[realsense2_camera_node-1] [33m[WARN] [1788459074.818729377] [roka.arm_camera]: re-enable the stream for the change to take effect.[0m
+[realsense2_camera_node-1] [31m[ERROR] [1788459169.916192517] [roka.arm_camera]: The device has been disconnected![0m
+[realsense2_camera_node-1]  04/09 03:12:57,755 ERROR [132472478094912] (librealsense-exception.h:53) map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:12:57,755 ERROR [132472478094912] (uvc-sensor.cpp:431) acquire_power failed: map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:12:57,755 ERROR [132472478094912] (global_timestamp_reader.cpp:253) Error during time_diff_keeper polling: map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:12:59,304 ERROR [132472444524096] (librealsense-exception.h:53) map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:12:59,304 ERROR [132472444524096] (uvc-sensor.cpp:431) acquire_power failed: map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:12:59,304 ERROR [132472444524096] (global_timestamp_reader.cpp:253) Error during time_diff_keeper polling: map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:13:00,854 ERROR [132472478094912] (librealsense-exception.h:53) map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:13:00,854 ERROR [132472478094912] (uvc-sensor.cpp:431) acquire_power failed: map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[realsense2_camera_node-1]  04/09 03:13:00,854 ERROR [132472478094912] (global_timestamp_reader.cpp:253) Error during time_diff_keeper polling: map_device_descriptor Cannot open '/dev/video4 Last Error: No such file or directory
+[vision_node-2] [33m[WARN] [1788459222.963774361] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=2.0s[0m
+[vision_node-2] [33m[WARN] [1788459227.963610339] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=7.0s[0m
+[vision_node-2] [33m[WARN] [1788459232.964356972] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=12.0s[0m
+[vision_node-2] [33m[WARN] [1788459237.964396022] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=17.0s[0m
+[vision_node-2] [33m[WARN] [1788459243.063616665] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=22.1s[0m
+[vision_node-2] [33m[WARN] [1788459248.163590731] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=27.2s[0m
+[vision_node-2] [33m[WARN] [1788459253.263432516] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=32.3s[0m
+[vision_node-2] [33m[WARN] [1788459258.263494839] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=37.3s[0m
+[vision_node-2] [33m[WARN] [1788459263.263493092] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=42.3s[0m
+[vision_node-2] [33m[WARN] [1788459268.363618413] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=47.4s[0m
+[vision_node-2] [33m[WARN] [1788459273.364411888] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=52.4s[0m
+[vision_node-2] [33m[WARN] [1788459278.463550212] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=57.5s[0m
+[vision_node-2] [33m[WARN] [1788459283.464195274] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=62.5s[0m
+[vision_node-2] [33m[WARN] [1788459288.564110613] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=67.6s[0m
+[vision_node-2] [33m[WARN] [1788459293.663575205] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=72.7s[0m
+[vision_node-2] [33m[WARN] [1788459298.664183268] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=77.7s[0m
+[vision_node-2] [33m[WARN] [1788459303.763455556] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=82.8s[0m
+[vision_node-2] [33m[WARN] [1788459308.763629994] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=87.8s[0m
+[vision_node-2] [33m[WARN] [1788459313.863649943] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=92.9s[0m
+[vision_node-2] [33m[WARN] [1788459318.963502209] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=98.0s[0m
+[vision_node-2] [33m[WARN] [1788459324.063580944] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=103.1s[0m
+[vision_node-2] [33m[WARN] [1788459329.063916085] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=108.1s[0m
+[vision_node-2] [33m[WARN] [1788459334.164324552] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=113.2s[0m
+[vision_node-2] [33m[WARN] [1788459339.264756691] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=118.3s[0m
+[vision_node-2] [33m[WARN] [1788459344.363477154] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=123.4s[0m
+[vision_node-2] [33m[WARN] [1788459349.364198273] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=128.4s[0m
+[vision_node-2] [33m[WARN] [1788459354.363688958] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=133.4s[0m
+[vision_node-2] [33m[WARN] [1788459359.364477154] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=138.4s[0m
+[vision_node-2] [33m[WARN] [1788459364.464214469] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=143.5s[0m
+[vision_node-2] [33m[WARN] [1788459369.563575813] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=148.6s[0m
+[vision_node-2] [33m[WARN] [1788459374.564243673] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=153.6s[0m
+[vision_node-2] [33m[WARN] [1788459379.664393091] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=158.7s[0m
+[vision_node-2] [33m[WARN] [1788459384.763554738] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=163.8s[0m
+[vision_node-2] [33m[WARN] [1788459389.863551229] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=168.9s[0m
+[vision_node-2] [33m[WARN] [1788459394.863549714] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=173.9s[0m
+[vision_node-2] [33m[WARN] [1788459399.963662025] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=179.0s[0m
+[vision_node-2] [33m[WARN] [1788459404.963923793] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=184.0s[0m
+[vision_node-2] [33m[WARN] [1788459410.063596727] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=189.1s[0m
+[vision_node-2] [33m[WARN] [1788459415.063851665] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=194.1s[0m
+[vision_node-2] [33m[WARN] [1788459420.064037007] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=199.1s[0m
+[vision_node-2] [33m[WARN] [1788459425.163588216] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=204.2s[0m
+[vision_node-2] [33m[WARN] [1788459430.164189023] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=209.2s[0m
+[vision_node-2] [33m[WARN] [1788459435.263790605] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=214.3s[0m
+[vision_node-2] [33m[WARN] [1788459440.363613404] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=219.4s[0m
+[vision_node-2] [33m[WARN] [1788459445.463953814] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=224.5s[0m
+[vision_node-2] [33m[WARN] [1788459450.466051208] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=229.5s[0m
+[vision_node-2] [33m[WARN] [1788459455.563938688] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=234.6s[0m
+[vision_node-2] [33m[WARN] [1788459460.663545803] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=239.7s[0m
+[vision_node-2] [33m[WARN] [1788459465.664626431] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=244.7s[0m
+[vision_node-2] [33m[WARN] [1788459470.763748826] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=249.8s[0m
+[vision_node-2] [33m[WARN] [1788459475.863875790] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=254.9s[0m
+[vision_node-2] [33m[WARN] [1788459480.963438779] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=260.0s[0m
+[vision_node-2] [33m[WARN] [1788459485.965286023] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=265.0s[0m
+[vision_node-2] [33m[WARN] [1788459491.064185540] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=270.1s[0m
+[vision_node-2] [33m[WARN] [1788459496.164272030] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=275.2s[0m
+[vision_node-2] [33m[WARN] [1788459501.263607052] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=280.3s[0m
+[vision_node-2] [33m[WARN] [1788459506.263755512] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=285.3s[0m
+[vision_node-2] [33m[WARN] [1788459511.363399777] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=290.4s[0m
+[vision_node-2] [33m[WARN] [1788459516.363967487] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=295.4s[0m
+[vision_node-2] [33m[WARN] [1788459521.463541420] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=300.5s[0m
+[vision_node-2] [33m[WARN] [1788459526.463794428] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=305.5s[0m
+[vision_node-2] [33m[WARN] [1788459531.466976977] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=310.5s[0m
+[vision_node-2] [33m[WARN] [1788459536.563775114] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=315.6s[0m
+[vision_node-2] [33m[WARN] [1788459541.663651113] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=320.7s[0m
+[vision_node-2] [33m[WARN] [1788459546.663909310] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=325.7s[0m
+[vision_node-2] [33m[WARN] [1788459551.764687185] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=330.8s[0m
+[vision_node-2] [33m[WARN] [1788459556.863467611] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=335.9s[0m
+[vision_node-2] [33m[WARN] [1788459561.864498439] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=340.9s[0m
+[vision_node-2] [33m[WARN] [1788459566.964580624] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=346.0s[0m
+[vision_node-2] [33m[WARN] [1788459572.063496791] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=351.1s[0m
+[vision_node-2] [33m[WARN] [1788459577.064494174] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=356.1s[0m
+[vision_node-2] [33m[WARN] [1788459582.164168987] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=361.2s[0m
+[vision_node-2] [33m[WARN] [1788459587.264232740] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=366.3s[0m
+[vision_node-2] [33m[WARN] [1788459592.363446360] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=371.4s[0m
+[vision_node-2] [33m[WARN] [1788459597.364490134] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=376.4s[0m
+[vision_node-2] [33m[WARN] [1788459602.463896163] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=381.5s[0m
+[vision_node-2] [33m[WARN] [1788459607.563602122] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=386.6s[0m
+[vision_node-2] [33m[WARN] [1788459612.563855543] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=391.6s[0m
+[vision_node-2] [33m[WARN] [1788459617.564703743] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=396.6s[0m
+[vision_node-2] [33m[WARN] [1788459622.663685278] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=401.7s[0m
+[vision_node-2] [33m[WARN] [1788459627.664486479] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=406.7s[0m
+[vision_node-2] [33m[WARN] [1788459632.763776069] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=411.8s[0m
+[vision_node-2] [33m[WARN] [1788459637.763802157] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=416.8s[0m
+[vision_node-2] [33m[WARN] [1788459642.763893832] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=421.8s[0m
+[vision_node-2] [33m[WARN] [1788459647.863503494] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=426.9s[0m
+[vision_node-2] [33m[WARN] [1788459652.864318821] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=431.9s[0m
+[vision_node-2] [33m[WARN] [1788459657.864809728] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=436.9s[0m
+[vision_node-2] [33m[WARN] [1788459662.963814401] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=442.0s[0m
+[vision_node-2] [33m[WARN] [1788459668.064092450] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=447.1s[0m
+[vision_node-2] [33m[WARN] [1788459673.066028437] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=452.1s[0m
+[vision_node-2] [33m[WARN] [1788459678.163622883] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=457.2s[0m
+[vision_node-2] [33m[WARN] [1788459683.263551141] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=462.3s[0m
+[vision_node-2] [33m[WARN] [1788459688.265166776] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=467.3s[0m
+[vision_node-2] [33m[WARN] [1788459693.363645475] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=472.4s[0m
+[vision_node-2] [33m[WARN] [1788459698.364221194] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=477.4s[0m
+[vision_node-2] [33m[WARN] [1788459703.463516239] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=482.5s[0m
+[vision_node-2] [33m[WARN] [1788459708.464985626] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=487.5s[0m
+[vision_node-2] [33m[WARN] [1788459713.563704694] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=492.6s[0m
+[vision_node-2] [33m[WARN] [1788459718.563817396] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=497.6s[0m
+[vision_node-2] [33m[WARN] [1788459723.663666676] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=502.7s[0m
+[vision_node-2] [33m[WARN] [1788459728.763961841] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=507.8s[0m
+[vision_node-2] [33m[WARN] [1788459733.864609542] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=512.9s[0m
+[vision_node-2] [33m[WARN] [1788459738.963915898] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=518.0s[0m
+[vision_node-2] [33m[WARN] [1788459744.063617272] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=523.1s[0m
+[vision_node-2] [33m[WARN] [1788459749.063670632] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=528.1s[0m
+[vision_node-2] [33m[WARN] [1788459754.063690562] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=533.1s[0m
+[vision_node-2] [33m[WARN] [1788459759.163645550] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=538.2s[0m
+[vision_node-2] [33m[WARN] [1788459764.263749650] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=543.3s[0m
+[vision_node-2] [33m[WARN] [1788459769.363745631] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=548.4s[0m
+[vision_node-2] [33m[WARN] [1788459774.364229135] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=553.4s[0m
+[vision_node-2] [33m[WARN] [1788459779.364342487] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=558.4s[0m
+[vision_node-2] [33m[WARN] [1788459784.365746472] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=563.4s[0m
+[vision_node-2] [33m[WARN] [1788459789.463542481] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=568.5s[0m
+[vision_node-2] [33m[WARN] [1788459794.463624729] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=573.5s[0m
+[vision_node-2] [33m[WARN] [1788459799.563733245] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=578.6s[0m
+[vision_node-2] [33m[WARN] [1788459804.565051198] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=583.6s[0m
+[vision_node-2] [33m[WARN] [1788459809.663385810] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=588.7s[0m
+[vision_node-2] [33m[WARN] [1788459814.663760944] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=593.7s[0m
+[vision_node-2] [33m[WARN] [1788459819.664443443] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=598.7s[0m
+[vision_node-2] [33m[WARN] [1788459824.763902057] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=603.8s[0m
+[vision_node-2] [33m[WARN] [1788459829.863481189] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=608.9s[0m
+[vision_node-2] [33m[WARN] [1788459834.963612142] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=614.0s[0m
+[vision_node-2] [33m[WARN] [1788459839.963656104] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=619.0s[0m
+[vision_node-2] [33m[WARN] [1788459844.964556595] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=624.0s[0m
+[vision_node-2] [33m[WARN] [1788459850.063793732] [mission_vision]: Waiting for camera on /roka/arm_camera/color/image_raw; last frame age=629.1s[0m
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[ERROR] [realsense2_camera_node-1]: process has died [pid 575578, exit code -2, cmd '/opt/ros/humble/lib/realsense2_camera/realsense2_camera_node --ros-args --log-level warn --ros-args -r __node:=arm_camera -r __ns:=/roka --params-file /tmp/launch_params_ak8hr1ju --params-file /tmp/launch_params_ak9frvym'].
+[ERROR] [vision_node-2]: process has died [pid 575580, exit code -2, cmd '/home/ryoo/roka_ws/install/mission_vision/lib/mission_vision/vision_node --ros-args --log-level warn --ros-args -r __node:=mission_vision --params-file /tmp/launch_params_nv8xc_of'].
+[LOG][SUMMARY] 동일 경고/오류 10줄 추가 반복 생략

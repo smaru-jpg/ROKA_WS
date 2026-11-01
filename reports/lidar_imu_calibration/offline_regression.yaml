@@ -1,0 +1,36 @@
+schema_version: 1
+generated_utc: '2026-08-30T15:00:30+00:00'
+source_bag: maps/flat/.backup/section_2/sensors
+configuration:
+  time_offset_lidar_to_imu_sec: -0.130492167
+  point_filter_num: 1
+  filter_size_surf_m: 0.10
+  filter_size_map_m: 0.10
+  blind_m: 0.30
+result: FAIL
+assessment: >-
+  Two-run timing calibration materially reduces drift, but this flat replay
+  still exceeds the 0.150 m FAST-LIO Z-span acceptance limit. Dynamic
+  calibration remains conditionally applied and requires a live stationary
+  startup plus a new track-map check before 3D autonomy approval.
+comparison:
+  uncalibrated_z_span_m: 3.8723483245
+  previous_phase_residual_z_span_m: 2.3936427912
+  applied_common_branch_z_span_m: 0.3203504074
+  improvement_vs_uncalibrated_percent: 91.7
+  improvement_vs_previous_percent: 86.6
+lio:
+  odom_count: 335
+  cloud_count: 335
+  path_length_m: 7.1655731531
+  maximum_step_m: 0.0779356805
+  maximum_yaw_step_rad: 0.0122264934
+  z_span_m: 0.3203504074
+  displacement_m: 1.2360525711
+pgo:
+  path_pose_count: 25
+  save_success: true
+  saved_points: 2059
+  saved_keyframes: 25
+failures:
+  - FAST-LIO Z span exceeds 0.150 m

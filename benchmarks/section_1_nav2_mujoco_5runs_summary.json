@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-25T09:06:42+09:00",
+  "csv_file": "benchmarks/section_1_nav2_mujoco_5runs.csv",
+  "runs": 5,
+  "successes": 5,
+  "completion_rate": 1.0,
+  "worst_lateral_error_m": 0.1184,
+  "maximum_abs_roll_deg": 0.011,
+  "maximum_abs_pitch_deg": 0.022,
+  "decision": "PASS",
+  "recommendation": "manual_speed_step_test_allowed"
+}

@@ -1,0 +1,11 @@
+schema_version: 1
+result: PASS
+ready: true
+status: localized; fitness=0.015945
+pose_count: 80
+maximum_step_m: 0.18436887319505424
+maximum_yaw_step_rad: 0.20906750530488483
+maximum_linear_rate_mps: 0.4612387805564389
+maximum_yaw_rate_radps: 0.5231054635539969
+reason: 80 localized poses remained stable for 31.7s
+observation_sec: 31.715683214999444

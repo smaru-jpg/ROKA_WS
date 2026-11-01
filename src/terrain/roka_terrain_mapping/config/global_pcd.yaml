@@ -1,0 +1,24 @@
+pcl_grid_map_extraction:
+  num_processing_threads: 4
+  cloud_transform:
+    translation: {x: 0.0, y: 0.0, z: 0.0}
+    rotation: {r: 0.0, p: 0.0, y: 0.0}
+  cluster_extraction:
+    # The optimized SC-PGO cloud is already voxelized.  A 0.25 m vertical
+    # cluster tolerance keeps ramp surfaces together while separating walls
+    # and objects that share the same XY cell.
+    cluster_tolerance: 0.25
+    min_num_points: 1
+    max_num_points: 1000000
+  outlier_removal:
+    is_remove_outliers: true
+    mean_K: 10
+    stddev_threshold: 1.0
+  downsampling:
+    is_downsample_cloud: false
+    voxel_size: {x: 0.05, y: 0.05, z: 0.05}
+  grid_map:
+    min_num_points_per_cell: 1
+    resolution: 0.10
+    height_type: 0
+    height_thresh: 0.50

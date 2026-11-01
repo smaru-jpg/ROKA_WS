@@ -1,0 +1,191 @@
+schema_version: 3
+source: maps/section_2/sensors
+bag_fingerprint:
+  metadata_sha256: 37c8a6bb127ebf7b5e6ef8bc0fb966b4b576a8e9bfde2a02ebe0060d92c61e6a
+  data_files:
+  - name: sensors_0.db3.zstd
+    size_bytes: 6221604
+result: PASS
+failures: []
+warnings: []
+topics:
+  /velodyne_packets:
+    type: velodyne_msgs/msg/VelodyneScan
+    expected_type: velodyne_msgs/msg/VelodyneScan
+    count: 184
+    rate_hz: 9.915
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: 101.08
+    record_minus_header_median_ms: 100.006
+    record_minus_header_p95_ms: 101.383
+    invalid_values: 0
+  /imu/data:
+    type: sensor_msgs/msg/Imu
+    expected_type: sensor_msgs/msg/Imu
+    count: 1859
+    rate_hz: 100.0
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: 10.0
+    record_minus_header_median_ms: 0.848
+    record_minus_header_p95_ms: 1.554
+    invalid_values: 0
+  /wheel/odom:
+    type: nav_msgs/msg/Odometry
+    expected_type: nav_msgs/msg/Odometry
+    count: 376
+    rate_hz: 20.04
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: 92.228
+    record_minus_header_median_ms: 0.548
+    record_minus_header_p95_ms: 1.36
+    invalid_values: 0
+  /tf:
+    type: tf2_msgs/msg/TFMessage
+    expected_type: tf2_msgs/msg/TFMessage
+    count: 2848
+    rate_hz: 0.0
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: null
+    record_minus_header_median_ms: null
+    record_minus_header_p95_ms: null
+    invalid_values: 0
+  /tf_static:
+    type: tf2_msgs/msg/TFMessage
+    expected_type: tf2_msgs/msg/TFMessage
+    count: 2
+    rate_hz: 0.0
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: null
+    record_minus_header_median_ms: null
+    record_minus_header_p95_ms: null
+    invalid_values: 0
+  /md/base_connected:
+    type: std_msgs/msg/Bool
+    expected_type: std_msgs/msg/Bool
+    count: 376
+    rate_hz: 20.04
+    invalid_values: 0
+  /md/left/raw_state:
+    type: std_msgs/msg/Float64MultiArray
+    expected_type: std_msgs/msg/Float64MultiArray
+    count: 93
+    rate_hz: 4.945
+    invalid_values: 0
+  /md/right/raw_state:
+    type: std_msgs/msg/Float64MultiArray
+    expected_type: std_msgs/msg/Float64MultiArray
+    count: 94
+    rate_hz: 4.999
+    invalid_values: 0
+  /diagnostics:
+    type: diagnostic_msgs/msg/DiagnosticArray
+    expected_type: diagnostic_msgs/msg/DiagnosticArray
+    count: 378
+    rate_hz: 19.613
+    invalid_values: 0
+velodyne_packets_per_scan:
+  minimum: 76
+  maximum: 76
+  median: 76.0
+lidar_imu_timing:
+  nearest_imu_minus_lidar_median_ms: 0.088
+  nearest_absolute_difference_p95_ms: 4.791
+calibration_excitation:
+  imu_peak_abs_gyro_radps:
+  - 0.0646
+  - 0.0908
+  - 0.0646
+  wheel_peak_abs_linear_mps: 0.2292
+  wheel_peak_abs_yaw_radps: 0.0341
+  sufficient_yaw_excitation: false
+  sufficient_roll_pitch_excitation: false
+imu_values:
+  acceleration_norm_mps2:
+    median: 9.7295
+    p05: 9.5531
+    p95: 9.9015
+  quaternion_norm:
+    minimum: 1.0
+    maximum: 1.0
+  covariance:
+    orientation_available_fraction: 1
+    angular_velocity_available_fraction: 1
+    linear_acceleration_available_fraction: 1
+wheel_odometry_covariance:
+  pose_nonzero_fraction: 1
+  twist_nonzero_fraction: 1
+md_feedback:
+  base_connected_false_samples: 0
+  controllers:
+    /md/left/raw_state:
+      samples: 93
+      peak_current_a: 0.1
+      nonzero_state_samples: 0
+    /md/right/raw_state:
+      samples: 94
+      peak_current_a: 0.0
+      nonzero_state_samples: 0
+diagnostics:
+  status_count: 415
+  ok_status_count: 364
+  warning_status_count: 51
+  error_status_count: 0
+  issues:
+  - name: 'ekf_filter_node: Filter diagnostic updater'
+    level: 1
+    severity: WARN
+    message: Potentially erroneous data or settings detected for a robot_localization
+      state estimation this->
+    count: 37
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY FAULT: non-finite command'
+    count: 7
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY CROSS_SLOPE: ok'
+    count: 3
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY FAULT: terrain risk exceeds 100% limit'
+    count: 2
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY FAULT: ok'
+    count: 1
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY FAULT: terrain map stale or invalid'
+    count: 1
+  terrain_extrema:
+    maximum_risk: 0.0
+    maximum_abs_relative_roll_deg: 0.0
+    maximum_abs_relative_pitch_deg: 0.0
+    maximum_abs_dynamic_roll_load_deg: 0.0
+    maximum_abs_dynamic_pitch_load_deg: 0.0
+  terrain_extrema_locations: {}
+tf_parents:
+  base_footprint:
+  - odom
+  base_link:
+  - odom
+  imu_link:
+  - base_link
+  odom:
+  - map
+  velodyne:
+  - base_link
+runtime_checks_still_required:
+- /velodyne_points fields x,y,z,intensity,ring,time
+- LiDAR-to-IMU physical time offset under sufficient angular motion
+- single live publisher ownership for dynamic TF

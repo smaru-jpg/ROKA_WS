@@ -1,0 +1,11 @@
+name: SC_PGO_ROS2
+upstream: https://github.com/taehun-kmu/SC_PGO
+branch: develop
+commit: a95c8456bf971f9cefc9f566ec49099c6a294465
+license: BSD-3-Clause
+local_changes:
+  - PK-3A repeated-module loop gates and stable-candidate confirmation.
+  - Non-destructive output staging and compressed map export.
+  - Per-keyframe PCD persistence disabled.
+  - Atomic binary keyframe-pose and Scan Context archives for map reuse/audit.
+  - VLP-16/FAST-LIO2 topic and frame configuration.

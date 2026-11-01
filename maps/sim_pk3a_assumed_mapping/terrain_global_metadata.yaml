@@ -1,0 +1,6 @@
+schema_version: 1
+source_pcd: surface.pcd
+topic: /terrain/static_map
+pipeline: ANYbotics grid_map_pcl + grid_map_filters
+role: mujoco_assumed_mapped_surface
+field_navigation_authorized: false

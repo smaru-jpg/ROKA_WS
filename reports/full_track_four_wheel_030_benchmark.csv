@@ -1,0 +1,2 @@
+run,reset_keyframe,success,outcome,sim_duration_sec,wall_duration_sec,max_progress_pct,max_abs_lateral_error_m,rms_lateral_error_m,max_abs_heading_error_deg,max_abs_roll_deg,max_abs_pitch_deg,min_reference_height_delta_m,min_tire_clearance_m,recovery_count,recovery_time_sec,corridor_unavailable_samples,max_linear_command_mps,max_angular_command_radps,status_samples
+1,,1,completed_lap,353.434,177.2,100.0,0.0743,0.027,13.758,40.215,32.543,0.014,-0.0341,0,0.0,0,0.2965,0.6,10598

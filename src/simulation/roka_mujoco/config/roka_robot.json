@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "name": "roka_mobile_manipulator",
+  "source_units": "millimetre",
+  "cad_axes": {
+    "forward": "+X",
+    "up": "+Y",
+    "left": "-Z"
+  },
+  "mujoco_axes": {
+    "forward": "+X",
+    "up": "+Z",
+    "left": "+Y"
+  },
+  "wheel_identification": {
+    "diameter_mm": 206.0,
+    "axial_width_mm": 118.2,
+    "dimension_tolerance_mm": 2.0,
+    "component_margin_mm": 15.0,
+    "minimum_main_component_faces": 10000
+  },
+  "wheel_physics": {
+    "radius_m": 0.103,
+    "half_width_m": 0.0591,
+    "mass_kg_each": 4.2,
+    "mass_status": "provisional_until_measured",
+    "rated_speed_rpm": 200.0,
+    "maximum_speed_rpm": 300.0,
+    "rated_torque_nm": 8.0,
+    "maximum_torque_nm": 16.0,
+    "joint_damping_nms_per_rad": 0.15,
+    "joint_frictionloss_nm": 0.05,
+    "joint_armature_kg_m2": 0.02,
+    "velocity_gain": 800.0,
+    "velocity_gain_status": "simulation_tuning_for_zero_command_slope_hold_with_manufacturer_torque_limit_unchanged",
+    "contact": {
+      "friction": [1.05, 0.015, 0.003],
+      "condim": 6,
+      "solref": [0.008, 1.1],
+      "solimp": [0.92, 0.99, 0.002, 0.5, 2.0]
+    }
+  },
+  "base_physics": {
+    "mass_kg_excluding_wheels": 26.0,
+    "mass_status": "provisional_cad_envelope_budget",
+    "centre_of_mass_m": [0.0, 0.0, 0.18],
+    "diagonal_inertia_kg_m2": [0.9, 1.4, 1.5],
+    "collision_boxes": [
+      {
+        "name": "chassis",
+        "position_m": [-0.005, 0.0, 0.142],
+        "half_size_m": [0.237, 0.188, 0.078]
+      },
+      {
+        "name": "arm_pedestal",
+        "position_m": [0.065, 0.0, 0.265],
+        "half_size_m": [0.065, 0.075, 0.105]
+      },
+      {
+        "name": "arm_envelope",
+        "position_m": [0.25, 0.0, 0.39],
+        "half_size_m": [0.19, 0.075, 0.075]
+      }
+    ]
+  },
+  "sensors": {
+    "velodyne": {
+      "frame_id": "velodyne",
+      "data_origin_position_m": [0.1815, 0.0, 0.112325],
+      "rpy_rad": [0.0, 0.0, 0.0],
+      "position_status": "cad_mount_plus_official_37_7_mm_data_origin_verify_on_hardware"
+    },
+    "imu": {
+      "frame_id": "imu_link",
+      "position_m": [0.1815, 0.0, 0.206625],
+      "rpy_rad": [0.0, 0.0, 0.0],
+      "mount_status": "operator_reported_same_xy_and_approximately_60_mm_above_vlp16_top"
+    }
+  },
+  "driver_camera": {
+    "name": "driver_camera",
+    "model": "Intel RealSense D435 wide driver view",
+    "position_m": [0.53568, -0.00011, 0.43009],
+    "xyaxes": [0.0, -1.0, 0.0, 0.0, 0.0, 1.0],
+    "vertical_fov_deg": 58.0,
+    "offscreen_resolution": [640, 360],
+    "source_status": "STL component envelope matched to the STEP RealSense_D435 occurrence"
+  },
+  "initial_pose": {
+    "position_m": [-0.63, 0.0, 0.417791739],
+    "roll_deg": 0.0,
+    "pitch_deg": 27.111793555,
+    "yaw_deg": 0.0,
+    "track_instance": "S00_DB1",
+    "interpretation": "Fitted to the S00_DB1 downhill profile with 0.11 mm maximum initial MuJoCo contact penetration."
+  },
+  "simulation_stage": {
+    "mobile_base": "four_independent_driven_wheels",
+    "arm": "locked_with_base_until_step_joint_axis_audit",
+    "commercial_sensor_geometry": "included_in_visual_mesh",
+    "collision_policy": "box_base_and_ellipsoid_wheels"
+  }
+}

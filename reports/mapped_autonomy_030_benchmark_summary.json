@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-03T11:31:52+09:00",
+  "csv_file": "/home/ryoo/roka_ws/reports/mapped_autonomy_030_benchmark.csv",
+  "runs": 0,
+  "successes": 0,
+  "completion_rate": 0.0,
+  "worst_lateral_error_m": Infinity,
+  "maximum_abs_roll_deg": Infinity,
+  "maximum_abs_pitch_deg": Infinity,
+  "decision": "FAIL",
+  "recommendation": "do_not_increase_speed"
+}

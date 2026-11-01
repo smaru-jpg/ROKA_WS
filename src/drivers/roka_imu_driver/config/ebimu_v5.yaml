@@ -1,0 +1,47 @@
+ebimu_driver:
+  ros__parameters:
+    # Confirmed on the installed unit with <ver>: EBIMU-9DOFV5 R3.0a.
+    # Resolve either the tested CP210x or a CH340/CH341 TTL adapter, while
+    # explicitly excluding the two FTDI motor-controller adapters.
+    serial_port: auto
+    # The installed V5 has this value stored in nonvolatile memory.
+    baud_rate: 921600
+    frame_id: imu_link
+
+    # Validated binary quaternion + gyro + raw acceleration + timestamp at 100 Hz.
+    expected_rate_hz: 100.0
+    polling_mode: false
+    # Resume a stopped sensor without rewriting flash. If the sensor was
+    # intentionally stored as <sor0>, automatically request samples with '*'.
+    send_start_on_open: true
+    auto_poll_fallback: true
+    auto_poll_delay_sec: 0.50
+    output_code: binary
+    orientation_format: quaternion
+    output_gyro: true
+    output_accelerometer: true
+    output_magnetometer: false
+    output_temperature: false
+    output_timestamp: true
+    use_sensor_timestamp: true
+
+    # Mount the PCB so its printed axes are X forward, Y left, Z up.
+    # This is ROS REP-103 FLU and therefore needs no software rotation.
+    sensor_to_imu_rpy: [0.0, 0.0, 0.0]
+
+    # Hardware yaw test: V5 R3.0a quaternion is world->sensor. Invert it for
+    # the sensor->world orientation required by sensor_msgs/Imu.
+    orientation_world_to_sensor: true
+
+    # Six-face data passed and the installed V5 yaw sign was checked. Absolute
+    # yaw is still excluded from the EKF; roll/pitch are now valid for leveling.
+    orientation_validated: true
+    orientation_stddev_rpy: [0.035, 0.035, 0.175]
+    angular_velocity_stddev: [0.02, 0.02, 0.02]
+    linear_acceleration_stddev: [0.20, 0.20, 0.20]
+
+    reconnect_period_sec: 2.0
+    data_timeout_sec: 0.25
+
+    # Unlock only for the one-time <soc>/<sof>/<sor>/... commissioning service.
+    allow_sensor_configuration: false

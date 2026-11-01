@@ -1,0 +1,20 @@
+model_file: box_marker_best.pt
+sha256: 059e5c485f5162659ae76b6492d7a8291bbcbce6ab75d1dbbf555f6e9f7acc95
+task: detect
+classes:
+  0: Box
+  1: Box-marker
+training:
+  base_model: yolo26n.pt
+  image_size: 640
+  epochs: 100
+dataset:
+  name: Box_marker.v1i.yolo26
+  source: https://universe.roboflow.com/donggeon/box_marker/dataset/1
+  license: CC BY 4.0
+runtime_validation:
+  date: 2026-08-29
+  ultralytics: 8.4.131
+  torch: 2.13.0+cu130
+  cpu_steady_median_sec: 0.040
+  rtx4050_steady_median_sec: 0.007

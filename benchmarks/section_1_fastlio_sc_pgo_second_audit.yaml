@@ -1,0 +1,27 @@
+schema_version: 2
+source: maps/section_1/sensors
+validated_local: '2026-08-27T08:25:00+09:00'
+result: FAIL
+lio:
+  odom_count: 241
+  cloud_count: 241
+  path_length_m: 3.7090378359209506
+  maximum_step_m: 0.034585773645336736
+  maximum_yaw_step_rad: 0.04133114849563628
+  z_span_m: 0.5132940236859244
+  displacement_m: 2.4547929249011173
+pgo:
+  path_pose_count: 15
+  save_success: true
+  save_message: saved 2286 optimized points and 15 keyframes
+  loop_constraint_unit_tests: PASS
+failures:
+  - FAST-LIO Z span exceeds 0.150 m
+decision:
+  production_eligible: false
+  flat_mapping_backend: slam_toolbox_2d
+  inline_fastlio_sc_pgo_locked: true
+  unlock_requires:
+    - dynamic LiDAR-to-IMU rotation calibration
+    - dynamic LiDAR-to-IMU temporal calibration
+    - a new full closed-loop inline mapping bag

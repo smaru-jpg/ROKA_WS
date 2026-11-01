@@ -1,0 +1,3 @@
+run,reset_keyframe,success,outcome,sim_duration_sec,wall_duration_sec,max_progress_pct,max_abs_lateral_error_m,rms_lateral_error_m,max_abs_heading_error_deg,max_abs_roll_deg,max_abs_pitch_deg,min_reference_height_delta_m,min_tire_clearance_m,recovery_count,recovery_time_sec,corridor_unavailable_samples,max_linear_command_mps,max_angular_command_radps,status_samples
+1,mapped_nominal,0,episode_timeout,120.073,120.6,55.901,0.413,0.3951,15.592,0.012,0.033,,,0,0.0,0,0.3,0.7036,2412
+2,mapped_left_8cm,0,Nav2 vehicle left the mapped path corridor,122.673,0.1,55.901,4.1837,4.1801,45.152,0.005,0.001,,,0,0.0,2,0.0583,0.15,2

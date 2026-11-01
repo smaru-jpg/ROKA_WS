@@ -1,0 +1,26 @@
+sim_safe_path_controller:
+  ros__parameters:
+    use_sim_time: true
+    odom_topic: /simulator/floating_base_state
+    cmd_vel_topic: /sim/cmd_vel_nav
+    auto_start: false
+    target_laps: 0
+    control_rate_hz: 30.0
+    lookahead_distance_m: 0.35
+    speed_scale: 2.0
+    maximum_linear_speed_mps: 0.30
+    maximum_angular_speed_radps: 0.45
+    linear_acceleration_mps2: 0.30
+    linear_deceleration_mps2: 0.45
+    maximum_cross_track_error_m: 0.30
+    required_wheel_edge_m: 0.1091
+    maximum_roll_deg: 85.0
+    maximum_roll_error_deg: 60.0
+    maximum_pitch_deg: 60.0
+    lateral_speed_soft_limit_mps: 0.08
+    maximum_lateral_speed_mps: 0.25
+    lateral_motion_hold_sec: 1.00
+    minimum_crawl_speed_mps: 0.035
+    slip_ratio: 0.20
+    slip_hold_sec: 1.50
+    odom_timeout_sec: 0.30

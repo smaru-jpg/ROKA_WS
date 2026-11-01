@@ -1,0 +1,21 @@
+/**:
+  ros__parameters:
+    # ROKA Xbox BT 9C:AA:1B:72:51:9D / USB 30324E4530303834353334393035.
+    axis_linear:
+      x: 1
+    # LB only: staged 0.40 m/s. LB+RB: near-double 0.55 m/s.
+    scale_linear:
+      x: 0.40
+    scale_linear_turbo:
+      x: 0.55
+    axis_angular:
+      yaw: 0
+    scale_angular:
+      yaw: 0.75
+    scale_angular_turbo:
+      yaw: 1.00
+    enable_button: 4
+    enable_turbo_button: 5
+    require_enable_button: true
+    inverted_reverse: false
+    publish_stamped_twist: false

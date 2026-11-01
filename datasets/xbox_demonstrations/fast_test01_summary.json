@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "csv_file": "datasets/xbox_demonstrations/fast_test01.csv",
+  "rows": 5739,
+  "enabled_rows": 4739,
+  "nonzero_command_rows": 4728,
+  "unsafe_rows": 662,
+  "maximum_abs_roll_deg": 42.07917461227989,
+  "maximum_abs_pitch_deg": 34.03160318085603,
+  "minimum_actual_edge_m": 0.02500000037252903,
+  "minimum_tire_edge_clearance_m": -0.03409999962747097,
+  "tire_half_width_m": 0.0591,
+  "edge_safety_margin_m": 0.05
+}

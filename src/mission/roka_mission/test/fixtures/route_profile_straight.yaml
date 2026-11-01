@@ -1,0 +1,5 @@
+frame_id: map
+closed_loop: false
+points:
+  - {x: 0.0, y: 0.0, yaw: 0.0, speed_mps: 0.10}
+  - {x: 0.3333, y: 0.0, yaw: 0.0, speed_mps: 0.10}

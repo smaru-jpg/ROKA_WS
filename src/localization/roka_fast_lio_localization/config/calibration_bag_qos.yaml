@@ -1,0 +1,11 @@
+/imu/data:
+  history: keep_last
+  depth: 200
+  reliability: best_effort
+  durability: volatile
+
+/velodyne_packets:
+  history: keep_last
+  depth: 20
+  reliability: best_effort
+  durability: volatile

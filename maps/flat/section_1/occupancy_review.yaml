@@ -1,0 +1,13 @@
+schema_version: 1
+status: approved
+approved_utc: '2026-09-02T19:54:25.175103+00:00'
+source_yaml: occupancy.yaml
+active_yaml: occupancy.yaml
+source_yaml_sha256: b318a5592be7c43a9a5c18538e66a64d475bd48a01fb7ee72b545be368b1d27a
+active_yaml_sha256: b318a5592be7c43a9a5c18538e66a64d475bd48a01fb7ee72b545be368b1d27a
+source_image: occupancy.pgm
+active_image: occupancy.pgm
+source_image_sha256: a66fd29dfa1086d963bc522028fa6ffc81fa81d6bd92ccd6f37b43a234ac1aac
+active_image_sha256: a66fd29dfa1086d963bc522028fa6ffc81fa81d6bd92ccd6f37b43a234ac1aac
+manual_cleanup_applied: false
+cleanup_audit_sha256: ''

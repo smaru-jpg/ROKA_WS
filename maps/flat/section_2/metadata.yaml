@@ -1,0 +1,20 @@
+schema_version: 2
+created_utc: '2026-09-02T19:04:00.654656+00:00'
+environment: flat
+mapping_backend: slam_toolbox_2d
+pose_authority: slam_toolbox
+frames:
+  global: map
+  odometry: odom
+  body_3d: base_link
+  body_2d: base_footprint
+sensors:
+  lidar: Velodyne VLP-16
+  imu: EBIMU-9DOFV5
+products:
+  occupancy: occupancy.yaml
+  terrain: terrain_map.bag
+  track_profile: track_profile.yaml
+  sensor_recording: sensors/metadata.yaml
+  session_metrics: session_metrics.yaml
+  slam_posegraph: slam_posegraph.posegraph

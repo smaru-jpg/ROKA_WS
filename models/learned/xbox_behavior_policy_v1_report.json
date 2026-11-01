@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "tire_half_width_m": 0.0591,
+  "edge_safety_margin_m": 0.05,
+  "input_files": [
+    "datasets/xbox_demonstrations/lap01.csv",
+    "datasets/xbox_demonstrations/lap01_2.csv"
+  ],
+  "sessions": [
+    {
+      "session": "lap01",
+      "source_file": "datasets/xbox_demonstrations/lap01.csv",
+      "enabled_rows": 3039,
+      "progress_laps": 0.3414918414918415,
+      "completed": false,
+      "first_recorded_unsafe_time_sec": 112.99999999900001,
+      "imitation": 0,
+      "risk": 725,
+      "excluded": 3039
+    },
+    {
+      "session": "lap01_2",
+      "source_file": "datasets/xbox_demonstrations/lap01_2.csv",
+      "enabled_rows": 7999,
+      "progress_laps": 1.0,
+      "completed": true,
+      "first_recorded_unsafe_time_sec": null,
+      "imitation": 2667,
+      "risk": 838,
+      "excluded": 0
+    }
+  ],
+  "imitation_samples": 2667,
+  "risk_samples": 1563,
+  "reference_source": "completed Xbox lap median, circular 0.72 m smoothing",
+  "feature_names": [
+    "lateral_error_m",
+    "heading_error_sin",
+    "heading_error_cos",
+    "planned_cross_slope_deg",
+    "planned_longitudinal_slope_deg",
+    "actual_cross_slope_deg",
+    "actual_longitudinal_slope_deg",
+    "roll_deg",
+    "pitch_deg",
+    "forward_speed_mps",
+    "lateral_speed_mps",
+    "yaw_rate_radps",
+    "tire_edge_clearance_m",
+    "planned_lateral_offset_m",
+    "path_curvature_radpm",
+    "lookahead_cross_slope_deg"
+  ],
+  "dataset_file": "datasets/processed/xbox_behavior_v1.npz",
+  "model_file": "models/learned/xbox_behavior_policy_v1.npz",
+  "training_report": {
+    "training_samples": 2160,
+    "validation_samples": 507,
+    "validation_path_index_range": [
+      600,
+      771
+    ],
+    "best_epoch": 56,
+    "normalized_validation_mse": 0.026172049549429876,
+    "output_units": [
+      "m/s",
+      "rad/s"
+    ],
+    "training": {
+      "mae": [
+        0.01465685142163612,
+        0.07171012279828
+      ],
+      "rmse": [
+        0.02283952908757356,
+        0.09723918236698127
+      ]
+    },
+    "validation": {
+      "mae": [
+        0.01640448461230831,
+        0.09668175988770177
+      ],
+      "rmse": [
+        0.023254316515342786,
+        0.1291542594311413
+      ]
+    },
+    "constant_baseline_validation": {
+      "mae": [
+        0.025546173398887397,
+        0.2097681394942853
+      ],
+      "rmse": [
+        0.030571660763404458,
+        0.25855001630332214
+      ]
+    }
+  }
+}

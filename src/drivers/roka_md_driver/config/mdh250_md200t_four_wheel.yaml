@@ -1,0 +1,71 @@
+roka_md_driver:
+  ros__parameters:
+    simulation_mode: true
+    allow_motion: false
+    hardware_layout: dual
+    single_side: right
+    left_serial_port: /dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0
+    right_serial_port: /dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0
+    baudrate: 57600
+    cmd_vel_topic: /cmd_vel
+    odom_topic: /odom
+    odom_frame_id: odom
+    base_frame_id: base_footprint
+    wheel_radius: 0.103
+    # Effective four-wheel skid-steer yaw parameter calibrated from repeated
+    # Section-5 runs. This deliberately differs from the 0.427149994 m
+    # physical wheel-centre track used by footprint/contact geometry.
+    wheel_separation: 0.66
+    # Section-5 software ceiling. Physical operation remains locked by
+    # allow_motion=false until the staged loaded-wheel validation is complete.
+    max_linear_speed: 1.20
+    max_angular_speed: 0.80
+    # Xbox axis 0 already follows ROS angular.z: left is positive, right is
+    # negative.  The previous extra inversion made physical steering opposite
+    # to the stick direction.
+    angular_command_sign: 1
+    # 112 RPM at radius 0.103 m is about 1.208 m/s.
+    max_wheel_rpm: 112.0
+    command_timeout_sec: 0.50
+    command_rate_hz: 20.0
+    feedback_rate_hz: 5.0
+    # Runtime reads are one short attempt per 5 Hz cycle. A normal response was
+    # measured at 7--24 ms, so 50 ms preserves margin without letting one side
+    # block the other controller and 20 Hz command output for 600 ms.
+    feedback_read_retries: 1
+    feedback_read_timeout_sec: 0.05
+    # Five consecutive missed 5 Hz PID210 cycles stop output and reopen both
+    # serial links. Motor state/current/overspeed faults remain hard-latched.
+    feedback_timeout_sec: 1.0
+    # Keep the process alive while USB/MD200T power-up or a temporary PID210
+    # communication interruption is recovering.
+    startup_retry_interval_sec: 2.0
+    startup_retry_log_interval_sec: 10.0
+    # Software commissioning guard doubled with the command envelope. This is
+    # not authorization for real motion before the staged load test.
+    feedback_overspeed_limit_rpm: 180.0
+    # Requested near-maximum guard. MD200T is rated 10 A/channel, so this
+    # leaves only 0.5 A of software margin; it is not thermal/fuse protection.
+    abort_current_a: 9.5
+    # Armed zero-velocity hold used while the manipulator is moving. This is
+    # distinct from emergency stop/torque-off and must be slope-tested.
+    hold_maximum_rpm: 2.0
+    hold_stable_sec: 0.50
+    # x/y/yaw wheel-odometry variances; z/roll/pitch and lateral twist are not
+    # observed by the MD200T wheel feedback and therefore receive large values.
+    pose_covariance_diagonal: [0.04, 0.04, 1000000.0, 1000000.0, 1000000.0, 0.09]
+    twist_covariance_diagonal: [0.01, 1000000.0, 1000000.0, 1000000.0, 1000000.0, 0.04]
+    # Lifted-wheel tests verified forward as MOT1 positive, MOT2 negative on
+    # both controllers. MOT1/MOT2 have deliberately not been renamed to
+    # front/rear: the physical axle-to-channel assignment still needs one
+    # witnessed lifted-wheel check on the final harness.
+    left_mot1_command_sign: 1
+    left_mot2_command_sign: -1
+    right_mot1_command_sign: 1
+    right_mot2_command_sign: -1
+    # Convert returned electrical RPM to physical forward wheel RPM.
+    left_mot1_feedback_sign: 1
+    left_mot2_feedback_sign: -1
+    right_mot1_feedback_sign: 1
+    right_mot2_feedback_sign: -1
+    publish_tf: true

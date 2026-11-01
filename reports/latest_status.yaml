@@ -1,0 +1,77 @@
+schema_version: 2
+generated_utc: '2026-09-03T02:42:24.802226+00:00'
+map_id: section_2
+map_profile: flat
+bundle: maps/flat/section_2
+scope: recorded
+problems: []
+warnings:
+- 같은 원본 수집에서 만든 2D 주행 지도입니다; 경사 판정은 함께 처리한 3D 지도를 확인하십시오
+map:
+  backend: slam_toolbox_2d
+  size_mib: 42.24
+  occupancy_width: 141
+  occupancy_height: 140
+  occupied_component_count: 69
+  occupied_fragment_component_count: 20
+  occupied_ignored_small_component_count: 49
+  path_points: 37
+  path_length_m: 2.1933123740490688
+  closed_loop: false
+  closure_distance_m: 2.1877378184798735
+  enclosed_area_m2: 0.04922530409605955
+  centre_free_fraction: 1.0
+  wheel_lane_free_fraction: 1.0
+  map_odom_translation_jump_m: 0.05531937811047577
+  map_odom_yaw_jump_deg: 3.599320869011827
+sensors:
+  result: PASS
+  vlp16_rate_hz: 9.915
+  imu_rate_hz: 100.0
+  wheel_odom_rate_hz: 20.054
+  lidar_imu_p95_ms: 4.784
+  diagnostic_error_count: 0
+  diagnostic_issues:
+  - name: 'ekf_filter_node: Filter diagnostic updater'
+    level: 1
+    severity: WARN
+    message: Potentially erroneous data or settings detected for a robot_localization
+      state estimation this->
+    count: 22
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY FAULT: terrain map stale or invalid'
+    count: 4
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY CROSS_SLOPE: ok'
+    count: 3
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY FAULT: non-finite command'
+    count: 3
+  - name: terrain_mapping/monitor
+    level: 1
+    severity: WARN
+    message: 'OBSERVE_ONLY FAULT: ok'
+    count: 3
+  terrain_diagnostic_extrema:
+    maximum_risk: 0.0
+    maximum_abs_relative_roll_deg: 0.0
+    maximum_abs_relative_pitch_deg: 0.0
+    maximum_abs_dynamic_roll_load_deg: 0.0
+    maximum_abs_dynamic_pitch_load_deg: 0.0
+  terrain_extrema_locations: {}
+reviewed_occupancy: occupancy.yaml
+recorded_path:
+  approved: true
+  points: 45
+  length_m: 2.192763716737327
+  minimum_speed_mps: 0.3
+  maximum_speed_mps: 0.3
+  closed_loop: false
+  obstacle_terrain_decisions: false
+result: READY

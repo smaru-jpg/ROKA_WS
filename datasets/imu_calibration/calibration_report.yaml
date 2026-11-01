@@ -1,0 +1,47 @@
+schema_version: 1
+sensor: EBIMU-9DOFV5
+test: detached_six_face_static
+status: passed_with_fixture_tolerance
+sample_rate_hz: 100.0
+diagnostics:
+  maximum_level: 0
+  checksum_errors: 0
+  format_errors: 0
+fixture_tolerance:
+  note: fixed bracket faces were not guaranteed to be exactly orthogonal
+  estimated_primary_axis_deviation_deg:
+    x_pair: 0.797
+    y_pair: 1.848
+    z_pair: 0.321
+accelerometer:
+  fitted_bias_mps2: [0.005078, -0.018411, -0.082466]
+  fitted_gravity_radius_mps2: 9.807172
+  opposite_face_half_span_mps2:
+    x: 9.78943
+    y: 9.79860
+    z: 9.82747
+  radial_fit_residual_mps2:
+    maximum_absolute: 0.022379
+gyro:
+  maximum_observed_stationary_mean_radps: 0.001686
+  maximum_observed_stationary_stddev_radps: 0.010344
+orientation:
+  level_z_up_roll_deg: 0.099
+  level_z_up_pitch_deg: 0.893
+  orientation_validated: true
+  scope: roll_pitch_for_leveling_and_verified_v5_yaw_sign
+  absolute_yaw_fused: false
+  reason: six-face data passed and the installed V5 yaw sign was checked; magnetic yaw remains excluded from EKF
+decision:
+  axis_mapping: pass
+  opposite_face_symmetry: pass_with_fixture_tolerance
+  stationary_noise: pass
+  communications: pass
+  apply_accelerometer_bias_now: false
+  apply_scale_now: false
+  keep_conservative_covariance: true
+next_steps:
+  - reinstall IMU with +X forward, +Y left, +Z up
+  - measure base_footprint-to-IMU and base_footprint-to-VLP16 transforms
+  - run the integrated section_1 mapping startup check
+  - record stationary, left/right yaw, and slope motion before path recording

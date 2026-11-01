@@ -1,0 +1,8 @@
+tf_flatten_2d:
+  ros__parameters:
+    source_parent_frame: odom
+    source_child_frame: base_link
+    flattened_child_frame: base_footprint
+    publish_rate: 50.0
+    flatten_translation_z: true
+    flatten_orientation: true

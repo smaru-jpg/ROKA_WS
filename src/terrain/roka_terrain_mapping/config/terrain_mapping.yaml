@@ -1,0 +1,21 @@
+terrain_mapper:
+  ros__parameters:
+    input_cloud_topic: /velodyne_points
+    output_map_topic: /terrain/local_map
+    target_frame: odom
+    tracking_frame: base_footprint
+    map_length_x: 12.0
+    map_length_y: 12.0
+    resolution: 0.10
+    min_height: -1.5
+    max_height: 2.5
+    min_points_per_cell: 1
+    max_cell_age_sec: 0.75
+    ground_separation_variance_m2: 0.0025
+    tf_fallback_tolerance_sec: 0.25
+    slope_limit_deg: 35.0
+    roughness_limit_m: 0.12
+    step_limit_m: 0.20
+    variance_limit_m2: 0.010
+    save_bag_topic: /terrain/static_map
+    publish_rate_hz: 10.0

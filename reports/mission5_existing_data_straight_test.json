@@ -1,0 +1,12 @@
+{
+  "bag": "/home/ryoo/roka_ws/reports/lidar_imu_calibration/run_1/sensors",
+  "segment_start_sec_from_bag": 200.7817509174347,
+  "duration_sec": 8.21955943107605,
+  "travel_distance_m": 1.2120288370322518,
+  "imu_heading_change_deg": 5.144250258019773,
+  "wheel_heading_change_deg": -1.0580677986145008,
+  "imu_max_lateral_error_m": 0.021228721180772146,
+  "wheel_max_lateral_error_m": 0.007973907749997351,
+  "straight_segments_found": 13,
+  "samples": 42
+}

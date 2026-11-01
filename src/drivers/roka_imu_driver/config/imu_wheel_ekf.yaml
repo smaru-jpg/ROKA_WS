@@ -1,0 +1,49 @@
+ekf_filter_node:
+  ros__parameters:
+    frequency: 50.0
+    sensor_timeout: 0.25
+    # Preserve roll/pitch for slope compensation. Nav2 receives the planar
+    # odom->base_footprint helper transform, while this EKF owns odom->base_link.
+    two_d_mode: false
+    transform_time_offset: 0.0
+    transform_timeout: 0.1
+    print_diagnostics: true
+    publish_tf: true
+    publish_acceleration: false
+
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom
+
+    # The MD odometry source must be renamed to /wheel/odom and its TF output
+    # disabled before this EKF becomes the single odom -> base_footprint publisher.
+    odom0: /wheel/odom
+    # The MD odometry is planar, so its explicit z=0 anchors vertical error
+    # during flat commissioning while roll/pitch still come from the IMU.
+    # Inclined-track mapping/localization uses FAST-LIO for true 3D motion.
+    odom0_config: [false, false, true,
+                   false, false, false,
+                   true,  false, false,
+                   false, false, true,
+                   false, false, false]
+    odom0_differential: false
+    odom0_relative: false
+    odom0_queue_size: 10
+
+    # Fuse roll/pitch orientation and yaw rate. Absolute magnetic yaw remains
+    # disabled until mounting axes and track magnetic disturbance are measured.
+    imu0: /imu/data
+    imu0_config: [false, false, false,
+                  true,  true,  false,
+                  false, false, false,
+                  false, false, true,
+                  false, false, false]
+    imu0_differential: false
+    imu0_relative: false
+    imu0_remove_gravitational_acceleration: false
+    imu0_queue_size: 50
+
+    # Reject isolated spikes without masking sustained slip; tune from field bags.
+    odom0_twist_rejection_threshold: 3.0
+    imu0_angular_velocity_rejection_threshold: 3.0

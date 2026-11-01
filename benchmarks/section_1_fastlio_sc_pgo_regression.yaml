@@ -1,0 +1,31 @@
+schema_version: 1
+result: FAIL
+source: maps/section_1/sensors
+validated_local: '2026-08-27T02:52:10+09:00'
+lio:
+  odom_count: 241
+  cloud_count: 241
+  path_length_m: 3.8773551381297158
+  maximum_step_m: 0.031726840229952556
+  maximum_yaw_step_rad: 0.041338825160216634
+  z_span_m: 0.4500565424636131
+  displacement_m: 2.53970878478822
+pgo:
+  path_pose_count: 16
+  save_success: true
+  save_message: saved 2395 optimized points and 16 keyframes
+  archives:
+    keyframe_poses.bin:
+      bytes: 920
+      count: 16
+    scan_context.bin:
+      bytes: 153752
+      count: 16
+  clean_shutdown: true
+  note: section_1 is an open short path, so zero loop closures is expected
+failures:
+- FAST-LIO Z span exceeds 0.150 m
+decision:
+  production_eligible: false
+  flat_mapping_backend: slam_toolbox_2d
+  inline_fastlio_sc_pgo_locked: true

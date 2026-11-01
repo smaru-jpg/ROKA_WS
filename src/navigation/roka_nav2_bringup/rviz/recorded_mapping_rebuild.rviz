@@ -1,0 +1,212 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: ""
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid 1m
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 24
+      Alpha: 0.22
+      Value: true
+    - Class: rviz_default_plugins/Map
+      Name: Growing 2D Map
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map
+      Alpha: 0.58
+      Color Scheme: map
+      Value: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: LiDAR 120deg 5s
+      Enabled: true
+      Topic:
+        Depth: 2
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /mapping/front_120_points
+      Style: Flat Squares
+      Size (Pixels): 3
+      Decay Time: 5.0
+      Position Transformer: XYZ
+      Color Transformer: AxisColor
+      Axis: Z
+      Selectable: false
+      Value: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: 원시 VLP16 누적 3D (rosbag)
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /replay/raw_accumulated_cloud
+      Style: Flat Squares
+      Size (Pixels): 3
+      Decay Time: 0
+      Position Transformer: XYZ
+      Color Transformer: AxisColor
+      Axis: Z
+      Selectable: true
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Name: 후처리 주행가능 면적 (초록/노랑/빨강)
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /terrain/visual/classes
+      Namespaces:
+        possible_green: true
+        caution_yellow: true
+        blocked_red: true
+        unobserved_gray: false
+      Value: true
+    - Class: grid_map_rviz_plugin/GridMap
+      Name: 경사 Slope 원본 레이어
+      Enabled: false
+      Topic:
+        Depth: 1
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /terrain/local_map
+      Color Transformer: GridMapLayer
+      Color Layer: slope
+      Height Transformer: GridMapLayer
+      Height Layer: elevation
+      Autocompute Intensity Bounds: false
+      Min Intensity: 0
+      Max Intensity: 45
+      Use Rainbow: true
+      Invert Rainbow: false
+      Show Grid Lines: false
+      Alpha: 0.88
+      Value: false
+    - Class: rviz_default_plugins/Path
+      Name: Route Growth cyan
+      Enabled: true
+      Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /replay/growing_path_latched
+      Line Style: Lines
+      Line Width: 0.09
+      Color: 0; 220; 255
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Route Final reference
+      Enabled: false
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /replay/final_path
+      Line Style: Lines
+      Line Width: 0.045
+      Color: 140; 140; 150
+      Value: false
+    - Class: rviz_default_plugins/Path
+      Name: Vehicle Left yellow
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /replay/vehicle_left
+      Line Style: Lines
+      Line Width: 0.04
+      Color: 255; 210; 0
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Vehicle Right yellow
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /replay/vehicle_right
+      Line Style: Lines
+      Line Width: 0.04
+      Color: 255; 210; 0
+      Value: true
+    - Class: rviz_default_plugins/Odometry
+      Name: Robot Pose
+      Enabled: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /odom
+      Keep: 1
+      Shape:
+        Alpha: 1
+        Axes Length: 0.45
+        Axes Radius: 0.04
+        Color: 255; 80; 80
+        Value: Arrow
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Name: TF (debug)
+      Enabled: false
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 25; 27; 31
+    Fixed Frame: map
+    Frame Rate: 20
+  Name: Mapping Process Rebuild
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+  Value: true
+Views:
+  Current:
+    Class: rviz_default_plugins/Orbit
+    Distance: 7
+    Focal Point:
+      X: 1.2
+      Y: 0
+      Z: 0.25
+    Name: 3D Orbit
+    Near Clip Distance: 0.01
+    Pitch: 0.65
+    Yaw: 0.75
+    Target Frame: map
+    Value: Orbit (rviz)
+Window Geometry:
+  Width: 1500
+  Height: 900
+  X: 40
+  Y: 40
+  Hide Left Dock: false
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd000000040000000000000156000002b0fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000002b0000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000002b0fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d000002b0000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005ad0000003efc0100000002fb0000000800540069006d00650100000000000005ad000002fb00fffffffb0000000800540069006d0065010000000000000450000000000000000000000451000002b000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000

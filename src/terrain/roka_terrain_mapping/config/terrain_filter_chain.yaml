@@ -1,0 +1,110 @@
+terrain_standard_postprocessor:
+  ros__parameters:
+    # Based on the upstream ANYbotics grid_map filter demo.  Each intermediate
+    # layer remains in the output bag so RViz can inspect the calculation.
+    grid_map_filters:
+      filter1:
+        name: buffer_normalizer
+        type: gridMapFilters/BufferNormalizerFilter
+
+      filter2:
+        name: inpaint_small_holes
+        type: gridMapCv/InpaintFilter
+        params:
+          input_layer: elevation
+          output_layer: elevation_inpainted
+          radius: 0.20
+
+      filter3:
+        name: elevation_mean
+        type: gridMapFilters/MeanInRadiusFilter
+        params:
+          input_layer: elevation_inpainted
+          output_layer: elevation_smooth
+          radius: 0.20
+
+      filter4:
+        name: surface_normals
+        type: gridMapFilters/NormalVectorsFilter
+        params:
+          input_layer: elevation_inpainted
+          output_layers_prefix: normal_vectors_
+          radius: 0.20
+          normal_vector_positive_axis: z
+          algorithm: area
+          parallelization_enabled: false
+
+      filter5:
+        name: slope_radians
+        type: gridMapFilters/MathExpressionFilter
+        params:
+          output_layer: slope
+          expression: acos(normal_vectors_z)
+
+      filter6:
+        name: slope_degrees
+        type: gridMapFilters/MathExpressionFilter
+        params:
+          output_layer: slope_deg
+          expression: 57.29577951308232 * slope
+
+      filter7:
+        name: roughness
+        type: gridMapFilters/MathExpressionFilter
+        params:
+          output_layer: roughness
+          expression: abs(elevation_inpainted - elevation_smooth)
+
+      filter8:
+        name: step_height
+        type: gridMapFilters/SlidingWindowMathExpressionFilter
+        params:
+          input_layer: elevation_inpainted
+          output_layer: step_height
+          # The Humble EigenLab parser does not expose max/min reduction.
+          # Twice the local finite-cell RMS deviation is used as a stable,
+          # upstream-supported peak-to-peak step/edge proxy.
+          expression: 2.0 * sqrt(sumOfFinites(square(elevation_inpainted - meanOfFinites(elevation_inpainted))) ./ numberOfFinites(elevation_inpainted))
+          compute_empty_cells: false
+          edge_handling: crop
+          window_length: 0.30
+
+      filter9:
+        name: risk
+        type: gridMapFilters/MathExpressionFilter
+        params:
+          output_layer: risk
+          # ROKA measured limits: 35 deg, 0.12 m roughness and 0.20 m step.
+          # A weighted score retains all three explainable source layers.
+          expression: 0.55 * (slope / 0.6108652381980153) + 0.30 * (roughness / 0.12) + 0.15 * (step_height / 0.20)
+
+      filter10:
+        name: risk_upper_bound
+        type: gridMapFilters/ThresholdFilter
+        params:
+          layer: risk
+          upper_threshold: 2.0
+          set_to: 2.0
+
+      filter11:
+        name: traversability
+        type: gridMapFilters/MathExpressionFilter
+        params:
+          output_layer: traversability
+          expression: 1.0 - risk
+
+      filter12:
+        name: traversability_lower_bound
+        type: gridMapFilters/ThresholdFilter
+        params:
+          layer: traversability
+          lower_threshold: 0.0
+          set_to: 0.0
+
+      filter13:
+        name: traversability_upper_bound
+        type: gridMapFilters/ThresholdFilter
+        params:
+          layer: traversability
+          upper_threshold: 1.0
+          set_to: 1.0

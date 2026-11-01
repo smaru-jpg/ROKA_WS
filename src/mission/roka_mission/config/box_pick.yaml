@@ -1,0 +1,18 @@
+box_pick_coordinator:
+  ros__parameters:
+    auto_start: true
+    required_detection_frames: 4
+    maximum_observation_age_sec: 0.40
+    maximum_target_depth_mm: 1800.0
+    maximum_stopped_speed_mps: 0.02
+    # FAST-LIO track maps publish /lio/odom; legacy flat maps publish /odom.
+    # Any fresh source that still reports motion blocks arm activation.
+    body_odom_topics: ["/lio/odom", "/odom"]
+    body_odom_timeout_sec: 0.50
+    service_timeout_sec: 5.0
+    hold_timeout_sec: 5.0
+    # No grasp time limit: HOLD remains active until the arm reports an
+    # explicit GRASP_COMPLETE or GRASP_FAILED result.
+    resume_route_after_grasp: true
+    box_perception_service: /roka/arm/set_perception_enabled
+    traffic_vision_service: /roka/vision/traffic/enable

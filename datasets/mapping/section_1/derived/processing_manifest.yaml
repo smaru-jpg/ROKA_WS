@@ -1,0 +1,19 @@
+schema_version: 1
+processed_at_utc: '2026-09-02T20:55:46.377101+00:00'
+source_bundle: /home/ryoo/roka_ws/datasets/mapping/section_1
+source_bag:
+  metadata_sha256: 47aabfad4075c168cb2b682ebcabb75531640dc9474abef2e6222a56f1be73b4
+  storage_files:
+  - name: sensors_0.db3.zstd
+    size_bytes: 13352382
+mode: 3d
+sensor_audit: /home/ryoo/roka_ws/datasets/mapping/section_1/derived/sensor_contract.yaml
+two_dimensional:
+  status: NOT_REQUESTED
+three_dimensional:
+  status: READY
+  directory: /home/ryoo/roka_ws/maps/track/section_1
+  regression: /home/ryoo/roka_ws/maps/track/section_1/regression.yaml
+  playback_rate: 1.0
+  autonomy_eligible: true
+  global_terrain: /home/ryoo/roka_ws/maps/track/section_1/terrain_global.bag

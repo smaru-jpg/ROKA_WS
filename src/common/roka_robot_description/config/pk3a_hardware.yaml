@@ -1,0 +1,87 @@
+schema_version: 2
+robot: pk3a_roka
+coordinate_convention: ros_flu
+frames:
+  body_3d: base_link
+  body_2d: base_footprint
+  lidar: velodyne
+  imu: imu_link
+geometry:
+  base_link_to_lidar:
+    xyz_m:
+    - 0.1815
+    - 0.0
+    - 0.112325
+    rpy_rad:
+    - 0.0
+    - 0.0
+    - 0.0
+  base_link_to_imu:
+    xyz_m:
+    - 0.1815
+    - 0.0
+    - 0.206625
+    rpy_rad:
+    - 0.0140568694
+    - 0.0199366605
+    - -0.0040315979
+  base_footprint_to_base_link:
+    xyz_m:
+    - 0.0
+    - 0.0
+    - 0.103
+    rpy_rad:
+    - 0.0
+    - 0.0
+    - 0.0
+vehicle:
+  wheel_radius_m: 0.103
+  wheelbase_m: 0.34
+  physical_wheel_track_m: 0.427149994
+  tire_half_width_m: 0.0591
+  # Flat-course calibration from six moving Section-5 bags.  Four runs with
+  # meaningful yaw excitation independently estimated 0.656--0.683 m; the
+  # all-turn least-squares estimate was 0.662 m.  Keep the CAD track above for
+  # footprint/contact geometry and use this rounded value only for real
+  # skid-steer Twist/RPM conversion and wheel odometry.
+  effective_drive_separation_m: 0.66
+  effective_drive_separation_status: section5_multibag_flat_calibrated
+  navigation_footprint:
+    front_m: 0.59
+    rear_m: 0.29
+    half_width_m: 0.312
+sensors:
+  lidar:
+    model: Velodyne VLP-16
+    scan_rate_hz: 10.0
+    point_time_unit: seconds
+    timestamp_reference: first_packet
+  imu:
+    model: EBIMU-9DOFV5 R3.0a
+    sample_rate_hz: 100.0
+    orientation_convention: sensor_to_world_ros_flu
+calibration:
+  lidar_to_imu:
+    translation_source: cad_and_tape_measurement
+    rotation_source: li_init_dynamic_two_run_validation
+    temporal_source: li_init_dynamic_two_run_vlp16_common_cut_frame_branch
+    rotation_validated_dynamically: true
+    temporal_offset_validated_dynamically: true
+    time_offset_lidar_to_imu_sec: -0.130492167
+    validated_at_utc: '2026-08-30T14:54:24.736851+00:00'
+    validation_report: reports/lidar_imu_calibration/validation.yaml
+    validation_repeatability:
+      rotation_difference_deg: 1.543071
+      time_offset_difference_sec: 0.004702333
+      translation_difference_m: 0.353268
+    validated_rotation_lidar_in_imu_matrix:
+    - - 0.9997931461
+      - -0.0040307858
+      - -0.0199353398
+    - - 0.0043114056
+      - 0.999891948
+      - 0.0140536131
+    - - 0.0198765386
+      - -0.0141366554
+      - 0.9997024948
+    time_offset_policy: preserve_raw_li_init_align_common_30hz_cut_frame_branch

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!-- Joint-free environment shell. The robot will be added in a later stage. -->
+<robot name="pk3a_track_environment">
+  <link name="world"/>
+</robot>

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-03T11:45:36+09:00",
+  "csv_file": "/home/ryoo/roka_ws/reports/nav2_recorded_route_030_benchmark.csv",
+  "runs": 2,
+  "successes": 0,
+  "completion_rate": 0.0,
+  "worst_lateral_error_m": 4.1837,
+  "maximum_abs_roll_deg": 0.012,
+  "maximum_abs_pitch_deg": 0.033,
+  "decision": "FAIL",
+  "recommendation": "do_not_increase_speed"
+}

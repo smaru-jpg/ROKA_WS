@@ -1,0 +1,8 @@
+# Keep this stack compatible with ROS 2 Humble cv_bridge on Ubuntu 22.04.
+# Torch requires setuptools >=77.0.3 while Jammy colcon-core requires <80.
+setuptools==79.0.1
+numpy==1.26.4
+opencv-python==4.11.0.86
+torch==2.13.0
+torchvision==0.28.0
+ultralytics==8.4.131

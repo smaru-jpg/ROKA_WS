@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!-- Kinematic/control shell. Visual and collision geometry live in MJCF. -->
+<robot name="roka_mobile_manipulator">
+  <link name="base_link"/>
+
+  <!-- ROS REP-103 body axes: +X forward, +Y left, +Z up. -->
+  <link name="velodyne"/>
+  <joint name="base_to_velodyne_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="velodyne"/>
+    <origin xyz="0.1815 0 0.112325" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link"/>
+  <joint name="base_to_imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <!-- Fixed above the VLP-16 centreline, about 60 mm above its top. -->
+    <origin xyz="0.1815 0 0.206625" rpy="0 0 0"/>
+  </joint>
+
+  <link name="front_left_wheel_link"/>
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_left_wheel_link"/>
+    <origin xyz="0.17 0.213574997 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="16" velocity="31.415926536"/>
+  </joint>
+
+  <link name="front_right_wheel_link"/>
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_right_wheel_link"/>
+    <origin xyz="0.17 -0.213574997 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="16" velocity="31.415926536"/>
+  </joint>
+
+  <link name="rear_left_wheel_link"/>
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel_link"/>
+    <origin xyz="-0.17 0.213574997 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="16" velocity="31.415926536"/>
+  </joint>
+
+  <link name="rear_right_wheel_link"/>
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel_link"/>
+    <origin xyz="-0.17 -0.213574997 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="16" velocity="31.415926536"/>
+  </joint>
+</robot>

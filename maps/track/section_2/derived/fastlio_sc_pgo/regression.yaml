@@ -1,0 +1,25 @@
+schema_version: 1
+result: PASS
+lio:
+  odom_count: 150
+  cloud_count: 150
+  path_length_m: 2.430324672858201
+  maximum_step_m: 0.041792493955027425
+  maximum_yaw_step_rad: 0.004665700669456263
+  z_span_m: 0.0831714698261442
+  displacement_m: 2.228373932316718
+pgo:
+  path_pose_count: 8
+  save_success: true
+  save_message: saved 1885 dense / 1117 lightweight optimized points and 8 keyframes
+  archives:
+    keyframe_poses.bin:
+      bytes: 472
+      count: 8
+      version: 1
+      legacy_magic: false
+    scan_context.bin:
+      bytes: 76888
+      count: 8
+      version: 1
+      legacy_magic: false

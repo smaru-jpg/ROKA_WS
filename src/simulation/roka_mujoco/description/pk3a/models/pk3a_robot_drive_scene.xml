@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PK-3A rideable approximate closed-loop base track generated from approved module profiles. -->
+<mujoco model="PK-3A rideable approximate closed-loop base track">
+  <compiler angle="radian"/>
+  <option timestep="0.002" integrator="implicitfast" gravity="0 0 -9.81" cone="elliptic" solver="Newton" iterations="80" tolerance="1e-10" impratio="5">
+    <flag multiccd="enable"/>
+  </option>
+  <visual>
+    <headlight diffuse="0.72 0.72 0.72"
+               ambient="0.32 0.32 0.32"
+               specular="0.12 0.12 0.12"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <quality shadowsize="1024" offsamples="1"/>
+    <map znear="0.01" zfar="100"/>
+    <global azimuth="135" elevation="-35" offwidth="640" offheight="360"/>
+  </visual>
+  <statistic center="-3.301649 -6.521303 0.20" extent="20.215114"/>
+  <asset>
+    <texture name="ground_tex" type="2d" builtin="checker" width="256" height="256"
+             rgb1="0.40 0.41 0.42" rgb2="0.31 0.32 0.33"/>
+    <material name="ground_mat" texture="ground_tex" texrepeat="18 18"
+              texuniform="true" reflectance="0.04" roughness="0.96"/>
+    <material name="mat_start_zone" rgba="0.080 0.380 0.920 1.000" specular="0.12" shininess="0.18" roughness="0.75"/>
+    <material name="mat_3BA1" rgba="0.76 0.57 0.36 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3BA1" file="../assets/visual/modules/3BA1.obj" smoothnormal="false"/>
+    <hfield name="collision_3BA1" file="../assets/collision/modules/3BA1.png" size="0.905000000 0.457200000 0.376100000 0.074200000"/>
+    <material name="mat_3DB1" rgba="0.64 0.46 0.30 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3DB1" file="../assets/visual/modules/3DB1.obj" smoothnormal="false"/>
+    <hfield name="collision_3DB1" file="../assets/collision/modules/3DB1.png" size="0.905000000 0.457200000 0.376100000 0.074200000"/>
+    <material name="mat_3TA1L_C" rgba="0.76 0.64 0.43 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3TA1L_C" file="../assets/visual/modules/3TA1L_C.obj" smoothnormal="false"/>
+    <hfield name="collision_3TA1L_C" file="../assets/collision/modules/3TA1L_C.png" size="0.600000000 0.457200000 0.532700000 0.145500000"/>
+    <material name="mat_3TB1L_C" rgba="0.69 0.49 0.32 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3TB1L_C" file="../assets/visual/modules/3TB1L_C.obj" smoothnormal="false"/>
+    <hfield name="collision_3TB1L_C" file="../assets/collision/modules/3TB1L_C.png" size="0.600000000 0.457200000 0.759700000 0.145500000"/>
+    <material name="mat_3TA1L_C_M" rgba="0.76 0.64 0.43 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3TA1L_C_M" file="../assets/visual/modules/3TA1L_C_M.obj" smoothnormal="false"/>
+    <hfield name="collision_3TA1L_C_M" file="../assets/collision/modules/3TA1L_C_M.png" size="0.600000000 0.457200000 0.532700000 0.145500000"/>
+    <material name="mat_3TB1L_C_M" rgba="0.69 0.49 0.32 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3TB1L_C_M" file="../assets/visual/modules/3TB1L_C_M.obj" smoothnormal="false"/>
+    <hfield name="collision_3TB1L_C_M" file="../assets/collision/modules/3TB1L_C_M.png" size="0.600000000 0.457200000 0.759700000 0.145500000"/>
+    <material name="mat_3CV1_G1" rgba="0.73 0.56 0.36 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3CV1_G1" file="../assets/visual/modules/3CV1_G1.obj" smoothnormal="false"/>
+    <hfield name="collision_3CV1_G1" file="../assets/collision/modules/3CV1_G1.png" size="0.406431382 0.465014144 0.874939863 0.030000000"/>
+    <material name="mat_3CV1_G2" rgba="0.73 0.56 0.36 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3CV1_G2" file="../assets/visual/modules/3CV1_G2.obj" smoothnormal="false"/>
+    <hfield name="collision_3CV1_G2" file="../assets/collision/modules/3CV1_G2.png" size="0.410182532 0.465507830 0.875200000 0.030000000"/>
+    <material name="mat_3CV1_G3" rgba="0.73 0.56 0.36 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3CV1_G3" file="../assets/visual/modules/3CV1_G3.obj" smoothnormal="false"/>
+    <hfield name="collision_3CV1_G3" file="../assets/collision/modules/3CV1_G3.png" size="0.414437093 0.466049058 0.875200000 0.030000000"/>
+    <material name="mat_3CV1_G4" rgba="0.73 0.56 0.36 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_3CV1_G4" file="../assets/visual/modules/3CV1_G4.obj" smoothnormal="false"/>
+    <hfield name="collision_3CV1_G4" file="../assets/collision/modules/3CV1_G4.png" size="0.404888105 0.464806578 0.875200000 0.030000000"/>
+    <material name="mat_F_HALF" rgba="0.42 0.64 0.72 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_F_HALF" file="../assets/visual/modules/F_HALF.obj" smoothnormal="false"/>
+    <hfield name="collision_F_HALF" file="../assets/collision/modules/F_HALF.png" size="0.228600000 0.457200000 0.000001000 0.450300000"/>
+    <material name="mat_F_CLOSE" rgba="0.35 0.62 0.72 1" specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="visual_F_CLOSE" file="../assets/visual/modules/F_CLOSE.obj" smoothnormal="false"/>
+    <hfield name="collision_F_CLOSE" file="../assets/collision/modules/F_CLOSE.png" size="0.041012638 0.457200000 0.000001000 0.450300000"/>
+    <material name="robot_frame_mat" rgba="0.16 0.22 0.30 1" specular="0.24" shininess="0.32" roughness="0.58"/>
+    <material name="robot_wheel_mat" rgba="0.035 0.040 0.045 1" specular="0.06" shininess="0.08" roughness="0.94"/>
+    <mesh name="robot_base_visual" file="../assets/robot/visual/base_and_locked_arm.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_front_left_visual" file="../assets/robot/visual/wheel_front_left.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_front_right_visual" file="../assets/robot/visual/wheel_front_right.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_rear_left_visual" file="../assets/robot/visual/wheel_rear_left.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_rear_right_visual" file="../assets/robot/visual/wheel_rear_right.obj" smoothnormal="true"/>
+  </asset>
+  <worldbody>
+    <light pos="-6.302 -10.521 10" dir="0.2 0.3 -1"
+           directional="true" castshadow="false"/>
+    <geom name="ground" type="plane" pos="-3.301649 -6.521303 -0.032000"
+          size="22.215 22.215 0.1"
+          rgba="0 0 0 0" friction="0.9 0.01 0.001"/>
+    <geom name="ground_visual" type="box"
+          pos="-3.301649 -6.521303 -0.057000"
+          size="22.215 22.215 0.025"
+          material="ground_mat" contype="0" conaffinity="0"/>
+    <body name="module_S00_DB1" pos="0.000000000 0.000000000 0" quat="1.000000000 0 0 0.000000000">
+      <geom name="visual_S00_DB1" type="mesh" mesh="visual_3DB1" material="mat_start_zone" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S00_DB1" type="hfield" hfield="collision_3DB1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S01_BA1" pos="1.810000000 0.000000000 0" quat="1.000000000 0 0 0.000000000">
+      <geom name="visual_S01_BA1" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S01_BA1" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S01_BA2" pos="3.620000000 -0.000000000 0" quat="0.000000000 0 0 1.000000000">
+      <geom name="visual_S01_BA2" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S01_BA2" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S02_TA1" pos="5.125000000 -0.000000000 0" quat="1.000000000 0 0 0.000000000">
+      <geom name="visual_S02_TA1" type="mesh" mesh="visual_3TA1L_C" material="mat_3TA1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S02_TA1" type="hfield" hfield="collision_3TA1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S02_TB1" pos="6.325000000 -0.000000000 0" quat="1.000000000 0 0 -0.000000000">
+      <geom name="visual_S02_TB1" type="mesh" mesh="visual_3TB1L_C" material="mat_3TB1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S02_TB1" type="hfield" hfield="collision_3TB1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV01" pos="7.271296949 -0.043928362 0" quat="0.998010555 0 0 -0.063047059">
+      <geom name="visual_S03_CV01" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV01" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV02" pos="7.941954282 -0.216859119 0" quat="0.982142460 0 0 -0.188138747">
+      <geom name="visual_S03_CV02" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV02" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV03" pos="8.548191523 -0.551766143 0" quat="0.950658568 0 0 -0.310239080">
+      <geom name="visual_S03_CV03" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV03" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV04" pos="9.051605901 -1.027434378 0" quat="0.904059465 0 0 -0.427406697">
+      <geom name="visual_S03_CV04" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV04" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV05" pos="9.420308077 -1.613732095 0" quat="0.843086063 0 0 -0.537778664">
+      <geom name="visual_S03_CV05" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV05" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV06" pos="9.630942203 -2.273519614 0" quat="0.768707823 0 0 -0.639600097">
+      <geom name="visual_S03_CV06" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV06" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV07" pos="9.670165427 -2.965001968 0" quat="0.682107338 0 0 -0.731252063">
+      <geom name="visual_S03_CV07" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV07" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV08" pos="9.535493112 -3.644376440 0" quat="0.584661533 0 0 -0.811277321">
+      <geom name="visual_S03_CV08" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV08" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV09" pos="9.235456224 -4.268607304 0" quat="0.477919770 0 0 -0.878403491">
+      <geom name="visual_S03_CV09" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV09" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV10" pos="8.789060931 -4.798151966 0" quat="0.363579213 0 0 -0.931563286">
+      <geom name="visual_S03_CV10" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV10" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV11" pos="8.224584637 -5.199465833 0" quat="0.243457846 0 0 -0.969911479">
+      <geom name="visual_S03_CV11" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV11" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV12" pos="7.577784717 -5.447127235 0" quat="0.119465565 0 0 -0.992838345">
+      <geom name="visual_S03_CV12" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV12" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV13" pos="6.889633428 -5.525447786 0" quat="0.006426185 0 0 0.999979352">
+      <geom name="visual_S03_CV13" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV13" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S03_CV14" pos="6.203722473 -5.429466184 0" quat="0.132215761 0 0 0.991220960">
+      <geom name="visual_S03_CV14" type="mesh" mesh="visual_3CV1_G1" material="mat_3CV1_G1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S03_CV14" type="hfield" hfield="collision_3CV1_G1" pos="0.000000000 0.012837692 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S04_TB_EXIT" pos="5.312225943 -5.109088979 0" quat="0.980913166 0 0 -0.194446292">
+      <geom name="visual_S04_TB_EXIT" type="mesh" mesh="visual_3TB1L_C_M" material="mat_3TB1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S04_TB_EXIT" type="hfield" hfield="collision_3TB1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S04_TA_EXIT" pos="4.202968408 -4.651325152 0" quat="0.980913166 0 0 -0.194446292">
+      <geom name="visual_S04_TA_EXIT" type="mesh" mesh="visual_3TA1L_C_M" material="mat_3TA1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S04_TA_EXIT" type="hfield" hfield="collision_3TA1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S04_F_HALF" pos="3.437026080 -4.335239230 0" quat="0.194446292 0 0 0.980913166">
+      <geom name="visual_S04_F_HALF" type="mesh" mesh="visual_F_HALF" material="mat_F_HALF" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S04_F_HALF" type="hfield" hfield="collision_F_HALF" pos="0.000000000 0.000000000 0.388300000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S04_TA_ENTRY" pos="2.671083752 -4.019153307 0" quat="0.194446292 0 0 0.980913166">
+      <geom name="visual_S04_TA_ENTRY" type="mesh" mesh="visual_3TA1L_C_M" material="mat_3TA1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S04_TA_ENTRY" type="hfield" hfield="collision_3TA1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S04_TB_ENTRY" pos="1.561826217 -3.561389481 0" quat="0.194446292 0 0 0.980913166">
+      <geom name="visual_S04_TB_ENTRY" type="mesh" mesh="visual_3TB1L_C_M" material="mat_3TB1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S04_TB_ENTRY" type="hfield" hfield="collision_3TB1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S05_CV01" pos="0.669682498 -3.243942167 0" quat="0.127957657 0 0 0.991779632">
+      <geom name="visual_S05_CV01" type="mesh" mesh="visual_3CV1_G2" material="mat_3CV1_G2" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S05_CV01" type="hfield" hfield="collision_3CV1_G2" pos="0.000000000 -0.013840722 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S05_CV02" pos="-0.016744855 -3.159883270 0" quat="0.006457525 0 0 -0.999979150">
+      <geom name="visual_S05_CV02" type="mesh" mesh="visual_3CV1_G2" material="mat_3CV1_G2" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S05_CV02" type="hfield" hfield="collision_3CV1_G2" pos="0.000000000 -0.013840722 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S05_CV03" pos="-0.700772204 -3.261642766 0" quat="0.140755603 0 0 -0.990044373">
+      <geom name="visual_S05_CV03" type="mesh" mesh="visual_3CV1_G2" material="mat_3CV1_G2" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S05_CV03" type="hfield" hfield="collision_3CV1_G2" pos="0.000000000 -0.013840722 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S05_CV04" pos="-1.333006053 -3.541872620 0" quat="0.272501124 0 0 -0.962155464">
+      <geom name="visual_S05_CV04" type="mesh" mesh="visual_3CV1_G2" material="mat_3CV1_G2" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S05_CV04" type="hfield" hfield="collision_3CV1_G2" pos="0.000000000 -0.013840722 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S06_TB_EXIT" pos="-2.094111302 -4.105265921 0" quat="0.941623752 0 0 0.336667060">
+      <geom name="visual_S06_TB_EXIT" type="mesh" mesh="visual_3TB1L_C" material="mat_3TB1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S06_TB_EXIT" type="hfield" hfield="collision_3TB1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S06_TA_EXIT" pos="-3.022083999 -4.866098802 0" quat="0.941623752 0 0 0.336667060">
+      <geom name="visual_S06_TA_EXIT" type="mesh" mesh="visual_3TA1L_C" material="mat_3TA1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S06_TA_EXIT" type="hfield" hfield="collision_3TA1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S07_BA1" pos="-4.185916424 -5.820310041 0" quat="0.336667060 0 0 -0.941623752">
+      <geom name="visual_S07_BA1" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S07_BA1" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S07_BA2" pos="-5.585608575 -6.967899637 0" quat="0.941623752 0 0 0.336667060">
+      <geom name="visual_S07_BA2" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S07_BA2" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S07_BA3" pos="-6.985300727 -8.115489233 0" quat="0.336667060 0 0 -0.941623752">
+      <geom name="visual_S07_BA3" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S07_BA3" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S07_BA4" pos="-8.384992879 -9.263078829 0" quat="0.941623752 0 0 0.336667060">
+      <geom name="visual_S07_BA4" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S07_BA4" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S08_DB1" pos="-9.784685030 -10.410668424 0" quat="0.336667060 0 0 -0.941623752">
+      <geom name="visual_S08_DB1" type="mesh" mesh="visual_3DB1" material="mat_3DB1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S08_DB1" type="hfield" hfield="collision_3DB1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S09_TA_ENTRY" pos="-10.948517455 -11.364879663 0" quat="0.336667060 0 0 -0.941623752">
+      <geom name="visual_S09_TA_ENTRY" type="mesh" mesh="visual_3TA1L_C" material="mat_3TA1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S09_TA_ENTRY" type="hfield" hfield="collision_3TA1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S09_TB_ENTRY" pos="-11.876490152 -12.125712544 0" quat="0.336667060 0 0 -0.941623752">
+      <geom name="visual_S09_TB_ENTRY" type="mesh" mesh="visual_3TB1L_C" material="mat_3TB1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S09_TB_ENTRY" type="hfield" hfield="collision_3TB1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV01" pos="-12.639234180 -12.686109751 0" quat="0.267793728 0 0 -0.963476268">
+      <geom name="visual_S10_CV01" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV01" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV02" pos="-13.275661201 -12.953432622 0" quat="0.126219449 0 0 -0.992002344">
+      <geom name="visual_S10_CV02" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV02" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV03" pos="-13.961887341 -13.028229382 0" quat="0.017987391 0 0 0.999838214">
+      <geom name="visual_S10_CV03" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV03" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV04" pos="-14.640960607 -12.904292421 0" quat="0.161819068 0 0 0.986820444">
+      <geom name="visual_S10_CV04" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV04" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV05" pos="-15.256522644 -12.591907644 0" quat="0.302275683 0 0 0.953220547">
+      <geom name="visual_S10_CV05" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV05" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV06" pos="-15.757486088 -12.117000812 0" quat="0.436427729 0 0 0.899739316">
+      <geom name="visual_S10_CV06" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV06" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV07" pos="-16.102274460 -11.518985888 0" quat="0.561477197 0 0 0.827492210">
+      <geom name="visual_S10_CV07" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV07" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV08" pos="-16.262272724 -10.847493948 0" quat="0.674815926 0 0 0.737986088">
+      <geom name="visual_S10_CV08" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV08" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S10_CV09" pos="-16.224202140 -10.158254149 0" quat="0.774080011 0 0 0.633087779">
+      <geom name="visual_S10_CV09" type="mesh" mesh="visual_3CV1_G3" material="mat_3CV1_G3" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S10_CV09" type="hfield" hfield="collision_3CV1_G3" pos="0.000000000 0.015002371 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S11_TB_EXIT" pos="-15.952497859 -9.251611846 0" quat="0.575538929 0 0 -0.817774383">
+      <geom name="visual_S11_TB_EXIT" type="mesh" mesh="visual_3TB1L_C_M" material="mat_3TB1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S11_TB_EXIT" type="hfield" hfield="collision_3TB1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S11_TA_EXIT" pos="-15.547486000 -8.122025464 0" quat="0.575538929 0 0 -0.817774383">
+      <geom name="visual_S11_TA_EXIT" type="mesh" mesh="visual_3TA1L_C_M" material="mat_3TA1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S11_TA_EXIT" type="hfield" hfield="collision_3TA1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S12_BA1" pos="-15.039533627 -6.705335877 0" quat="0.817774383 0 0 0.575538929">
+      <geom name="visual_S12_BA1" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S12_BA1" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S12_BA2" pos="-14.428640740 -5.001543084 0" quat="0.575538929 0 0 -0.817774383">
+      <geom name="visual_S12_BA2" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S12_BA2" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S13_TA_ENTRY" pos="-13.920688366 -3.584853497 0" quat="0.817774383 0 0 0.575538929">
+      <geom name="visual_S13_TA_ENTRY" type="mesh" mesh="visual_3TA1L_C" material="mat_3TA1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S13_TA_ENTRY" type="hfield" hfield="collision_3TA1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S13_TB_ENTRY" pos="-13.515676507 -2.455267115 0" quat="0.817774383 0 0 0.575538929">
+      <geom name="visual_S13_TB_ENTRY" type="mesh" mesh="visual_3TB1L_C" material="mat_3TB1L_C" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S13_TB_ENTRY" type="hfield" hfield="collision_3TB1L_C" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S14_CV01" pos="-13.156016055 -1.578721772 0" quat="0.851510628 0 0 0.524337343">
+      <geom name="visual_S14_CV01" type="mesh" mesh="visual_3CV1_G4" material="mat_3CV1_G4" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S14_CV01" type="hfield" hfield="collision_3CV1_G4" pos="0.000000000 0.012430732 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S14_CV02" pos="-12.770701946 -1.002715669 0" quat="0.909263950 0 0 0.416219978">
+      <geom name="visual_S14_CV02" type="mesh" mesh="visual_3CV1_G4" material="mat_3CV1_G4" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S14_CV02" type="hfield" hfield="collision_3CV1_G4" pos="0.000000000 0.012430732 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S14_CV03" pos="-12.257038423 -0.537527772 0" quat="0.953355752 0 0 0.301848986">
+      <geom name="visual_S14_CV03" type="mesh" mesh="visual_3CV1_G4" material="mat_3CV1_G4" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S14_CV03" type="hfield" hfield="collision_3CV1_G4" pos="0.000000000 0.012430732 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S14_CV04" pos="-11.645780318 -0.211010510 0" quat="0.983123564 0 0 0.182942770">
+      <geom name="visual_S14_CV04" type="mesh" mesh="visual_3CV1_G4" material="mat_3CV1_G4" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S14_CV04" type="hfield" hfield="collision_3CV1_G4" pos="0.000000000 0.012430732 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S14_CV05" pos="-10.973525791 -0.042713613 0" quat="0.998120131 0 0 0.061287873">
+      <geom name="visual_S14_CV05" type="mesh" mesh="visual_3CV1_G4" material="mat_3CV1_G4" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S14_CV05" type="hfield" hfield="collision_3CV1_G4" pos="0.000000000 0.012430732 -0.032000000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S15_TB_EXIT" pos="-10.027025433 -0.000000027 0" quat="0.000000006 0 0 -1.000000000">
+      <geom name="visual_S15_TB_EXIT" type="mesh" mesh="visual_3TB1L_C_M" material="mat_3TB1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S15_TB_EXIT" type="hfield" hfield="collision_3TB1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S15_TA_EXIT" pos="-8.827025433 -0.000000013 0" quat="0.000000006 0 0 -1.000000000">
+      <geom name="visual_S15_TA_EXIT" type="mesh" mesh="visual_3TA1L_C_M" material="mat_3TA1L_C_M" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S15_TA_EXIT" type="hfield" hfield="collision_3TA1L_C_M" pos="0.000000000 0.000000000 0.083500000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S16_F_CLOSE" pos="-8.186012795 -0.000000005 0" quat="1.000000000 0 0 0.000000006">
+      <geom name="visual_S16_F_CLOSE" type="mesh" mesh="visual_F_CLOSE" material="mat_F_CLOSE" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S16_F_CLOSE" type="hfield" hfield="collision_F_CLOSE" pos="0.000000000 0.000000000 0.388300000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S17_BA1" pos="-7.240000157 0.000000006 0" quat="1.000000000 0 0 0.000000006">
+      <geom name="visual_S17_BA1" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S17_BA1" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S17_BA2" pos="-5.430000157 0.000000027 0" quat="0.000000006 0 0 -1.000000000">
+      <geom name="visual_S17_BA2" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S17_BA2" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S17_BA3" pos="-3.620000157 0.000000048 0" quat="1.000000000 0 0 0.000000006">
+      <geom name="visual_S17_BA3" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S17_BA3" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <body name="module_S17_BA4" pos="-1.810000157 0.000000070 0" quat="0.000000006 0 0 -1.000000000">
+      <geom name="visual_S17_BA4" type="mesh" mesh="visual_3BA1" material="mat_3BA1" contype="0" conaffinity="0" group="0"/>
+      <geom name="track_S17_BA4" type="hfield" hfield="collision_3BA1" pos="0.000000000 0.000000000 0.012200000" rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001" condim="6" priority="1" solmix="1" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+    </body>
+    <geom name="start_line_00" type="capsule" fromto="-0.825000 -0.432200 0.395095 -0.825000 -0.378175 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_01" type="capsule" fromto="-0.825000 -0.378175 0.395095 -0.825000 -0.324150 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_02" type="capsule" fromto="-0.825000 -0.324150 0.395095 -0.825000 -0.270125 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_03" type="capsule" fromto="-0.825000 -0.270125 0.395095 -0.825000 -0.216100 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_04" type="capsule" fromto="-0.825000 -0.216100 0.395095 -0.825000 -0.162075 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_05" type="capsule" fromto="-0.825000 -0.162075 0.395095 -0.825000 -0.108050 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_06" type="capsule" fromto="-0.825000 -0.108050 0.395095 -0.825000 -0.054025 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_07" type="capsule" fromto="-0.825000 -0.054025 0.395095 -0.825000 0.000000 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_08" type="capsule" fromto="-0.825000 0.000000 0.395095 -0.825000 0.054025 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_09" type="capsule" fromto="-0.825000 0.054025 0.395095 -0.825000 0.108050 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_10" type="capsule" fromto="-0.825000 0.108050 0.395095 -0.825000 0.162075 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_11" type="capsule" fromto="-0.825000 0.162075 0.395095 -0.825000 0.216100 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_12" type="capsule" fromto="-0.825000 0.216100 0.395095 -0.825000 0.270125 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_13" type="capsule" fromto="-0.825000 0.270125 0.395095 -0.825000 0.324150 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_14" type="capsule" fromto="-0.825000 0.324150 0.395095 -0.825000 0.378175 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <geom name="start_line_15" type="capsule" fromto="-0.825000 0.378175 0.395095 -0.825000 0.432200 0.395095" size="0.025000" rgba="1.000 1.000 1.000 1.000" contype="0" conaffinity="0"/>
+    <body name="base_link" pos="-0.63 0 0.417791739" quat="0.972141712 0 0.23439388 0">
+      <freejoint name="floating_base_joint"/>
+      <inertial pos="0 0 0.18" mass="26" diaginertia="0.9 1.4 1.5"/>
+      <geom name="robot_base_visual_geom" type="mesh" mesh="robot_base_visual" material="robot_frame_mat" mass="0" contype="0" conaffinity="0" group="0"/>
+      <geom name="robot_chassis_collision" type="box" pos="-0.005 0 0.142" size="0.237 0.188 0.078" mass="0" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      <geom name="robot_arm_pedestal_collision" type="box" pos="0.065 0 0.265" size="0.065 0.075 0.105" mass="0" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      <geom name="robot_arm_envelope_collision" type="box" pos="0.25 0 0.39" size="0.19 0.075 0.075" mass="0" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      <body name="front_left_wheel_link" pos="0.169999999 0.213574997 0">
+        <joint name="front_left_wheel_joint" type="hinge" axis="0 1 0" limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="front_left_wheel_visual_geom" type="mesh" mesh="robot_wheel_front_left_visual" material="robot_wheel_mat" mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="front_left_wheel_collision" type="ellipsoid" size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003" condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2" priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <body name="front_right_wheel_link" pos="0.169999999 -0.213574997 0">
+        <joint name="front_right_wheel_joint" type="hinge" axis="0 1 0" limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="front_right_wheel_visual_geom" type="mesh" mesh="robot_wheel_front_right_visual" material="robot_wheel_mat" mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="front_right_wheel_collision" type="ellipsoid" size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003" condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2" priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <body name="rear_left_wheel_link" pos="-0.169999999 0.213574997 0">
+        <joint name="rear_left_wheel_joint" type="hinge" axis="0 1 0" limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="rear_left_wheel_visual_geom" type="mesh" mesh="robot_wheel_rear_left_visual" material="robot_wheel_mat" mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="rear_left_wheel_collision" type="ellipsoid" size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003" condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2" priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <body name="rear_right_wheel_link" pos="-0.169999999 -0.213574997 0">
+        <joint name="rear_right_wheel_joint" type="hinge" axis="0 1 0" limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="rear_right_wheel_visual_geom" type="mesh" mesh="robot_wheel_rear_right_visual" material="robot_wheel_mat" mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="rear_right_wheel_collision" type="ellipsoid" size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003" condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2" priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <site name="base_imu_site" pos="0.1815 0 0.206625" size="0.008" rgba="0.2 0.8 1 0"/>
+      <camera name="driver_camera" pos="0.53568 -0.00011 0.43009" xyaxes="0 -1 0 0 0 1" resolution="640 360" fovy="58"/>
+    </body>
+  </worldbody>
+  <actuator>
+    <velocity name="front_left_wheel_actuator" joint="front_left_wheel_joint" kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265" forcelimited="true" forcerange="-16 16"/>
+    <velocity name="front_right_wheel_actuator" joint="front_right_wheel_joint" kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265" forcelimited="true" forcerange="-16 16"/>
+    <velocity name="rear_left_wheel_actuator" joint="rear_left_wheel_joint" kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265" forcelimited="true" forcerange="-16 16"/>
+    <velocity name="rear_right_wheel_actuator" joint="rear_right_wheel_joint" kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265" forcelimited="true" forcerange="-16 16"/>
+  </actuator>
+  <sensor>
+    <framepos name="base_position" objtype="body" objname="base_link"/>
+    <framequat name="base_imu_quat" objtype="site" objname="base_imu_site"/>
+    <gyro name="base_imu_gyro" site="base_imu_site"/>
+    <accelerometer name="base_imu_accel" site="base_imu_site"/>
+  </sensor>
+</mujoco>

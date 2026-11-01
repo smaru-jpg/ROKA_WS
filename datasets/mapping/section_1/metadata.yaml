@@ -1,0 +1,14 @@
+schema_version: 2
+created_utc: '2026-09-02T19:50:09.049367+00:00'
+environment: capture
+mapping_backend: raw_sensor_capture
+pose_authority: wheel_imu_odom
+frames:
+  global: odom
+  odometry: odom
+  body_3d: base_link
+  body_2d: base_footprint
+products:
+  sensor_recording: sensors/metadata.yaml
+  recorded_route: track_profile.yaml
+  session_metrics: session_metrics.yaml

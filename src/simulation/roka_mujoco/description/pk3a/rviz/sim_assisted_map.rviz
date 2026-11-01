@@ -1,0 +1,129 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: 1m 기준격자
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 24
+      Alpha: 0.20
+      Value: true
+    - Class: rviz_default_plugins/Map
+      Name: 실차 2D 점유지도
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map
+      Alpha: 0.38
+      Color Scheme: map
+      Value: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: 실차2D+MuJoCo 3D prior
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /sim_assisted/hybrid_cloud
+      Style: Flat Squares
+      Size (Pixels): 4
+      Decay Time: 0
+      Position Transformer: XYZ
+      Color Transformer: AxisColor
+      Axis: Z
+      Use Fixed Frame: true
+      Selectable: true
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: 실차 XY + prior Z 중심경로
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /sim_assisted/path_3d
+      Line Style: Lines
+      Line Width: 0.07
+      Color: 0; 220; 255
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: 트랙 왼쪽 끝단
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /sim_assisted/track_left
+      Line Style: Lines
+      Line Width: 0.035
+      Color: 255; 220; 0
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: 트랙 오른쪽 끝단
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /sim_assisted/track_right
+      Line Style: Lines
+      Line Width: 0.035
+      Color: 255; 220; 0
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Name: provisional 위험도(초록-빨강)
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /sim_assisted/risk
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 24; 26; 30
+    Fixed Frame: map
+    Frame Rate: 20
+  Name: Sim-assisted 3D prior
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+  Value: true
+Views:
+  Current:
+    Class: rviz_default_plugins/Orbit
+    Distance: 5.5
+    Focal Point:
+      X: 1.4
+      Y: 0
+      Z: -0.1
+    Name: 3D Orbit
+    Near Clip Distance: 0.01
+    Pitch: 0.55
+    Yaw: 0.85
+    Target Frame: map
+    Value: Orbit (rviz)
+Window Geometry:
+  Width: 1500
+  Height: 900
+  X: 40
+  Y: 40
+  Hide Left Dock: false
+  Hide Right Dock: true

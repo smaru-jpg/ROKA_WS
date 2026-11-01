@@ -1,0 +1,1552 @@
+#!/usr/bin/env bash
+set -Eeo pipefail
+
+launcher_name="$(basename "$0")"
+script_source="${BASH_SOURCE[0]}"
+while [[ -L "$script_source" ]]; do
+  script_directory="$(cd "$(dirname "$script_source")" && pwd)"
+  script_source="$(readlink "$script_source")"
+  [[ "$script_source" == /* ]] || \
+    script_source="$script_directory/$script_source"
+done
+workspace_root="$(cd "$(dirname "$script_source")" && pwd)"
+export ROKA_WS_ROOT="$workspace_root"
+report_dir="$workspace_root/reports"
+runtime_log="$report_dir/latest_runtime.log"
+raw_runtime_log="$report_dir/latest_runtime.raw.log"
+history_log="$report_dir/roka_history.log"
+instance_config="${ROKA_CONFIG_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/roka/${launcher_name}.env}"
+# One operator-facing ceiling for every map/profile-based autonomous route.
+# Section 5 leader following is an independent mission and keeps its explicit
+# 0.60--1.20 m/s argument.
+mapped_autonomy_speed_mps="0.30"
+
+load_instance_config() {
+  [[ -r "$instance_config" ]] || return 0
+  local line key value
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    [[ -z "$line" || "$line" == \#* ]] && continue
+    key="${line%%=*}"
+    value="${line#*=}"
+    case "$key" in
+      ROKA_ROS_DOMAIN_ID|ROKA_ARM_CAMERA_SERIAL|ROKA_LED_SERIAL)
+        export "$key=$value"
+        ;;
+      *)
+        fail "지원하지 않는 로컬 설정입니다: $key ($instance_config)"
+        ;;
+    esac
+  done <"$instance_config"
+}
+
+remove_foreign_ros_paths() {
+  local variable="$1" raw entry filtered=""
+  raw="${!variable:-}"
+  IFS=':' read -r -a entries <<<"$raw"
+  for entry in "${entries[@]}"; do
+    [[ -z "$entry" ]] && continue
+    case "$entry" in
+      /opt/ros/*|*/install/*|*/build/*) continue ;;
+    esac
+    filtered="${filtered:+$filtered:}$entry"
+  done
+  printf -v "$variable" '%s' "$filtered"
+  export "$variable"
+}
+
+fail() {
+  printf '[ROKA][ERROR] %s\n' "$*" >&2
+  exit 2
+}
+
+usage() {
+  cat <<'EOF'
+ROKA 실차 통합 실행기
+
+지도 생성·주행:
+  roka mapping section_1       원본 센서와 수동주행 경로 1회 저장
+  roka process section_1 all   같은 원본으로 2D와 3D 지도 생성
+  roka review section_1 2d     2D 지도 검토
+  roka review section_1 3d     3D PCD·경로·경사 검토
+  roka auto section_1 2d       대회 권장: 2D 위치추정+기록경로+IMU 전복보호
+  roka auto section_1 3d       3D 고정-PCD 위치추정 시험
+
+매핑 Xbox: Y 활성화 → A 기록 → LB+스틱 주행 → B 저장 → B 종료
+
+수동·미션:
+  roka manual                  차체+로봇팔 수동조종
+  roka drive                   차체만 수동조종, 팔 고정
+  roka drive pro-hold          차체 수동조종, 24V PRO ID 11/12/13만 고정
+  roka manual section1         섹션 1 전체 팔자세+IFF YOLO+수동주행
+  roka manual section2         섹션 2 박스/B 파지+신호등 YOLO+수동주행
+  roka manual section3         섹션 3 전체 팔자세+마커 YOLO+수동주행
+  roka manual section4         섹션 4 전체 팔자세+원본 운전 카메라
+  roka manual section5         섹션 5 전체 팔자세+원본 운전 카메라
+  roka vision spring-led       D435 IFF+Nano LED 전용 시험(구동부 미사용)
+  roka track mission1 section_1 fog_1
+  roka track mission2 section_2
+  roka track mission3 section_3
+  roka track mission4 section_4
+  roka mission5 0.60
+  roka mission5 0.80
+  roka mission5 1.00
+  roka mission5 1.20
+
+점검:
+  roka flat check section_1    2D 결과 확인
+  roka track check section_1   3D 결과 확인
+  roka log                     최근 핵심 오류
+  roka verify                  하드웨어 비구동 코드 검증
+  roka sections                섹션별 구현 설명
+  roka yolo-paths              섹션별 활성 PT·설정·필터 경로 표시
+
+로컬 무조코 가정 매핑:
+  roka mujoco mapping          성공 수동주행 lap01_2로 가상 3D 지도 생성
+  roka mujoco review           가상 3D 지도·수동경로·경사 위험도 RViz 확인
+
+전체 복사 명령은 바탕화면 ROKA_통합_사용명령.txt 참고.
+EOF
+}
+
+yolo_summary() {
+  cat <<EOF
+ROKA YOLO 활성 파일
+
+섹션1 IFF
+  PT     $workspace_root/src/mission_vision/models/IFF_0830.pt
+  설정   $workspace_root/src/mission_vision/config/spring.yaml
+  ROS    $workspace_root/src/mission_vision/mission_vision/neopixel_controller.py
+  Nano   $workspace_root/src/mission_vision/firmware/roka_iff_neopixel/roka_iff_neopixel.ino
+  시험   roka vision spring-led
+
+섹션2 팔 파지(실제 자동 파지)
+  PT     $workspace_root/src/manipulation/roka_arm/models/box_marker_best.pt
+  설정   $workspace_root/src/manipulation/roka_arm/config/roka_arm.yaml
+  계약   $workspace_root/src/manipulation/roka_arm/models/model_metadata.yaml
+
+박스 단독 관찰(roka vision summer, 팔 파지 모델과 별개)
+  PT     $workspace_root/src/mission_vision/models/box_0830.pt
+  설정   $workspace_root/src/mission_vision/config/summer.yaml
+
+섹션2 신호등
+  PT     $workspace_root/src/mission_vision/models/traffic_0831.pt
+  설정   $workspace_root/src/mission_vision/config/traffic.yaml
+  주행   $workspace_root/src/mission/roka_mission/config/traffic_stop_go.yaml
+
+섹션3 표식
+  PT     $workspace_root/src/mission_vision/models/vision_0831.pt
+  설정   $workspace_root/src/mission_vision/config/autumn.yaml
+
+공통 모델 계약
+  $workspace_root/src/mission_vision/models/model_metadata.yaml
+
+모델 선택을 추적할 런치
+  $workspace_root/src/mission_vision/launch/{spring,summer,traffic,autumn}.launch.py
+  $workspace_root/src/mission/roka_mission/launch/section_manual.launch.py
+  $workspace_root/src/mission/roka_mission/launch/section2_box_pick.launch.py
+  $workspace_root/src/manipulation/roka_arm/launch/roka_arm.launch.py
+
+필터 구현
+  $workspace_root/src/mission_vision/mission_vision/filters
+
+교체 설명
+  $workspace_root/docs/ROKA_YOLO_교체_가이드.md
+
+폴더 열기
+  xdg-open "$workspace_root/src/mission_vision/models"
+  xdg-open "$workspace_root/src/mission_vision/config"
+  xdg-open "$workspace_root/src/mission_vision/firmware/roka_iff_neopixel"
+  xdg-open "$workspace_root/src/manipulation/roka_arm/models"
+EOF
+}
+
+section_summary() {
+  cat <<'EOF'
+ROKA 섹션별 구현 분류
+
+공통 매핑·주행 코드
+  mapping         : VLP-16/IMU/휠 odom/TF/수동경로 원본을 한 번만 수집
+  process 2d      : 같은 bag -> slam_toolbox 2D
+  process 3d      : 같은 bag -> FAST-LIO2 + SC-PGO 3D
+  auto            : pk3a_field -> pk3a_autonomy -> lidar_md_navigation
+                    -> track_path_follower -> MD200T
+  공통 입력       : VLP-16, EBIMU, wheel odom, Xbox(매핑), 팔 자세 HOLD
+
+section_1
+  mapping/auto    : 공통 지도·기록경로 기능
+  blind-record    : IMU+wheel odom으로 안개 직선 명령 기록
+  mission1        : 안개 구간 직선 재생 -> LiDAR 재위치추정 -> 기록경로 재개
+                    D435 IFF(spring)와 선택형 LED 판정 포함
+
+section_2
+  mapping/auto    : 공통 지도 생성과 경로만 단독 시험
+  mission2        : 기존 roka_arm D435/YOLO -> 경로 정지 -> MD 0 RPM HOLD
+                    -> Dynamixel 파지/배치 -> 신호등 YOLO -> 기록경로 재개
+                    RED는 즉시 경로 취소+0 명령 유지, BLUE 2회 확정 뒤
+                    현재 위치에서 같은 기록경로에 재결합(NONE은 상태 유지)
+
+section_3
+  mapping/auto    : 공통 지도·경로 기능 사용 가능
+  mission3        : 기록경로 주행+B 정지/수동전환+D435 마커(autumn) 관찰
+                    SECTION3 자세 HOLD, 마커 누적완료 판정은 아직 미연결
+
+section_4
+  mission4        : 기록경로 주행+B 정지/수동전환+SECTION4 자세+운전영상
+  mapping/auto    : 곡선 진입·이탈은 공통 지도·곡률 기반 경로 추종
+                    이후 좌우 직선·상하 곡률 구간은 별도 고속 영역으로 분류 예정
+  현재 상태       : 자동 슬립 제어는 제외. 매핑 때 IMU·4륜 RPM/전류·접지
+                    진단을 함께 기록해 반복 실차 데이터로 속도 영역을 산출
+
+section_5
+  mission5        : flat/track 구분 없이 평지에서 저장 지도 없이
+                    VLP-16 PCL 군집/선두 궤적/Kalman 가림복구
+                    -> velocity smoother/collision monitor -> MD200T
+  YOLO·사전 매핑  : 사용하지 않음
+
+소스 위치
+  공통 매핑/주행  : src/navigation/roka_nav2_bringup
+  3D SLAM/보정    : src/localization/roka_fast_lio_localization
+  지도 위치추정   : src/localization/roka_map_localization
+  지형/선두추종   : src/terrain/roka_terrain_mapping
+  섹션 조정       : src/mission/roka_mission
+  미션 비전       : src/mission_vision
+  기존 로봇팔     : src/manipulation/roka_arm
+EOF
+}
+
+validate_section() {
+  [[ "$1" =~ ^section_[1-5]$ ]] || \
+    fail "map id는 section_1부터 section_5까지만 허용됩니다: $1"
+}
+
+dynamic_calibration_ready() {
+  local hardware_source="$workspace_root/src/common/roka_robot_description/config/pk3a_hardware.yaml"
+  [[ -r "$hardware_source" ]] && \
+    grep -Eq '^[[:space:]]*rotation_validated_dynamically:[[:space:]]*true[[:space:]]*$' \
+      "$hardware_source" && \
+    grep -Eq '^[[:space:]]*temporal_offset_validated_dynamically:[[:space:]]*true[[:space:]]*$' \
+      "$hardware_source"
+}
+
+print_dynamic_calibration_summary() {
+  local calibration_root="$report_dir/lidar_imu_calibration"
+  local profile="${execution_profile:-track}"
+  local calibration_running=false
+  if pgrep -f 'lidar_imu_dynamic_calibration.launch.py' >/dev/null 2>&1; then
+    calibration_running=true
+    printf '[CALIBRATION][RUNNING] 동적 보정이 실행 중입니다. 현재 터미널에서 Ctrl+C를 누르지 마십시오.\n'
+  fi
+  if dynamic_calibration_ready; then
+    if [[ -s "$calibration_root/offline_regression.yaml" ]] && \
+       grep -Eq '^result:[[:space:]]*FAIL[[:space:]]*$' \
+         "$calibration_root/offline_regression.yaml"; then
+      printf '[CALIBRATION][CONDITIONAL] 2회 재현성은 PASS지만 저장 평지 bag의 3D Z 드리프트 기준은 FAIL\n'
+      printf '[CALIBRATION][REQUIRED] 매핑 시작 전 FAST-LIO stationary PASS, 저장 후 roka track check가 필요합니다.\n'
+      printf '[CALIBRATION][REGRESSION] %s\n' \
+        "$calibration_root/offline_regression.yaml"
+    else
+      printf '[CALIBRATION][PASS] LiDAR-IMU 회전·시간 오프셋 2회 재현성 검증 완료\n'
+    fi
+    [[ -s "$calibration_root/validation.yaml" ]] && \
+      printf '[CALIBRATION][REPORT] %s\n' "$calibration_root/validation.yaml"
+    return 0
+  fi
+  if [[ -s "$calibration_root/run_1/result.yaml" ]]; then
+    printf '[CALIBRATION][CANDIDATE] 1차 LI-Init 배치 초기해 있음(아직 실차 설정 미반영)\n'
+    if grep -Eq '^[[:space:]]*stable:[[:space:]]*false[[:space:]]*$' \
+        "$calibration_root/run_1/result.yaml"; then
+      printf '[CALIBRATION][WARN] 온라인 refinement 발산 감지; 배치 초기해만 2차 재현성 검증에 사용\n'
+    fi
+  elif [[ "$calibration_running" == true ]]; then
+    printf '[CALIBRATION][PENDING] 1차 실행 중; 조정 목표 기준 X/Y/Z 100%%와 자동 종료를 기다리는 중\n'
+  elif [[ -e "$calibration_root/run_1/Initialization_result.txt" ]]; then
+    printf '[CALIBRATION][INCOMPLETE] 1차 결과가 0바이트입니다. 조정 목표 기준 X/Y/Z 100%% 전에 종료됐습니다.\n'
+  else
+    printf '[CALIBRATION][MISSING] 1차 결과 없음\n'
+  fi
+  if [[ -s "$calibration_root/run_2/result.yaml" ]]; then
+    printf '[CALIBRATION][CANDIDATE] 2차 LI-Init 배치 초기해 있음\n'
+  else
+    printf '[CALIBRATION][MISSING] 2차 결과 없음\n'
+  fi
+  if [[ "$calibration_running" == true ]]; then
+    printf '[CALIBRATION][NEXT] 현재 보정 터미널에서 계속 진행하십시오. 새 보정을 중복 실행하지 마십시오.\n'
+  elif [[ -s "$calibration_root/run_1/result.yaml" ]]; then
+    printf '[CALIBRATION][NEXT] LiDAR·IMU 전원 재인가 후 독립 2차 실행: roka %s calibrate 2\n' "$profile"
+  else
+    printf '[CALIBRATION][NEXT] %s\n' "roka $profile calibrate 1"
+  fi
+  printf '[CALIBRATION][MOTION] 차륜형 목표는 원본 LI-Init의 6%%; 화면은 이 조정 목표를 100%%로 환산 표시\n'
+  printf '[CALIBRATION][MOTION] X=좌우 기울기, Y=오르막·내리막, Z=S회전; 세 축 완료 후 자동 종료\n'
+  return 1
+}
+
+require_dynamic_calibration_ready() {
+  [[ "$execution_profile" == "track" ]] || return 0
+  dynamic_calibration_ready && return 0
+  printf '[ROKA][BLOCKED] 3D 매핑 전 LiDAR-IMU 동적 보정 2회가 필요합니다.\n' >&2
+  print_dynamic_calibration_summary >&2 || true
+  fail "보정 완료 전에는 track 3D 지도를 생성하지 않습니다."
+}
+
+require_profile() {
+  [[ "$execution_profile" == "flat" || "$execution_profile" == "track" ]] || \
+    fail "프로필을 먼저 선택하십시오: roka <flat|track> $command_name ..."
+}
+
+profile_environment() {
+  case "$execution_profile" in
+    flat) printf flat ;;
+    track) printf inline ;;
+  esac
+}
+
+profile_competition_mode() {
+  [[ "$execution_profile" == "track" ]] && printf true || printf false
+}
+
+profile_label() {
+  case "$execution_profile" in
+    flat) printf '평지' ;;
+    track) printf '경사·트랙 3D' ;;
+  esac
+}
+
+prepare_environment() {
+  [[ -r /opt/ros/humble/setup.bash ]] || fail "ROS 2 Humble을 찾을 수 없습니다."
+  [[ -r "$workspace_root/install/setup.bash" ]] || \
+    fail "install/setup.bash가 없습니다. 먼저 워크스페이스를 빌드하십시오."
+  load_instance_config
+  local selected_domain="${ROKA_ROS_DOMAIN_ID:-31}"
+  [[ "$selected_domain" =~ ^[0-9]+$ ]] && \
+    ((selected_domain >= 0 && selected_domain <= 232)) || \
+    fail "ROKA_ROS_DOMAIN_ID는 0~232여야 합니다: $selected_domain"
+  cd "$workspace_root"
+  # A receiver may already have sourced another workspace containing the same
+  # package names. Remove all inherited ROS/colcon indexes before selecting the
+  # Humble underlay and this exact ROKA install.
+  unset AMENT_PREFIX_PATH COLCON_PREFIX_PATH CMAKE_PREFIX_PATH ROS_PACKAGE_PATH
+  unset ROS_DISTRO ROS_VERSION ROS_PYTHON_VERSION PYTHONPATH
+  export PYTHONNOUSERSITE=1
+  # Prefer Ubuntu/ROS tools over unrelated pip-installed copies in ~/.local.
+  # ROS setup below prepends /opt/ros/humble/bin afterwards.
+  export PATH="/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:$HOME/.local/bin"
+  remove_foreign_ros_paths PATH
+  remove_foreign_ros_paths LD_LIBRARY_PATH
+  remove_foreign_ros_paths PKG_CONFIG_PATH
+  # shellcheck disable=SC1091
+  source /opt/ros/humble/setup.bash
+  # shellcheck disable=SC1091
+  source "$workspace_root/install/setup.bash"
+  export ROS_DOMAIN_ID="$selected_domain"
+  if [[ -d "$workspace_root/.roka_python" ]]; then
+    export PYTHONPATH="$workspace_root/.roka_python${PYTHONPATH:+:$PYTHONPATH}"
+  fi
+  python3 "$workspace_root/tools/check_overlay.py" \
+    --workspace "$workspace_root" --quiet || \
+    fail "다른 ROS 워크스페이스가 ROKA 패키지를 가리고 있습니다."
+  # Child Python nodes (notably the Dynamixel driver) also use plain print()
+  # for register-level diagnostics.  Flush those lines immediately so an
+  # early launch shutdown cannot hide the actual motor/port failure.
+  export PYTHONUNBUFFERED=1
+  mkdir -p "$report_dir"
+}
+
+ensure_arm_motion_is_not_running() {
+  local nodes
+  nodes="$(timeout 3 ros2 node list 2>/dev/null || true)"
+  if grep -qx '/roka_manual_arm_joy' <<< "$nodes"; then
+    fail "로봇팔 수동조작이 이미 실행 중입니다. 기존 manual 터미널을 종료하십시오."
+  fi
+  if grep -qx '/roka_arm_hold' <<< "$nodes"; then
+    fail "로봇팔 주행 잠금이 이미 실행 중입니다. 기존 주행 터미널을 종료하십시오."
+  fi
+  if grep -qx '/roka_arm_controller' <<< "$nodes"; then
+    local motion
+    motion="$(timeout 3 ros2 param get /roka_arm_controller enable_motion 2>/dev/null || true)"
+    if grep -q 'True' <<< "$motion"; then
+      fail "로봇팔 구동 모드가 실행 중입니다. 팔을 종료·수납한 뒤 베이스를 주행하십시오."
+    fi
+  fi
+}
+
+ensure_base_is_not_running() {
+  local nodes
+  nodes="$(timeout 3 ros2 node list 2>/dev/null || true)"
+  if grep -qx '/roka_md_driver' <<< "$nodes"; then
+    fail "베이스 MD 드라이버가 이미 실행 중입니다. 기존 주행 터미널을 종료하십시오."
+  fi
+}
+
+ensure_mission_runtime_is_not_running() {
+  local nodes collision
+  nodes="$(timeout 3 ros2 node list 2>/dev/null || true)"
+  collision="$(grep -E '^/(mission_vision|mission_neopixel|roka_arm_controller|roka_manual_arm_joy|box_pick_coordinator|blind_segment_controller|section5_leader_follower|section5_field_preflight|pk3a_field_preflight|roka/arm_camera(/arm_camera)?)$' <<< "$nodes" || true)"
+  if [[ -n "$collision" ]]; then
+    fail "이전 미션/카메라 노드가 아직 실행 중입니다. 기존 터미널을 종료하십시오: $(tr '\n' ' ' <<< "$collision")"
+  fi
+}
+
+ensure_d435_connected() {
+  if ! command -v rs-enumerate-devices >/dev/null 2>&1 || \
+     ! rs-enumerate-devices -s 2>/dev/null | grep -q D435; then
+    fail "Intel RealSense D435가 연결되지 않았습니다. arm-check 후 다시 실행하십시오."
+  fi
+}
+
+ensure_led_connected_if_enabled() {
+  [[ -n "${ROKA_LED_SERIAL:-}" ]] || return 0
+  [[ -e "$ROKA_LED_SERIAL" && -r "$ROKA_LED_SERIAL" && -w "$ROKA_LED_SERIAL" ]] || \
+    fail "피아식별 LED 직렬 장치가 없거나 권한이 없습니다: $ROKA_LED_SERIAL"
+  case "$(basename "$ROKA_LED_SERIAL")" in
+    *A76BHBER*|*A751CYHM*|*FT89FBMQ*|*FT78LQH1*)
+      fail "LED 포트가 MD200T/로봇팔 어댑터와 충돌합니다: $ROKA_LED_SERIAL" ;;
+  esac
+}
+
+record_event() {
+  printf '%s %s\n' "$(date --iso-8601=seconds)" "$*" >> "$history_log"
+}
+
+run_filtered() {
+  local label="$1"
+  local interrupted=0
+  shift
+  : > "$runtime_log"
+  : > "$raw_runtime_log"
+  printf '[ROKA] %s | 핵심 로그: %s\n' "$label" "$runtime_log" | \
+    tee -a "$runtime_log"
+  record_event "start $label"
+  trap 'interrupted=1' INT
+  set +e
+  stdbuf -oL -eL "$@" 2>&1 | \
+    tee -i "$raw_runtime_log" | \
+    python3 -u "$workspace_root/tools/roka_log_filter.py" | \
+    tee -i -a "$runtime_log"
+  local pipeline_status=("${PIPESTATUS[@]}")
+  set -e
+  trap - INT
+  local command_status="${pipeline_status[0]}"
+  # Some launch guards intentionally emit a Shutdown event after printing a
+  # launch-level error. ROS 2 then exits with status 0 even though no node was
+  # started. Treat those guard messages as failures so callers do not print
+  # DONE or continue into map/status checks for products that cannot exist.
+  if [[ "$command_status" -eq 0 && -s "$raw_runtime_log" ]] && \
+     ! grep -q '^\[PROCESS\]\[RESULT\] COMPLETE' "$raw_runtime_log" && \
+     grep -Eq '^\[ERROR\] \[(pk3a_field|launch)\]:|^\[ERROR\] \[[^]]+-[0-9]+\]: process has died|InvalidTopicNameError' \
+       "$raw_runtime_log"; then
+    command_status=1
+  fi
+  if [[ "$interrupted" -eq 1 || "$command_status" -eq 130 || "$command_status" -eq 120 ]]; then
+    command_status=130
+    printf '[ROKA][STOP] %s 사용자 중지\n' "$label" | tee -a "$runtime_log"
+    record_event "finish $label result=STOPPED"
+  elif [[ "$command_status" -eq 0 ]]; then
+    printf '[ROKA][DONE] %s 정상 종료\n' "$label" | tee -a "$runtime_log"
+    record_event "finish $label result=PASS"
+  else
+    printf '[ROKA][ERROR] %s 실패(exit=%s). roka log 확인\n' \
+      "$label" "$command_status" | tee -a "$runtime_log" >&2
+    if [[ -s "$raw_runtime_log" ]]; then
+      printf '[ROKA][DETAIL] 필터 전 원본 로그의 마지막 출력:\n' | \
+        tee -a "$runtime_log" >&2
+      tail -n 20 "$raw_runtime_log" | tee -a "$runtime_log" >&2
+      printf '[ROKA][DETAIL] 전체 원본 로그: %s\n' "$raw_runtime_log" | \
+        tee -a "$runtime_log" >&2
+    fi
+    record_event "finish $label result=FAIL exit=$command_status"
+  fi
+  return "$command_status"
+}
+
+prepare_test() {
+  local section="$1"
+  local speed="$2"
+  local approval_flag="$3"
+  if [[ -n "$approval_flag" ]]; then
+    ros2 run roka_nav2_bringup approve_reviewed_occupancy \
+      "$active_map_root/$section" "$approval_flag" >/dev/null
+  fi
+  ros2 run roka_nav2_bringup pk3a_map_check \
+    --map-root "$active_map_root" --map-id "$section" \
+    --prepare-test --maximum-speed-mps "$speed"
+}
+
+prepare_full() {
+  local section="$1"
+  local speed="$2"
+  local approval_flag="$3"
+  if [[ -n "$approval_flag" ]]; then
+    ros2 run roka_nav2_bringup approve_reviewed_occupancy \
+      "$active_map_root/$section" "$approval_flag" >/dev/null
+  fi
+  ros2 run roka_nav2_bringup pk3a_map_check \
+    --map-root "$active_map_root" --map-id "$section" \
+    --prepare --maximum-speed-mps "$speed"
+}
+
+prepare_recorded() {
+  local section="$1"
+  local speed="$2"
+  local approval_flag="$3"
+  if [[ -n "$approval_flag" ]]; then
+    ros2 run roka_nav2_bringup approve_reviewed_occupancy \
+      "$active_map_root/$section" "$approval_flag" >/dev/null
+  fi
+  ros2 run roka_nav2_bringup pk3a_map_check \
+    --map-root "$active_map_root" --map-id "$section" \
+    --prepare-recorded --maximum-speed-mps "$speed"
+}
+
+print_status() {
+  local section="$1"
+  local scope="$2"
+  local profile_key="${execution_profile}_${section}"
+  if [[ -f "$active_map_root/$section/sensors/metadata.yaml" ]]; then
+    ros2 run roka_fast_lio_localization roka_bag_sensor_audit \
+      "$active_map_root/$section/sensors" --require-diagnostics \
+      --output "$workspace_root/benchmarks/${profile_key}_sensor_contract.yaml" \
+      >/dev/null 2>&1 || true
+  fi
+  ros2 run roka_nav2_bringup roka_operator_status \
+    --workspace "$workspace_root" --map-root "$active_map_root" \
+    --map-id "$section" --scope "$scope"
+}
+
+execution_profile=""
+command_name="${1:-help}"
+legacy_ramp_alias=false
+command_already_shifted=false
+legacy_command=""
+if [[ "$command_name" == "mujoco" ]]; then
+  shift
+  command_name="mujoco-${1:-help}"
+  [[ "$#" -gt 0 ]] && shift
+  command_already_shifted=true
+elif [[ "$command_name" == "mapping" || "$command_name" == "process" || \
+      "$command_name" == "capture" ]]; then
+  unified_name="$command_name"
+  if [[ "$unified_name" == "capture" ]]; then
+    legacy_command="capture"
+    unified_name="mapping"
+  fi
+  shift
+  if [[ "${1:-}" == "flat" || "${1:-}" == "track" ]]; then
+    # Compatibility only: the old command selected a mapper before recording.
+    execution_profile="$1"
+    shift
+  else
+    execution_profile="capture"
+  fi
+  command_name="$unified_name"
+  command_already_shifted=true
+elif [[ "$command_name" == "review" || "$command_name" == "auto" ]]; then
+  unified_name="$command_name"
+  shift
+  if [[ "${1:-}" == "flat" || "${1:-}" == "track" ]]; then
+    execution_profile="$1"
+    shift
+  else
+    canonical_section="${1:-section_1}"
+    canonical_map_mode="${2:-2d}"
+    validate_section "$canonical_section"
+    case "$canonical_map_mode" in
+      2d) execution_profile="flat" ;;
+      3d) execution_profile="track" ;;
+      *) fail "지도 방식은 2d 또는 3d여야 합니다: $canonical_map_mode" ;;
+    esac
+    shift $(( $# >= 2 ? 2 : 1 ))
+    set -- "$canonical_section" "$@"
+  fi
+  command_name="$unified_name"
+  command_already_shifted=true
+elif [[ "$command_name" == "ramp" ]]; then
+  # Keep old operator scripts working, but never create a third map tree.
+  # Ramp and real-track practice now share the exact track 3D backend/data.
+  execution_profile="track"
+  legacy_ramp_alias=true
+  shift
+  command_name="${1:-help}"
+elif [[ "$command_name" == "flat" || "$command_name" == "track" ]]; then
+  execution_profile="$command_name"
+  shift
+  command_name="${1:-help}"
+fi
+if [[ "$command_name" == "map" ]]; then
+  legacy_command="map"
+  command_name="mapping"
+elif [[ "$command_name" == "follow" ]]; then
+  legacy_command="follow"
+  command_name="auto"
+fi
+if [[ "$command_name" == "help" || "$command_name" == "--help" || "$command_name" == "-h" ]]; then
+  usage
+  exit 0
+fi
+if [[ "$command_name" == "sections" ]]; then
+  section_summary
+  exit 0
+fi
+if [[ "$command_name" == "yolo-paths" ]]; then
+  yolo_summary
+  exit 0
+fi
+[[ "$command_already_shifted" == true ]] || shift
+prepare_environment
+if [[ "$execution_profile" == "capture" ]]; then
+  active_map_root="$workspace_root/datasets/mapping"
+else
+  active_map_root="$workspace_root/maps/${execution_profile:-unselected}"
+fi
+if [[ "$legacy_ramp_alias" == true ]]; then
+  printf '[ROKA][COMPAT] ramp는 track 3D 프로필로 통합되었습니다: maps/track 사용\n'
+fi
+if [[ -n "$legacy_command" ]]; then
+  printf '[ROKA][COMPAT] %s는 이전 명령입니다. 새 명령은 roka %s section_N 입니다.\n' \
+    "$legacy_command" "$command_name"
+fi
+
+# ROS 2 Humble rejects an empty command-line launch assignment such as
+# `camera_serial:=`.  Leave the argument out when no camera is explicitly
+# selected; the launch file then uses its empty/default serial and RealSense
+# selects the connected D435.  Keep this as an array so an unset value expands
+# to zero shell arguments instead of one malformed argument.
+arm_camera_launch_args=()
+if [[ -n "${ROKA_ARM_CAMERA_SERIAL:-}" ]]; then
+  arm_camera_launch_args=("camera_serial:=${ROKA_ARM_CAMERA_SERIAL}")
+fi
+mission_led_launch_args=("enable_led:=false")
+if [[ -n "${ROKA_LED_SERIAL:-}" ]]; then
+  [[ "$ROKA_LED_SERIAL" == /dev/serial/by-id/* ]] || \
+    fail "ROKA_LED_SERIAL은 고정 /dev/serial/by-id 경로여야 합니다."
+  mission_led_launch_args=(
+    "enable_led:=true"
+    "led_serial_port:=${ROKA_LED_SERIAL}"
+  )
+fi
+
+case "$command_name" in
+  mujoco-mapping)
+    demonstration="${1:-lap01_2}"
+    demonstration="${demonstration%.csv}"
+    [[ "$demonstration" =~ ^[a-zA-Z0-9_-]+$ ]] || \
+      fail "무조코 수동주행 이름은 영문/숫자/_/-만 허용됩니다: $demonstration"
+    success_csv="$workspace_root/datasets/xbox_demonstrations/${demonstration}.csv"
+    [[ -f "$success_csv" ]] || fail "수동주행 데이터가 없습니다: $success_csv"
+    printf '[ROKA] 무조코 트랙 가정 매핑: 형상=PK-3A, 경로=%s, 가상 VLP-16=전방 120도\n' \
+      "$demonstration"
+    ros2 run roka_mujoco export_assumed_mapped_track \
+      --success-csv "$success_csv" \
+      --output-directory "$workspace_root/maps/sim_pk3a_assumed_mapping"
+    printf '[ROKA][DONE] 가상 지도: %s/maps/sim_pk3a_assumed_mapping\n' "$workspace_root"
+    printf '[ROKA] 확인: roka mujoco review\n'
+    ;;
+
+  mujoco-review)
+    bundle="$workspace_root/maps/sim_pk3a_assumed_mapping"
+    [[ -f "$bundle/simulation_mapping_manifest.yaml" ]] || \
+      fail "가상 지도가 없습니다: 먼저 roka mujoco mapping"
+    exec ros2 launch roka_mujoco mujoco_assumed_mapping_view.launch.py \
+      bundle_directory:="$bundle"
+    ;;
+
+  mujoco-help)
+    printf 'roka mujoco mapping [lap01_2]  가상 VLP-16 지도 생성\n'
+    printf 'roka mujoco review             RViz 결과 확인\n'
+    ;;
+
+  verify)
+    printf '[ROKA] 소프트웨어 회귀검증(모터 출력 없음)\n'
+    verify_log="$report_dir/verify_software.log"
+    : > "$verify_log"
+    bash -n "$workspace_root/roka"
+    (cd "$workspace_root" && sha256sum -c tools/section5_frozen.sha256) \
+      >>"$verify_log" 2>&1 || fail "섹션5 동결 파일이 변경되었습니다"
+    export PYTHONPATH="$workspace_root/src/common/roka_robot_description:$workspace_root/src/drivers/roka_md_driver:$workspace_root/src/manipulation/roka_arm:$workspace_root/src/mission/roka_mission:$workspace_root/src/mission_vision:$workspace_root/src/navigation/roka_nav2_bringup:$workspace_root/src/localization/roka_fast_lio_localization:${PYTHONPATH:-}"
+    /usr/bin/python3 -m pytest -q \
+      "$workspace_root/src/common/roka_robot_description/test" \
+      "$workspace_root/src/drivers/roka_md_driver/test" \
+      "$workspace_root/src/manipulation/roka_arm/test" \
+      "$workspace_root/src/mission/roka_mission/test" \
+      "$workspace_root/src/mission_vision/test" \
+      "$workspace_root/src/navigation/roka_nav2_bringup/test" \
+      "$workspace_root/src/localization/roka_fast_lio_localization/test"
+    cpp_test_packages=(
+      roka_imu_driver
+      roka_terrain_supervisor
+      roka_terrain_mapping
+    )
+    for test_package in "${cpp_test_packages[@]}" sc_pgo; do
+      # Never aggregate XML left by a previous test environment or interrupted
+      # run. colcon/CTest recreate these directories below.
+      rm -rf -- \
+        "$workspace_root/build/$test_package/test_results" \
+        "$workspace_root/build/$test_package/Testing"
+    done
+    if ! CMAKE_BUILD_PARALLEL_LEVEL=1 MAKEFLAGS=-j1 \
+      colcon test --executor sequential --packages-select "${cpp_test_packages[@]}" \
+      >>"$verify_log" 2>&1; then
+      tail -n 60 "$verify_log" >&2
+      fail "C++ IMU/terrain/leader 시험 실패"
+    fi
+    # SC-PGO is vendored third-party code. Its Flake8 result depends on any
+    # globally installed Python linter, while the deployed runtime is C++.
+    # Verify the actual loop-constraint implementation and exclude only the
+    # upstream development-style linters from the portable handoff contract.
+    if ! CMAKE_BUILD_PARALLEL_LEVEL=1 MAKEFLAGS=-j1 \
+      colcon test --executor sequential --packages-select sc_pgo \
+        --ctest-args -R '^test_loop_constraint$' \
+      >>"$verify_log" 2>&1; then
+      tail -n 60 "$verify_log" >&2
+      fail "SC-PGO C++ 루프제약 시험 실패"
+    fi
+    cpp_test_packages+=(sc_pgo)
+    for test_package in "${cpp_test_packages[@]}"; do
+      package_result="$(colcon test-result \
+        --test-result-base "$workspace_root/build/$test_package" 2>&1)" || {
+        printf '%s\n' "$package_result" >&2
+        fail "$test_package 시험 결과 실패"
+      }
+      printf '[ROKA][VERIFY][%s] %s\n' "$test_package" "$package_result"
+    done
+    # Parse every first-party real-robot launch, not only the mission wrappers.
+    # Vendor and simulation launch files have their own upstream/local tests and
+    # are deliberately outside the handoff/runtime contract checked here.
+    launch_count=0
+    while IFS= read -r launch_file; do
+      package_directory="${launch_file%/launch/*}"
+      package_name="$(sed -n \
+        's:.*<name>\(.*\)</name>.*:\1:p' \
+        "$package_directory/package.xml" | head -n 1)"
+      [[ -n "$package_name" ]] || fail "런치 패키지 이름 확인 실패: $launch_file"
+      ros2 launch "$package_name" "$(basename "$launch_file")" --show-args \
+        >>"$verify_log" 2>&1 || \
+        fail "런치 인자 검사 실패: $package_name/$(basename "$launch_file")"
+      launch_count=$((launch_count + 1))
+    done < <(
+      find "$workspace_root/src" -path '*/launch/*.launch.py' -type f \
+        ! -path "$workspace_root/src/vendor/*" \
+        ! -path "$workspace_root/src/simulation/*" | sort
+    )
+    source_roots=()
+    for directory in "$workspace_root"/src/*; do
+      [[ -d "$directory" && "$(basename "$directory")" != simulation ]] && \
+        source_roots+=("$directory")
+    done
+    # ament_python is the installed ROS build type used by Python packages,
+    # but Ubuntu Jammy's rosdep database does not publish it as a resolvable
+    # system key. Package builds above prove that backend separately.
+    rosdep check --from-paths "${source_roots[@]}" --ignore-src \
+      --skip-keys=ament_python --rosdistro humble >>"$verify_log" 2>&1
+    printf '[ROKA][VERIFY][PASS] Python 회귀 + IMU/terrain/leader/SC-PGO C++ + 실차 런치 %s개, rosdep 누락 0\n' \
+      "$launch_count"
+    ;;
+
+  handoff)
+    output_file="${1:-$HOME/Downloads/roka_ws_handoff_$(date +%m%d).zip}"
+    python3 "$workspace_root/tools/export_handoff.py" "$output_file"
+    ;;
+
+  arm-check)
+    require_profile
+    check_scope="${1:-hardware}"
+    case "$check_scope" in
+      software)
+        ros2 run roka_arm roka_arm_preflight
+        ;;
+      hardware)
+        ensure_arm_motion_is_not_running
+        ros2 run roka_arm roka_arm_preflight --require-hardware
+        ;;
+      *) fail "arm-check 인자는 software 또는 hardware여야 합니다: $check_scope" ;;
+    esac
+    ;;
+
+  arm-observe)
+    require_profile
+    ensure_mission_runtime_is_not_running
+    ensure_d435_connected
+    printf '[ROKA] D435+YOLO 관찰 모드: U2D2와 모터 명령을 사용하지 않습니다.\n'
+    run_filtered "로봇팔 카메라 관찰" \
+      ros2 launch roka_arm roka_arm.launch.py \
+      start_realsense:=true connect_hardware:=false enable_motion:=false \
+      "${arm_camera_launch_args[@]}" inference_device:=auto
+    if grep -Eq '\[ROKA-ARM\]\[ERROR\]|process has died' "$runtime_log"; then
+      fail "로봇팔 관찰 노드 오류. roka log 확인"
+    fi
+    ;;
+
+  arm)
+    require_profile
+    ensure_mission_runtime_is_not_running
+    ensure_base_is_not_running
+    ros2 run roka_arm roka_arm_preflight --require-hardware
+    printf '[ROKA] 로봇팔 구동: 시작 자세로 이동 후 자동제어는 OFF 상태입니다.\n'
+    run_filtered "ROKA 로봇팔 구동" \
+      ros2 launch roka_arm roka_arm.launch.py \
+      start_realsense:=true connect_hardware:=true enable_motion:=true \
+      "${arm_camera_launch_args[@]}" inference_device:=auto
+    if grep -Eq '\[ROKA-ARM\]\[ERROR\]|process has died' "$runtime_log"; then
+      fail "로봇팔 구동 노드 오류. roka log 확인"
+    fi
+    ;;
+
+  blind-record)
+    require_profile
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    section="${1:-section_1}"
+    profile_name="${2:-fog_1}"
+    requested_exit="${3:-30}"
+    validate_section "$section"
+    [[ "$section" == "section_1" ]] || \
+      fail "안개 직선 기록은 section_1 전용입니다: $section"
+    [[ "$profile_name" =~ ^[a-zA-Z0-9_-]+$ ]] || \
+      fail "안개 프로파일 이름은 영문/숫자/_/-만 허용됩니다: $profile_name"
+    case "$requested_exit" in
+      20|0.2|0.20) exit_ratio="0.20"; exit_percent="20" ;;
+      30|0.3|0.30) exit_ratio="0.30"; exit_percent="30" ;;
+      40|0.4|0.40) exit_ratio="0.40"; exit_percent="40" ;;
+      *) fail "눈감고 달릴 출구는 20, 30, 40% 중 하나여야 합니다: $requested_exit" ;;
+    esac
+    profile_file="$active_map_root/$section/missions/${profile_name}.yaml"
+    route_profile_file="$active_map_root/$section/track_profile_recorded.yaml"
+    [[ -s "$route_profile_file" ]] || \
+      fail "기록 경로가 없습니다: 먼저 roka $execution_profile map $section 을 완료하십시오."
+    printf '[ROKA] 안개 직선 수동기록: 시작~%s%%, A 시작, LB+스틱 주행, 목표거리 자동저장\n' \
+      "$exit_percent"
+    run_filtered "안개 직선 기록 $section/$profile_name" \
+      ros2 launch roka_mission blind_segment_record.launch.py \
+      output_file:="$profile_file" route_profile_file:="$route_profile_file" \
+      exit_progress_ratio:="$exit_ratio" \
+      md_allow_motion:=true
+    ;;
+
+  mission1)
+    require_profile
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    ensure_mission_runtime_is_not_running
+    section="${1:-section_1}"
+    profile_name="${2:-fog_1}"
+    validate_section "$section"
+    [[ "$section" == "section_1" ]] || \
+      fail "미션 1은 section_1 전용입니다: $section"
+    [[ "$profile_name" =~ ^[a-zA-Z0-9_-]+$ ]] || \
+      fail "안개 프로파일 이름이 잘못되었습니다: $profile_name"
+    profile_file="$active_map_root/$section/missions/${profile_name}.yaml"
+    route_profile_file="$active_map_root/$section/track_profile_recorded.yaml"
+    [[ -s "$profile_file" ]] || \
+      fail "안개 직선 기록이 없습니다: roka $execution_profile blind-record $section $profile_name 30"
+    [[ -s "$route_profile_file" ]] || fail "기록 경로가 없습니다: $route_profile_file"
+    ensure_d435_connected
+    ensure_led_connected_if_enabled
+    review_file="$active_map_root/$section/occupancy_review.yaml"
+    [[ -f "$review_file" ]] && mission_approval="" || mission_approval="--approve-original"
+    prepare_recorded "$section" "$mapped_autonomy_speed_mps" "$mission_approval"
+    run_filtered "$(profile_label) 섹션1 혼합주행 $section/$profile_name" \
+      ros2 launch roka_mission section1_fog_hybrid.launch.py \
+      map_id:="$section" profile_file:="$profile_file" \
+      route_profile_file:="$route_profile_file" map_root:="$active_map_root" \
+      competition_track_mode:="$(profile_competition_mode)" md_allow_motion:=true \
+      "${arm_camera_launch_args[@]}" "${mission_led_launch_args[@]}" \
+      inference_device:=auto
+    ;;
+
+  mission2)
+    require_profile
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    ensure_mission_runtime_is_not_running
+    section="${1:-section_2}"
+    validate_section "$section"
+    [[ "$section" == "section_2" ]] || \
+      fail "미션 2는 section_2 전용입니다: $section"
+    printf '[ROKA][MODE] 섹션2 YOLO 화면 + 기록경로 주행 + 0 RPM 정지 + 로봇팔 집기를 시작합니다.\n'
+    ensure_d435_connected
+    ros2 run roka_arm roka_arm_preflight --require-hardware
+    review_file="$active_map_root/$section/occupancy_review.yaml"
+    [[ -f "$review_file" ]] && mission_approval="" || mission_approval="--approve-original"
+    prepare_recorded "$section" "$mapped_autonomy_speed_mps" "$mission_approval"
+    run_filtered "$(profile_label) 섹션2 박스 회수 $section" \
+      ros2 launch roka_mission section2_box_pick.launch.py \
+      map_id:="$section" map_root:="$active_map_root" \
+      competition_track_mode:="$(profile_competition_mode)" md_allow_motion:=true \
+      "${arm_camera_launch_args[@]}" inference_device:=auto
+    ;;
+
+  mission3)
+    require_profile
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    ensure_mission_runtime_is_not_running
+    section="${1:-section_3}"
+    validate_section "$section"
+    [[ "$section" == "section_3" ]] || \
+      fail "미션 3은 section_3 전용입니다: $section"
+    ensure_d435_connected
+    ros2 run roka_arm roka_arm_preflight --require-hardware
+    review_file="$active_map_root/$section/occupancy_review.yaml"
+    [[ -f "$review_file" ]] && mission_approval="" || mission_approval="--approve-original"
+    prepare_recorded "$section" "$mapped_autonomy_speed_mps" "$mission_approval"
+    printf '[ROKA][MODE] 섹션3 기록경로 주행+마커 관찰. B=정지/수동전환.\n'
+    run_filtered "$(profile_label) 섹션3 기록주행+마커 인식" \
+      ros2 launch roka_mission section3_marker_vision.launch.py \
+      map_id:="$section" map_root:="$active_map_root" \
+      competition_track_mode:="$(profile_competition_mode)" md_allow_motion:=true \
+      "${arm_camera_launch_args[@]}" inference_device:=auto display_enabled:=true
+    ;;
+
+  mission4)
+    require_profile
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    ensure_mission_runtime_is_not_running
+    section="${1:-section_4}"
+    validate_section "$section"
+    [[ "$section" == "section_4" ]] || \
+      fail "미션 4는 section_4 전용입니다: $section"
+    ensure_d435_connected
+    ros2 run roka_arm roka_arm_preflight --require-hardware
+    review_file="$active_map_root/$section/occupancy_review.yaml"
+    [[ -f "$review_file" ]] && mission_approval="" || mission_approval="--approve-original"
+    prepare_recorded "$section" "$mapped_autonomy_speed_mps" "$mission_approval"
+    printf '[ROKA][MODE] 섹션4 기록경로 주행+운전영상. B=정지/수동전환.\n'
+    run_filtered "$(profile_label) 섹션4 기록주행" \
+      ros2 launch roka_mission section4_route.launch.py \
+      map_id:="$section" map_root:="$active_map_root" \
+      competition_track_mode:="$(profile_competition_mode)" md_allow_motion:=true \
+      "${arm_camera_launch_args[@]}" display_enabled:=true
+    ;;
+
+  mission5)
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    ensure_mission_runtime_is_not_running
+    if [[ -n "$execution_profile" ]]; then
+      printf '[ROKA][COMPAT] 섹션5는 평지 전용 단일 실행입니다. 다음부터 roka mission5 <속도>를 사용하십시오.\n'
+    fi
+    mission5_speed="${1:-0.60}"
+    case "$mission5_speed" in
+      0.60|0.6)
+        mission5_speed="0.60"; mission5_driver_speed="1.00"; mission5_rpm="112.0"; mission5_guard="130.0" ;;
+      0.80|0.8)
+        mission5_speed="0.80"; mission5_driver_speed="1.00"; mission5_rpm="112.0"; mission5_guard="130.0" ;;
+      1.00|1.0|1)
+        mission5_speed="1.00"; mission5_driver_speed="1.00"; mission5_rpm="112.0"; mission5_guard="130.0" ;;
+      1.20|1.2)
+        mission5_speed="1.20"; mission5_driver_speed="1.20"; mission5_rpm="112.0"; mission5_guard="180.0" ;;
+      *) fail "섹션5 속도는 0.60, 0.80, 1.00, 1.20 중 하나여야 합니다." ;;
+    esac
+    printf '[ROKA] 섹션5 지도 없는 VLP-16 궤적추종·가림복구: 최고 %s m/s\n' "$mission5_speed"
+    printf '[ROKA] 권장 검증: 0.60 -> 0.80 -> 1.00 -> 1.20; 초록 구=선두, 파란 선=선두 궤적.\n'
+    printf '[ROKA] B 수동전환: B -> LB 해제 -> LB+스틱(최대 0.30), LB+LT+스틱(터보 최대 1.00 m/s).\n'
+    run_filtered "평지 섹션5 선두추종 ${mission5_speed}mps" \
+      ros2 launch roka_mission section5_leader_follow.launch.py \
+      md_allow_motion:=true maximum_speed_mps:="$mission5_speed" \
+      driver_maximum_speed_mps:="$mission5_driver_speed" \
+      maximum_wheel_rpm:="$mission5_rpm" \
+      feedback_overspeed_limit_rpm:="$mission5_guard" use_rviz:=true
+    ;;
+
+  drive)
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    drive_variant="${1:-all}"
+    case "$drive_variant" in
+      all) hold_scope="all"; drive_label="전체 팔 고정" ;;
+      pro-hold|pro_only|pro-only)
+        hold_scope="pro_only"; drive_label="24V PRO ID 11/12/13만 고정" ;;
+      *) fail "drive 모드는 all(기본) 또는 pro-hold입니다: $drive_variant" ;;
+    esac
+    printf '[ROKA] Xbox 차체 수동주행(%s): LB=0.30 m/s, LB+LT=터보 1.00 m/s\n' "$drive_label"
+    run_filtered "Xbox 차체 전용 수동주행" \
+      ros2 launch roka_arm arm_locked_xbox_drive.launch.py \
+      allow_motion:=true joy_device_id:=auto \
+      hold_scope:="$hold_scope" \
+      require_field_preflight:=false \
+      max_linear_speed:=1.00 max_wheel_rpm:=112.0 \
+      feedback_overspeed_limit_rpm:=130.0 \
+      log_level:=info
+    ;;
+
+  manual)
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    ensure_mission_runtime_is_not_running
+    manual_variant="${1:-basic}"
+    if [[ "$manual_variant" != "basic" ]]; then
+      case "$manual_variant" in
+        section1|section_1) manual_section="section1" ;;
+        section2|section_2) manual_section="section2" ;;
+        section3|section_3) manual_section="section3" ;;
+        section4|section_4) manual_section="section4" ;;
+        section5|section_5) manual_section="section5" ;;
+        *) fail "섹션 수동모드는 section1~section5입니다: $manual_variant" ;;
+      esac
+      ensure_d435_connected
+      ros2 run roka_arm roka_arm_preflight --require-hardware
+      printf '[ROKA] %s 수동주행: 전체 로봇팔 자세+운전 카메라+섹션 인식\n' "$manual_section"
+      printf '[ROKA] A=SECTION2_START | X=SECTION1 | Y=SECTION2_DRIVE | B=section2 파지 승인\n'
+      printf '[ROKA] 자세/파지 중 차체 잠금; LB를 놓았다 다시 눌러야 주행 재개\n'
+      run_filtered "${manual_section} 카메라+전체팔 수동주행" \
+        ros2 launch roka_mission section_manual.launch.py \
+        section:="$manual_section" simulation_mode:=false \
+        md_allow_motion:=true connect_arm_hardware:=true \
+        enable_arm_motion:=true start_realsense:=true \
+        "${arm_camera_launch_args[@]}" inference_device:=auto \
+        display_enabled:=true joy_device_id:=auto \
+        max_linear_speed:=1.00 max_wheel_rpm:=112.0 \
+        feedback_overspeed_limit_rpm:=130.0 log_level:=info
+      exit 0
+    fi
+    printf '[ROKA] 대회 수동모드: 시작 시 기존 초기자세를 먼저 HOLD합니다.\n'
+    printf '[ROKA] LB+왼쪽 스틱=차체 0.30 m/s | LB+LT+왼쪽 스틱=터보 1.00 m/s\n'
+    printf '[ROKA] RB+오른쪽 Y=ID13 | RB+오른쪽 X=ID11 | RB+D-pad 상하=ID4/6\n'
+    printf '[ROKA] RB를 놓으면 마지막 팔 자세를 유지하며, Ctrl+C 후에도 전원이 있는 동안 토크가 유지됩니다.\n'
+    run_filtered "Xbox 베이스+로봇팔 수동 위치제어" \
+      ros2 launch roka_arm manual_xbox_drive.launch.py \
+      allow_motion:=true joy_device_id:=auto \
+      max_linear_speed:=1.00 max_wheel_rpm:=112.0 \
+      feedback_overspeed_limit_rpm:=130.0 log_level:=info
+    ;;
+
+  vision)
+    ensure_arm_motion_is_not_running
+    ensure_mission_runtime_is_not_running
+    vision_profile="${1:-}"
+    vision_led_args=()
+    case "$vision_profile" in
+      spring|summer|autumn|traffic) ;;
+      spring-led)
+        vision_profile="spring"
+        led_test_serial="${2:-${ROKA_LED_SERIAL:-/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5069RR4-if00-port0}}"
+        export ROKA_LED_SERIAL="$led_test_serial"
+        ensure_led_connected_if_enabled
+        vision_led_args=(
+          "enable_led:=true"
+          "led_serial_port:=${ROKA_LED_SERIAL}"
+        )
+        ;;
+      *) fail "비전 프로필은 spring, spring-led, summer, autumn, traffic 중 하나여야 합니다." ;;
+    esac
+    ensure_d435_connected
+    printf '[ROKA] D435 비전 관찰: %s (차체·로봇팔 명령 없음)\n' "$vision_profile"
+    printf '[ROKA] 박스의 HSV 비율과 PASS/REJECT가 영상에 함께 표시됩니다.\n'
+    run_filtered "D435 ${vision_profile} 비전 관찰" \
+      ros2 launch mission_vision "${vision_profile}.launch.py" \
+      "${arm_camera_launch_args[@]}" \
+      "${vision_led_args[@]}" \
+      inference_device:=auto display_enabled:=true
+    ;;
+
+  calibrate)
+    require_profile
+    [[ "$execution_profile" == "track" ]] || \
+      fail "LiDAR-IMU 동적 보정은 3D 매핑 준비용입니다: roka track calibrate 1"
+    calibration_action="${1:-status}"
+    calibration_replay_run="${2:-1}"
+    calibration_root="$report_dir/lidar_imu_calibration"
+    hardware_source="$workspace_root/src/common/roka_robot_description/config/pk3a_hardware.yaml"
+    mkdir -p "$calibration_root"
+    if [[ "$calibration_action" == "status" ]]; then
+      printf '[ROKA] LiDAR-IMU 동적 보정 상태\n'
+      grep -nE \
+        'rotation_source:|temporal_source:|rotation_validated_dynamically:|temporal_offset_validated_dynamically:|time_offset_lidar_to_imu_sec:|validated_at_utc:' \
+        "$hardware_source" || true
+      print_dynamic_calibration_summary || true
+      exit 0
+    fi
+    if [[ "$calibration_action" == "replay" ]]; then
+      [[ "$calibration_replay_run" == "1" || "$calibration_replay_run" == "2" ]] || \
+        fail "재처리 회차는 1 또는 2여야 합니다: $calibration_replay_run"
+      recorded_run="$calibration_root/run_${calibration_replay_run}"
+      recorded_bag="$recorded_run/sensors"
+      [[ -s "$recorded_bag/metadata.yaml" ]] || \
+        fail "재처리할 센서 rosbag이 없습니다: $recorded_bag"
+      replay_output="$calibration_root/reprocessed_run_${calibration_replay_run}"
+      if [[ -e "$replay_output" ]]; then
+        mkdir -p "$calibration_root/archive"
+        mv -- "$replay_output" \
+          "$calibration_root/archive/$(date +%Y%m%d_%H%M%S)_reprocessed_run_${calibration_replay_run}"
+      fi
+      printf '[ROKA] 저장 rosbag으로 LiDAR-IMU %s차 보정 재처리\n' "$calibration_replay_run"
+      printf '[ROKA] 원본 기록은 보존하며 차륜형 목표 6%%, 최소 누적 60초를 적용합니다.\n'
+      if ! run_filtered "LiDAR-IMU 저장 데이터 ${calibration_replay_run}차 재처리" \
+        ros2 launch roka_fast_lio_localization lidar_imu_bag_calibration.launch.py \
+        bag:="$recorded_bag" output_dir:="$replay_output" \
+        required_excitation_fraction:=0.06 \
+        minimum_accumulation_duration_sec:=60.0 replay_rate:=1.0; then
+        fail "저장 데이터 LI-Init 재처리가 비정상 종료되었습니다. roka log 확인"
+      fi
+      [[ -s "$replay_output/Initialization_result.txt" ]] || \
+        fail "저장 데이터가 조정된 3축 관측성 기준을 충족하지 못했습니다. 원본 rosbag은 유지됩니다."
+      ros2 run roka_fast_lio_localization roka_lidar_imu_calibration \
+        --result "$replay_output/Initialization_result.txt" \
+        --write-run "$replay_output/result.yaml" || \
+        fail "재처리된 LI-Init 결과 형식/수치 검증에 실패했습니다."
+      cp -- "$replay_output/Initialization_result.txt" "$recorded_run/Initialization_result.txt"
+      cp -- "$replay_output/result.yaml" "$recorded_run/result.yaml"
+      printf '[CALIBRATION][CANDIDATE] %s차 배치 초기해를 %s에 저장했습니다.\n' \
+        "$calibration_replay_run" "$recorded_run/result.yaml"
+      if [[ "$calibration_replay_run" == "2" && -s "$calibration_root/run_1/result.yaml" ]]; then
+        ros2 run roka_fast_lio_localization roka_lidar_imu_calibration \
+          --run-1 "$calibration_root/run_1/result.yaml" \
+          --run-2 "$calibration_root/run_2/result.yaml" \
+          --hardware-config "$hardware_source" \
+          --report "$calibration_root/validation.yaml" --apply || \
+          fail "1·2차 보정 재현성 기준을 통과하지 못했습니다."
+      else
+        printf '[ROKA][NEXT] 독립된 2차 기록이 필요합니다: roka %s calibrate 2\n' \
+          "$execution_profile"
+      fi
+      exit 0
+    fi
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    [[ "$calibration_action" == "1" || "$calibration_action" == "2" ]] || \
+      fail "보정 회차는 1, 2 또는 status여야 합니다: $calibration_action"
+    if [[ "$calibration_action" == "2" && ! -s "$calibration_root/run_1/result.yaml" ]]; then
+      fail "1차 보정 결과가 없습니다: 먼저 roka track calibrate 1"
+    fi
+    archive_root="$calibration_root/archive"
+    archive_stamp="$(date +%Y%m%d_%H%M%S)"
+    archive_run() {
+      local target="$1"
+      if [[ -e "$target" ]]; then
+        mkdir -p "$archive_root"
+        mv -- "$target" "$archive_root/${archive_stamp}_$(basename "$target")"
+      fi
+    }
+    run_directory="$calibration_root/run_${calibration_action}"
+    archive_run "$run_directory"
+    # A new first run invalidates an older second-run comparison.
+    if [[ "$calibration_action" == "1" ]]; then
+      archive_run "$calibration_root/run_2"
+      if [[ -f "$calibration_root/validation.yaml" ]]; then
+        mkdir -p "$archive_root"
+        mv -- "$calibration_root/validation.yaml" \
+          "$archive_root/${archive_stamp}_validation.yaml"
+      fi
+    fi
+    printf '[ROKA] LiDAR-IMU 동적 보정 %s차\n' "$calibration_action"
+    printf '  1) 실행 후 로봇을 5초 이상 움직이지 마십시오.\n'
+    printf '  2) FIELD-CHECK READY 뒤 LB: X=좌우 기울기, Y=오르막·내리막, Z=S회전입니다.\n'
+    printf '  3) 터미널의 X/Y/Z 진행률을 각각 100%%까지 올리십시오. 평지 회전만 하면 Z만 증가합니다.\n'
+    printf '  4) 100%% 뒤 온라인 refinement가 끝나면 자동 종료됩니다. Ctrl+C를 누르지 마십시오.\n'
+    if ! run_filtered "LiDAR-IMU 동적 보정 ${calibration_action}차" \
+      ros2 launch roka_fast_lio_localization \
+      lidar_imu_dynamic_calibration.launch.py \
+      output_dir:="$run_directory" allow_motion:=true \
+      joy_device_id:=auto use_rviz:=true; then
+      fail "LI-Init 실행이 비정상 종료되었습니다. roka log에서 최초 오류를 확인하십시오."
+    fi
+    if grep -Eq '^\[ERROR\] \[li_init-[0-9]+\]: process has died|InvalidTopicNameError|terminate called' \
+      "$raw_runtime_log"; then
+      fail "LI-Init 노드가 비정상 종료되었습니다. roka log에서 최초 오류를 확인하십시오."
+    fi
+    [[ -s "$run_directory/Initialization_result.txt" ]] || \
+      fail "LI-Init 최종 결과가 없습니다. 회전 자극이 부족했거나 중간 종료되었습니다."
+    ros2 run roka_fast_lio_localization roka_lidar_imu_calibration \
+      --result "$run_directory/Initialization_result.txt" \
+      --write-run "$run_directory/result.yaml" || \
+      fail "LI-Init 결과 형식/수치 검증에 실패했습니다. roka log 확인"
+    if [[ "$calibration_action" == "1" ]]; then
+      printf '[ROKA][NEXT] LiDAR와 IMU 전원을 완전히 껐다가 다시 켠 뒤 실행:\n'
+      printf '  roka %s calibrate 2\n' "$execution_profile"
+    else
+      ros2 run roka_fast_lio_localization roka_lidar_imu_calibration \
+        --run-1 "$calibration_root/run_1/result.yaml" \
+        --run-2 "$calibration_root/run_2/result.yaml" \
+        --hardware-config "$hardware_source" \
+        --report "$calibration_root/validation.yaml" --apply || \
+        fail "1·2차 보정 재현성 기준을 통과하지 못했습니다. 1차부터 다시 측정하십시오."
+      printf '[ROKA][NEXT] 보정값이 적용되었습니다. 이제 트랙 매핑 가능:\n'
+      printf '  roka %s map section_2\n' "$execution_profile"
+    fi
+    ;;
+
+  mapping)
+    if [[ "$execution_profile" != "capture" ]]; then
+      printf '[ROKA][COMPAT] 수집 때 flat/track 선택은 더 이상 필요 없습니다. 권장: roka mapping section_N\n'
+      require_dynamic_calibration_ready
+    fi
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    section="${1:-section_1}"
+    environment="$([[ "$execution_profile" == "capture" ]] && printf capture || profile_environment)"
+    validate_section "$section"
+    if [[ "$execution_profile" == "capture" ]]; then
+      printf '[ROKA] 원본 센서+주행경로 1회 수집: 2D/3D 지도는 process에서 생성합니다.\n'
+      printf '[ROKA] 매핑 데이터 수집 시작: %s, 성공 시 같은 섹션 원본을 덮어씁니다.\n' "$section"
+      mapping_label="원본 매핑 데이터 수집"
+    else
+      printf '[ROKA] 이전 호환 모드: 수집과 지도 생성을 동시에 수행합니다.\n'
+      printf '[ROKA] %s 수동 매핑 시작: %s (%s)\n' \
+        "$(profile_label)" "$section" "$environment"
+      mapping_label="$(profile_label) 수동 매핑"
+    fi
+    printf '[ROKA] Y로 매핑버튼 활성화, A로 기록 시작, LB+스틱 주행, B로 저장합니다.\n'
+    printf '[ROKA] 저장 완료 후에도 팔 시작자세 토크 고정과 LB 수동주행이 유지됩니다.\n'
+    printf '[ROKA] 저장 후 종료하려면 LB를 놓고 B를 한 번 더 누르십시오.\n'
+    map_metadata_file="$active_map_root/$section/metadata.yaml"
+    map_metadata_before="$(stat -c '%y:%s' "$map_metadata_file" 2>/dev/null || true)"
+    map_run_status=0
+    run_filtered "$mapping_label $section" \
+      ros2 launch roka_nav2_bringup pk3a_field.launch.py \
+      mode:=mapping environment:="$environment" map_id:="$section" \
+      map_root:="$active_map_root" \
+      overwrite_existing:=true md_allow_motion:=true joy_device_id:=auto || \
+      map_run_status=$?
+    map_metadata_after="$(stat -c '%y:%s' "$map_metadata_file" 2>/dev/null || true)"
+    if [[ "$execution_profile" == "flat" && \
+          "$map_metadata_after" != "$map_metadata_before" && \
+          -s "$active_map_root/$section/occupancy.yaml" && \
+          -s "$active_map_root/$section/track_profile.yaml" ]]; then
+      if [[ -f "$active_map_root/$section/occupancy_review.yaml" ]]; then
+        flat_approval=""
+      else
+        flat_approval="--approve-original"
+      fi
+      printf '[ROKA] 평지 원본 지도 승인·기록 경로 준비를 자동 수행합니다.\n'
+      if prepare_recorded "$section" "$mapped_autonomy_speed_mps" "$flat_approval"; then
+        printf '[ROKA][READY] 평지 지도와 직접 기록경로 준비 완료: %s\n' "$section"
+        map_run_status=0
+      else
+        printf '[ROKA][WARN] 지도는 저장됐지만 자동 승인/경로 준비가 실패했습니다. roka flat check %s 확인\n' \
+          "$section" >&2
+      fi
+    fi
+    if [[ "$execution_profile" == "capture" ]]; then
+      if [[ "$map_metadata_after" != "$map_metadata_before" ]]; then
+        printf '[ROKA][READY] 원본 저장 완료: %s\n' "$active_map_root/$section"
+        printf '[ROKA][NEXT] roka process %s all\n' "$section"
+      fi
+    else
+      print_status "$section" map || true
+    fi
+    # `roka` is executed as a top-level script, not sourced as a shell
+    # function.  Preserve the launch exit status without triggering Bash's
+    # misleading "return: can only return from a function" error.
+    [[ "$map_run_status" -eq 0 ]] || exit "$map_run_status"
+    ;;
+
+  process)
+    section="${1:-section_1}"
+    process_mode="${2:-all}"
+    playback_rate="${3:-1.0}"
+    validate_section "$section"
+    case "$process_mode" in
+      audit|2d|3d|all) ;;
+      *) fail "처리 모드는 audit, 2d, 3d 또는 all이어야 합니다: $process_mode" ;;
+    esac
+    if [[ "$execution_profile" == "capture" ]]; then
+      if [[ "$process_mode" == "3d" || "$process_mode" == "all" ]]; then
+        execution_profile="track"
+        require_dynamic_calibration_ready
+        execution_profile="capture"
+      fi
+      source_bundle="$workspace_root/datasets/mapping/$section"
+      [[ -f "$source_bundle/sensors/metadata.yaml" ]] || \
+        fail "원본 매핑 데이터가 없습니다: 먼저 roka mapping $section"
+      printf '[ROKA] 같은 원본 bag으로 지도 생성: %s, mode=%s (실차·모터 비구동)\n' \
+        "$section" "$process_mode"
+      run_filtered "오프라인 지도 처리 ${section}/${process_mode}" \
+        ros2 run roka_nav2_bringup offline_session_processor \
+        "$source_bundle" --mode "$process_mode" \
+        --playback-rate "$playback_rate" \
+        --output-2d "$workspace_root/maps/flat" \
+        --output-3d "$workspace_root/maps/track"
+    else
+      printf '[ROKA][COMPAT] 이전 프로필 원본 재처리: %s/%s, mode=%s\n' \
+        "$execution_profile" "$section" "$process_mode"
+      run_filtered "오프라인 지도 처리 ${execution_profile}/${section}" \
+        ros2 run roka_nav2_bringup offline_session_processor \
+        "$active_map_root/$section" --mode "$process_mode" \
+        --playback-rate "$playback_rate"
+    fi
+    ;;
+
+  prepare|prepare-cleaned)
+    require_profile
+    section="${1:-section_1}"
+    speed="${2:-$mapped_autonomy_speed_mps}"
+    validate_section "$section"
+    [[ "$speed" =~ ^[0-9]+([.][0-9]+)?$ ]] || \
+      fail "속도는 0 이상의 숫자여야 합니다: $speed"
+    if [[ "$command_name" == "prepare-cleaned" ]]; then
+      approval_flag="--approve-cleaned"
+      approval_name="편집 지도"
+    else
+      approval_flag="--approve-original"
+      approval_name="원본 지도"
+    fi
+    printf '[ROKA] %s 승인 후 시험 경로 준비: %s, 최고속도 %s m/s\n' \
+      "$approval_name" "$section" "$speed"
+    prepare_test "$section" "$speed" "$approval_flag"
+    print_status "$section" test
+    ;;
+
+  auto)
+    require_profile
+    section="${1:-section_1}"
+    route_mode="${2:-recorded}"
+    validate_section "$section"
+    if [[ "$section" == "section_2" ]]; then
+      printf '[ROKA][MODE] auto는 비전·로봇팔 없이 저장 경로만 자율주행합니다. 박스 미션은 mission2를 사용하십시오.\n'
+    fi
+    ensure_arm_motion_is_not_running
+    ensure_base_is_not_running
+    case "$route_mode" in
+      test) test_mode=true ;;
+      full)
+        [[ "$execution_profile" == "track" ]] || \
+          fail "full은 3D 경사 프로필 전용입니다. 평지는 recorded 또는 test를 사용하십시오."
+        test_mode=false
+        ;;
+      recorded) test_mode=false ;;
+      *) fail "경로 모드는 recorded, test 또는 full이어야 합니다: $route_mode" ;;
+    esac
+    if [[ "$route_mode" == "recorded" ]]; then
+      review_file="$active_map_root/$section/occupancy_review.yaml"
+      if [[ -f "$review_file" ]]; then
+        recorded_approval=""
+        printf '[ROKA] 기존 지도 승인 유지·기록 경로 전체 준비: %s\n' "$section"
+      else
+        recorded_approval="--approve-original"
+        printf '[ROKA] 원본 지도 자동 승인·기록 경로 전체 준비: %s\n' "$section"
+      fi
+      prepare_output="$(prepare_recorded "$section" "$mapped_autonomy_speed_mps" "$recorded_approval" 2>&1)" || {
+        printf '%s\n' "$prepare_output" >&2
+        fail "기록 경로 추종 준비 검사 실패"
+      }
+      printf '%s\n' "$prepare_output" | \
+        awk '/\[MAP-CHECK\]\[PASS\]|\[MAP-CHECK\]\[FAIL\]|\[MAP-CHECK\]\[RESULT\]/'
+    elif [[ "$route_mode" == "test" ]]; then
+      review_file="$active_map_root/$section/occupancy_review.yaml"
+      if [[ -f "$review_file" ]]; then
+        auto_approval=""
+        printf '[ROKA] 기존 지도 승인 유지·시험 경로·저장 데이터 검사: %s\n' \
+          "$section"
+      else
+        auto_approval="--approve-original"
+        printf '[ROKA] 원본 지도 자동 승인·시험 경로·저장 데이터 검사: %s\n' \
+          "$section"
+      fi
+      prepare_output="$(prepare_test "$section" "$mapped_autonomy_speed_mps" "$auto_approval" 2>&1)" || {
+        printf '%s\n' "$prepare_output" >&2
+        fail "자율주행 준비 검사 실패"
+      }
+      printf '%s\n' "$prepare_output" | \
+        awk '/\[MAP-CHECK\]\[FAIL\]|\[MAP-CHECK\]\[RESULT\]/'
+      print_status "$section" test
+    else
+      review_file="$active_map_root/$section/occupancy_review.yaml"
+      cleaned_map="$active_map_root/$section/occupancy_cleaned.yaml"
+      if [[ -f "$review_file" ]]; then
+        full_approval=""
+        printf '[ROKA] 기존 지도 승인 유지·3D 안전 경로 재생성: %s\n' \
+          "$section"
+      elif [[ -f "$cleaned_map" ]]; then
+        full_approval="--approve-cleaned"
+        printf '[ROKA] 편집 지도 승인·3D 안전 경로 생성: %s\n' \
+          "$section"
+      else
+        fail "full 주행 전 지도 검토가 필요합니다: roka track review $section 후 roka track save-review"
+      fi
+      prepare_output="$(prepare_full "$section" "$mapped_autonomy_speed_mps" "$full_approval" 2>&1)" || {
+        printf '%s\n' "$prepare_output" >&2
+        fail "3D 차량 폭·경사 안전 경로 준비 검사 실패"
+      }
+      printf '%s\n' "$prepare_output" | \
+        awk '/\[MAP-CHECK\]\[PASS\]|\[MAP-CHECK\]\[FAIL\]|\[MAP-CHECK\]\[RESULT\]/'
+    fi
+    run_filtered "$(profile_label) 자율주행 $section ($route_mode)" \
+      ros2 launch roka_nav2_bringup pk3a_field.launch.py \
+      mode:=autonomy map_id:="$section" test_mode:="$test_mode" \
+      map_root:="$active_map_root" \
+      recorded_route_mode:="$([[ "$route_mode" == "recorded" ]] && printf true || printf false)" \
+      localization_backend:=auto md_allow_motion:=true \
+      autonomy_auto_start:=true joy_device_id:=auto \
+      competition_track_mode:="$(profile_competition_mode)"
+    ;;
+
+  check|status)
+    require_profile
+    section="${1:-section_1}"
+    validate_section "$section"
+    print_status "$section" recorded
+    ;;
+
+  log)
+    if [[ -s "$runtime_log" ]]; then
+      tail -n 120 "$runtime_log"
+      if [[ -s "$raw_runtime_log" ]]; then
+        printf '[ROKA] 필터 전 원본 로그: %s\n' "$raw_runtime_log"
+      fi
+      printf '[ROKA] 구조화 상태: %s/latest_status.yaml\n' "$report_dir"
+    else
+      fail "최근 실행 로그가 없습니다"
+    fi
+    ;;
+
+  review)
+    require_profile
+    section="${1:-section_1}"
+    radius="${2:-0.20}"
+    validate_section "$section"
+    [[ "$radius" =~ ^[0-9]+([.][0-9]+)?$ ]] || \
+      fail "편집 반경은 0 이상의 숫자여야 합니다: $radius"
+    if [[ "$execution_profile" == "track" ]]; then
+      printf '[ROKA] 3D PCD+경로+차체 폭+경사 판정 표시\n'
+      printf '[ROKA] 영역 지정: roka track terrain-mode possible|blocked, 저장: roka track terrain-save\n'
+      exec ros2 launch roka_nav2_bringup track_map_view.launch.py \
+        bundle_directory:="$active_map_root/$section"
+    else
+      printf '[ROKA] 청록=기록경로, 노랑=실차 폭, Publish Point 클릭=지도 지우기\n'
+      printf '[ROKA] 다른 터미널: roka flat undo-review | reset-review | save-review\n'
+      exec ros2 launch roka_nav2_bringup occupancy_cleanup_review.launch.py \
+        map_directory:="$active_map_root/$section" clear_radius_m:="$radius"
+    fi
+    ;;
+
+  replay)
+    require_profile
+    section="${1:-section_1}"
+    replay_mode="${2:-result}"
+    playback_rate="${3:-1.0}"
+    validate_section "$section"
+    replay_directory="$active_map_root/$section"
+    if [[ ! -f "$replay_directory/sensors/metadata.yaml" && \
+          "$execution_profile" == "track" && \
+          -f "$active_map_root/.staging/$section/sensors/metadata.yaml" ]]; then
+      replay_directory="$active_map_root/.staging/$section"
+      printf '[ROKA][WARN] 정식 승인 지도 없음; staging rosbag/지도만 진단 재생합니다. 자율주행에는 사용되지 않습니다.\n'
+    fi
+    case "$replay_mode" in
+      result|saved) replay_launch="recorded_mapping_view.launch.py" ;;
+      process|rebuild) replay_launch="recorded_mapping_rebuild.launch.py" ;;
+      *) fail "재생 모드는 result 또는 process여야 합니다: $replay_mode" ;;
+    esac
+    [[ "$playback_rate" =~ ^[0-9]+([.][0-9]+)?$ ]] || \
+      fail "재생 배속은 0보다 큰 숫자여야 합니다: $playback_rate"
+    awk -v rate="$playback_rate" 'BEGIN {exit !(rate > 0.0 && rate <= 4.0)}' || \
+      fail "재생 배속은 0보다 크고 4.0 이하여야 합니다: $playback_rate"
+    if [[ "$replay_mode" == "result" || "$replay_mode" == "saved" ]]; then
+      printf '[ROKA] 완성 지도+Terrain+경로+3D LiDAR 1회 재생: %s (모터 비구동)\n' \
+        "$section"
+      printf '[ROKA] 재생 종료 뒤 화면은 유지됩니다. 초록=가능, 노랑=주의, 빨강=불가, 청록=기록경로\n'
+      printf '[ROKA] RViz 그룹: SCANS / MAPS / TRAJECTORIES / TERRAIN / REVIEW\n'
+      printf '[ROKA] 다각형 주석: roka %s terrain-mode possible|blocked -> Publish Point 3개 이상 -> terrain-commit\n' \
+        "$execution_profile"
+    else
+      printf '[ROKA] rosbag으로 빈 지도부터 매핑 과정 재구성: %s, %sx (모터 비구동)\n' \
+        "$section" "$playback_rate"
+      printf '[ROKA] 센서 bag 종료 뒤 화면은 유지됩니다. 확인 후 Ctrl+C로 종료하십시오.\n'
+    fi
+    replay_database="$replay_directory/sensors/sensors_0.db3"
+    replay_database_existed=false
+    [[ -f "$replay_database" ]] && replay_database_existed=true
+    cleanup_replay_database() {
+      if [[ "$replay_database_existed" == false && -f "$replay_database" ]]; then
+        rm -f -- "$replay_database"
+        printf '[ROKA] 재생용 임시 DB 삭제: %s\n' "$replay_database"
+      fi
+    }
+    trap cleanup_replay_database EXIT
+    replay_status=0
+    ros2 launch roka_nav2_bringup "$replay_launch" \
+      map_directory:="$replay_directory" \
+      playback_rate:="$playback_rate" || replay_status=$?
+    exit "$replay_status"
+    ;;
+
+  view)
+    require_profile
+    section="${1:-section_1}"
+    validate_section "$section"
+    if [[ "$execution_profile" != "track" ]]; then
+      fail "3D 통합 지도 화면은 track 전용입니다. 평지 결과는 roka flat replay $section"
+    fi
+    view_directory="$active_map_root/$section"
+    if [[ ! -s "$view_directory/map.pcd" ]]; then
+      staging_directory="$active_map_root/.staging/$section"
+      if [[ -s "$staging_directory/map.pcd" ]]; then
+        view_directory="$staging_directory"
+        printf '[ROKA][WARN] 정식 저장 지도 없음; 실패한 staging 자료를 진단용으로 표시합니다. 자율주행에는 사용되지 않습니다.\n'
+      else
+        fail "표시할 3D 지도가 없습니다: roka mapping $section 후 roka process $section 3d"
+      fi
+    fi
+    printf '[ROKA] 실제 3D 지도 + 기록경로 + 차체 폭 + 2D 투영 + 위험도: %s\n' \
+      "$view_directory"
+    exec ros2 launch roka_nav2_bringup track_map_view.launch.py \
+      bundle_directory:="$view_directory"
+    ;;
+
+  undo-review)
+    require_profile
+    exec ros2 service call /occupancy_cleanup/undo std_srvs/srv/Trigger "{}"
+    ;;
+
+  reset-review)
+    require_profile
+    exec ros2 service call /occupancy_cleanup/reset std_srvs/srv/Trigger "{}"
+    ;;
+
+  save-review)
+    require_profile
+    exec ros2 service call /occupancy_cleanup/save std_srvs/srv/Trigger "{}"
+    ;;
+
+  terrain-mode)
+    require_profile
+    terrain_mode="${1:-inspect}"
+    case "$terrain_mode" in
+      possible|blocked|inspect) ;;
+      *) fail "영역 검토 모드는 possible, blocked 또는 inspect입니다: $terrain_mode" ;;
+    esac
+    exec ros2 service call "/terrain_review/mode_${terrain_mode}" \
+      std_srvs/srv/Trigger "{}"
+    ;;
+
+  terrain-undo)
+    require_profile
+    exec ros2 service call /terrain_review/undo std_srvs/srv/Trigger "{}"
+    ;;
+
+  terrain-commit)
+    require_profile
+    exec ros2 service call /terrain_review/commit std_srvs/srv/Trigger "{}"
+    ;;
+
+  terrain-cancel)
+    require_profile
+    exec ros2 service call /terrain_review/cancel std_srvs/srv/Trigger "{}"
+    ;;
+
+  terrain-reset)
+    require_profile
+    exec ros2 service call /terrain_review/reset std_srvs/srv/Trigger "{}"
+    ;;
+
+  terrain-save)
+    require_profile
+    exec ros2 service call /terrain_review/save std_srvs/srv/Trigger "{}"
+    ;;
+
+  audit)
+    require_profile
+    section="${1:-section_1}"
+    validate_section "$section"
+    run_filtered "저장 센서 audit $section" \
+      ros2 run roka_fast_lio_localization roka_bag_sensor_audit \
+      "$active_map_root/$section/sensors" --require-diagnostics \
+      --summary-only --output "benchmarks/${execution_profile}_${section}_sensor_contract.yaml"
+    ;;
+
+  *)
+    usage >&2
+    fail "알 수 없는 명령입니다: $command_name"
+    ;;
+esac

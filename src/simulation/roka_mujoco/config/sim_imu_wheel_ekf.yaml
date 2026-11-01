@@ -1,0 +1,40 @@
+sim_sensor_ekf:
+  ros__parameters:
+    use_sim_time: true
+    frequency: 50.0
+    sensor_timeout: 0.25
+    two_d_mode: false
+    transform_time_offset: 0.0
+    transform_timeout: 0.1
+    print_diagnostics: false
+    publish_tf: false
+    publish_acceleration: false
+
+    map_frame: map
+    odom_frame: sim_sensor_odom
+    base_link_frame: base_link
+    world_frame: sim_sensor_odom
+
+    odom0: /sim/wheel/odom
+    odom0_config: [false, false, false,
+                   false, false, false,
+                   true,  false, false,
+                   false, false, true,
+                   false, false, false]
+    odom0_differential: false
+    odom0_relative: false
+    odom0_queue_size: 10
+
+    imu0: /sim/imu/data
+    imu0_config: [false, false, false,
+                  true,  true,  false,
+                  false, false, false,
+                  false, false, true,
+                  false, false, false]
+    imu0_differential: false
+    imu0_relative: false
+    imu0_remove_gravitational_acceleration: false
+    imu0_queue_size: 50
+
+    odom0_twist_rejection_threshold: 3.0
+    imu0_angular_velocity_rejection_threshold: 3.0

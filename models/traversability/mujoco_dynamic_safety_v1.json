@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "provisional_mujoco_only_replace_with_field_envelope",
+  "purpose": "surface-relative roll/pitch and wheel-contact guard calibration",
+  "inputs": [
+    {
+      "name": "fast_test01",
+      "source": "datasets/xbox_demonstrations/fast_test01.csv",
+      "completed": true,
+      "sample_count": 4739
+    },
+    {
+      "name": "fast_test01_2",
+      "source": "datasets/xbox_demonstrations/fast_test01_2.csv",
+      "completed": true,
+      "sample_count": 6056
+    },
+    {
+      "name": "lap01",
+      "source": "datasets/xbox_demonstrations/lap01.csv",
+      "completed": false,
+      "sample_count": 3039
+    },
+    {
+      "name": "lap01_2",
+      "source": "datasets/xbox_demonstrations/lap01_2.csv",
+      "completed": true,
+      "sample_count": 7999
+    }
+  ],
+  "surface_relative_convention": {
+    "roll_error_deg": "imu_roll_deg - terrain_lateral_slope_deg",
+    "pitch_error_deg": "imu_pitch_deg + terrain_longitudinal_slope_deg",
+    "dynamic_roll_load": "projected roll error + atan(|v*yaw_rate|/g)"
+  },
+  "model_geometry": {
+    "total_mass_kg": 42.800000000000004,
+    "center_of_mass_height_m": 0.2123457943925233,
+    "center_of_mass_x_m": 0.0,
+    "lateral_support_half_span_m": 0.213574997,
+    "front_support_m": 0.17,
+    "rear_support_m": 0.17,
+    "static_rollover_deg": 45.16535451536725,
+    "static_forward_pitchover_deg": 38.68009919546736,
+    "static_reverse_pitchover_deg": 38.68009919546736
+  },
+  "successful_dynamic_roll_load": {
+    "p95": 7.564873280820965,
+    "p99": 9.439422063335574,
+    "maximum": 23.734692211936395
+  },
+  "successful_dynamic_pitch_load": {
+    "p95": 7.509632273965343,
+    "p99": 9.432294130275604,
+    "maximum": 21.728185003097273
+  },
+  "failed_rollover_onset_dynamic_load_deg": 96.04486312300294,
+  "successful_acceleration_norm_proxy": {
+    "p95": 11.029229909025343,
+    "p99": 11.78486445000443,
+    "maximum": 17.771311341484882
+  },
+  "limits": {
+    "roll_warning_deg": 32.4,
+    "roll_critical_deg": 38.1,
+    "roll_hard_deg": 40.6,
+    "pitch_warning_deg": 27.8,
+    "pitch_critical_deg": 32.7,
+    "pitch_hard_deg": 34.8,
+    "absolute_roll_hard_deg": 85.0,
+    "absolute_pitch_hard_deg": 65.0,
+    "attitude_prediction_horizon_sec": 0.2,
+    "attitude_hard_hold_sec": 0.08
+  },
+  "replay_validation": {
+    "successful_roll_hard_samples": 0,
+    "successful_pitch_hard_samples": 0,
+    "successful_false_airborne_samples": 0,
+    "first_failed_roll_guard_time_sec": 112.76799999900001,
+    "first_failed_unsafe_time_sec": 112.99999999900001,
+    "roll_guard_lead_time_sec": 0.23199999999999932,
+    "pass": true
+  },
+  "contact_estimator": {
+    "airborne_accel_norm_max_mps2": 3.0,
+    "landing_accel_norm_min_mps2": 13.0,
+    "airborne_hold_sec": 0.05,
+    "partial_contact_hold_sec": 0.08,
+    "landing_hold_sec": 0.3,
+    "note": "completed MuJoCo logs contain no confirmed free-flight sample and no motor current; acceleration thresholds are model-informed provisional guards and partial-contact current thresholds require field calibration"
+  },
+  "limitations": [
+    "MuJoCo mass, center of mass, friction and tire compliance remain provisional",
+    "absolute_pitch_hard_deg retains the MuJoCo gross inversion guard because no pitch-over failure was recorded",
+    "do not claim real-world safety until a separate field calibration and validation run replace this file"
+  ]
+}

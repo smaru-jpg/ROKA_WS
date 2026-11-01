@@ -1,0 +1,41 @@
+selection_basis: checkpoint_metadata
+runtime:
+  ultralytics: 8.4.131
+  torch: 2.13.0+cu130
+  image_size: 640
+models:
+  spring:
+    file: IFF_0830.pt
+    sha256: 4a26f5212771f5d9b1587ecffbfc8dc1aca9584232b096c03b10626460626f57
+    checkpoint_date: "2026-08-28T22:38:01.995556"
+    classes: {0: enemy, 1: friend}
+    map50: 0.98909
+    map50_95: 0.75603
+    duplicate_removed: spring_v2.pt
+  summer:
+    file: box_0830.pt
+    sha256: cc4c52f9151bb1b765c38f7a7e225cb0f4267d67252a640ae72931a17bb8787b
+    checkpoint_date: "2026-08-30T00:29:56.379521"
+    classes: {0: box}
+    map50: 0.99500
+    map50_95: 0.96023
+  autumn:
+    file: vision_0831.pt
+    sha256: 34a559f050a28951bf99fa47d95101c73477b7f5c92cd099d9b040e183105d2e
+    checkpoint_date: "2026-08-31T14:09:33.967046+09:00"
+    classes: {0: A, 1: E, 2: Heart, 3: K, 4: M, 5: O, 6: R, 7: Y}
+    map50: 0.99500
+    map50_95: 0.94919
+    note: "0831 checkpoint removed the previous Check class"
+  traffic:
+    file: traffic_0831.pt
+    sha256: d463b849b9e9385380aace40e48ac9ecfbe55028f26b8667a8a9fa64ed518d50
+    checkpoint_date: "2026-08-31T20:11:43.459228+09:00"
+    classes: {0: blue, 1: red}
+    map50: 0.99500
+    map50_95: 0.84913
+rollback_models:
+  autumn_0830:
+    file: vision_0830.pt
+    sha256: 7bdfb6c208c4da0146f5089420c5dad4ddb40d14e205c05ff16806425bf30873
+    reason: "Retained only until the 0831 marker model passes a real D435 mission test"

@@ -1,0 +1,30 @@
+schema_version: 1
+result: PASS
+validation:
+  context: flat_like_capture
+  maximum_step_m: 0.1
+  maximum_yaw_step_deg: 8.0
+  maximum_z_span_m: 0.35
+lio:
+  odom_count: 373
+  cloud_count: 373
+  path_length_m: 7.853004717269152
+  maximum_step_m: 0.07473216502676464
+  maximum_yaw_step_rad: 0.05199920880098185
+  z_span_m: 0.29247659669061365
+  displacement_m: 4.5106280233684
+pgo:
+  path_pose_count: 35
+  save_success: true
+  save_message: saved 6194 dense / 3870 lightweight optimized points and 35 keyframes
+  archives:
+    keyframe_poses.bin:
+      bytes: 1984
+      count: 35
+      version: 1
+      legacy_magic: false
+    scan_context.bin:
+      bytes: 336304
+      count: 35
+      version: 1
+      legacy_magic: false

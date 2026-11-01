@@ -1,0 +1,203 @@
+{
+  "schema_version": 7,
+  "artifact_stem": "pk3a_closed_loop",
+  "track_role": "base_track",
+  "name": "PK-3A rideable approximate closed-loop base track",
+  "purpose": "Use the complete rearranged route as the default simulation base track and mark its S00_DB1 start section",
+  "surface_material": {
+    "profile": "highonesys_pk3a_dry_composite_antislip",
+    "condition": "dry_clean",
+    "intended_contact": "rubber_tire_or_rubber_tread",
+    "construction": "nylon-resin GFRP/CFRP riding plate with a high-friction surface over a supported modular frame",
+    "source_basis": [
+      {
+        "document": "KR10-2234256 고분자 복합소재를 이용한 모듈러 펌프 트랙",
+        "facts_used": [
+          "nylon resin reinforced with glass or carbon fibre",
+          "elastic riding feel and high tire grip",
+          "surface friction, tire wear, flexural strength and elastic modulus are design variables"
+        ]
+      },
+      {
+        "document": "KR10-1849721 모바일 펌프트랙",
+        "facts_used": [
+          "anti-slip coating may be applied to the riding plate",
+          "epoxy and silica-sand mixture is given as an example"
+        ]
+      }
+    ],
+    "calibration_notice": "The patents do not publish a measured tire-surface friction coefficient. Sliding friction 1.1 is retained as a dry nominal simulation value and must be replaced by a tire-specific test result when available."
+  },
+  "port_registry": "config/pk3a_port_sources.json",
+  "course_axis_modules": ["3TA1L", "3TB1L"],
+  "course_axis_lengths_m": {
+    "3TA1L": 1.2,
+    "3TB1L": 1.2
+  },
+  "course_axis_blend_modes": {
+    "3TA1L": "c1_smoothstep",
+    "3TB1L": "c1_two_block"
+  },
+  "mirror_y_modules": ["3TA1L_C", "3TB1L_C", "3CV1"],
+  "turn_variants": [
+    {
+      "name": "3CV1_G1",
+      "source": "3CV1",
+      "turn_deg": -14.45891133,
+      "copies": 14,
+      "interpretation": "First left curve group; plan curvature calibrated for approximate loop closure"
+    },
+    {
+      "name": "3CV1_G2",
+      "source": "3CV1",
+      "turn_deg": 15.44316113,
+      "copies": 4,
+      "interpretation": "Right curve group; plan curvature calibrated for approximate loop closure"
+    },
+    {
+      "name": "3CV1_G3",
+      "source": "3CV1",
+      "turn_deg": -16.56368019,
+      "copies": 9,
+      "interpretation": "Second long left curve group; plan curvature calibrated for approximate loop closure"
+    },
+    {
+      "name": "3CV1_G4",
+      "source": "3CV1",
+      "turn_deg": -14.05495285,
+      "copies": 5,
+      "interpretation": "Final left curve group; plan curvature calibrated for approximate loop closure"
+    }
+  ],
+  "half_straight": {
+    "name": "F_HALF",
+    "shape": "linear_joiner",
+    "length_m": 0.4572,
+    "width_m": 0.9144,
+    "inlet_right_left_m": [0.3883, 0.3883],
+    "outlet_right_left_m": [0.3883, 0.3883],
+    "interpretation": "Half-length constant-height straight inserted between the two rectangular TA1L faces"
+  },
+  "custom_modules": [
+    {
+      "name": "F_CLOSE",
+      "shape": "linear_joiner",
+      "length_m": 0.082025275694,
+      "width_m": 0.9144,
+      "inlet_right_left_m": [0.3883, 0.3883],
+      "outlet_right_left_m": [0.3883, 0.3883],
+      "interpretation": "Final constant-height longitudinal residual solved after all standard modules were rigidly placed"
+    }
+  ],
+  "generation": {
+    "cell_size_m": 0.005,
+    "visual_spacing_m": 0.04,
+    "collision_spacing_m": 0.005,
+    "collision_ray_inset_m": 0.003,
+    "height_scale_m": 0.8432,
+    "maximum_nonadjacent_overlap_m2": 0.000001,
+    "surface_contact": {
+      "friction": [1.1, 0.01, 0.001],
+      "condim": 6,
+      "solref": [0.008, 1.1],
+      "solimp": [0.92, 0.99, 0.002, 0.5, 2.0],
+      "priority": 1,
+      "solmix": 1.0,
+      "interpretation": "Dry rubber-tire nominal grip; torsional and rolling resistance enabled; small compliant/damped layer represents the composite plate, anti-slip texture and tire carcass together"
+    },
+    "contact_solver": {
+      "cone": "elliptic",
+      "solver": "Newton",
+      "iterations": 80,
+      "tolerance": 1e-10,
+      "impratio": 5.0,
+      "multiccd": true,
+      "interpretation": "Accurate friction cone and reduced soft-contact slip for the future wheeled robot"
+    }
+  },
+  "start_pose": {"xy_m": [0.0, 0.0], "yaw_deg": 0.0},
+  "start_zone": {
+    "label": "START",
+    "instance_ids": ["S00_DB1"],
+    "line_instance_id": "S00_DB1",
+    "line_progress_m": 0.08,
+    "line_width_m": 0.05,
+    "lateral_inset_m": 0.025,
+    "zone_rgba": [0.08, 0.38, 0.92, 1.0],
+    "line_rgba": [1.0, 1.0, 1.0, 1.0],
+    "interpretation": "Visual-only base-track start section; does not alter collision or ride geometry"
+  },
+  "closure": {
+    "first_input_port": "inlet",
+    "maximum_position_error_m": 0.001,
+    "maximum_yaw_error_deg": 0.01,
+    "maximum_plan_error_m": 0.001
+  },
+  "route": [
+    {"id": "S00_DB1", "module": "3DB1", "output_port": "outlet"},
+    {"id": "S01_BA1", "module": "3BA1", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S01_BA2", "module": "3BA1", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S02_TA1", "module": "3TA1L_C", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S02_TB1", "module": "3TB1L_C", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S03_CV01", "module": "3CV1_G1", "input_port": "inlet", "output_port": "outlet", "copies": 14},
+    {"id": "S04_TB_EXIT", "module": "3TB1L_C_M", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S04_TA_EXIT", "module": "3TA1L_C_M", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S04_F_HALF", "module": "F_HALF", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S04_TA_ENTRY", "module": "3TA1L_C_M", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S04_TB_ENTRY", "module": "3TB1L_C_M", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S05_CV01", "module": "3CV1_G2", "input_port": "inlet", "output_port": "outlet", "copies": 4},
+    {"id": "S06_TB_EXIT", "module": "3TB1L_C", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S06_TA_EXIT", "module": "3TA1L_C", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S07_BA1", "module": "3BA1", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S07_BA2", "module": "3BA1", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S07_BA3", "module": "3BA1", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S07_BA4", "module": "3BA1", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S08_DB1", "module": "3DB1", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S09_TA_ENTRY", "module": "3TA1L_C", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S09_TB_ENTRY", "module": "3TB1L_C", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S10_CV01", "module": "3CV1_G3", "input_port": "inlet", "output_port": "outlet", "copies": 9},
+    {"id": "S11_TB_EXIT", "module": "3TB1L_C_M", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S11_TA_EXIT", "module": "3TA1L_C_M", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S12_BA1", "module": "3BA1", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S12_BA2", "module": "3BA1", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S13_TA_ENTRY", "module": "3TA1L_C", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S13_TB_ENTRY", "module": "3TB1L_C", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S14_CV01", "module": "3CV1_G4", "input_port": "inlet", "output_port": "outlet", "copies": 5},
+    {"id": "S15_TB_EXIT", "module": "3TB1L_C_M", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S15_TA_EXIT", "module": "3TA1L_C_M", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S16_F_CLOSE", "module": "F_CLOSE", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S17_BA1", "module": "3BA1", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S17_BA2", "module": "3BA1", "input_port": "outlet", "output_port": "inlet"},
+    {"id": "S17_BA3", "module": "3BA1", "input_port": "inlet", "output_port": "outlet"},
+    {"id": "S17_BA4", "module": "3BA1", "input_port": "outlet", "output_port": "inlet"}
+  ],
+  "expected": {
+    "instance_count": 64,
+    "seam_count": 64,
+    "start_zone_instance_id": "S00_DB1",
+    "module_counts": {
+      "3DB1": 2,
+      "3BA1": 12,
+      "3TA1L": 8,
+      "3TB1L": 8,
+      "3CV1": 32,
+      "F_HALF": 1,
+      "F_CLOSE": 1
+    },
+    "cv_signed_turn_deg": -360.00000006,
+    "cv_group_turns_deg": [-202.42475862, 61.77264452, -149.07312171, -70.27476425],
+    "maximum_adjacent_axis_angle_deg": 17.0,
+    "maximum_seam_height_error_m": 0.01,
+    "maximum_course_tangent_error_deg": 0.05,
+    "maximum_longitudinal_slope_deg_by_module": {
+      "3TA1L_C": 21.0,
+      "3TB1L_C": 14.5,
+      "3TA1L_C_M": 21.0,
+      "3TB1L_C_M": 14.5
+    },
+    "maximum_nonadjacent_overlap_m2": 0.000001,
+    "maximum_closure_position_error_m": 0.001,
+    "maximum_closure_yaw_error_deg": 0.01,
+    "maximum_expanded_visual_faces": 500000
+  }
+}

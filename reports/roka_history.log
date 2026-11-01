@@ -1,0 +1,418 @@
+2026-08-28T17:36:09.411793+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-28T18:04:39.673122+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-28T18:06:01.343146+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-28T19:39:51.442081+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-29T05:23:18.937453+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-29T05:34:38.142529+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-29T05:57:26.296033+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-29T15:02:22+09:00 start 수동 매핑 section_2 (flat)
+2026-08-29T15:04:02+09:00 finish 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-29T15:05:06+09:00 start 수동 매핑 section_2 (flat)
+2026-08-29T15:05:55+09:00 finish 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-29T15:06:32+09:00 start Xbox 실차 수동주행
+2026-08-29T15:06:45+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-29T15:07:00+09:00 start 수동 매핑 section_2 (inline)
+2026-08-29T15:07:01+09:00 finish 수동 매핑 section_2 (inline) result=PASS
+2026-08-29T06:07:01.385018+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-08-29T15:07:30+09:00 start 수동 매핑 section_2 (flat)
+2026-08-29T15:08:04+09:00 finish 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-29T15:11:26+09:00 start 수동 매핑 section_2 (flat)
+2026-08-29T15:12:29+09:00 finish 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-29T15:13:03+09:00 start Xbox 실차 수동주행
+2026-08-29T15:13:37+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-29T06:14:05.349552+00:00 check section_2 scope=recorded result=NOT_READY problems=1 warnings=0
+2026-08-29T06:20:53.630772+00:00 check section_2 scope=recorded result=NOT_READY problems=2 warnings=1
+2026-08-29T06:29:01.789230+00:00 check section_2 scope=recorded result=NOT_READY problems=2 warnings=1
+2026-08-29T15:29:58+09:00 start 섹션2 박스 회수 section_2
+2026-08-29T15:29:59+09:00 finish 섹션2 박스 회수 section_2 result=FAIL exit=1
+2026-08-29T15:30:58+09:00 start 섹션2 박스 회수 section_2
+2026-08-29T15:30:58+09:00 finish 섹션2 박스 회수 section_2 result=FAIL exit=1
+2026-08-29T06:45:06.152555+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-29T06:46:11.229791+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-29T06:46:12.806764+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-29T06:46:13.569492+00:00 check section_1 scope=recorded result=NOT_READY problems=1 warnings=0
+2026-08-29T15:48:10+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-29T15:48:11+09:00 finish 평지 섹션2 박스 회수 section_2 result=FAIL exit=1
+2026-08-29T15:48:57+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-29T15:48:57+09:00 finish 평지 섹션2 박스 회수 section_2 result=FAIL exit=1
+2026-08-29T15:49:18+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-29T15:49:19+09:00 finish 평지 섹션2 박스 회수 section_2 result=FAIL exit=1
+2026-08-29T15:53:38+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-29T15:56:56+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-29T15:59:54+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-29T16:05:03+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-29T16:07:44+09:00 start Xbox 실차 수동주행
+2026-08-29T16:08:26+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-29T16:10:52+09:00 start Xbox 실차 수동주행
+2026-08-29T16:13:25+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-29T16:18:01+09:00 start 트랙 수동 매핑 section_2 (inline)
+2026-08-29T16:18:01+09:00 finish 트랙 수동 매핑 section_2 (inline) result=PASS
+2026-08-29T07:18:01.951324+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-08-29T16:18:13+09:00 start 트랙 수동 매핑 section_2 (inline)
+2026-08-29T16:18:13+09:00 finish 트랙 수동 매핑 section_2 (inline) result=PASS
+2026-08-29T07:18:13.709990+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-08-29T16:20:38+09:00 start 트랙 수동 매핑 section_2 (inline)
+2026-08-29T16:20:39+09:00 finish 트랙 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-08-29T16:26:22+09:00 start Xbox 실차 수동주행
+2026-08-29T16:26:47+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-29T22:48:18+09:00 start 트랙 수동 매핑 section_2 (inline)
+2026-08-29T22:48:18+09:00 finish 트랙 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-08-30T00:38:31+09:00 start LiDAR-IMU 동적 보정 1차
+2026-08-30T00:38:33+09:00 finish LiDAR-IMU 동적 보정 1차 result=PASS
+2026-08-30T00:38:52+09:00 start LiDAR-IMU 동적 보정 1차
+2026-08-30T00:38:54+09:00 finish LiDAR-IMU 동적 보정 1차 result=PASS
+2026-08-30T01:00:32+09:00 start LiDAR-IMU 동적 보정 1차
+2026-08-30T01:04:57+09:00 finish LiDAR-IMU 동적 보정 1차 result=STOPPED
+2026-08-30T01:29:03+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T01:29:04+09:00 finish 평지 수동 매핑 section_2 (flat) result=PASS
+2026-08-29T16:29:05.715672+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-08-30T01:29:58+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T01:32:18+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T01:32:39+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-30T01:33:49+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-30T01:58:32+09:00 start Xbox 실차 수동주행
+2026-08-30T01:58:53+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-30T01:59:07+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-30T02:00:50+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-30T02:01:29+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T02:01:31+09:00 finish 평지 수동 매핑 section_2 (flat) result=PASS
+2026-08-29T17:01:32.313443+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-08-30T02:01:43+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T02:01:45+09:00 finish 평지 수동 매핑 section_2 (flat) result=PASS
+2026-08-29T17:01:46.010386+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-08-30T02:05:54+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T02:07:03+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T02:08:26+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-30T02:09:22+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-30T02:09:38+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-30T02:11:49+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-30T02:12:15+09:00 start 평지 수동 매핑 section_1 (flat)
+2026-08-30T02:12:16+09:00 finish 평지 수동 매핑 section_1 (flat) result=PASS
+2026-08-29T17:12:17.715540+00:00 check section_1 scope=map result=READY problems=0 warnings=1
+2026-08-30T02:12:28+09:00 start 평지 수동 매핑 section_1 (flat)
+2026-08-30T02:12:29+09:00 finish 평지 수동 매핑 section_1 (flat) result=PASS
+2026-08-29T17:12:30.816368+00:00 check section_1 scope=map result=READY problems=0 warnings=1
+2026-08-30T02:12:35+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T02:12:36+09:00 finish 평지 수동 매핑 section_2 (flat) result=PASS
+2026-08-29T17:12:37.818427+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-08-30T02:12:59+09:00 start 평지 수동 매핑 section_1 (flat)
+2026-08-30T02:14:25+09:00 finish 평지 수동 매핑 section_1 (flat) result=STOPPED
+2026-08-29T17:50:02.409282+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T22:41:49+09:00 start Xbox 실차 수동주행
+2026-08-30T22:43:29+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-30T22:43:33+09:00 start 트랙 수동 매핑 section_2 (inline)
+2026-08-30T22:43:33+09:00 finish 트랙 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-08-30T22:44:06+09:00 start 실내 경사 수동 매핑 section_2 (ramp)
+2026-08-30T22:44:06+09:00 finish 실내 경사 수동 매핑 section_2 (ramp) result=FAIL exit=1
+2026-08-30T22:44:26+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T22:46:10+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T22:46:22+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-30T22:47:26+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-30T22:48:54+09:00 start LiDAR-IMU 동적 보정 1차
+2026-08-30T22:55:18+09:00 finish LiDAR-IMU 동적 보정 1차 result=FAIL exit=1
+2026-08-30T23:03:39+09:00 start LiDAR-IMU 저장 데이터 1차 재처리
+2026-08-30T23:09:53+09:00 finish LiDAR-IMU 저장 데이터 1차 재처리 result=PASS
+2026-08-30T23:13:44+09:00 start LiDAR-IMU 저장 데이터 1차 재처리
+2026-08-30T23:15:49+09:00 start Xbox 실차 수동주행
+2026-08-30T23:16:10+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-30T23:16:31+09:00 finish LiDAR-IMU 저장 데이터 1차 재처리 result=PASS
+2026-08-30T14:16:48.554908+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T14:17:02.409187+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T23:17:33+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T23:17:58+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T23:18:02+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T23:20:01+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T14:20:51.660643+00:00 check section_2 scope=recorded result=NOT_READY problems=2 warnings=1
+2026-08-30T14:21:10.135216+00:00 check section_2 scope=recorded result=NOT_READY problems=2 warnings=1
+2026-08-30T23:22:21+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T23:23:36+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T14:23:45.128131+00:00 check section_2 scope=recorded result=NOT_READY problems=2 warnings=1
+2026-08-30T23:23:58+09:00 start LiDAR-IMU 동적 보정 2차
+2026-08-30T23:28:37+09:00 finish LiDAR-IMU 동적 보정 2차 result=PASS
+2026-08-30T23:30:23+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T23:31:11+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T23:31:18+09:00 start Xbox 실차 수동주행
+2026-08-30T23:31:28+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-30T14:31:39.416279+00:00 check section_2 scope=recorded result=NOT_READY problems=2 warnings=1
+2026-08-30T14:34:49.142803+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T14:36:09.242905+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T23:37:58+09:00 start 트랙 수동 매핑 section_2 (inline)
+2026-08-30T23:38:36+09:00 finish 트랙 수동 매핑 section_2 (inline) result=STOPPED
+2026-08-30T14:38:37.153437+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-08-30T14:39:07.130239+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T23:39:13+09:00 start 평지 자율주행 section_2 (recorded)
+2026-08-30T23:40:45+09:00 finish 평지 자율주행 section_2 (recorded) result=STOPPED
+2026-08-30T23:41:04+09:00 start 평지 자율주행 section_2 (recorded)
+2026-08-30T23:41:30+09:00 finish 평지 자율주행 section_2 (recorded) result=STOPPED
+2026-08-30T23:42:03+09:00 start Xbox 실차 수동주행
+2026-08-30T23:42:41+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-30T23:47:02+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-08-30T23:48:18+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-30T14:48:19.460794+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-08-30T23:48:30+09:00 start Xbox 실차 수동주행
+2026-08-30T23:49:07+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-30T23:49:49+09:00 start 평지 섹션2 박스 회수 section_2
+2026-08-30T23:53:21+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-08-30T23:53:41+09:00 start Xbox 실차 수동주행
+2026-08-30T23:54:10+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-30T14:54:43.212075+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-31T00:00:37+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T00:01:45+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T00:02:58+09:00 start Xbox 실차 수동주행
+2026-08-31T00:03:31+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T00:03:39+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T00:03:58+09:00 finish 평지 섹션5 선두추종 0.60mps result=PASS
+2026-08-30T16:09:11.844556+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T16:09:13.366136+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-31T01:36:45+09:00 start Xbox 실차 수동주행
+2026-08-31T01:36:45+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-31T01:37:00+09:00 start Xbox 실차 수동주행
+2026-08-31T01:37:01+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-31T01:37:23+09:00 start Xbox 실차 수동주행
+2026-08-31T01:37:23+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-31T01:40:44+09:00 start Xbox 실차 수동주행
+2026-08-31T01:41:09+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T01:41:19+09:00 start 트랙 섹션5 선두추종 0.60mps
+2026-08-31T01:42:37+09:00 finish 트랙 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T01:42:42+09:00 start Xbox 실차 수동주행
+2026-08-31T01:42:53+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T01:43:16+09:00 start 트랙 섹션5 선두추종 0.60mps
+2026-08-31T01:44:01+09:00 finish 트랙 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T01:44:11+09:00 start Xbox 실차 수동주행
+2026-08-31T01:44:35+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T01:54:21+09:00 start 트랙 섹션5 선두추종 0.60mps
+2026-08-31T01:56:02+09:00 finish 트랙 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T01:56:16+09:00 start Xbox 실차 수동주행
+2026-08-31T01:56:51+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-31T02:18:10+09:00 start Xbox 실차 수동주행
+2026-08-31T02:18:24+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T02:20:06+09:00 start 트랙 섹션5 선두추종 0.60mps
+2026-08-31T02:21:11+09:00 finish 트랙 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T02:21:15+09:00 start Xbox 실차 수동주행
+2026-08-31T02:22:20+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T02:22:47+09:00 start 트랙 섹션5 선두추종 0.60mps
+2026-08-31T02:24:03+09:00 finish 트랙 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T02:24:08+09:00 start Xbox 실차 수동주행
+2026-08-31T02:24:27+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T02:24:30+09:00 start 트랙 섹션5 선두추종 0.60mps
+2026-08-31T02:26:46+09:00 finish 트랙 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T02:26:49+09:00 start Xbox 실차 수동주행
+2026-08-31T02:27:53+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-31T02:39:41+09:00 start Xbox 실차 수동주행
+2026-08-31T02:39:42+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-31T02:40:08+09:00 start Xbox 실차 수동주행
+2026-08-31T02:40:09+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-30T17:40:21.378272+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-30T17:40:22.892578+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-08-31T02:40:38+09:00 start Xbox 실차 수동주행
+2026-08-31T02:40:39+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-08-31T02:41:25+09:00 start Xbox 실차 수동주행
+2026-08-31T02:42:13+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T02:42:47+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T02:45:22+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T02:45:27+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T02:46:11+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T02:46:14+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T02:48:39+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T02:48:58+09:00 start Xbox 실차 수동주행
+2026-08-31T02:49:53+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T03:16:39+09:00 start Xbox 실차 수동주행
+2026-08-31T03:17:46+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T03:18:00+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T03:20:22+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T03:20:36+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T03:22:32+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T03:22:34+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T03:23:06+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T03:23:09+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T03:24:16+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T03:25:04+09:00 start Xbox 실차 수동주행
+2026-08-31T03:26:12+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-08-31T03:26:16+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-08-31T03:28:21+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-08-31T03:28:29+09:00 start Xbox 실차 수동주행
+2026-08-31T03:50:30.615928+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-08-31T03:50:36.091821+00:00 check section_1 scope=recorded result=NOT_READY problems=1 warnings=0
+2026-08-31T23:58:20+09:00 start D435 traffic 비전 관찰
+2026-09-01T00:05:02+09:00 finish D435 traffic 비전 관찰 result=STOPPED
+2026-09-01T00:10:06+09:00 start D435 autumn 비전 관찰
+2026-09-01T00:11:57+09:00 finish D435 autumn 비전 관찰 result=STOPPED
+2026-09-01T00:12:45+09:00 start D435 summer 비전 관찰
+2026-09-01T00:16:17+09:00 finish D435 summer 비전 관찰 result=STOPPED
+2026-09-01T00:24:10+09:00 start D435 traffic 비전 관찰
+2026-09-01T00:24:29+09:00 finish D435 traffic 비전 관찰 result=STOPPED
+2026-09-01T00:25:02+09:00 start D435 traffic 비전 관찰
+2026-09-01T00:25:23+09:00 finish D435 traffic 비전 관찰 result=STOPPED
+2026-09-01T00:34:27+09:00 start D435 autumn 비전 관찰
+2026-09-01T00:35:48+09:00 finish D435 autumn 비전 관찰 result=STOPPED
+2026-09-01T00:46:36+09:00 start D435 autumn 비전 관찰
+2026-09-01T00:47:39+09:00 finish D435 autumn 비전 관찰 result=STOPPED
+2026-09-01T00:47:46+09:00 start 로봇팔 카메라 관찰
+2026-09-01T00:48:36+09:00 finish 로봇팔 카메라 관찰 result=STOPPED
+2026-09-01T01:23:49+09:00 start Xbox 실차 수동주행
+2026-09-01T01:23:49+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-09-01T01:24:13+09:00 start Xbox 실차 수동주행
+2026-09-01T01:25:43+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:25:56+09:00 start 평지 섹션5 선두추종 0.80mps
+2026-09-01T01:26:57+09:00 finish 평지 섹션5 선두추종 0.80mps result=STOPPED
+2026-09-01T01:27:10+09:00 start Xbox 실차 수동주행
+2026-09-01T01:27:20+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:27:27+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-09-01T01:28:36+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-09-01T01:28:40+09:00 start Xbox 실차 수동주행
+2026-09-01T01:29:01+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:29:11+09:00 start 평지 섹션5 선두추종 0.80mps
+2026-09-01T01:30:16+09:00 finish 평지 섹션5 선두추종 0.80mps result=STOPPED
+2026-09-01T01:30:24+09:00 start Xbox 실차 수동주행
+2026-09-01T01:30:39+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:30:47+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-09-01T01:31:26+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-09-01T01:31:30+09:00 start Xbox 실차 수동주행
+2026-09-01T01:31:35+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:31:41+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-09-01T01:32:11+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-09-01T01:32:26+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-09-01T01:32:58+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-09-01T01:33:04+09:00 start Xbox 실차 수동주행
+2026-09-01T01:33:12+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:33:16+09:00 start 평지 섹션5 선두추종 0.80mps
+2026-09-01T01:35:01+09:00 finish 평지 섹션5 선두추종 0.80mps result=STOPPED
+2026-09-01T01:35:05+09:00 start Xbox 실차 수동주행
+2026-09-01T01:35:18+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:35:27+09:00 start 평지 섹션5 선두추종 1.00mps
+2026-09-01T01:38:06+09:00 finish 평지 섹션5 선두추종 1.00mps result=STOPPED
+2026-09-01T01:38:16+09:00 start 평지 섹션5 선두추종 0.80mps
+2026-09-01T01:38:46+09:00 finish 평지 섹션5 선두추종 0.80mps result=STOPPED
+2026-09-01T01:38:59+09:00 start Xbox 실차 수동주행
+2026-09-01T01:39:16+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:39:23+09:00 start 평지 섹션5 선두추종 0.60mps
+2026-09-01T01:40:42+09:00 finish 평지 섹션5 선두추종 0.60mps result=STOPPED
+2026-09-01T01:40:52+09:00 start Xbox 실차 수동주행
+2026-09-01T01:41:12+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:41:42+09:00 start 경사·트랙 3D 수동 매핑 section_2 (inline)
+2026-09-01T01:42:24+09:00 finish 경사·트랙 3D 수동 매핑 section_2 (inline) result=STOPPED
+2026-08-31T16:42:24.899253+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-09-01T01:42:27+09:00 start Xbox 실차 수동주행
+2026-09-01T01:42:40+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T01:43:23+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-09-01T01:44:09+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-08-31T16:44:11.064698+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-09-01T01:44:25+09:00 start 평지 섹션2 박스 회수 section_2
+2026-09-01T01:49:03+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-09-01T01:49:20+09:00 start Xbox 실차 수동주행
+2026-09-01T01:49:21+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-09-01T01:49:29+09:00 start Xbox 실차 수동주행
+2026-09-01T01:49:30+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-09-01T01:49:48+09:00 start Xbox 실차 수동주행
+2026-09-01T01:49:49+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-09-01T01:50:07+09:00 start Xbox 실차 수동주행
+2026-09-01T01:50:08+09:00 finish Xbox 실차 수동주행 result=FAIL exit=1
+2026-09-01T01:50:34+09:00 start Xbox 실차 수동주행
+2026-09-01T01:51:19+09:00 finish Xbox 실차 수동주행 result=STOPPED
+2026-09-01T07:19:04.658539+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-09-01T12:23:10.593200+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-09-01T12:23:11.177431+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-01T19:46:20.854706+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-01T19:46:22.780546+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-09-02T04:46:28+09:00 start 오프라인 지도 처리 flat/section_1
+2026-09-02T04:47:05+09:00 finish 오프라인 지도 처리 flat/section_1 result=FAIL exit=1
+2026-09-02T04:47:11+09:00 start 오프라인 지도 처리 flat/section_2
+2026-09-02T04:47:31+09:00 finish 오프라인 지도 처리 flat/section_2 result=FAIL exit=1
+2026-09-02T04:52:40+09:00 start 오프라인 지도 처리 flat/section_2
+2026-09-02T04:52:50+09:00 finish 오프라인 지도 처리 flat/section_2 result=PASS
+2026-09-02T04:53:21+09:00 start 오프라인 지도 처리 flat/section_2
+2026-09-02T04:53:41+09:00 finish 오프라인 지도 처리 flat/section_2 result=PASS
+2026-09-02T09:41:38+09:00 start 오프라인 지도 처리 flat/section_1
+2026-09-02T09:42:15+09:00 finish 오프라인 지도 처리 flat/section_1 result=PASS
+2026-09-03T03:45:02+09:00 start 경사·트랙 3D 수동 매핑 section_2 (inline)
+2026-09-03T03:45:03+09:00 finish 경사·트랙 3D 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-09-02T18:45:04.200915+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-09-03T03:45:19+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-09-03T03:45:20+09:00 finish 평지 수동 매핑 section_2 (flat) result=FAIL exit=1
+2026-09-02T18:45:21.709707+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-09-03T03:47:28+09:00 start 경사·트랙 3D 수동 매핑 section_2 (inline)
+2026-09-03T03:47:29+09:00 finish 경사·트랙 3D 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-09-02T18:47:30.170178+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-09-03T03:49:28+09:00 start 경사·트랙 3D 수동 매핑 section_2 (inline)
+2026-09-03T03:49:30+09:00 finish 경사·트랙 3D 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-09-02T18:49:30.615480+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-09-03T03:49:42+09:00 start 경사·트랙 3D 수동 매핑 section_2 (inline)
+2026-09-03T03:49:44+09:00 finish 경사·트랙 3D 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-09-02T18:49:44.502868+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-09-03T03:49:53+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-09-03T03:49:54+09:00 finish 평지 수동 매핑 section_2 (flat) result=FAIL exit=1
+2026-09-02T18:49:55.800553+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-09-03T03:50:01+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-09-03T03:50:02+09:00 finish 평지 수동 매핑 section_2 (flat) result=FAIL exit=1
+2026-09-02T18:50:03.102958+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-09-03T03:52:13+09:00 start 경사·트랙 3D 수동 매핑 section_2 (inline)
+2026-09-03T03:52:15+09:00 finish 경사·트랙 3D 수동 매핑 section_2 (inline) result=FAIL exit=1
+2026-09-02T18:52:15.286181+00:00 check section_2 scope=map result=NOT_READY problems=1 warnings=0
+2026-09-03T03:52:20+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-09-03T03:52:25+09:00 finish 평지 수동 매핑 section_2 (flat) result=FAIL exit=1
+2026-09-02T18:52:26.463388+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-09-03T03:59:37+09:00 start 경사·트랙 3D 수동 매핑 section_2 (inline)
+2026-09-03T04:00:43+09:00 finish 경사·트랙 3D 수동 매핑 section_2 (inline) result=STOPPED
+2026-09-02T19:00:43.856864+00:00 check section_2 scope=map result=READY problems=0 warnings=0
+2026-09-03T04:00:55+09:00 start 오프라인 지도 처리 track/section_2
+2026-09-03T04:01:19+09:00 finish 오프라인 지도 처리 track/section_2 result=PASS
+2026-09-03T04:02:39+09:00 start 평지 자율주행 section_2 (recorded)
+2026-09-03T04:02:44+09:00 finish 평지 자율주행 section_2 (recorded) result=STOPPED
+2026-09-03T04:02:59+09:00 start 평지 섹션2 박스 회수 section_2
+2026-09-03T04:03:24+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-09-03T04:03:34+09:00 start 평지 수동 매핑 section_2 (flat)
+2026-09-03T04:04:19+09:00 finish 평지 수동 매핑 section_2 (flat) result=STOPPED
+2026-09-02T19:04:21.433886+00:00 check section_2 scope=map result=READY problems=0 warnings=1
+2026-09-03T04:04:45+09:00 start 평지 섹션2 박스 회수 section_2
+2026-09-03T04:09:44+09:00 finish 평지 섹션2 박스 회수 section_2 result=STOPPED
+2026-09-03T04:40:35+09:00 start Xbox 차체 전용 수동주행
+2026-09-03T04:40:36+09:00 finish Xbox 차체 전용 수동주행 result=FAIL exit=1
+2026-09-03T04:41:09+09:00 start Xbox 차체 전용 수동주행
+2026-09-03T04:41:10+09:00 finish Xbox 차체 전용 수동주행 result=FAIL exit=1
+2026-09-03T04:41:33+09:00 start Xbox 차체 전용 수동주행
+2026-09-03T04:41:34+09:00 finish Xbox 차체 전용 수동주행 result=FAIL exit=1
+2026-09-03T04:42:12+09:00 start Xbox 차체 전용 수동주행
+2026-09-03T04:48:17+09:00 finish Xbox 차체 전용 수동주행 result=STOPPED
+2026-09-03T04:49:10+09:00 start 원본 매핑 데이터 수집 section_1
+2026-09-03T04:50:50+09:00 finish 원본 매핑 데이터 수집 section_1 result=STOPPED
+2026-09-03T04:50:54+09:00 start 오프라인 지도 처리 section_1/all
+2026-09-03T04:52:27+09:00 finish 오프라인 지도 처리 section_1/all result=PASS
+2026-09-03T04:54:25+09:00 start 평지 자율주행 section_1 (recorded)
+2026-09-03T04:57:29+09:00 finish 평지 자율주행 section_1 (recorded) result=STOPPED
+2026-09-03T04:57:38+09:00 start 경사·트랙 3D 자율주행 section_1 (recorded)
+2026-09-03T04:57:39+09:00 finish 경사·트랙 3D 자율주행 section_1 (recorded) result=FAIL exit=1
+2026-09-03T04:57:57+09:00 start 원본 매핑 데이터 수집 section_2
+2026-09-03T05:00:23+09:00 finish 원본 매핑 데이터 수집 section_2 result=STOPPED
+2026-09-03T05:00:45+09:00 start 원본 매핑 데이터 수집 section_2
+2026-09-03T05:00:46+09:00 finish 원본 매핑 데이터 수집 section_2 result=FAIL exit=1
+2026-09-03T05:01:17+09:00 start 원본 매핑 데이터 수집 section_2
+2026-09-03T05:01:18+09:00 finish 원본 매핑 데이터 수집 section_2 result=FAIL exit=1
+2026-09-02T20:42:17.955527+00:00 check section_1 scope=recorded result=READY problems=0 warnings=0
+2026-09-03T05:55:45+09:00 start 오프라인 지도 처리 section_1/3d
+2026-09-03T05:56:31+09:00 finish 오프라인 지도 처리 section_1/3d result=PASS
+2026-09-02T20:56:36.733107+00:00 check section_1 scope=recorded result=NOT_READY problems=2 warnings=0
+2026-09-02T21:08:30.742336+00:00 check section_1 scope=map result=READY problems=0 warnings=0
+2026-09-02T21:09:23.395641+00:00 check section_1 scope=recorded result=NOT_READY problems=2 warnings=0
+2026-09-02T21:09:38.635984+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-02T21:09:51.094250+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-02T21:13:26.690389+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-02T21:13:38.853896+00:00 check section_1 scope=recorded result=NOT_READY problems=2 warnings=0
+2026-09-03T02:28:53.303234+00:00 check section_1 scope=recorded result=NOT_READY problems=2 warnings=0
+2026-09-03T02:28:54.867273+00:00 check section_2 scope=recorded result=NOT_READY problems=3 warnings=0
+2026-09-03T02:30:54.860084+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-03T02:30:56.501719+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-09-03T02:41:51.999631+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-03T02:41:53.655931+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-09-03T02:42:23.243863+00:00 check section_1 scope=recorded result=READY problems=0 warnings=1
+2026-09-03T02:42:24.802226+00:00 check section_2 scope=recorded result=READY problems=0 warnings=1
+2026-09-03T23:11:01+09:00 start D435 spring 비전 관찰
+2026-09-03T23:11:17+09:00 start 원본 매핑 데이터 수집 section_1
+2026-09-03T23:19:08+09:00 finish 원본 매핑 데이터 수집 section_1 result=STOPPED
+2026-09-03T23:19:16+09:00 start 원본 매핑 데이터 수집 section_2
+2026-09-03T23:21:54+09:00 finish 원본 매핑 데이터 수집 section_2 result=STOPPED
+2026-09-03T23:23:06+09:00 finish D435 spring 비전 관찰 result=STOPPED
+2026-09-03T23:23:12+09:00 start Xbox 베이스+로봇팔 수동 위치제어
+2026-09-03T23:27:01+09:00 finish Xbox 베이스+로봇팔 수동 위치제어 result=STOPPED
+2026-09-03T23:27:10+09:00 start Xbox 베이스+로봇팔 수동 위치제어
+2026-09-03T23:27:11+09:00 finish Xbox 베이스+로봇팔 수동 위치제어 result=FAIL exit=1
+2026-09-04T03:11:14+09:00 start D435 spring 비전 관찰

@@ -1,0 +1,17 @@
+# The field launch deliberately renames the converter so it is distinguishable
+# from the vendor Velodyne ring converter.  ROS 2 parameter files match the
+# final node name, therefore this key must match the renamed node.
+stabilized_pointcloud_to_laserscan:
+  ros__parameters:
+    target_frame: base_footprint
+    transform_tolerance: 0.05
+    min_height: 0.10
+    max_height: 0.45
+    angle_min: -3.14159
+    angle_max: 3.14159
+    angle_increment: 0.00873
+    scan_time: 0.10
+    range_min: 0.30
+    range_max: 30.0
+    use_inf: true
+    inf_epsilon: 1.0

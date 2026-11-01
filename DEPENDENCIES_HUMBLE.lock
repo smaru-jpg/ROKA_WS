@@ -1,0 +1,29 @@
+platform: Ubuntu 22.04 / ROS 2 Humble / Python 3.10
+verified: 2026-09-04
+handoff_format: 3
+ros-humble-grid-map: 2.0.1
+ros-humble-grid-map-filters: 2.0.1
+ros-humble-grid-map-loader: 2.0.1
+ros-humble-grid-map-pcl: 2.0.1
+ros-humble-pointcloud-to-laserscan: 2.0.1
+ros-humble-twist-mux: 4.3.0
+ros-humble-nav2-collision-monitor: 1.1.20
+ros-humble-navigation2: 1.1.20
+ros-humble-slam-toolbox: 2.6.10
+ros-humble-robot-localization: 3.5.4
+ros-humble-realsense2-camera: 4.58.3
+ros-humble-dynamixel-sdk: 4.0.3
+ros-humble-joy: 3.3.0
+ros-humble-teleop-twist-joy: 2.4.8
+libceres-dev: 2.0.0+dfsg1-5
+python-matplotlib: system Ubuntu 22.04
+python-numpy: 1.26.4
+python-opencv: 4.11.0.86
+python-torch: 2.13.0+cu130
+python-ultralytics: 8.4.131
+python-pyserial: 3.5
+python-setuptools: 79.0.1 (workspace-isolated ML runtime; colcon-compatible <80)
+arduino-cli: 1.5.1
+arduino-avr-core: 1.8.8
+arduino-adafruit-neopixel: 1.15.5
+box_marker_best.pt-sha256: 059e5c485f5162659ae76b6492d7a8291bbcbce6ab75d1dbbf555f6e9f7acc95

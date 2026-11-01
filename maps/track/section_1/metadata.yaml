@@ -1,0 +1,24 @@
+schema_version: 2
+created_utc: '2026-09-02T20:56:31.313880+00:00'
+environment: processed_3d
+mapping_backend: fastlio_sc_pgo
+pose_authority: sc_pgo
+frames:
+  global: map
+  odometry: odom
+  body_3d: base_link
+  body_2d: base_footprint
+sensors:
+  lidar: Velodyne VLP-16
+  imu: EBIMU-9DOFV5
+products:
+  occupancy: occupancy.yaml
+  terrain: terrain_map.bag
+  global_terrain: terrain_global.bag
+  track_profile: track_profile.yaml
+  pointcloud: map.pcd
+  drivable_surface: surface.pcd
+  optimized_path: optimized_path.csv
+  pose_graph_3d: pose_graph.g2o
+  source_sensor_contract: sensor_contract.yaml
+source_acquisition: /home/ryoo/roka_ws/datasets/mapping/section_1

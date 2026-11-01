@@ -1,0 +1,255 @@
+{
+  "schema_version": 2,
+  "purpose": "planner speed/cost calibration; not a standalone safety certificate",
+  "planner_linear_limit_mps": 0.55,
+  "planner_angular_limit_radps": 0.8,
+  "tire_half_width_m": 0.0591,
+  "edge_safety_margin_m": 0.05,
+  "risk_horizon_sec": 1.5,
+  "risk_model": {
+    "feature_names": [
+      "candidate_speed_ratio",
+      "candidate_speed_squared",
+      "abs_cross_slope_ratio",
+      "abs_longitudinal_slope_ratio",
+      "curvature_ratio",
+      "edge_deficit_ratio",
+      "speed_cross_interaction",
+      "speed_longitudinal_interaction",
+      "speed_curvature_interaction"
+    ],
+    "feature_mean": [
+      0.6160290484640796,
+      0.42247373214480977,
+      0.48517888068868387,
+      0.1935635523334779,
+      0.12433476159342156,
+      0.07170652824389825,
+      0.2920918544039923,
+      0.11858638896764877,
+      0.07505674698982034
+    ],
+    "feature_std": [
+      0.20732087109869904,
+      0.2627743549557885,
+      0.38811919831536035,
+      0.20314677007017312,
+      0.1278725886043413,
+      0.14735319983896983,
+      0.2625140326290745,
+      0.13686136849970523,
+      0.08406665306938128
+    ],
+    "coefficients": [
+      0.0,
+      0.0,
+      0.39226065425948725,
+      0.0,
+      0.1182970944321817,
+      2.832254592527513,
+      0.004059158130806235,
+      0.0,
+      0.019132217720448125
+    ],
+    "bias": 0.11736013919134325,
+    "monotone_non_decreasing": true
+  },
+  "risk_model_metrics": {
+    "weighted_brier": 0.08616251397900204,
+    "weighted_auc": 0.9762314992011542,
+    "positive_fraction_unweighted": 0.3237759355104658
+  },
+  "planner": {
+    "maximum_accepted_risk": 0.35,
+    "minimum_speed_mps": 0.1,
+    "speed_candidates_mps": [
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1
+    ],
+    "maximum_lateral_acceleration_mps2": 0.25,
+    "maximum_acceleration_mps2": 0.5,
+    "maximum_deceleration_mps2": 0.8,
+    "out_of_distribution_speed_mps": 0.1,
+    "bank_speed_floor_table": [
+      {
+        "minimum_abs_cross_slope_deg": 0.0,
+        "maximum_abs_cross_slope_deg": 8.0,
+        "minimum_speed_mps": 0.1,
+        "safe_samples": 6990,
+        "method": "session-balanced completed-lap p10"
+      },
+      {
+        "minimum_abs_cross_slope_deg": 8.0,
+        "maximum_abs_cross_slope_deg": 16.0,
+        "minimum_speed_mps": 0.1,
+        "safe_samples": 430,
+        "method": "session-balanced completed-lap p10"
+      },
+      {
+        "minimum_abs_cross_slope_deg": 16.0,
+        "maximum_abs_cross_slope_deg": 24.0,
+        "minimum_speed_mps": 0.1857532739639282,
+        "safe_samples": 793,
+        "method": "session-balanced completed-lap p10"
+      },
+      {
+        "minimum_abs_cross_slope_deg": 24.0,
+        "maximum_abs_cross_slope_deg": 32.0,
+        "minimum_speed_mps": 0.2621917247772217,
+        "safe_samples": 6750,
+        "method": "session-balanced completed-lap p10"
+      },
+      {
+        "minimum_abs_cross_slope_deg": 32.0,
+        "maximum_abs_cross_slope_deg": 45.0,
+        "minimum_speed_mps": 0.2558868885040283,
+        "safe_samples": 1882,
+        "method": "session-balanced completed-lap p10"
+      }
+    ]
+  },
+  "observed_safe_feature_p99": {
+    "candidate_speed_ratio": 1.0,
+    "candidate_speed_squared": 1.0,
+    "abs_cross_slope_ratio": 1.0704491739392827,
+    "abs_longitudinal_slope_ratio": 0.8908560072530237,
+    "curvature_ratio": 0.40156991515250345,
+    "edge_deficit_ratio": 0.0,
+    "speed_cross_interaction": 0.9461554104248333,
+    "speed_longitudinal_interaction": 0.6403056648687475,
+    "speed_curvature_interaction": 0.343831429027732
+  },
+  "successful_dynamic_envelope": {
+    "roll_deg": {
+      "p95": 40.41840749772419,
+      "p99": 42.99359829697556,
+      "maximum": 44.416255306476714
+    },
+    "pitch_deg": {
+      "p95": 18.934207152434446,
+      "p99": 31.63695679650881,
+      "maximum": 34.03160318085603
+    },
+    "forward_speed_mps": {
+      "p95": 0.5290302623322476,
+      "p99": 0.5930511939327104,
+      "maximum": 0.8753407460634459
+    },
+    "lateral_speed_mps": {
+      "p95": 0.044439080136193805,
+      "p99": 0.06747123845916421,
+      "maximum": 0.25716576946738035
+    },
+    "yaw_rate_radps": {
+      "p95": 0.18623437758679373,
+      "p99": 0.2854796886703419,
+      "maximum": 0.7389357886144057
+    },
+    "lateral_error_m": {
+      "p95": 0.1656773127851507,
+      "p99": 0.18583049308542038,
+      "maximum": 0.201206676809185
+    },
+    "heading_error_deg": {
+      "p95": 9.14424683643563,
+      "p99": 11.74199439087,
+      "maximum": 15.177048389437415
+    },
+    "tire_edge_clearance_m": {
+      "p95": 0.17674952950477602,
+      "p99": 0.19090000000000001,
+      "maximum": 0.19090000000000001
+    },
+    "slip_ratio": {
+      "p95": 1.1464115847313625,
+      "p99": 1.3938526087203245,
+      "maximum": 2.1455164062402337
+    }
+  },
+  "sessions": [
+    {
+      "session": "fast_test01",
+      "source_file": "datasets/xbox_demonstrations/fast_test01.csv",
+      "rows": 5739,
+      "enabled_rows": 4739,
+      "progress_laps": 1.006993006993007,
+      "completed": true,
+      "role": "completed_boundary",
+      "hard_boundary_rows": 662,
+      "warning_rows": 1838,
+      "stalled_rows": 0,
+      "failure_precursor_rows": 0,
+      "planning_risk_rows": 1939,
+      "maximum_command_linear_mps": 0.55,
+      "maximum_command_angular_radps": 0.9912258982658386,
+      "maximum_abs_roll_deg": 42.07917461227989,
+      "maximum_abs_pitch_deg": 34.03160318085603,
+      "maximum_abs_lateral_error_m": 0.24798681588488672
+    },
+    {
+      "session": "fast_test01_2",
+      "source_file": "datasets/xbox_demonstrations/fast_test01_2.csv",
+      "rows": 6719,
+      "enabled_rows": 6056,
+      "progress_laps": 1.005827505827506,
+      "completed": true,
+      "role": "completed_reference",
+      "hard_boundary_rows": 83,
+      "warning_rows": 994,
+      "stalled_rows": 0,
+      "failure_precursor_rows": 0,
+      "planning_risk_rows": 1004,
+      "maximum_command_linear_mps": 0.55,
+      "maximum_command_angular_radps": 0.75,
+      "maximum_abs_roll_deg": 44.416255306476714,
+      "maximum_abs_pitch_deg": 32.54313720595024,
+      "maximum_abs_lateral_error_m": 0.2011974405810683
+    },
+    {
+      "session": "lap01",
+      "source_file": "datasets/xbox_demonstrations/lap01.csv",
+      "rows": 3713,
+      "enabled_rows": 3039,
+      "progress_laps": 0.3414918414918415,
+      "completed": false,
+      "role": "failed_negative",
+      "hard_boundary_rows": 640,
+      "warning_rows": 1375,
+      "stalled_rows": 0,
+      "failure_precursor_rows": 163,
+      "planning_risk_rows": 1527,
+      "maximum_command_linear_mps": 0.3,
+      "maximum_command_angular_radps": 0.5475012302398682,
+      "maximum_abs_roll_deg": 179.507987109737,
+      "maximum_abs_pitch_deg": 34.751745373861425,
+      "maximum_abs_lateral_error_m": 1.1754503419228033
+    },
+    {
+      "session": "lap01_2",
+      "source_file": "datasets/xbox_demonstrations/lap01_2.csv",
+      "rows": 9469,
+      "enabled_rows": 7999,
+      "progress_laps": 1.0,
+      "completed": true,
+      "role": "completed_boundary",
+      "hard_boundary_rows": 838,
+      "warning_rows": 2587,
+      "stalled_rows": 0,
+      "failure_precursor_rows": 0,
+      "planning_risk_rows": 2599,
+      "maximum_command_linear_mps": 0.3,
+      "maximum_command_angular_radps": 0.6,
+      "maximum_abs_roll_deg": 40.410251995505774,
+      "maximum_abs_pitch_deg": 32.315921980578004,
+      "maximum_abs_lateral_error_m": 0.22768420107451323
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+collision_monitor:
+  ros__parameters:
+    base_frame_id: base_footprint
+    odom_frame_id: odom
+    cmd_vel_in_topic: /cmd_vel_terrain
+    cmd_vel_out_topic: /cmd_vel
+    transform_tolerance: 0.20
+    source_timeout: 0.40
+    base_shift_correction: true
+    stop_pub_timeout: 1.0
+    polygons: [StopZone, SlowZone]
+    StopZone:
+      type: polygon
+      # STEP footprint plus a small immediate-stop shell.
+      points: [0.64, 0.35, 0.64, -0.35, -0.34, -0.35, -0.34, 0.35]
+      action_type: stop
+      max_points: 3
+      visualize: true
+      polygon_pub_topic: /collision_monitor/stop_zone
+      enabled: true
+    SlowZone:
+      type: polygon
+      points: [1.10, 0.42, 1.10, -0.42, -0.55, -0.42, -0.55, 0.42]
+      action_type: slowdown
+      max_points: 3
+      slowdown_ratio: 0.35
+      visualize: true
+      polygon_pub_topic: /collision_monitor/slow_zone
+      enabled: true
+    observation_sources: [pointcloud]
+    pointcloud:
+      type: pointcloud
+      # The raw pump-track surface rises into the old height band and caused
+      # false stops. This topic contains only points above the elevation map.
+      topic: /terrain/obstacle_points
+      min_height: -2.0
+      max_height: 2.0
+      enabled: true

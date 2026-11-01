@@ -1,0 +1,12 @@
+terrain_obstacle_filter:
+  ros__parameters:
+    input_cloud_topic: /velodyne_points
+    terrain_map_topic: /terrain/local_map
+    output_obstacle_topic: /terrain/obstacle_points
+    min_obstacle_clearance_m: 0.15
+    max_obstacle_clearance_m: 1.50
+    tf_fallback_tolerance_sec: 0.25
+    # Normal track mode ignores unknown ramp cells. Controlled level-test mode
+    # overrides this and admits only points 0.15..1.50 m above odom z=0.
+    unknown_is_obstacle: false
+    unknown_level_ground_z_m: 0.0

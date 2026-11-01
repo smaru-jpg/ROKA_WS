@@ -1,0 +1,26 @@
+rosbag2_bagfile_information:
+  version: 5
+  storage_identifier: sqlite3
+  duration:
+    nanoseconds: 0
+  starting_time:
+    nanoseconds_since_epoch: 1788375679077823862
+  message_count: 1
+  topics_with_message_count:
+    - topic_metadata:
+        name: /terrain/static_map
+        type: grid_map_msgs/msg/GridMap
+        serialization_format: cdr
+        offered_qos_profiles: ""
+      message_count: 1
+  compression_format: ""
+  compression_mode: ""
+  relative_file_paths:
+    - terrain_global.bag_0.db3
+  files:
+    - path: terrain_global.bag_0.db3
+      starting_time:
+        nanoseconds_since_epoch: 1788375679077823862
+      duration:
+        nanoseconds: 0
+      message_count: 1

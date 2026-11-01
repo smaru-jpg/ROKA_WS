@@ -1,0 +1,36 @@
+sim_learned_controller:
+  ros__parameters:
+    use_sim_time: true
+    odom_topic: /simulator/floating_base_state
+    cmd_vel_topic: /sim/cmd_vel_nav
+    auto_start: false
+    target_laps: 0
+    control_rate_hz: 30.0
+    minimum_linear_speed_mps: 0.12
+    maximum_linear_speed_mps: 0.30
+    maximum_angular_speed_radps: 0.60
+    linear_acceleration_mps2: 0.40
+    linear_deceleration_mps2: 0.60
+    angular_acceleration_radps2: 1.50
+    lateral_reference_gain_radps_per_m: 2.40
+    heading_reference_gain_radps_per_rad: 1.20
+    minimum_tracking_speed_scale: 0.70
+    # The completed Xbox lap reached 0.025 m wheel-centre edge clearance.
+    # With the 0.0591 m tyre half-width this is -0.0341 m tyre clearance,
+    # while MuJoCo still retained surface contact. Keep a small measured
+    # tolerance and stop before the wheel centre itself leaves the track.
+    minimum_tire_clearance_m: -0.04
+    # Ground Truth edge cells request mapped-path recovery; they do not stop
+    # the robot. Hysteresis prevents rapid normal/recovery mode switching.
+    recovery_enter_lateral_error_m: 0.12
+    recovery_exit_lateral_error_m: 0.06
+    recovery_enter_heading_error_deg: 25.0
+    recovery_exit_heading_error_deg: 12.0
+    recovery_lookahead_m: 0.55
+    recovery_linear_speed_mps: 0.16
+    # Only a gross departure, actual drop, or overturn is a hard stop.
+    maximum_recovery_lateral_error_m: 0.55
+    minimum_reference_height_delta_m: -0.06
+    absolute_roll_limit_deg: 85.0
+    absolute_pitch_limit_deg: 65.0
+    odom_timeout_sec: 0.30

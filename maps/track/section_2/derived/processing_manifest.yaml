@@ -1,0 +1,22 @@
+schema_version: 1
+processed_at_utc: '2026-09-02T19:00:56.862531+00:00'
+source_bundle: /home/ryoo/roka_ws/maps/track/section_2
+source_bag:
+  metadata_sha256: 03cad175d7ce47de4baa49fc6ab8fe5ecb662f46902cd4fb6244bebdbd341290
+  storage_files:
+  - name: sensors_0.db3.zstd
+    size_bytes: 5390098
+mode: all
+sensor_audit: /home/ryoo/roka_ws/maps/track/section_2/derived/sensor_contract.yaml
+two_dimensional:
+  status: READY
+  yaml: /home/ryoo/roka_ws/maps/track/section_2/occupancy.yaml
+  image: /home/ryoo/roka_ws/maps/track/section_2/occupancy.pgm
+  resolution_m: 0.05
+three_dimensional:
+  status: READY
+  directory: /home/ryoo/roka_ws/maps/track/section_2/derived/fastlio_sc_pgo
+  regression: /home/ryoo/roka_ws/maps/track/section_2/derived/fastlio_sc_pgo/regression.yaml
+  playback_rate: 1.0
+  autonomy_eligible: true
+  global_terrain: /home/ryoo/roka_ws/maps/track/section_2/derived/fastlio_sc_pgo/terrain_global.bag

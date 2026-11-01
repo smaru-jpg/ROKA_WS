@@ -1,0 +1,3732 @@
+src/mission/roka_mission/config/section5_takeover_mux.yaml: OK
+src/mission/roka_mission/launch/section5_leader_follow.launch.py: OK
+src/mission/roka_mission/roka_mission/section5_lifecycle_gate.py: OK
+src/terrain/roka_terrain_mapping/src/leader_follower_node.cpp: OK
+src/terrain/roka_terrain_mapping/include/roka_terrain_mapping/leader_follow_math.hpp: OK
+Starting >>> roka_imu_driver
+[0.214s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/ryoo/.local/ros-humble-mujoco/opt/ros/humble' in the environment variable AMENT_PREFIX_PATH doesn't contain any 'local_setup.*' files.
+Finished <<< roka_imu_driver [0.18s]
+Starting >>> roka_terrain_mapping
+Finished <<< roka_terrain_mapping [0.27s]
+Starting >>> roka_terrain_supervisor
+Finished <<< roka_terrain_supervisor [0.17s]
+
+Summary: 3 packages finished [0.78s]
+Starting >>> sc_pgo
+[0.200s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/ryoo/.local/ros-humble-mujoco/opt/ros/humble' in the environment variable AMENT_PREFIX_PATH doesn't contain any 'local_setup.*' files.
+Finished <<< sc_pgo [0.14s]
+
+Summary: 1 package finished [0.29s]
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'imu_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_imu_driver/share/roka_imu_driver/config/ebimu_v5.yaml')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'serial_port':
+        no description given
+        (default: 'auto')
+
+    'allow_sensor_configuration':
+        no description given
+        (default: 'false')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'imu_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_imu_driver/share/roka_imu_driver/config/ebimu_v5.yaml')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'ekf_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_imu_driver/share/roka_imu_driver/config/imu_wheel_ekf.yaml')
+
+    'serial_port':
+        no description given
+        (default: 'auto')
+
+    'allow_sensor_configuration':
+        no description given
+        (default: 'false')
+
+    'wheel_odom_topic':
+        no description given
+        (default: '/wheel/odom')
+
+    'filtered_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'use_imu_static_tf':
+        no description given
+        (default: 'true')
+
+    'base_frame':
+        no description given
+        (default: 'base_link')
+
+    'imu_x':
+        no description given
+        (default: '0.1815')
+
+    'imu_y':
+        no description given
+        (default: '0.0')
+
+    'imu_z':
+        no description given
+        (default: '0.206625')
+
+    'imu_roll':
+        no description given
+        (default: '0.0140568694')
+
+    'imu_pitch':
+        no description given
+        (default: '0.0199366605')
+
+    'imu_yaw':
+        no description given
+        (default: '-0.0040315979')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        Effective skid-steer separation; not physical wheel track.
+        (default: '0.66')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'teleop_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'max_linear_speed':
+        no description given
+        (default: '1.00')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '112.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '130.0')
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        Effective skid-steer separation; not physical wheel track.
+        (default: '0.66')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'bag':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/flat/section_1/sensors')
+
+    'output_dir':
+        no description given
+        (default: '/tmp/roka_fastlio_regression')
+
+    'apply_dynamic_calibration':
+        no description given
+        (default: 'true')
+
+    'time_offset_override_sec':
+        no description given
+        (default: '')
+
+    'point_filter_num_override':
+        no description given
+        (default: '')
+
+    'filter_size_surf_override_m':
+        no description given
+        (default: '')
+
+    'filter_size_map_override_m':
+        no description given
+        (default: '')
+
+    'blind_override_m':
+        no description given
+        (default: '')
+
+    'playback_rate':
+        no description given
+        (default: '1.0')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'output_dir':
+        no description given
+        (default: '/tmp/roka_lio_mapping')
+
+    'fast_lio_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/fast_lio/share/fast_lio/config/roka_vlp16.yaml')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+
+    'use_sc_pgo':
+        no description given
+        (default: 'true')
+
+    'publish_lio_tf':
+        no description given
+        (default: 'false')
+
+    'apply_dynamic_calibration':
+        no description given
+        (default: 'true')
+
+    'time_offset_override_sec':
+        no description given
+        (default: '')
+
+    'point_filter_num_override':
+        no description given
+        (default: '')
+
+    'filter_size_surf_override_m':
+        no description given
+        (default: '')
+
+    'filter_size_map_override_m':
+        no description given
+        (default: '')
+
+    'blind_override_m':
+        no description given
+        (default: '')
+
+    'world_frame':
+        no description given
+        (default: 'lio_odom')
+
+    'body_frame':
+        no description given
+        (default: 'base_link')
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'bag':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/flat/section_1/sensors')
+
+    'map_pcd':
+        no description given
+        (default: '')
+
+    'initial_pose_file':
+        no description given
+        (default: '')
+
+    'output_file':
+        no description given
+        (default: '/tmp/fixed_map_regression.yaml')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'bag':
+        no description given
+
+    'output_dir':
+        no description given
+
+    'replay_rate':
+        no description given
+        (default: '1.0')
+
+    'required_excitation_fraction':
+        no description given
+        (default: '0.06')
+
+    'minimum_accumulation_duration_sec':
+        no description given
+        (default: '60.0')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'output_dir':
+        no description given
+
+    'allow_motion':
+        no description given
+        (default: 'true')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'duration_sec':
+        no description given
+        (default: '8.0')
+
+    'output':
+        no description given
+        (default: '')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_pcd':
+        no description given
+        (default: '')
+
+    'initial_pose_file':
+        no description given
+        (default: '')
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_directory':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/flat/section_1')
+
+    'input_pcd':
+        no description given
+        (default: '')
+
+    'output_pcd':
+        no description given
+        (default: '')
+
+    'audit_file':
+        no description given
+        (default: '')
+
+    'removal_radius_m':
+        no description given
+        (default: '0.30')
+
+    'minimum_remaining_fraction':
+        no description given
+        (default: '0.50')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'pending_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel_arm_pending')
+
+    'require_field_preflight':
+        no description given
+        (default: 'false')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+
+    'max_linear_speed':
+        no description given
+        (default: '1.00')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '112.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '130.0')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'teleop_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        Effective skid-steer separation; not physical wheel track.
+        (default: '0.66')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'pending_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel_arm_pending')
+
+    'max_linear_speed':
+        no description given
+        (default: '1.00')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '112.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '130.0')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'teleop_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        Effective skid-steer separation; not physical wheel track.
+        (default: '0.66')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'connect_hardware':
+        no description given
+        (default: 'false')
+
+    'enable_motion':
+        no description given
+        (default: 'false')
+
+    'visualize':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2_start')
+
+    'perception_enabled':
+        no description given
+        (default: 'true')
+
+    'manual_joy_enabled':
+        no description given
+        (default: 'false')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'output_file':
+        no description given
+
+    'route_profile_file':
+        no description given
+
+    'exit_progress_ratio':
+        no description given
+        (default: '0.30')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'pending_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel_arm_pending')
+
+    'require_field_preflight':
+        no description given
+        (default: 'false')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+
+    'max_linear_speed':
+        no description given
+        (default: '1.00')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '112.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '130.0')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'teleop_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        Effective skid-steer separation; not physical wheel track.
+        (default: '0.66')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+
+    'imu_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_imu_driver/share/roka_imu_driver/config/ebimu_v5.yaml')
+
+    'serial_port':
+        no description given
+        (default: 'auto')
+
+    'allow_sensor_configuration':
+        no description given
+        (default: 'false')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_id':
+        no description given
+        (default: 'section_1')
+
+    'map_root':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps')
+
+    'profile_file':
+        no description given
+
+    'route_profile_file':
+        no description given
+
+    'localization_timeout_sec':
+        no description given
+        (default: '20.0')
+
+    'maximum_exit_progress_error_ratio':
+        no description given
+        (default: '0.10')
+
+    'maximum_exit_route_distance_m':
+        no description given
+        (default: '0.75')
+
+    'competition_track_mode':
+        no description given
+        (default: 'false')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'enable_led':
+        no description given
+        (default: 'false')
+
+    'led_serial_port':
+        no description given
+        (default: '')
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'mode':
+        no description given
+        (default: 'mapping')
+
+    'environment':
+        Mapping mode: capture (raw sensors only), flat (legacy live 2D) or inline (legacy live 3D).
+        (default: 'flat')
+
+    'map_bundle_directory':
+        no description given
+        (default: 'auto')
+
+    'overwrite_existing':
+        For map_id section_1..section_5 only, atomically replace the existing bundle after the new staging map passes validation.
+        (default: 'true')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'hold_arm':
+        Recover to and torque-hold the section pose during base motion.
+        (default: 'true')
+
+    'record_bag':
+        no description given
+        (default: 'true')
+
+    'forward_display_fov_deg':
+        Visualization-only forward sector in degrees; FAST-LIO/SC-PGO always retain the full VLP-16 cloud.
+        (default: '120.0')
+
+    'localization_backend':
+        Autonomy localization: auto, fastlio_map or legacy
+        (default: 'auto')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'use_imu_ekf':
+        Legacy backend only: fuse wheel odometry and EBIMU. fastlio_map uses FAST-LIO2 as the sole odom->base_link owner.
+        (default: 'true')
+
+    'maximum_start_distance_m':
+        no description given
+        (default: '0.75')
+
+    'initialize_from_profile_start':
+        After returning the robot to its marked start, seed the active localizer from the recorded first point with broad covariance.
+        (default: 'true')
+
+    'maximum_start_heading_error_deg':
+        no description given
+        (default: '90.0')
+
+    'test_mode':
+        Use the separately generated track_profile_test.yaml; this never authorizes the normal track profile.
+        (default: 'false')
+
+    'recorded_route_mode':
+        Follow track_profile_recorded.yaml without terrain or obstacle cost decisions; localization and route-deviation checks remain.
+        (default: 'false')
+
+    'autonomy_auto_start':
+        Start an approved path automatically after localization is ready; false restores optional Xbox Y/A start control.
+        (default: 'true')
+
+    'autonomy_optional_xbox':
+        Auto start never requires Xbox; when the ROKA controller is present, add B cancel and LB manual takeover.
+        (default: 'true')
+
+    'autonomy_external_start_control':
+        Keep the route stopped and suppress Xbox Y/A controls until an external mission controller calls /track_path_follower/start.
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+
+    'enabled':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_id':
+        no description given
+        (default: 'section_2')
+
+    'map_root':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps')
+
+    'competition_track_mode':
+        no description given
+        (default: 'false')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'connect_arm_hardware':
+        no description given
+        (default: 'true')
+
+    'enable_arm_motion':
+        no description given
+        (default: 'true')
+
+    'visualize_arm':
+        no description given
+        (default: 'true')
+
+    'start_navigation':
+        no description given
+        (default: 'true')
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'mode':
+        no description given
+        (default: 'mapping')
+
+    'environment':
+        Mapping mode: capture (raw sensors only), flat (legacy live 2D) or inline (legacy live 3D).
+        (default: 'flat')
+
+    'map_bundle_directory':
+        no description given
+        (default: 'auto')
+
+    'overwrite_existing':
+        For map_id section_1..section_5 only, atomically replace the existing bundle after the new staging map passes validation.
+        (default: 'true')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'hold_arm':
+        Recover to and torque-hold the section pose during base motion.
+        (default: 'true')
+
+    'record_bag':
+        no description given
+        (default: 'true')
+
+    'forward_display_fov_deg':
+        Visualization-only forward sector in degrees; FAST-LIO/SC-PGO always retain the full VLP-16 cloud.
+        (default: '120.0')
+
+    'localization_backend':
+        Autonomy localization: auto, fastlio_map or legacy
+        (default: 'auto')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'use_imu_ekf':
+        Legacy backend only: fuse wheel odometry and EBIMU. fastlio_map uses FAST-LIO2 as the sole odom->base_link owner.
+        (default: 'true')
+
+    'maximum_start_distance_m':
+        no description given
+        (default: '0.75')
+
+    'initialize_from_profile_start':
+        After returning the robot to its marked start, seed the active localizer from the recorded first point with broad covariance.
+        (default: 'true')
+
+    'maximum_start_heading_error_deg':
+        no description given
+        (default: '90.0')
+
+    'test_mode':
+        Use the separately generated track_profile_test.yaml; this never authorizes the normal track profile.
+        (default: 'false')
+
+    'recorded_route_mode':
+        Follow track_profile_recorded.yaml without terrain or obstacle cost decisions; localization and route-deviation checks remain.
+        (default: 'false')
+
+    'autonomy_auto_start':
+        Start an approved path automatically after localization is ready; false restores optional Xbox Y/A start control.
+        (default: 'true')
+
+    'autonomy_optional_xbox':
+        Auto start never requires Xbox; when the ROKA controller is present, add B cancel and LB manual takeover.
+        (default: 'true')
+
+    'autonomy_external_start_control':
+        Keep the route stopped and suppress Xbox Y/A controls until an external mission controller calls /track_path_follower/start.
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+
+    'connect_hardware':
+        no description given
+        (default: 'false')
+
+    'enable_motion':
+        no description given
+        (default: 'false')
+
+    'visualize':
+        no description given
+        (default: 'true')
+
+    'perception_enabled':
+        no description given
+        (default: 'true')
+
+    'manual_joy_enabled':
+        no description given
+        (default: 'false')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'enabled':
+        no description given
+        (default: 'true')
+
+    'enable_led':
+        no description given
+        (default: 'false')
+
+    'led_serial_port':
+        no description given
+        (default: '')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_id':
+        no description given
+        (default: 'section_3')
+
+    'map_root':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps')
+
+    'competition_track_mode':
+        no description given
+        (default: 'false')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'start_navigation':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'hold_arm':
+        no description given
+        (default: 'true')
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'mode':
+        no description given
+        (default: 'mapping')
+
+    'environment':
+        Mapping mode: capture (raw sensors only), flat (legacy live 2D) or inline (legacy live 3D).
+        (default: 'flat')
+
+    'map_bundle_directory':
+        no description given
+        (default: 'auto')
+
+    'overwrite_existing':
+        For map_id section_1..section_5 only, atomically replace the existing bundle after the new staging map passes validation.
+        (default: 'true')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'record_bag':
+        no description given
+        (default: 'true')
+
+    'forward_display_fov_deg':
+        Visualization-only forward sector in degrees; FAST-LIO/SC-PGO always retain the full VLP-16 cloud.
+        (default: '120.0')
+
+    'localization_backend':
+        Autonomy localization: auto, fastlio_map or legacy
+        (default: 'auto')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'use_imu_ekf':
+        Legacy backend only: fuse wheel odometry and EBIMU. fastlio_map uses FAST-LIO2 as the sole odom->base_link owner.
+        (default: 'true')
+
+    'maximum_start_distance_m':
+        no description given
+        (default: '0.75')
+
+    'initialize_from_profile_start':
+        After returning the robot to its marked start, seed the active localizer from the recorded first point with broad covariance.
+        (default: 'true')
+
+    'maximum_start_heading_error_deg':
+        no description given
+        (default: '90.0')
+
+    'test_mode':
+        Use the separately generated track_profile_test.yaml; this never authorizes the normal track profile.
+        (default: 'false')
+
+    'recorded_route_mode':
+        Follow track_profile_recorded.yaml without terrain or obstacle cost decisions; localization and route-deviation checks remain.
+        (default: 'false')
+
+    'autonomy_auto_start':
+        Start an approved path automatically after localization is ready; false restores optional Xbox Y/A start control.
+        (default: 'true')
+
+    'autonomy_optional_xbox':
+        Auto start never requires Xbox; when the ROKA controller is present, add B cancel and LB manual takeover.
+        (default: 'true')
+
+    'autonomy_external_start_control':
+        Keep the route stopped and suppress Xbox Y/A controls until an external mission controller calls /track_path_follower/start.
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+
+    'enabled':
+        no description given
+        (default: 'true')
+
+    'enable_led':
+        no description given
+        (default: 'false')
+
+    'led_serial_port':
+        no description given
+        (default: '')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_id':
+        no description given
+        (default: 'section_4')
+
+    'map_root':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps')
+
+    'competition_track_mode':
+        no description given
+        (default: 'false')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'start_navigation':
+        no description given
+        (default: 'true')
+
+    'hold_arm':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'mode':
+        no description given
+        (default: 'mapping')
+
+    'environment':
+        Mapping mode: capture (raw sensors only), flat (legacy live 2D) or inline (legacy live 3D).
+        (default: 'flat')
+
+    'map_bundle_directory':
+        no description given
+        (default: 'auto')
+
+    'overwrite_existing':
+        For map_id section_1..section_5 only, atomically replace the existing bundle after the new staging map passes validation.
+        (default: 'true')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'record_bag':
+        no description given
+        (default: 'true')
+
+    'forward_display_fov_deg':
+        Visualization-only forward sector in degrees; FAST-LIO/SC-PGO always retain the full VLP-16 cloud.
+        (default: '120.0')
+
+    'localization_backend':
+        Autonomy localization: auto, fastlio_map or legacy
+        (default: 'auto')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'use_imu_ekf':
+        Legacy backend only: fuse wheel odometry and EBIMU. fastlio_map uses FAST-LIO2 as the sole odom->base_link owner.
+        (default: 'true')
+
+    'maximum_start_distance_m':
+        no description given
+        (default: '0.75')
+
+    'initialize_from_profile_start':
+        After returning the robot to its marked start, seed the active localizer from the recorded first point with broad covariance.
+        (default: 'true')
+
+    'maximum_start_heading_error_deg':
+        no description given
+        (default: '90.0')
+
+    'test_mode':
+        Use the separately generated track_profile_test.yaml; this never authorizes the normal track profile.
+        (default: 'false')
+
+    'recorded_route_mode':
+        Follow track_profile_recorded.yaml without terrain or obstacle cost decisions; localization and route-deviation checks remain.
+        (default: 'false')
+
+    'autonomy_auto_start':
+        Start an approved path automatically after localization is ready; false restores optional Xbox Y/A start control.
+        (default: 'true')
+
+    'autonomy_optional_xbox':
+        Auto start never requires Xbox; when the ROKA controller is present, add B cancel and LB manual takeover.
+        (default: 'true')
+
+    'autonomy_external_start_control':
+        Keep the route stopped and suppress Xbox Y/A controls until an external mission controller calls /track_path_follower/start.
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+
+    'section':
+        no description given
+        (default: 'section4')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'maximum_speed_mps':
+        no description given
+        (default: '1.20')
+
+    'driver_maximum_speed_mps':
+        no description given
+        (default: '1.20')
+
+    'maximum_wheel_rpm':
+        no description given
+        (default: '112.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '180.0')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'record_diagnostics':
+        no description given
+        (default: 'true')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+
+    'use_lidar_driver':
+        no description given
+        (default: 'true')
+
+    'lidar_package':
+        no description given
+        (default: 'velodyne')
+
+    'lidar_launch_file':
+        no description given
+        (default: 'velodyne-all-nodes-VLP16-launch.py')
+
+    'use_md_driver':
+        no description given
+        (default: 'true')
+
+    'md_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'md_simulation_mode':
+        Safe default: run the two-controller base without serial hardware.
+        (default: 'true')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'md_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'md_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'md_base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'md_publish_tf':
+        no description given
+        (default: 'true')
+
+    'use_lidar_static_tf':
+        no description given
+        (default: 'true')
+
+    'base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'lidar_frame':
+        no description given
+        (default: 'velodyne')
+
+    'lidar_x':
+        no description given
+        (default: '0.1815')
+
+    'lidar_y':
+        no description given
+        (default: '0.0')
+
+    'lidar_z':
+        no description given
+        (default: '0.215325')
+
+    'lidar_roll':
+        no description given
+        (default: '0.0')
+
+    'lidar_pitch':
+        no description given
+        (default: '0.0')
+
+    'lidar_yaw':
+        no description given
+        (default: '0.0')
+
+    'use_stabilized_scan':
+        no description given
+        (default: 'true')
+
+    'scan_cloud_topic':
+        Dedicated raw cloud slice for SLAM/AMCL. Terrain obstacle clouds are derived, sparse, and must not own localization.
+        (default: '/velodyne_points')
+
+    'pointcloud_to_scan_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'pointcloud_to_scan.yaml''))
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+
+    'imu_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_imu_driver/share/roka_imu_driver/config/ebimu_v5.yaml')
+
+    'serial_port':
+        no description given
+        (default: 'auto')
+
+    'allow_sensor_configuration':
+        no description given
+        (default: 'false')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'section':
+        no description given
+        (default: 'section1')
+
+    'simulation_mode':
+        no description given
+        (default: 'false')
+
+    'start_base':
+        no description given
+        (default: 'true')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'connect_arm_hardware':
+        no description given
+        (default: 'true')
+
+    'enable_arm_motion':
+        no description given
+        (default: 'true')
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'pending_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel_section_manual_pending')
+
+    'max_linear_speed':
+        no description given
+        (default: '1.00')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '112.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '130.0')
+
+    'log_level':
+        no description given
+        (default: 'info')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'enabled':
+        no description given
+        (default: 'true')
+
+    'enable_led':
+        no description given
+        (default: 'false')
+
+    'led_serial_port':
+        no description given
+        (default: '')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'section':
+        no description given
+        (default: 'section4')
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'enabled':
+        no description given
+        (default: 'true')
+
+    'enable_led':
+        no description given
+        (default: 'false')
+
+    'led_serial_port':
+        no description given
+        (default: '')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'enabled':
+        no description given
+        (default: 'true')
+
+    'enable_led':
+        no description given
+        (default: 'false')
+
+    'led_serial_port':
+        no description given
+        (default: '')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'start_realsense':
+        no description given
+        (default: 'true')
+
+    'camera_serial':
+        no description given
+        (default: '')
+
+    'inference_device':
+        no description given
+        (default: 'auto')
+
+    'display_enabled':
+        no description given
+        (default: 'true')
+
+    'enabled':
+        no description given
+        (default: 'true')
+
+    'enable_led':
+        no description given
+        (default: 'false')
+
+    'led_serial_port':
+        no description given
+        (default: '')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'use_lidar_driver':
+        no description given
+        (default: 'true')
+
+    'lidar_package':
+        no description given
+        (default: 'velodyne')
+
+    'lidar_launch_file':
+        no description given
+        (default: 'velodyne-all-nodes-VLP16-launch.py')
+
+    'use_md_driver':
+        no description given
+        (default: 'true')
+
+    'md_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'md_simulation_mode':
+        Safe default: run the two-controller base without serial hardware.
+        (default: 'true')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'md_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'md_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'md_base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'md_publish_tf':
+        no description given
+        (default: 'true')
+
+    'use_lidar_static_tf':
+        no description given
+        (default: 'true')
+
+    'base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'lidar_frame':
+        no description given
+        (default: 'velodyne')
+
+    'lidar_x':
+        no description given
+        (default: '0.1815')
+
+    'lidar_y':
+        no description given
+        (default: '0.0')
+
+    'lidar_z':
+        no description given
+        (default: '0.215325')
+
+    'lidar_roll':
+        no description given
+        (default: '0.0')
+
+    'lidar_pitch':
+        no description given
+        (default: '0.0')
+
+    'lidar_yaw':
+        no description given
+        (default: '0.0')
+
+    'use_stabilized_scan':
+        no description given
+        (default: 'true')
+
+    'scan_cloud_topic':
+        Dedicated raw cloud slice for SLAM/AMCL. Terrain obstacle clouds are derived, sparse, and must not own localization.
+        (default: '/velodyne_points')
+
+    'pointcloud_to_scan_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'pointcloud_to_scan.yaml''))
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'map':
+        Absolute path to a map YAML created by map_saver_cli.
+        (default: '')
+
+    'localization_backend':
+        fastlio_map or legacy (AMCL)
+        (default: 'legacy')
+
+    'map_pcd':
+        no description given
+        (default: '')
+
+    'initial_pose_file':
+        no description given
+        (default: '')
+
+    'params_file':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_nav2_bringup'), 'config', 'lidar_md_nav2.yaml''))
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'autostart':
+        no description given
+        (default: 'true')
+
+    'use_terrain_mapping':
+        no description given
+        (default: 'true')
+
+    'use_safety_pipeline':
+        no description given
+        (default: 'true')
+
+    'use_collision_monitor':
+        no description given
+        (default: 'true')
+
+    'direct_recorded_route':
+        Keep localization and route tracking, but bypass terrain and obstacle decisions for an operator-approved clear track.
+        (default: 'false')
+
+    'collision_source_timeout':
+        no description given
+        (default: '0.40')
+
+    'supervisor_require_terrain':
+        no description given
+        (default: 'true')
+
+    'supervisor_enable_terrain_decisions':
+        no description given
+        (default: 'true')
+
+    'supervisor_allow_level_fallback':
+        no description given
+        (default: 'false')
+
+    'supervisor_require_imu':
+        no description given
+        (default: 'false')
+
+    'supervisor_require_odom':
+        no description given
+        (default: 'false')
+
+    'supervisor_enable_slip_detection':
+        no description given
+        (default: 'false')
+
+    'supervisor_use_contact_estimator':
+        no description given
+        (default: 'true')
+
+    'supervisor_derive_body_twist_from_pose':
+        no description given
+        (default: 'false')
+
+    'supervisor_body_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'supervisor_wheel_odom_topic':
+        no description given
+        (default: '/wheel/odom')
+
+    'use_static_terrain_map':
+        no description given
+        (default: 'false')
+
+    'terrain_bag_path':
+        no description given
+        (default: '')
+
+    'use_track_follower':
+        no description given
+        (default: 'false')
+
+    'track_profile':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/track_v1/track_profile.yaml')
+
+    'track_auto_start':
+        no description given
+        (default: 'false')
+
+    'require_field_preflight':
+        no description given
+        (default: 'false')
+
+    'initialize_from_profile_start':
+        Seed AMCL from the first recorded path point after the robot is physically returned near its marked start.
+        (default: 'false')
+
+    'initializer_position_stddev_m':
+        no description given
+        (default: '0.50')
+
+    'initializer_yaw_stddev_deg':
+        no description given
+        (default: '60.0')
+
+    'track_loop':
+        no description given
+        (default: 'true')
+
+    'maximum_start_distance_m':
+        no description given
+        (default: '0.75')
+
+    'maximum_start_heading_error_deg':
+        no description given
+        (default: '90.0')
+
+    'allow_test_profile':
+        Explicitly permit a controlled test-only path.
+        (default: 'false')
+
+    'operation_profile':
+        flat_commissioning or inline_track safety/route profile.
+        (default: 'inline_track')
+
+    'use_dry_run_map_tf':
+        Publish identity map->odom only for no-LiDAR launch validation. Never enable with AMCL receiving real scans.
+        (default: 'false')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'rviz_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_nav2_bringup'), 'rviz', 'lidar_md_navigation.rviz''))
+
+    'use_lidar_driver':
+        no description given
+        (default: 'true')
+
+    'lidar_package':
+        no description given
+        (default: 'velodyne')
+
+    'lidar_launch_file':
+        no description given
+        (default: 'velodyne-all-nodes-VLP16-launch.py')
+
+    'use_md_driver':
+        no description given
+        (default: 'true')
+
+    'use_imu_driver':
+        Run EBIMU on real hardware even when EKF fusion is disabled.
+        (default: 'true')
+
+    'use_imu_ekf':
+        Fuse EBIMU-9DOFV5 with wheel odometry and publish the planar base_footprint required by Nav2.
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'imu_allow_sensor_configuration':
+        no description given
+        (default: 'false')
+
+    'md_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'md_simulation_mode':
+        no description given
+        (default: 'true')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'md_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'md_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'md_base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'md_publish_tf':
+        no description given
+        (default: 'true')
+
+    'base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'lidar_x':
+        no description given
+        (default: '0.1815')
+
+    'lidar_y':
+        no description given
+        (default: '0.0')
+
+    'lidar_z':
+        no description given
+        (default: '0.215325')
+
+    'lidar_z_base_link':
+        no description given
+        (default: '0.112325')
+
+    'lidar_roll':
+        no description given
+        (default: '0.0')
+
+    'lidar_pitch':
+        no description given
+        (default: '0.0')
+
+    'lidar_yaw':
+        no description given
+        (default: '0.0')
+
+    'use_lidar_static_tf':
+        no description given
+        (default: 'true')
+
+    'use_stabilized_scan':
+        no description given
+        (default: 'true')
+
+    'imu_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_imu_driver/share/roka_imu_driver/config/ebimu_v5.yaml')
+
+    'ekf_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_imu_driver/share/roka_imu_driver/config/imu_wheel_ekf.yaml')
+
+    'serial_port':
+        no description given
+        (default: 'auto')
+
+    'allow_sensor_configuration':
+        no description given
+        (default: 'false')
+
+    'wheel_odom_topic':
+        no description given
+        (default: '/wheel/odom')
+
+    'filtered_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'use_imu_static_tf':
+        no description given
+        (default: 'true')
+
+    'imu_x':
+        no description given
+        (default: '0.1815')
+
+    'imu_y':
+        no description given
+        (default: '0.0')
+
+    'imu_z':
+        no description given
+        (default: '0.206625')
+
+    'imu_roll':
+        no description given
+        (default: '0.0140568694')
+
+    'imu_pitch':
+        no description given
+        (default: '0.0199366605')
+
+    'imu_yaw':
+        no description given
+        (default: '-0.0040315979')
+
+    'terrain_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_mapping.yaml''))
+
+    'use_obstacle_filter':
+        no description given
+        (default: 'true')
+
+    'controlled_level_test':
+        no description given
+        (default: 'false')
+
+    'obstacle_filter_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_obstacle_filter.yaml''))
+
+    'map_bundle_directory':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/track_v1')
+
+    'enable_terrain_decisions':
+        no description given
+        (default: 'true')
+
+    'require_terrain':
+        no description given
+        (default: 'true')
+
+    'allow_level_fallback':
+        no description given
+        (default: 'false')
+
+    'require_imu':
+        no description given
+        (default: 'false')
+
+    'require_odom':
+        no description given
+        (default: 'false')
+
+    'enable_slip_detection':
+        no description given
+        (default: 'false')
+
+    'use_contact_estimator':
+        no description given
+        (default: 'true')
+
+    'derive_body_twist_from_pose':
+        no description given
+        (default: 'false')
+
+    'body_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'contact_state_topic':
+        no description given
+        (default: '/terrain/wheel_contact')
+
+    'physical_wheel_track':
+        no description given
+        (default: '0.427149994')
+
+    'wheel_radius':
+        no description given
+        (default: '0.103')
+
+    'footprint_length':
+        no description given
+        (default: '0.88')
+
+    'footprint_width':
+        no description given
+        (default: '0.624')
+
+    'supervisor_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'terrain_supervisor.yaml''))
+
+    'dynamic_limits_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'provisional_vehicle_limits.yaml''))
+
+    'bag_path':
+        no description given
+
+    'bag_topic':
+        no description given
+        (default: '/terrain/static_map')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'slam_params_file':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_nav2_bringup'), 'config', 'lidar_md_slam.yaml''))
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'rviz_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_nav2_bringup'), 'rviz', 'lidar_md_navigation.rviz''))
+
+    'use_lidar_driver':
+        no description given
+        (default: 'true')
+
+    'lidar_package':
+        no description given
+        (default: 'velodyne')
+
+    'lidar_launch_file':
+        no description given
+        (default: 'velodyne-all-nodes-VLP16-launch.py')
+
+    'use_md_driver':
+        no description given
+        (default: 'true')
+
+    'md_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'md_simulation_mode':
+        no description given
+        (default: 'true')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'md_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'md_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'md_base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'md_publish_tf':
+        no description given
+        (default: 'true')
+
+    'base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'lidar_x':
+        no description given
+        (default: '0.1815')
+
+    'lidar_y':
+        no description given
+        (default: '0.0')
+
+    'lidar_z':
+        no description given
+        (default: '0.215325')
+
+    'lidar_roll':
+        no description given
+        (default: '0.0')
+
+    'lidar_pitch':
+        no description given
+        (default: '0.0')
+
+    'lidar_yaw':
+        no description given
+        (default: '0.0')
+
+    'use_lidar_static_tf':
+        no description given
+        (default: 'true')
+
+    'lidar_frame':
+        no description given
+        (default: 'velodyne')
+
+    'use_stabilized_scan':
+        no description given
+        (default: 'true')
+
+    'scan_cloud_topic':
+        Dedicated raw cloud slice for SLAM/AMCL. Terrain obstacle clouds are derived, sparse, and must not own localization.
+        (default: '/velodyne_points')
+
+    'pointcloud_to_scan_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'pointcloud_to_scan.yaml''))
+
+    'config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_md_driver'), 'config', 'mdh250_md200t_four_wheel.yaml''))
+
+    'simulation_mode':
+        no description given
+        (default: 'true')
+
+    'allow_motion':
+        no description given
+        (default: 'false')
+
+    'max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'hardware_layout':
+        no description given
+        (default: 'dual')
+
+    'single_side':
+        no description given
+        (default: 'right')
+
+    'cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'odom_topic':
+        no description given
+        (default: '/odom')
+
+    'base_frame_id':
+        no description given
+        (default: 'base_footprint')
+
+    'publish_tf':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'map_bundle_directory':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/track_v1')
+
+    'final_map_bundle_directory':
+        no description given
+        (default: '')
+
+    'overwrite_existing':
+        no description given
+        (default: 'false')
+
+    'use_lidar_driver':
+        no description given
+        (default: 'true')
+
+    'use_md_driver':
+        no description given
+        (default: 'true')
+
+    'md_simulation_mode':
+        no description given
+        (default: 'true')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'use_imu_driver':
+        no description given
+        (default: 'true')
+
+    'use_imu_ekf':
+        no description given
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'imu_allow_sensor_configuration':
+        no description given
+        (default: 'false')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'md_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel_joy')
+
+    'use_safety_pipeline':
+        no description given
+        (default: 'false')
+
+    'use_contact_diagnostics':
+        Record read-only IMU/RPM/current contact evidence during mapping; never gates or modifies the Xbox command.
+        (default: 'true')
+
+    'use_terrain_monitor':
+        no description given
+        (default: 'true')
+
+    'use_terrain_mapping':
+        no description given
+        (default: 'true')
+
+    'use_2d_slam':
+        no description given
+        (default: 'true')
+
+    'use_3d_slam':
+        no description given
+        (default: 'false')
+
+    'mapping_backend':
+        no description given
+        (default: 'slam_toolbox_2d')
+
+    'acquisition_only':
+        no description given
+        (default: 'false')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'rviz_config':
+        no description given
+        (default: 'auto')
+
+    'forward_display_fov_deg':
+        no description given
+        (default: '120.0')
+
+    'record_bag':
+        no description given
+        (default: 'false')
+
+    'abort_recording_on_md_disconnect':
+        no description given
+        (default: 'false')
+
+    'recording_odometry_topic':
+        Authoritative motion evidence for acquisition metrics.
+        (default: '/wheel/odom')
+
+    'maximum_bag_bytes':
+        no description given
+        (default: '5368709120')
+
+    'maximum_bag_duration_sec':
+        no description given
+        (default: '900.0')
+
+    'minimum_start_free_bytes':
+        no description given
+        (default: '21474836480')
+
+    'minimum_runtime_free_bytes':
+        no description given
+        (default: '10737418240')
+
+    'require_preflight':
+        no description given
+        (default: 'true')
+
+    'record_track_path':
+        no description given
+        (default: 'true')
+
+    'environment':
+        no description given
+        (default: 'flat')
+
+    'track_map_frame':
+        no description given
+        (default: 'map')
+
+    'track_sample_frame':
+        no description given
+        (default: 'map')
+
+    'track_base_frame':
+        no description given
+        (default: 'base_footprint')
+
+    'track_width_m':
+        no description given
+        (default: '1.20')
+
+    'track_closure_distance_m':
+        no description given
+        (default: '0.80')
+
+    'track_closure_heading_tolerance_deg':
+        no description given
+        (default: '75.0')
+
+    'track_minimum_closed_loop_length_m':
+        no description given
+        (default: '3.0')
+
+    'track_minimum_closed_loop_area_m2':
+        no description given
+        (default: '0.50')
+
+    'use_xbox_mapping_controls':
+        no description given
+        (default: 'true')
+
+    'track_profile':
+        no description given
+        (default: LaunchConfig('map_bundle_directory') + '/track_profile.yaml')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'joy_available':
+        no description given
+        (default: 'true')
+
+    'startup_check_duration_sec':
+        no description given
+        (default: '8.0')
+
+    'terrain_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_mapping.yaml''))
+
+    'use_obstacle_filter':
+        no description given
+        (default: 'true')
+
+    'controlled_level_test':
+        no description given
+        (default: 'false')
+
+    'obstacle_filter_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_obstacle_filter.yaml''))
+
+    'use_collision_monitor':
+        no description given
+        (default: 'true')
+
+    'direct_recorded_route':
+        no description given
+        (default: 'false')
+
+    'enable_terrain_decisions':
+        no description given
+        (default: 'true')
+
+    'collision_source_timeout':
+        no description given
+        (default: '0.40')
+
+    'require_terrain':
+        no description given
+        (default: 'true')
+
+    'allow_level_fallback':
+        no description given
+        (default: 'false')
+
+    'require_imu':
+        no description given
+        (default: 'false')
+
+    'require_odom':
+        no description given
+        (default: 'false')
+
+    'enable_slip_detection':
+        no description given
+        (default: 'false')
+
+    'use_contact_estimator':
+        no description given
+        (default: 'true')
+
+    'derive_body_twist_from_pose':
+        no description given
+        (default: 'false')
+
+    'body_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'wheel_odom_topic':
+        no description given
+        (default: '/wheel/odom')
+
+    'contact_state_topic':
+        no description given
+        (default: '/terrain/wheel_contact')
+
+    'physical_wheel_track':
+        no description given
+        (default: '0.427149994')
+
+    'wheel_radius':
+        no description given
+        (default: '0.103')
+
+    'footprint_length':
+        no description given
+        (default: '0.88')
+
+    'footprint_width':
+        no description given
+        (default: '0.624')
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'supervisor_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'terrain_supervisor.yaml''))
+
+    'dynamic_limits_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'provisional_vehicle_limits.yaml''))
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_directory':
+        no description given
+
+    'clear_radius_m':
+        no description given
+        (default: '0.20')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'source_directory':
+        no description given
+
+    'output_directory':
+        no description given
+
+    'playback_rate':
+        no description given
+        (default: '1.0')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'map':
+        no description given
+        (default: '')
+
+    'localization_backend':
+        no description given
+        (default: 'fastlio_map')
+
+    'map_pcd':
+        no description given
+        (default: '')
+
+    'initial_pose_file':
+        no description given
+        (default: '')
+
+    'track_profile':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/track_v1/track_profile.yaml')
+
+    'use_lidar_driver':
+        no description given
+        (default: 'true')
+
+    'use_imu_driver':
+        no description given
+        (default: 'true')
+
+    'use_imu_ekf':
+        no description given
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'wheel_separation':
+        Effective skid-steer separation; not physical wheel track.
+        (default: '0.66')
+
+    'md_simulation_mode':
+        no description given
+        (default: 'true')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'md_cmd_vel_topic':
+        no description given
+        (default: '/cmd_vel')
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'track_auto_start':
+        no description given
+        (default: 'false')
+
+    'competition_track_mode':
+        Keep banked track geometry out of obstacle decisions while retaining read-only wheel-contact diagnostics. Automatic slip derating remains disabled until repeated field data validates it.
+        (default: 'false')
+
+    'require_field_preflight':
+        no description given
+        (default: 'true')
+
+    'supervisor_require_imu':
+        no description given
+        (default: 'true')
+
+    'supervisor_require_odom':
+        no description given
+        (default: 'true')
+
+    'supervisor_enable_slip_detection':
+        no description given
+        (default: 'false')
+
+    'initialize_from_profile_start':
+        no description given
+        (default: 'true')
+
+    'maximum_start_distance_m':
+        no description given
+        (default: '0.75')
+
+    'maximum_start_heading_error_deg':
+        no description given
+        (default: '90.0')
+
+    'allow_test_profile':
+        Explicit second gate for controlled test-only profiles.
+        (default: 'false')
+
+    'direct_recorded_route':
+        Replay the recorded route without terrain/obstacle decisions.
+        (default: 'false')
+
+    'use_dry_run_map_tf':
+        No-hardware launch validation only; keep false with real AMCL.
+        (default: 'false')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'ros_domain_id':
+        no description given
+        (default: '31')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'mode':
+        no description given
+        (default: 'mapping')
+
+    'environment':
+        Mapping mode: capture (raw sensors only), flat (legacy live 2D) or inline (legacy live 3D).
+        (default: 'flat')
+
+    'map_root':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps')
+
+    'map_id':
+        Named map bundle such as section_1..section_5; auto keeps the legacy next/latest selection.
+        (default: 'auto')
+
+    'map_bundle_directory':
+        no description given
+        (default: 'auto')
+
+    'overwrite_existing':
+        For map_id section_1..section_5 only, atomically replace the existing bundle after the new staging map passes validation.
+        (default: 'true')
+
+    'md_allow_motion':
+        no description given
+        (default: 'false')
+
+    'md_max_linear_speed':
+        no description given
+        (default: '0.60')
+
+    'md_max_wheel_rpm':
+        no description given
+        (default: '56.0')
+
+    'md_feedback_overspeed_limit_rpm':
+        no description given
+        (default: '90.0')
+
+    'hold_arm':
+        Recover to and torque-hold the section pose during base motion.
+        (default: 'true')
+
+    'record_bag':
+        no description given
+        (default: 'true')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'forward_display_fov_deg':
+        Visualization-only forward sector in degrees; FAST-LIO/SC-PGO always retain the full VLP-16 cloud.
+        (default: '120.0')
+
+    'localization_backend':
+        Autonomy localization: auto, fastlio_map or legacy
+        (default: 'auto')
+
+    'joy_device_id':
+        no description given
+        (default: 'auto')
+
+    'use_imu_ekf':
+        Legacy backend only: fuse wheel odometry and EBIMU. fastlio_map uses FAST-LIO2 as the sole odom->base_link owner.
+        (default: 'true')
+
+    'maximum_start_distance_m':
+        no description given
+        (default: '0.75')
+
+    'initialize_from_profile_start':
+        After returning the robot to its marked start, seed the active localizer from the recorded first point with broad covariance.
+        (default: 'true')
+
+    'maximum_start_heading_error_deg':
+        no description given
+        (default: '90.0')
+
+    'test_mode':
+        Use the separately generated track_profile_test.yaml; this never authorizes the normal track profile.
+        (default: 'false')
+
+    'recorded_route_mode':
+        Follow track_profile_recorded.yaml without terrain or obstacle cost decisions; localization and route-deviation checks remain.
+        (default: 'false')
+
+    'competition_track_mode':
+        Competition pump-track mode: recorded line is primary, track slope is not an obstacle; wheel-contact diagnostics remain visible but automatic slip derating stays disabled.
+        (default: 'false')
+
+    'autonomy_auto_start':
+        Start an approved path automatically after localization is ready; false restores optional Xbox Y/A start control.
+        (default: 'true')
+
+    'autonomy_optional_xbox':
+        Auto start never requires Xbox; when the ROKA controller is present, add B cancel and LB manual takeover.
+        (default: 'true')
+
+    'autonomy_external_start_control':
+        Keep the route stopped and suppress Xbox Y/A controls until an external mission controller calls /track_path_follower/start.
+        (default: 'false')
+
+    'imu_serial_port':
+        no description given
+        (default: 'auto')
+
+    'left_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A76BHBER-if00-port0')
+
+    'right_serial_port':
+        no description given
+        (default: '/dev/serial/by-id/usb-FTDI_USB_to_RS-422_485_Adapter_A751CYHM-if00-port0')
+
+    'hardware_config':
+        no description given
+        (default: '/home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml')
+
+    'wheel_separation':
+        no description given
+        (default: '0.66')
+
+    'start_pose_name':
+        no description given
+        (default: 'section2')
+
+    'hold_scope':
+        no description given
+        (default: 'all')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'profile_file':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/track_v1/track_profile.yaml')
+
+    'output_directory':
+        no description given
+        (default: '/home/ryoo/roka_ws/datasets/real_traversability')
+
+    'session_name':
+        no description given
+        (default: '')
+
+    'sample_rate_hz':
+        no description given
+        (default: '20')
+
+    'body_odom_topic':
+        no description given
+        (default: '/lio/odom')
+
+    'wheel_odom_topic':
+        no description given
+        (default: '/wheel/odom')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_directory':
+        no description given
+
+    'playback_rate':
+        no description given
+        (default: '0.5')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'map_directory':
+        no description given
+
+    'sensor_directory':
+        Raw acquisition bag; auto follows processed-map lineage.
+        (default: 'auto')
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'forward_display_fov_deg':
+        no description given
+        (default: '120.0')
+
+    'playback_rate':
+        no description given
+        (default: '1.0')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'bundle_directory':
+        no description given
+
+    'use_rviz':
+        no description given
+        (default: 'true')
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'use_collision_monitor':
+        no description given
+        (default: 'true')
+
+    'direct_recorded_route':
+        no description given
+        (default: 'false')
+
+    'enable_terrain_decisions':
+        no description given
+        (default: 'true')
+
+    'collision_source_timeout':
+        no description given
+        (default: '0.40')
+
+    'require_terrain':
+        no description given
+        (default: 'true')
+
+    'allow_level_fallback':
+        no description given
+        (default: 'false')
+
+    'require_imu':
+        no description given
+        (default: 'false')
+
+    'require_odom':
+        no description given
+        (default: 'false')
+
+    'enable_slip_detection':
+        no description given
+        (default: 'false')
+
+    'use_contact_estimator':
+        no description given
+        (default: 'true')
+
+    'derive_body_twist_from_pose':
+        no description given
+        (default: 'false')
+
+    'body_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'wheel_odom_topic':
+        no description given
+        (default: '/wheel/odom')
+
+    'contact_state_topic':
+        no description given
+        (default: '/terrain/wheel_contact')
+
+    'physical_wheel_track':
+        no description given
+        (default: '0.427149994')
+
+    'wheel_radius':
+        no description given
+        (default: '0.103')
+
+    'footprint_length':
+        no description given
+        (default: '0.88')
+
+    'footprint_width':
+        no description given
+        (default: '0.624')
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'supervisor_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'terrain_supervisor.yaml''))
+
+    'dynamic_limits_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'provisional_vehicle_limits.yaml''))
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'terrain_type':
+        no description given
+        (default: 'uphill')
+
+    'slope_deg':
+        no description given
+        (default: '15.0')
+
+    'terrain_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_mapping.yaml''))
+
+    'use_obstacle_filter':
+        no description given
+        (default: 'true')
+
+    'controlled_level_test':
+        no description given
+        (default: 'false')
+
+    'obstacle_filter_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_obstacle_filter.yaml''))
+
+    'map_bundle_directory':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/track_v1')
+
+    'use_collision_monitor':
+        no description given
+        (default: 'true')
+
+    'direct_recorded_route':
+        no description given
+        (default: 'false')
+
+    'enable_terrain_decisions':
+        no description given
+        (default: 'true')
+
+    'collision_source_timeout':
+        no description given
+        (default: '0.40')
+
+    'require_terrain':
+        no description given
+        (default: 'true')
+
+    'allow_level_fallback':
+        no description given
+        (default: 'false')
+
+    'require_imu':
+        no description given
+        (default: 'false')
+
+    'require_odom':
+        no description given
+        (default: 'false')
+
+    'enable_slip_detection':
+        no description given
+        (default: 'false')
+
+    'use_contact_estimator':
+        no description given
+        (default: 'true')
+
+    'derive_body_twist_from_pose':
+        no description given
+        (default: 'false')
+
+    'body_odom_topic':
+        no description given
+        (default: '/odom')
+
+    'wheel_odom_topic':
+        no description given
+        (default: '/wheel/odom')
+
+    'contact_state_topic':
+        no description given
+        (default: '/terrain/wheel_contact')
+
+    'physical_wheel_track':
+        no description given
+        (default: '0.427149994')
+
+    'wheel_radius':
+        no description given
+        (default: '0.103')
+
+    'footprint_length':
+        no description given
+        (default: '0.88')
+
+    'footprint_width':
+        no description given
+        (default: '0.624')
+
+    'use_sim_time':
+        no description given
+        (default: 'false')
+
+    'supervisor_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'terrain_supervisor.yaml''))
+
+    'dynamic_limits_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_supervisor'), 'config', 'provisional_vehicle_limits.yaml''))
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'folder_path':
+        no description given
+
+    'pcd_filename':
+        no description given
+
+    'output_grid_map':
+        no description given
+        (default: 'terrain_global.bag')
+
+    'map_frame':
+        no description given
+        (default: 'map')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'bag_path':
+        no description given
+
+    'bag_topic':
+        no description given
+        (default: '/terrain/static_map')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'terrain_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_mapping.yaml''))
+
+    'use_obstacle_filter':
+        no description given
+        (default: 'true')
+
+    'controlled_level_test':
+        no description given
+        (default: 'false')
+
+    'obstacle_filter_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_obstacle_filter.yaml''))
+
+    'map_bundle_directory':
+        no description given
+        (default: '/home/ryoo/roka_ws/maps/track_v1')
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'log_level':
+        no description given
+        (default: 'warn')
+
+    'terrain_type':
+        no description given
+        (default: 'uphill')
+
+    'slope_deg':
+        no description given
+        (default: '15.0')
+
+    'map_bundle_directory':
+        no description given
+        (default: '/tmp/roka_terrain_bundle_test')
+
+    'terrain_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_mapping.yaml''))
+
+    'use_obstacle_filter':
+        no description given
+        (default: 'true')
+
+    'controlled_level_test':
+        no description given
+        (default: 'false')
+
+    'obstacle_filter_config':
+        no description given
+        (default: PathJoinSubstitution('FindPackageShare(pkg='roka_terrain_mapping'), 'config', 'terrain_obstacle_filter.yaml''))
+/usr/bin/rosdep:6: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import load_entry_point
+All system dependencies have been satisfied

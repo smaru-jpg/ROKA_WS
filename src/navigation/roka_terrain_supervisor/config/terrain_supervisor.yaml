@@ -1,0 +1,122 @@
+terrain_supervisor:
+  ros__parameters:
+    input_cmd_topic: /cmd_vel_mux
+    output_cmd_topic: /cmd_vel_terrain
+    terrain_topic: /terrain/local_map
+    imu_topic: /imu/data
+    # Body motion and wheel-predicted motion must stay separate; their ratio is
+    # the only way to distinguish vehicle motion from wheel spin.
+    odom_topic: /odom  # legacy alias used only when body_odom_topic is omitted
+    body_odom_topic: /odom
+    wheel_odom_topic: /wheel/odom
+    contact_state_topic: /terrain/wheel_contact
+    track_speed_topic: /track/reference_speed
+    # Planar footprint is available in both MD-only and 3D-EKF modes.
+    base_frame: base_footprint
+    publish_rate_hz: 30.0
+    command_timeout_sec: 0.35
+    terrain_timeout_sec: 0.40
+    imu_timeout_sec: 0.25
+    odom_timeout_sec: 0.35
+    contact_state_timeout_sec: 0.25
+    require_terrain: true
+    enable_terrain_decisions: true
+    # Enabled only by the explicitly gated flat short-test launch. It still
+    # requires fresh LiDAR terrain messages and collision monitoring.
+    allow_level_fallback: false
+    require_imu: false
+    require_odom: false
+    enable_slip_detection: false
+    use_track_speed_limit: true
+    track_speed_fail_closed: true
+    track_speed_timeout_sec: 0.50
+    stale_track_speed_limit_mps: 0.10
+    max_linear_speed: 0.60
+    max_angular_speed: 0.80
+    warning_ratio: 0.80
+    critical_ratio: 0.90
+    hard_ratio: 1.00
+    state_hold_sec: 0.20
+    recovery_hold_sec: 0.50
+    uphill_enter_deg: 8.0
+    downhill_enter_deg: 8.0
+    cross_slope_enter_deg: 8.0
+    # The route profile already carries the speed needed for each pump/bank.
+    # State labels no longer impose an unrelated 0.8/0.7/0.6 multiplier.
+    uphill_speed_scale: 1.0
+    downhill_speed_scale: 1.0
+    cross_slope_speed_scale: 1.0
+    slip_speed_scale: 0.40
+    # Provisional surface-relative limits. The vehicle-limit overlay is the
+    # authoritative runtime copy until repeated real-track data replaces it.
+    roll_warning_deg: 32.4
+    roll_critical_deg: 38.1
+    roll_hard_deg: 40.6
+    pitch_warning_deg: 27.8
+    pitch_critical_deg: 32.7
+    pitch_hard_deg: 34.8
+    absolute_roll_hard_deg: 85.0
+    absolute_pitch_hard_deg: 65.0
+    attitude_prediction_horizon_sec: 0.20
+    attitude_hard_hold_sec: 0.08
+    grounded_acceleration_mps2: 0.50
+    partial_contact_acceleration_mps2: 0.30
+    airborne_acceleration_mps2: 0.10
+    landing_acceleration_mps2: 0.25
+    normal_deceleration_mps2: 0.80
+    airborne_deceleration_mps2: 0.15
+    angular_acceleration_radps2: 1.50
+    angular_deceleration_radps2: 2.00
+    # Conservative Nav2 STEP envelope (0.88 x 0.624 m), not wheel geometry.
+    footprint_length: 0.88
+    footprint_width: 0.624
+    lookahead_distance: 1.00
+    # PK-3A: evaluate only the predicted left/right wheel lanes. The old
+    # full-footprint maximum stopped on the unused steep outer bank.
+    terrain_sampling_mode: wheel_corridors
+    wheel_track: 0.427149994
+    wheel_corridor_half_width: 0.08
+    minimum_valid_cells: 4
+    # Mapped autonomy is capped at 0.30 m/s. Keep the diagnostic threshold low
+    # enough to observe wheel/body disagreement while accelerating from rest.
+    slip_command_min_mps: 0.08
+    slip_velocity_ratio: 0.35
+    slip_hold_sec: 0.80
+
+wheel_contact_estimator:
+  ros__parameters:
+    body_odom_topic: /odom
+    wheel_odom_topic: /wheel/odom
+    derive_body_twist_from_pose: false
+    pose_twist_filter_alpha: 0.35
+    imu_topic: /imu/data
+    joint_state_topic: /joint_states
+    contact_state_topic: /terrain/wheel_contact
+    contact_publish_rate_hz: 50.0
+    wheel_radius: 0.103
+    wheel_track: 0.427149994
+    body_odom_timeout_sec: 0.35
+    wheel_odom_timeout_sec: 0.35
+    contact_imu_timeout_sec: 0.25
+    motor_feedback_timeout_sec: 0.50
+    joint_feedback_timeout_sec: 0.25
+    airborne_accel_norm_max_mps2: 3.0
+    landing_accel_norm_min_mps2: 13.0
+    airborne_hold_sec: 0.05
+    partial_contact_hold_sec: 0.08
+    landing_hold_sec: 0.30
+    contact_moving_speed_min_mps: 0.08
+    # Permit an unloaded wheel to run substantially faster than body speed;
+    # partial-contact classification still uses current and IMU evidence.
+    wheel_unload_speed_ratio: 1.60
+    wheel_unload_speed_margin_mps: 0.12
+    # No motor current exists in the saved MuJoCo demonstrations. These two
+    # thresholds remain provisional until an unloaded-wheel field sample.
+    unloaded_current_max_a: 0.60
+    loaded_current_min_a: 1.20
+    # Keep controller-channel names until the final harness test establishes
+    # which MOT channel is the physical front/rear wheel on each side.
+    left_mot1_feedback_sign: 1
+    left_mot2_feedback_sign: -1
+    right_mot1_feedback_sign: 1
+    right_mot2_feedback_sign: -1

@@ -1,0 +1,6 @@
+run,reset_keyframe,success,outcome,sim_duration_sec,wall_duration_sec,max_progress_pct,max_abs_lateral_error_m,rms_lateral_error_m,max_abs_heading_error_deg,max_abs_roll_deg,max_abs_pitch_deg,min_reference_height_delta_m,min_tire_clearance_m,recovery_count,recovery_time_sec,corridor_unavailable_samples,max_linear_command_mps,max_angular_command_radps,status_samples
+1,mapped_nominal,1,completed_lap,33.83,34.3,100.0,0.1064,0.0551,12.247,0.011,0.019,,,0,0.0,0,0.1,0.2732,686
+2,mapped_left_8cm,1,completed_lap,33.895,34.4,100.0,0.1184,0.0684,17.296,0.01,0.022,,,0,0.0,0,0.1,0.3122,688
+3,mapped_right_8cm,1,completed_lap,33.693,34.2,100.0,0.0885,0.0535,10.037,0.008,0.016,,,0,0.0,0,0.1,0.2114,684
+4,mapped_yaw_left_8deg,1,completed_lap,33.725,34.2,100.0,0.1019,0.0559,15.481,0.01,0.015,,,0,0.0,0,0.1,0.2682,684
+5,mapped_yaw_right_8deg,1,completed_lap,33.823,34.3,100.0,0.1078,0.0571,9.796,0.009,0.013,,,0,0.0,0,0.1,0.2728,686

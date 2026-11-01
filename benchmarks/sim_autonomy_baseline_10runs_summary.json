@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-20T16:10:06+09:00",
+  "csv_file": "benchmarks/sim_autonomy_baseline_10runs.csv",
+  "runs": 10,
+  "successes": 10,
+  "completion_rate": 1.0,
+  "worst_lateral_error_m": 0.1563,
+  "maximum_abs_roll_deg": 39.603,
+  "maximum_abs_pitch_deg": 32.339,
+  "decision": "PASS",
+  "recommendation": "manual_speed_step_test_allowed"
+}

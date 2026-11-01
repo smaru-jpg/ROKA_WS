@@ -1,0 +1,4 @@
+# Verified ROKA competition robot U2D2 role assignment (2026-08-29).
+# The runtime uses /dev/serial/by-id directly; these aliases are optional.
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", ATTRS{serial}=="FT89FBMQ", SYMLINK+="roka_arm_rs485", GROUP="dialout", MODE="0660", ENV{ID_MM_DEVICE_IGNORE}="1"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", ATTRS{serial}=="FT78LQH1", SYMLINK+="roka_arm_ttl", GROUP="dialout", MODE="0660", ENV{ID_MM_DEVICE_IGNORE}="1"

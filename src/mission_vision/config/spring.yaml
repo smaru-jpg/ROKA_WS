@@ -1,0 +1,92 @@
+
+mission:
+  name: "spring"
+
+camera:
+  type: "ros"
+  topic: "/roka/arm_camera/color/image_raw"
+  width: 640
+  height: 480
+  fps: 30
+
+model:
+  path: "models/IFF_0830.pt"
+  sha256: "4a26f5212771f5d9b1587ecffbfc8dc1aca9584232b096c03b10626460626f57"
+  expected_classes: {0: enemy, 1: friend}
+  image_size: 640
+  device: "auto"
+
+  # Low threshold so weak detections can still reach our own filters.
+  yolo_conf_threshold: 0.25
+
+inference:
+  # Keep friend and enemy together so the Nano can show the BOTH state.
+  detection_mode: "multiple"
+  timer_period_sec: 0.10
+
+display:
+  enabled: true
+
+ros:
+  result_topic: "/roka/vision/result"
+
+pipeline:
+  # Frame -> frame filters (fog enhancement, CLAHE, dehazing, etc.)
+  preprocess: []
+
+  # YOLO detection-list -> detection-list filters
+  detection:
+    - module: "mission_vision.filters.confidence_filter"
+      class: "ConfidenceFilter"
+      enabled: true
+      params:
+        threshold: 0.60
+
+    # 0831 field-tuning filter: enemy detections require a dark green ratio.
+    - module: "mission_vision.filters.hsv_ratio_filter"
+      class: "HSVRatioFilter"
+      enabled: true
+      params:
+        target_classes: ["enemy"]
+        h_min: 23
+        h_max: 40
+        s_min: 70
+        s_max: 255
+        v_min: 20
+        v_max: 150
+        min_ratio: 0.20
+        reject_below: true
+        result_name: "enemy_green"
+
+    # 0831 field-tuning filter: friend detections require a camouflage ratio.
+    - module: "mission_vision.filters.hsv_ratio_filter"
+      class: "HSVRatioFilter"
+      enabled: true
+      params:
+        target_classes: ["friend"]
+        h_min: 25
+        h_max: 80
+        s_min: 45
+        s_max: 255
+        v_min: 15
+        v_max: 180
+        min_ratio: 0.30
+        reject_below: true
+        result_name: "friend_camo"
+
+  # Class result -> confirmed class result filters
+  result:
+    - module: "mission_vision.filters.temporal_filter"
+      class: "TemporalFilter"
+      enabled: true
+      params:
+        window_size: 5
+        required_count: 3
+
+led:
+  # Enable only after assigning this controller a stable /dev/serial/by-id path.
+  enabled: false
+  port: ""
+  baud_rate: 115200
+  startup_delay_sec: 2.0
+  topic: "/roka/vision/result"

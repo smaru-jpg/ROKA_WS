@@ -1,0 +1,61 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 500
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    sim_imu_broadcaster:
+      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
+    sim_diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+
+sim_diff_drive_controller:
+  ros__parameters:
+    left_wheel_names:
+      - front_left_wheel_joint
+      - rear_left_wheel_joint
+    right_wheel_names:
+      - front_right_wheel_joint
+      - rear_right_wheel_joint
+    wheels_per_side: 2
+
+    # Use the MuJoCo wheel-centre geometry, not the MDH250 calibration value.
+    wheel_separation: 0.427149994
+    wheel_radius: 0.103
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    position_feedback: true
+    open_loop: false
+    cmd_vel_timeout: 0.5
+    use_stamped_vel: false
+
+    # The 3-D MuJoCo floating-base state is authoritative on the pump track.
+    # Keep planar wheel odometry available without publishing a competing TF.
+    enable_odom_tf: false
+    odom_frame_id: sim_wheel_odom
+    base_frame_id: base_link
+    publish_rate: 50.0
+
+    linear.x.has_velocity_limits: true
+    linear.x.max_velocity: 0.30
+    linear.x.min_velocity: -0.30
+    linear.x.has_acceleration_limits: true
+    linear.x.max_acceleration: 0.80
+    linear.x.min_acceleration: -0.80
+
+    angular.z.has_velocity_limits: true
+    angular.z.max_velocity: 0.60
+    angular.z.min_velocity: -0.60
+    angular.z.has_acceleration_limits: true
+    angular.z.max_acceleration: 1.50
+    angular.z.min_acceleration: -1.50
+
+sim_imu_broadcaster:
+  ros__parameters:
+    sensor_name: base_imu
+    frame_id: imu_link

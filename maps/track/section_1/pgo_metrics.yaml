@@ -1,0 +1,12 @@
+schema_version: 1
+keyframes: 35
+dense_map_points: 6194
+map_points: 3870
+session_start_keyframe: 0
+discarded_warmup_keyframes: 0
+accepted_loops: 0
+rejected_loops: 0
+raw_closure_translation_m: 4.532703121
+optimized_closure_translation_m: 4.532703121
+maximum_adjacent_translation_deformation_m: 4.968945752e-16
+maximum_adjacent_rotation_deformation_rad: 3.000326224e-16

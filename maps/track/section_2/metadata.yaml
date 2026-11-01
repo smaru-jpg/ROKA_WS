@@ -1,0 +1,25 @@
+schema_version: 2
+created_utc: '2026-09-02T19:00:18.019367+00:00'
+environment: inline
+mapping_backend: fastlio_sc_pgo
+pose_authority: sc_pgo
+frames:
+  global: map
+  odometry: odom
+  body_3d: base_link
+  body_2d: base_footprint
+sensors:
+  lidar: Velodyne VLP-16
+  imu: EBIMU-9DOFV5
+products:
+  occupancy: occupancy.yaml
+  terrain: terrain_map.bag
+  track_profile: track_profile.yaml
+  sensor_recording: sensors/metadata.yaml
+  session_metrics: session_metrics.yaml
+  pointcloud: map.pcd
+  optimized_path: optimized_path.csv
+  keyframe_poses: keyframe_poses.bin
+  scan_context: scan_context.bin
+  pose_graph_3d: pose_graph.g2o
+  pgo_metrics: pgo_metrics.yaml

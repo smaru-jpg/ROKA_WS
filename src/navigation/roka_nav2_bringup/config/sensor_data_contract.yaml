@@ -1,0 +1,44 @@
+schema_version: 1
+
+# One acquisition contract is shared by flat and track processing.  Profiles
+# select an odometry/localization authority; they do not change the raw data
+# recorded by the operator.
+topics:
+  lidar_packets: /velodyne_packets
+  lidar_points: /velodyne_points
+  imu: /imu/data
+  wheel_odometry: /wheel/odom
+  fused_odometry: /odom
+  lidar_inertial_odometry: /lio/odom
+  dynamic_tf: /tf
+  static_tf: /tf_static
+  recorded_path: /track/recorded_path
+  joy: /joy
+  manual_command: /cmd_vel_joy
+  motor_connected: /md/base_connected
+
+qos:
+  sensor_inputs: sensor_data_best_effort
+  odometry: sensor_data_best_effort
+  state: reliable_volatile
+  static_state: reliable_transient_local
+
+odometry_authority:
+  acquisition: /wheel/odom
+  flat_processing: /odom
+  track_processing: /lio/odom
+  flat_runtime: /odom
+  track_runtime: /lio/odom
+
+tf_ownership:
+  base_link_to_sensors: robot_description_static
+  odom_to_base_link: wheel_imu_ekf
+  lio_map_to_lio_odom: fast_lio_offline_only
+  map_to_odom_flat: slam_toolbox_or_amcl_exactly_one
+  map_to_odom_track: fixed_pcd_localizer_exactly_one
+
+offline_replay:
+  replay_static_tf: true
+  replay_dynamic_tf: false
+  excluded_dynamic_parent_frames: [map, lio_map]
+

@@ -1,0 +1,14 @@
+schema_version: 1
+result: PASS
+source: maps/section_1/sensors
+map_source: FAST-LIO2 and SC-PGO offline regression output
+validated_local: '2026-08-27T01:15:38+09:00'
+ready: true
+status: localized
+fitness_score: 0.016430
+pose_count: 5
+maximum_step_m: 0.037158230292936016
+maximum_yaw_step_rad: 0.0036895176261038977
+reason: five consecutive localized poses received
+production_eligible: false
+qualification_note: localizer mechanics passed, but its source FAST-LIO flat-map regression failed the 0.15 m Z-span gate

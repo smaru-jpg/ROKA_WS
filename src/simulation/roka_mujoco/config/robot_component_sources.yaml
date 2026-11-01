@@ -1,0 +1,117 @@
+schema_version: 1
+assembly:
+  step_filename: ASSSEMBLEEE.STEP
+  stl_filename: asssembleee.stl
+  step_role: assembly names, dimensions, component audit and future joint separation
+  stl_role: tessellated visual geometry and whole-assembly cross-check
+  ignored_formats:
+    - SLDASM
+    - SLDPRT
+
+components:
+  - step_product: "[3D]HBLS2D02E0200-D206"
+    manufacturer: MDROBOT
+    model: MDH250 / HBLS2D02E0200-D206
+    source: https://www.mdrobot.co.kr/inwheelmotor-store/?idx=272
+    official_values:
+      wheel_diameter_mm: 206
+      voltage_vdc: "24-48"
+      power_w: "100-350"
+      rated_current_a: 8
+      rated_torque_nm: 8
+      maximum_torque_nm: 16
+      rated_speed_rpm: 200
+      maximum_speed_rpm: 300
+      encoder_ppr: 4096
+      ingress_protection: IP65
+    applied_to_simulation:
+      wheel_radius_m: 0.103
+      maximum_joint_speed_rad_s: 31.415926536
+      actuator_force_range_nm: [-16, 16]
+    confidence: high
+
+  - step_product: "MD200T, DMD200T.step"
+    manufacturer: MDROBOT
+    model: DMD200T
+    source: https://www.mdrobot.co.kr/shop_view/288
+    official_values:
+      voltage_vdc: "12-48"
+      current_per_channel_a: 10
+      channels: 2
+      power_w: 200
+    applied_to_simulation: reference_only_no_collision
+    confidence: high
+
+  - step_product: "[3D] PDIST120"
+    manufacturer: MDROBOT
+    model: PDIST120
+    source: https://www.mdrobot.co.kr/acc-power-management-etc/?idx=284
+    applied_to_simulation: visual_mesh_and_base_mass_budget
+    confidence: high
+
+  - step_product: "86-0101 REV B ENVELOPE, VLP-16"
+    manufacturer: Ouster / Velodyne
+    model: VLP-16
+    source: https://ouster.com/products/hardware/vlp-16
+    official_values:
+      envelope_mm: [89, 89, 72]
+      minimum_weight_kg: 0.590
+    applied_to_simulation: visual_mesh_and_base_mass_budget
+    confidence: high
+
+  - step_product: RealSense_D435
+    manufacturer: Intel RealSense
+    model: D435
+    source: https://www.intelrealsense.com/wp-content/uploads/2022/05/Intel-RealSense-D400-Series-Datasheet-April-2022.pdf
+    official_values:
+      nominal_dimensions_mm: [90, 25, 25]
+      nominal_weight_kg: 0.075
+    applied_to_simulation: visual_mesh_and_base_mass_budget
+    confidence: high
+
+  - step_product: H54P-200_M54P-060.stp
+    manufacturer: ROBOTIS
+    model: DYNAMIXEL-P H54P-200 / M54P-060 family
+    source: https://emanual.robotis.com/docs/en/dxl/p/
+    official_values:
+      renamed_models:
+        H54P-200-S500-R: PH54-200-S500-R
+        M54P-060-S250-R: PM54-060-S250-R
+      nominal_actuator_dimensions_mm: [54, 126, 54]
+      nominal_actuator_weight_kg: 0.855
+    applied_to_simulation: locked_arm_visual_and_base_mass_budget
+    confidence: medium_exact_variant_requires_step_axis_audit
+
+  - step_product: robot_arm
+    manufacturer: ROBOTIS reference architecture
+    model: OpenMANIPULATOR-P comparison only
+    source: https://emanual.robotis.com/docs/en/platform/openmanipulator_p/specification/
+    official_values:
+      degrees_of_freedom: 6
+      total_weight_kg: 5.76
+      reach_m: 0.645
+      payload_kg: 3.0
+      repeatability_m: 0.00005
+    applied_to_simulation: mass_budget_reference_not_model_identity
+    confidence: comparison_only
+
+custom_or_unresolved_parts:
+  policy: Use STEP/STL geometry only; do not invent a manufacturer or product mass.
+  examples:
+    - FRAME
+    - base
+    - bat
+    - camera_mount
+    - motor_case_maru_add
+    - motorbracket.prt
+    - plate
+    - propile-2020 X 200mm
+    - gripper_assemble
+    - hand
+
+provisional_physics:
+  wheel_mass_kg_each: 4.2
+  base_mass_kg_excluding_wheels: 26.0
+  policy: Replace with measured assembled masses before controller or rollover validation.
+  wheel_collision_shape: ellipsoid
+  wheel_collision_reason: Preserves 206 x 118.2 mm envelope while avoiding dense cylinder-heightfield contacts.

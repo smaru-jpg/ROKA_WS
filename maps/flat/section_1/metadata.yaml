@@ -1,0 +1,21 @@
+schema_version: 2
+created_utc: '2026-09-02T19:51:41.931485+00:00'
+environment: processed_2d
+mapping_backend: slam_toolbox_2d
+pose_authority: slam_toolbox
+frames:
+  global: map
+  odometry: odom
+  body_3d: base_link
+  body_2d: base_footprint
+sensors:
+  lidar: Velodyne VLP-16
+  imu: EBIMU-9DOFV5
+products:
+  occupancy: occupancy.yaml
+  terrain: terrain_map.bag
+  track_profile: track_profile.yaml
+  session_metrics: session_metrics.yaml
+  slam_posegraph: slam_posegraph.posegraph
+  source_sensor_contract: sensor_contract.yaml
+source_acquisition: /home/ryoo/roka_ws/datasets/mapping/section_1

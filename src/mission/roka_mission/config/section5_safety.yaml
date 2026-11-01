@@ -1,0 +1,59 @@
+mission5_velocity_smoother:
+  ros__parameters:
+    smoothing_frequency: 20.0
+    scale_velocities: false
+    feedback: OPEN_LOOP
+    max_velocity: [1.20, 0.0, 1.20]
+    min_velocity: [0.0, 0.0, -1.20]
+    max_accel: [0.80, 0.0, 1.50]
+    max_decel: [-1.00, 0.0, -1.80]
+    odom_topic: /odom
+    odom_duration: 0.2
+    deadband_velocity: [0.01, 0.0, 0.01]
+    velocity_timeout: 0.30
+
+mission5_collision_monitor:
+  ros__parameters:
+    base_frame_id: base_footprint
+    odom_frame_id: odom
+    cmd_vel_in_topic: /cmd_vel_mission5_smoothed
+    cmd_vel_out_topic: /cmd_vel_mission5_safe
+    transform_tolerance: 0.20
+    source_timeout: 0.40
+    base_shift_correction: true
+    stop_pub_timeout: 1.0
+    polygons: [EmergencyStop, SlowZone, FootprintApproach]
+    EmergencyStop:
+      type: polygon
+      # 0.59 m front shell + required 0.10 m final clearance.
+      points: [0.69, 0.36, 0.69, -0.36, -0.38, -0.36, -0.38, 0.36]
+      action_type: stop
+      max_points: 3
+      visualize: true
+      polygon_pub_topic: /mission5/safety/emergency_zone
+      enabled: true
+    SlowZone:
+      type: polygon
+      points: [1.30, 0.45, 1.30, -0.45, -0.48, -0.45, -0.48, 0.45]
+      action_type: slowdown
+      max_points: 3
+      slowdown_ratio: 0.40
+      visualize: true
+      polygon_pub_topic: /mission5/safety/slow_zone
+      enabled: true
+    FootprintApproach:
+      type: circle
+      radius: 0.54
+      action_type: approach
+      time_before_collision: 1.20
+      simulation_time_step: 0.05
+      max_points: 3
+      visualize: false
+      enabled: true
+    observation_sources: [pointcloud]
+    pointcloud:
+      type: pointcloud
+      topic: /mission5/obstacle_points
+      min_height: -0.50
+      max_height: 2.20
+      enabled: true

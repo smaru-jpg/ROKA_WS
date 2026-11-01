@@ -1,0 +1,56 @@
+# Apply this hardware profile even when the launch file gives LI-Init a
+# descriptive node name. A literal `laser_mapping:` selector silently drops
+# every parameter after a ROS node-name override and leaves empty topics.
+/**:
+  ros__parameters:
+    common:
+      lid_topic: /velodyne_points
+      imu_topic: /imu/data
+      # Both ROKA drivers publish Unix/system-time headers.  The upstream
+      # >1 s fallback mistakes the blocking batch optimizer for a clock-domain
+      # mismatch and injected a false +1.923 s offset during rosbag replay.
+      enable_hard_time_sync: false
+
+    preprocess:
+      lidar_type: 2
+      scan_line: 16
+      blind: 0.50
+      feature_extract_en: false
+
+    initialization:
+      # A 10 Hz mechanical LiDAR is divided into three frames so the
+      # LiDAR-only angular-motion estimate runs at the recommended 30 Hz.
+      cut_frame: true
+      cut_frame_num: 3
+      orig_odom_freq: 10
+      mean_acc_norm: 9.81
+      online_refine_time: 25.0
+      data_accum_length: 600.0
+      # The upstream 100% target assumes a hand-carried sensor that can be
+      # rotated freely about all three axes.  PK-3A is a heavy wheeled robot;
+      # use 6% of that target and require a full minute plus an independent
+      # second run before applying the result.
+      required_excitation_fraction: 0.06
+      minimum_accumulation_duration_sec: 60.0
+      Rot_LI_cov: [0.00005, 0.00005, 0.00005]
+      Trans_LI_cov: [0.0001, 0.0001, 0.0001]
+
+    mapping:
+      filter_size_surf: 0.10
+      filter_size_map: 0.20
+      gyr_cov: 0.5
+      acc_cov: 0.5
+      grav_cov: 0.0001
+      b_acc_cov: 0.0001
+      b_gyr_cov: 0.0001
+      det_range: 60.0
+
+    publish:
+      path_en: true
+      scan_publish_en: true
+      dense_publish_en: false
+      scan_bodyframe_pub_en: true
+
+    pcd_save:
+      pcd_save_en: false
+      interval: -1

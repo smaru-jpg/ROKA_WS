@@ -1,0 +1,33 @@
+# Provisional vehicle attitude/contact limits. Replace with repeated real-track
+# measurements before final competition sign-off; they are not a certificate.
+terrain_supervisor:
+  ros__parameters:
+    roll_warning_deg: 32.4
+    roll_critical_deg: 38.1
+    roll_hard_deg: 40.6
+    pitch_warning_deg: 27.8
+    pitch_critical_deg: 32.7
+    pitch_hard_deg: 34.8
+    absolute_roll_hard_deg: 85.0
+    absolute_pitch_hard_deg: 65.0
+    attitude_prediction_horizon_sec: 0.2
+    attitude_hard_hold_sec: 0.08
+mapping_terrain_monitor:
+  ros__parameters:
+    roll_warning_deg: 32.4
+    roll_critical_deg: 38.1
+    roll_hard_deg: 40.6
+    pitch_warning_deg: 27.8
+    pitch_critical_deg: 32.7
+    pitch_hard_deg: 34.8
+    absolute_roll_hard_deg: 85.0
+    absolute_pitch_hard_deg: 65.0
+    attitude_prediction_horizon_sec: 0.2
+    attitude_hard_hold_sec: 0.08
+wheel_contact_estimator:
+  ros__parameters:
+    airborne_accel_norm_max_mps2: 3.0
+    landing_accel_norm_min_mps2: 13.0
+    airborne_hold_sec: 0.05
+    partial_contact_hold_sec: 0.08
+    landing_hold_sec: 0.3

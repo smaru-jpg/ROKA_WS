@@ -1,0 +1,406 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: GLIM형 레이어
+  - Class: rviz_common/Time
+    Experimental: false
+    Name: Rosbag 시간
+    SyncMode: 0
+    SyncSource: /replay/raw_accumulated_cloud
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: 00 기준격자 1m
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 40
+      Alpha: 0.16
+      Value: true
+    - Class: rviz_common/Group
+      Name: 01 SCANS - 현재 센서
+      Enabled: true
+      Displays:
+        - Class: rviz_default_plugins/PointCloud2
+          Name: 현재 VLP16 전체
+          Enabled: true
+          Topic:
+            Depth: 2
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /velodyne_points
+          Style: Flat Squares
+          Size (Pixels): 3
+          Decay Time: 0.25
+          Position Transformer: XYZ
+          Color Transformer: Intensity
+          Selectable: false
+          Value: true
+        - Class: rviz_default_plugins/PointCloud2
+          Name: 현재 전방 120도
+          Enabled: false
+          Topic:
+            Depth: 2
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /mapping/front_120_points
+          Style: Points
+          Size (Pixels): 3
+          Decay Time: 0.25
+          Position Transformer: XYZ
+          Color Transformer: Intensity
+          Selectable: false
+          Value: false
+      Value: true
+    - Class: rviz_common/Group
+      Name: 02 MAPS - 누적/최적화 지도
+      Enabled: true
+      Displays:
+        - Class: rviz_default_plugins/PointCloud2
+          Name: 원시 rosbag 누적
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /replay/raw_accumulated_cloud
+          Style: Flat Squares
+          Size (Pixels): 2
+          Decay Time: 0
+          Position Transformer: XYZ
+          Color Transformer: AxisColor
+          Axis: Z
+          Selectable: true
+          Value: false
+        - Class: rviz_default_plugins/PointCloud2
+          Name: 조밀 SC-PGO 최적화 지도
+          Enabled: true
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /track_visual/map_dense
+          Style: Flat Squares
+          Size (Pixels): 3
+          Decay Time: 0
+          Position Transformer: XYZ
+          Color Transformer: AxisColor
+          Axis: Z
+          Selectable: true
+          Value: true
+        - Class: rviz_default_plugins/PointCloud2
+          Name: 경량 SC-PGO 지도
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /track_visual/map_3d
+          Style: Flat Squares
+          Size (Pixels): 4
+          Decay Time: 0
+          Position Transformer: XYZ
+          Color Transformer: FlatColor
+          Color: 70; 145; 255
+          Selectable: true
+          Value: false
+        - Class: rviz_default_plugins/Map
+          Name: 2D 점유지도 참고
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /map
+          Alpha: 0.28
+          Color Scheme: map
+          Value: false
+      Value: true
+    - Class: rviz_common/Group
+      Name: 03 TRAJECTORIES - 경로/그래프
+      Enabled: true
+      Displays:
+        - Class: rviz_default_plugins/Path
+          Name: 당시 기록 경로 청록
+          Enabled: true
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /replay/final_path
+          Line Style: Lines
+          Line Width: 0.09
+          Color: 0; 235; 255
+          Value: true
+        - Class: rviz_default_plugins/Path
+          Name: rosbag 진행 경로 자홍
+          Enabled: true
+          Topic:
+            Depth: 5
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /replay/growing_path_latched
+          Line Style: Lines
+          Line Width: 0.05
+          Color: 255; 50; 220
+          Value: true
+        - Class: rviz_default_plugins/Path
+          Name: SC-PGO 최적화 경로 파랑
+          Enabled: true
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /track_visual/path_3d
+          Line Style: Lines
+          Line Width: 0.06
+          Color: 80; 150; 255
+          Value: true
+        - Class: rviz_default_plugins/MarkerArray
+          Name: SC-PGO 키프레임/팩터
+          Enabled: true
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /track_visual/pose_graph
+          Namespaces:
+            keyframes: true
+            factors: true
+          Value: true
+        - Class: rviz_default_plugins/Path
+          Name: 차체 왼쪽 폭
+          Enabled: true
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /replay/vehicle_left
+          Line Style: Lines
+          Line Width: 0.035
+          Color: 255; 215; 0
+          Value: true
+        - Class: rviz_default_plugins/Path
+          Name: 차체 오른쪽 폭
+          Enabled: true
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /replay/vehicle_right
+          Line Style: Lines
+          Line Width: 0.035
+          Color: 255; 215; 0
+          Value: true
+      Value: true
+    - Class: rviz_common/Group
+      Name: 04 TERRAIN - 자동 판정
+      Enabled: true
+      Displays:
+        - Class: rviz_default_plugins/MarkerArray
+          Name: 가능 초록 / 주의 노랑 / 불가 빨강
+          Enabled: true
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /terrain/visual/classes
+          Namespaces:
+            possible_green: true
+            caution_yellow: true
+            blocked_red: true
+            unobserved_gray: false
+            manual_possible_polygon: true
+            manual_blocked_polygon: true
+            committed_review_polygons: true
+            draft_review_polygon: true
+          Value: true
+        - Class: grid_map_rviz_plugin/GridMap
+          Name: 높이 elevation
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /terrain/static_map
+          Color Transformer: GridMapLayer
+          Color Layer: elevation
+          Height Transformer: GridMapLayer
+          Height Layer: elevation
+          Autocompute Intensity Bounds: true
+          Use Rainbow: true
+          Show Grid Lines: false
+          Alpha: 0.84
+          Value: false
+        - Class: grid_map_rviz_plugin/GridMap
+          Name: 경사 slope_deg
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /terrain/static_map
+          Color Transformer: GridMapLayer
+          Color Layer: slope_deg
+          Height Transformer: GridMapLayer
+          Height Layer: elevation
+          Autocompute Intensity Bounds: false
+          Min Intensity: 0
+          Max Intensity: 45
+          Use Rainbow: true
+          Show Grid Lines: false
+          Alpha: 0.88
+          Value: false
+        - Class: grid_map_rviz_plugin/GridMap
+          Name: 거칠기 roughness
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /terrain/static_map
+          Color Transformer: GridMapLayer
+          Color Layer: roughness
+          Height Transformer: GridMapLayer
+          Height Layer: elevation
+          Autocompute Intensity Bounds: false
+          Min Intensity: 0
+          Max Intensity: 0.12
+          Use Rainbow: true
+          Show Grid Lines: false
+          Alpha: 0.88
+          Value: false
+        - Class: grid_map_rviz_plugin/GridMap
+          Name: 단차 step_height
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /terrain/static_map
+          Color Transformer: GridMapLayer
+          Color Layer: step_height
+          Height Transformer: GridMapLayer
+          Height Layer: elevation
+          Autocompute Intensity Bounds: false
+          Min Intensity: 0
+          Max Intensity: 0.20
+          Use Rainbow: true
+          Show Grid Lines: false
+          Alpha: 0.88
+          Value: false
+        - Class: grid_map_rviz_plugin/GridMap
+          Name: 종합 위험도 risk
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /terrain/static_map
+          Color Transformer: GridMapLayer
+          Color Layer: risk
+          Height Transformer: GridMapLayer
+          Height Layer: elevation
+          Autocompute Intensity Bounds: false
+          Min Intensity: 0
+          Max Intensity: 2
+          Use Rainbow: true
+          Show Grid Lines: false
+          Alpha: 0.88
+          Value: false
+      Value: true
+    - Class: rviz_common/Group
+      Name: 05 REVIEW - 수동 다각형
+      Enabled: true
+      Displays:
+        - Class: rviz_default_plugins/Map
+          Name: 수동 blocked keepout 마스크
+          Enabled: false
+          Topic:
+            Depth: 1
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /terrain/manual_keepout_mask
+          Alpha: 0.55
+          Color Scheme: costmap
+          Value: false
+      Value: true
+    - Class: rviz_default_plugins/Odometry
+      Name: 90 당시 로봇 자세
+      Enabled: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /odom
+      Keep: 1
+      Shape:
+        Alpha: 1
+        Axes Length: 0.45
+        Axes Radius: 0.04
+        Color: 255; 80; 80
+        Value: Arrow
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Name: 99 TF 진단
+      Enabled: false
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 18; 20; 24
+    Fixed Frame: map
+    Frame Rate: 20
+  Name: ROKA GLIM-style Mapping Review
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+    - Class: rviz_default_plugins/PublishPoint
+      Topic: /terrain_review/clicked_point
+  Value: true
+Views:
+  Current:
+    Class: rviz_default_plugins/Orbit
+    Distance: 8
+    Focal Point:
+      X: 1.5
+      Y: 0
+      Z: 0.2
+    Name: 3D Orbit
+    Near Clip Distance: 0.01
+    Pitch: 0.62
+    Yaw: 0.82
+    Target Frame: map
+    Value: Orbit (rviz)
+Window Geometry:
+  Width: 1600
+  Height: 900
+  X: 20
+  Y: 20
+  Hide Left Dock: false
+  Hide Right Dock: true

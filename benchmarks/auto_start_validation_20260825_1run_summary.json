@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-25T01:11:43+09:00",
+  "csv_file": "benchmarks/auto_start_validation_20260825_1run.csv",
+  "runs": 1,
+  "successes": 0,
+  "completion_rate": 0.0,
+  "worst_lateral_error_m": 0.0582,
+  "maximum_abs_roll_deg": 36.062,
+  "maximum_abs_pitch_deg": 32.179,
+  "decision": "FAIL",
+  "recommendation": "do_not_increase_speed"
+}

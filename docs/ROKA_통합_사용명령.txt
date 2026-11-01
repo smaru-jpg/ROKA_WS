@@ -1,0 +1,210 @@
+ROKA 통합 사용 명령
+===================
+
+기본
+----
+명령은 어느 폴더에서든 실행한다. 중지는 실행 터미널에서 Ctrl+C 1회.
+
+  roka verify       하드웨어를 움직이지 않고 코드 검증
+  roka log          최근 실행의 핵심 오류
+  roka sections     섹션별 구현 상태
+  roka yolo-paths   섹션별 활성 PT·설정·필터 위치
+
+매핑 공통 조작
+--------------
+Y: 버튼 활성화 → A: 기록 시작 → LB+왼쪽 스틱: 수동주행 → B: 저장 → B: 종료
+
+mapping은 2D/3D를 선택하지 않고 원본 센서와 주행경로를 한 번만 저장한다.
+process가 같은 원본 bag을 2D와 3D 지도로 각각 만든다.
+매핑 중 IMU·4륜 RPM/전류·접지 진단도 함께 저장하지만 수동 명령에는 개입하지 않는다.
+
+대회 주행 원칙
+--------------
+2D auto를 기본으로 쓴다. 기록 경로는 원본에서 최대 5 cm 이내로만 부드럽게
+만들며, 현재 section_1 실제 편차는 2.8 mm이다. IMU roll/pitch 전복 보호는
+2D auto에서도 계속 동작한다.
+지도 기반 auto·mission1·mission2·mission3·mission4의 속도 상한은 모두 0.30 m/s이다.
+급곡선은 곡률에 따라 0.05~0.30 m/s로 자동 감속한다.
+3D auto는 FAST-LIO 차체 이동과 네 바퀴 RPM·전류·IMU를 비교해
+부분 접지/공중 상태를 진단한다. 자동 슬립 감속은 실차 보정 전까지 꺼져 있다.
+섹션 5 선두추종 속도(0.60~1.20 m/s)는 별도다.
+
+3D 결과는 전체 PCD와 주행면을 분리한다. 원본 PCD는 위치추정 증거로 보존하고,
+벽·가구를 제외한 surface.pcd만 elevation/slope/roughness/위험도에 사용한다.
+평지 데이터의 3D 경사는 처리 검증용이며 실제 트랙 경사를 측정한 값은 아니다.
+
+섹션 1
+------
+  roka mapping section_1
+  roka process section_1 all
+  roka review section_1 2d
+  roka auto section_1 2d
+  roka review section_1 3d
+  roka auto section_1 3d
+
+섹션 2
+------
+  roka mapping section_2
+  roka process section_2 all
+  roka review section_2 2d
+  roka auto section_2 2d
+  roka review section_2 3d
+  roka auto section_2 3d
+
+섹션 3
+------
+  roka mapping section_3
+  roka process section_3 all
+  roka review section_3 2d
+  roka auto section_3 2d
+  roka review section_3 3d
+  roka auto section_3 3d
+
+섹션 4
+------
+  roka mapping section_4
+  roka process section_4 all
+  roka review section_4 2d
+  roka auto section_4 2d
+  roka review section_4 3d
+  roka auto section_4 3d
+
+곡선 진입·이탈은 경로 곡률에 따라 감속한다. 그 뒤 좌우로 직선이면서 상하
+곡률이 있는 돌파 구간만 별도 고속 영역으로 취급한다. 고속값과 접지 허용시간은
+반복 실차 매핑/수동주행 데이터로 정하며, 현재 자동 슬립 감속에는 연결하지 않는다.
+
+섹션 5
+------
+  roka mapping section_5
+  roka process section_5 all
+  roka review section_5 2d
+  roka auto section_5 2d
+  roka review section_5 3d
+  roka auto section_5 3d
+
+필요한 지도만 만들 때
+----------------------
+  roka process section_1 2d
+  roka process section_1 3d
+
+3D process 전 최초 1회 LiDAR-IMU 보정
+--------------------------------------
+  roka track calibrate status
+  roka track calibrate 1
+  # LiDAR와 IMU 전원을 완전히 껐다가 다시 켠다.
+  roka track calibrate 2
+
+수동주행
+--------
+  roka manual     차체+로봇팔 대회 수동조종
+  roka drive      차체만 수동조종, 팔은 섹션 시작자세 고정
+  roka drive pro-hold
+                  차체 수동조종, 24V PRO ID 11/12/13만 고정
+                  12V 손목 ID 4/6과 그리퍼 ID 1 포트는 열지 않음
+
+섹션별 카메라+전체 로봇팔 수동주행:
+  roka manual section1   SECTION1 전체 자세 + IFF YOLO 화면
+  roka manual section2   SECTION2_START 전체 자세 + 박스 YOLO, B 파지
+  roka manual section3   SECTION3 전체 자세 + 마커 YOLO 화면
+  roka manual section4   SECTION4 전체 자세 + 원본 운전 카메라
+  roka manual section5   SECTION5 전체 자세 + 원본 운전 카메라
+
+차체: LB+왼쪽 스틱 0.30 m/s, LB+LT+왼쪽 스틱 터보 1.00 m/s
+팔: RB+오른쪽 스틱 ID13/ID11, RB+D-pad 상하 ID4/6 동기 손목
+정상 종료 뒤에도 제어기 전원이 있으면 마지막 팔 자세 토크를 유지한다.
+
+섹션 수동모드 공통 키:
+  A = SECTION2_START 자세
+  X = SECTION1 자세
+  Y = SECTION2_DRIVE 자세
+  B = section2에서만 박스 파지 승인
+자세 이동과 파지 중에는 차체가 잠기며, LB를 한 번 놓아야 재주행된다.
+section2 파지 성공 후 박스 YOLO는 꺼지고 신호등 YOLO 화면으로 전환된다.
+
+섹션별 미션
+-----------
+  roka track blind-record section_1 fog_1 30
+  roka track mission1 section_1 fog_1
+  roka track mission2 section_2
+  roka track mission3 section_3
+  roka track mission4 section_4
+  roka mission5 0.80
+
+mission1: 안개 직선은 IMU+휠로 통과한 뒤 지도 경로로 복귀
+mission2: 박스 파지·배치 후 신호등 전환, RED 정지·BLUE 재출발
+          NONE은 직전 신호 상태 유지, B 수동전환 뒤에는 자동 재출발 금지
+mission3: 기록경로 주행+B 정지/수동전환과 표식 비전 관찰
+mission4: 기록경로 주행+B 정지/수동전환과 운전 카메라
+mission5: 저장 지도 없이 VLP-16 선두추종, 속도는 0.60~1.20 입력
+
+지도 확인·편집
+--------------
+  roka flat check section_1
+  roka track check section_1
+  roka flat replay section_1
+  roka track replay section_1
+
+track check의 3D-SURFACE=주행면 추출·경로 커버리지,
+3D-LOCALIZATION=저장 PCD 위치추정 회귀시험이다. 둘 다 PASS인지 확인한다.
+
+3D 화면 기본 표시:
+  색 점구름 = FAST-LIO/SC-PGO 원본 3D 장면
+  굵은 지면점 = 기록경로와 연결된 주행면(surface.pcd)
+  청록선 = 기록 중심경로, 노랑선 = 실제 차체 좌우 여유선
+  초록/노랑/빨강 = 가능/주의/불가. 왼쪽 체크박스로 각 레이어를 켜고 끈다.
+
+2D review 화면의 Publish Point로 지운 뒤 다른 터미널에서:
+  roka flat undo-review
+  roka flat reset-review
+  roka flat save-review
+
+3D review 화면에서 가능/불가 영역을 지정할 때 다른 터미널에서:
+  roka track terrain-mode possible
+  roka track terrain-mode blocked
+  roka track terrain-commit
+  roka track terrain-undo
+  roka track terrain-save
+
+비전만 확인
+-----------
+  roka vision spring
+  roka vision spring-led
+  roka vision summer
+  roka vision autumn
+  roka vision traffic
+
+섹션 1 IFF LED Nano
+----------------------
+  펌웨어: src/mission_vision/firmware/roka_iff_neopixel/
+  사양: Arduino Nano, D6, NeoPixel 16개, 115200 baud
+  프로토콜: E=적색, F=녹색, B=반반, N=소등
+  카메라+LED 시험(모터·팔 미사용): roka vision spring-led
+  다른 Nano 포트 직접 지정: roka vision spring-led /dev/serial/by-id/...
+  설치 예:
+    ./tools/install_handoff.sh --command-name roka --domain-id 31 \
+      --led-serial /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5069RR4-if00-port0
+  다른 PC에서는 A5069RR4를 고정 복사하지 말고 실제 by-id를 사용한다.
+
+파일 위치
+---------
+원본 1회 수집: ~/roka_ws/datasets/mapping/section_N
+2D 결과:       ~/roka_ws/maps/flat/section_N
+3D 결과:       ~/roka_ws/maps/track/section_N
+
+인수인계
+--------
+보내는 PC:
+  roka verify
+  roka handoff ~/Downloads/roka_ws_handoff.zip
+
+전체 지도·rosbag·보고서까지 포함한 이식본:
+  python3 tools/export_full_handoff.py ~/Downloads/ROKA_WS_전체_이식본.zip
+
+받는 PC(Ubuntu 22.04, ROS 2 Humble):
+  cd ~/roka_ws
+  ./tools/install_system_dependencies_low_memory.sh
+  ./tools/install_handoff.sh
+
+YOLO 파일 교체 위치:
+  roka yolo-paths
+  docs/ROKA_YOLO_교체_가이드.md

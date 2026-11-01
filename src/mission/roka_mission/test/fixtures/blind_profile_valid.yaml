@@ -1,0 +1,17 @@
+format: roka_blind_v2
+purpose: section_1_start_origin_fog_command_replay
+entry_progress_ratio: 0.0
+exit_progress_ratio: 0.30
+route_length_m: 0.3333
+target_distance_m: 0.10
+duration_sec: 1.0
+distance_m: 0.10
+sample_rate_hz: 5.0
+preserves_recorded_stops: true
+commands:
+  - {elapsed_sec: 0.0, linear_mps: 0.10, angular_radps: 0.0, yaw_delta_rad: 0.0}
+  - {elapsed_sec: 0.2, linear_mps: 0.10, angular_radps: 0.0, yaw_delta_rad: 0.0}
+  - {elapsed_sec: 0.4, linear_mps: 0.10, angular_radps: 0.0, yaw_delta_rad: 0.0}
+  - {elapsed_sec: 0.6, linear_mps: 0.10, angular_radps: 0.0, yaw_delta_rad: 0.0}
+  - {elapsed_sec: 0.8, linear_mps: 0.10, angular_radps: 0.0, yaw_delta_rad: 0.0}
+  - {elapsed_sec: 1.0, linear_mps: 0.0, angular_radps: 0.0, yaw_delta_rad: 0.0}

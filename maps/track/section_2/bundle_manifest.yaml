@@ -1,0 +1,291 @@
+schema_version: 3
+status: complete
+validated_utc: '2026-09-02T19:00:18.360415+00:00'
+product_sha256:
+  occupancy.yaml: a0761704436177aeeba59f2be41d6182529bc7ee026e14e174e13ff678f37552
+  occupancy.pgm: 0d7d0635dba3dbac21ef10a5803192bbb67e2867224d1a3ccda500bdf833467c
+  map.pcd: 32182ca6e2073cff61154aa9165a0c01d2d4b02f7d173486b4ca3314d2068d5a
+  pose_graph.g2o: dd1e164f175e09bf3c6366ca060c4cfdf9ce700558cd770bdc6fa8711ca109de
+  track_profile.yaml: 8c2043b09bd8392f8af64168ca5dce54cec1fcccadcab7a1d4f9200c308bec1f
+  session_metrics.yaml: 05ff00165b2b503c70681831f1148976c19b4a5f5df97bd7abae7ddc4d6d327f
+  pgo_metrics.yaml: b738a7d4a707e9cefe079a148243114b1d08a5c6efdec1dbe6437ef18f1b9796
+  optimized_path.csv: 15152f96fb3049d9b471645f008495e428c0fba3422f1ecca1a917114ece213d
+  keyframe_poses.bin: 5da55e16d3f2fbbba692a8e1c289eda1007c18f61f07625a9e9678e455c16249
+  scan_context.bin: 794cf9d024a8dfd71ccfb30050aa891405a55f1ed809fe6e02910b9e85467713
+  sensor_contract.yaml: eeec4c96dac8e000210dca35e032a4da02ff61f1826268dfe559122c05197989
+quality:
+  mapping_backend: fastlio_sc_pgo
+  sc_pgo_archives:
+    keyframe_poses.bin:
+      bytes: 584
+      count: 10
+      version: 1
+      legacy_magic: false
+    scan_context.bin:
+      bytes: 96104
+      count: 10
+      version: 1
+      legacy_magic: false
+  occupancy:
+    width: 107
+    height: 80
+    resolution_m: 0.05
+    pixel_count: 8560
+    known_count: 5457
+    occupied_count: 3709
+    known_fraction: 0.6375
+    known_component_count: 2
+    known_largest_fraction: 0.9954187282389592
+    occupied_component_count: 6
+    occupied_fragment_component_count: 4
+    occupied_ignored_small_component_count: 2
+    fragmentation_ignore_maximum_extent_m: 0.15
+    occupied_largest_fraction: 0.9614451334591534
+  pointcloud_points: 1704
+  pose_graph_3d:
+    vertices: 10
+    edges: 9
+    path_length_m: 2.731043296128728
+    maximum_step_m: 0.32269601848937896
+    displacement_m: 2.4727857121371675
+    z_span_m: 0.039063
+  pose_graph_3d_vertices: 10
+  pose_graph_3d_edges: 9
+  sc_pgo:
+    keyframes: 10
+    map_points: 1704
+    accepted_loops: 0
+    rejected_loops: 0
+    raw_closure_translation_m: 2.472788128
+    optimized_closure_translation_m: 2.472788128
+    maximum_adjacent_translation_deformation_m: 5.551157475e-17
+    maximum_adjacent_rotation_deformation_rad: 4.129116211e-17
+  optimized_path:
+    pose_count: 10
+    path_length_m: 2.731044836046153
+    maximum_step_m: 0.3226962629516106
+    closure_distance_m: 2.4727881278463806
+    z_span_m: 0.03906292957301086
+    start_x: -0.048433893832218855
+    start_y: -0.39539050447472457
+  track:
+    point_count: 33
+    closed_loop: false
+    path_length_m: 2.730089553736203
+    recorded_path_length_m: 2.169046193907225
+    maximum_displacement_m: 2.472614270206931
+    closure_distance_m: 2.472614270206931
+    enclosed_area_m2: 0.6345573367398969
+  pose_graph_to_recorded_path_ratio: 1.2590987244993366
+  optimized_path_to_recorded_path_ratio: 1.2590994344507564
+  path_occupancy_alignment:
+    point_count: 33
+    wheel_lane_offset_m: 0.3
+    centre_in_bounds_fraction: 1.0
+    centre_free_fraction: 1.0
+    wheel_lane_in_bounds_fraction: 1.0
+    wheel_lane_free_fraction: 1.0
+  sensor_message_counts:
+    /md/right/raw_state: 72
+    /tf_static: 2
+    /imu/data: 1551
+    /velodyne_packets: 154
+    /joy: 511
+    /odom: 745
+    /md/left/raw_state: 72
+    /tf: 1470
+    /diagnostics: 304
+    /md/base_connected: 288
+    /lio/odom: 146
+    /terrain/state: 443
+    /track/recorded_path: 38
+    /wheel/odom: 288
+    /cmd_vel_joy: 434
+  sensor_contract:
+    schema_version: 3
+    source: maps/track/.staging/section_2/sensors
+    bag_fingerprint:
+      metadata_sha256: 03cad175d7ce47de4baa49fc6ab8fe5ecb662f46902cd4fb6244bebdbd341290
+      data_files:
+      - name: sensors_0.db3.zstd
+        size_bytes: 5390098
+    result: PASS
+    failures: []
+    warnings: []
+    topics:
+      /velodyne_packets:
+        type: velodyne_msgs/msg/VelodyneScan
+        expected_type: velodyne_msgs/msg/VelodyneScan
+        count: 154
+        rate_hz: 9.915
+        header_backwards: 0
+        header_duplicates: 0
+        period_p95_ms: 101.024
+        record_minus_header_median_ms: 99.893
+        record_minus_header_p95_ms: 100.153
+        invalid_values: 0
+      /imu/data:
+        type: sensor_msgs/msg/Imu
+        expected_type: sensor_msgs/msg/Imu
+        count: 1551
+        rate_hz: 100.0
+        header_backwards: 0
+        header_duplicates: 0
+        period_p95_ms: 10.0
+        record_minus_header_median_ms: 0.402
+        record_minus_header_p95_ms: 1.133
+        invalid_values: 0
+      /wheel/odom:
+        type: nav_msgs/msg/Odometry
+        expected_type: nav_msgs/msg/Odometry
+        count: 288
+        rate_hz: 19.999
+        header_backwards: 0
+        header_duplicates: 0
+        period_p95_ms: 90.838
+        record_minus_header_median_ms: 0.504
+        record_minus_header_p95_ms: 0.789
+        invalid_values: 0
+      /tf:
+        type: tf2_msgs/msg/TFMessage
+        expected_type: tf2_msgs/msg/TFMessage
+        count: 1470
+        rate_hz: 0.0
+        header_backwards: 0
+        header_duplicates: 0
+        period_p95_ms: null
+        record_minus_header_median_ms: null
+        record_minus_header_p95_ms: null
+        invalid_values: 0
+      /tf_static:
+        type: tf2_msgs/msg/TFMessage
+        expected_type: tf2_msgs/msg/TFMessage
+        count: 2
+        rate_hz: 0.0
+        header_backwards: 0
+        header_duplicates: 0
+        period_p95_ms: null
+        record_minus_header_median_ms: null
+        record_minus_header_p95_ms: null
+        invalid_values: 0
+      /md/base_connected:
+        type: std_msgs/msg/Bool
+        expected_type: std_msgs/msg/Bool
+        count: 288
+        rate_hz: 19.999
+        invalid_values: 0
+      /md/left/raw_state:
+        type: std_msgs/msg/Float64MultiArray
+        expected_type: std_msgs/msg/Float64MultiArray
+        count: 72
+        rate_hz: 5.0
+        invalid_values: 0
+      /md/right/raw_state:
+        type: std_msgs/msg/Float64MultiArray
+        expected_type: std_msgs/msg/Float64MultiArray
+        count: 72
+        rate_hz: 5.0
+        invalid_values: 0
+      /diagnostics:
+        type: diagnostic_msgs/msg/DiagnosticArray
+        expected_type: diagnostic_msgs/msg/DiagnosticArray
+        count: 304
+        rate_hz: 19.79
+        invalid_values: 0
+    velodyne_packets_per_scan:
+      minimum: 76
+      maximum: 76
+      median: 76.0
+    lidar_imu_timing:
+      nearest_imu_minus_lidar_median_ms: -0.013
+      nearest_absolute_difference_p95_ms: 4.777
+    calibration_excitation:
+      imu_peak_abs_gyro_radps:
+      - 0.0855
+      - 0.1012
+      - 0.0995
+      wheel_peak_abs_linear_mps: 0.3101
+      wheel_peak_abs_yaw_radps: 0.0327
+      sufficient_yaw_excitation: false
+      sufficient_roll_pitch_excitation: true
+    imu_values:
+      acceleration_norm_mps2:
+        median: 9.7456
+        p05: 9.4786
+        p95: 10.0425
+      quaternion_norm:
+        minimum: 1.0
+        maximum: 1.0
+      covariance:
+        orientation_available_fraction: 1
+        angular_velocity_available_fraction: 1
+        linear_acceleration_available_fraction: 1
+    wheel_odometry_covariance:
+      pose_nonzero_fraction: 1
+      twist_nonzero_fraction: 1
+    md_feedback:
+      base_connected_false_samples: 0
+      controllers:
+        /md/left/raw_state:
+          samples: 72
+          peak_current_a: 0.1
+          nonzero_state_samples: 0
+        /md/right/raw_state:
+          samples: 72
+          peak_current_a: 0.1
+          nonzero_state_samples: 0
+    diagnostics:
+      status_count: 334
+      ok_status_count: 302
+      warning_status_count: 32
+      error_status_count: 0
+      issues:
+      - name: 'ekf_filter_node: Filter diagnostic updater'
+        level: 1
+        severity: WARN
+        message: Potentially erroneous data or settings detected for a robot_localization
+          state estimation this->
+        count: 30
+      - name: terrain_mapping/monitor
+        level: 1
+        severity: WARN
+        message: 'OBSERVE_ONLY FAULT: ok'
+        count: 1
+      - name: terrain_mapping/monitor
+        level: 1
+        severity: WARN
+        message: 'OBSERVE_ONLY FAULT: terrain map stale or invalid'
+        count: 1
+      terrain_extrema:
+        maximum_risk: 0.0
+        maximum_abs_relative_roll_deg: 0.0
+        maximum_abs_relative_pitch_deg: 0.0
+        maximum_abs_dynamic_roll_load_deg: 0.0
+        maximum_abs_dynamic_pitch_load_deg: 0.0
+      terrain_extrema_locations: {}
+    tf_parents:
+      base_footprint:
+      - odom
+      base_link:
+      - odom
+      imu_link:
+      - base_link
+      velodyne:
+      - base_link
+    runtime_checks_still_required:
+    - /velodyne_points fields x,y,z,intensity,ring,time
+    - LiDAR-to-IMU physical time offset under sufficient angular motion
+    - single live publisher ownership for dynamic TF
+  session:
+    schema_version: 2
+    environment: inline
+    mapping_backend: fastlio_sc_pgo
+    acquisition_odometry_topic: /wheel/odom
+    recorded_size_bytes: 5398412
+    odom_cumulative_distance_m: 2.182046993338413
+    maximum_map_odom_translation_jump_m: 0.0
+    maximum_map_odom_yaw_jump_deg: 0.0
+    md_disconnect_count: 0
+    md_disconnect_total_sec: 0.0
+    md_disconnect_max_sec: 0.0
+  bundle_size_bytes: 6421004

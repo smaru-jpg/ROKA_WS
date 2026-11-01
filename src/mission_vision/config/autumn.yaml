@@ -1,0 +1,54 @@
+
+mission:
+  name: "autumn"
+
+camera:
+  type: "ros"
+  topic: "/roka/arm_camera/color/image_raw"
+  width: 640
+  height: 480
+  fps: 30
+
+model:
+  path: "models/vision_0831.pt"
+  sha256: "34a559f050a28951bf99fa47d95101c73477b7f5c92cd099d9b040e183105d2e"
+  expected_classes: {0: A, 1: E, 2: Heart, 3: K, 4: M, 5: O, 6: R, 7: Y}
+  image_size: 640
+  device: "auto"
+  yolo_conf_threshold: 0.25
+
+inference:
+  # Allows several distinct model classes to be confirmed together.
+  detection_mode: "multiple"
+  timer_period_sec: 0.10
+
+display:
+  enabled: true
+
+ros:
+  result_topic: "/roka/vision/result"
+
+pipeline:
+  preprocess: []
+
+  detection:
+    - module: "mission_vision.filters.confidence_filter"
+      class: "ConfidenceFilter"
+      enabled: true
+      params:
+        threshold: 0.60
+
+  result:
+    - module: "mission_vision.filters.marker_count_filter"
+      class: "MarkerCountFilter"
+      enabled: true
+      params:
+        window_size: 10
+        required_count: 7
+        disappear_frames: 8
+        max_sequence_length: 5
+    # Later example:
+    # - module: "mission_vision.filters.dedup_filter"
+    #   class: "DedupFilter"
+    #   enabled: true
+    #   params: {}

@@ -1,0 +1,11 @@
+roka_arm_hold:
+  ros__parameters:
+    arm_serial_port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT89FBMQ-if00-port0
+    wrist_serial_port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT78LQH1-if00-port0
+    # Keep the selected section pose mechanically held after terminal exit.
+    torque_off_on_exit: false
+    verify_period_sec: 1.0
+    # One RS-485/TTL status packet miss must not tear down the entire mission.
+    # Three consecutive failed checks revoke base permission; successful reads
+    # recover automatically without restarting the launch.
+    communication_grace_count: 2

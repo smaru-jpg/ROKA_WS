@@ -1,0 +1,27 @@
+schema_version: 1
+result: FAIL
+lio:
+  odom_count: 3778
+  cloud_count: 3778
+  path_length_m: 57.80635626004155
+  maximum_step_m: 0.12915169661957351
+  maximum_yaw_step_rad: 0.061223184984266474
+  z_span_m: 2.861923319446881
+  displacement_m: 11.476742145216912
+pgo:
+  path_pose_count: 320
+  save_success: true
+  save_message: saved 23021 optimized points and 320 keyframes
+  archives:
+    keyframe_poses.bin:
+      bytes: 17944
+      count: 320
+      version: 1
+      legacy_magic: false
+    scan_context.bin:
+      bytes: 3074584
+      count: 320
+      version: 1
+      legacy_magic: false
+failures:
+- FAST-LIO pose step exceeds 0.100 m

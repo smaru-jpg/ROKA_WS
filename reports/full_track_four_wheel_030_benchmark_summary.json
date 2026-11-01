@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-03T11:49:04+09:00",
+  "csv_file": "/home/ryoo/roka_ws/reports/full_track_four_wheel_030_benchmark.csv",
+  "runs": 1,
+  "successes": 1,
+  "completion_rate": 1.0,
+  "worst_lateral_error_m": 0.0743,
+  "maximum_abs_roll_deg": 40.215,
+  "maximum_abs_pitch_deg": 32.543,
+  "decision": "PASS",
+  "recommendation": "manual_speed_step_test_allowed"
+}

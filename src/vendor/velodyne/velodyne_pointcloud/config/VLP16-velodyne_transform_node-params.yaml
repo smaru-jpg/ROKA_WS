@@ -1,0 +1,20 @@
+velodyne_transform_node:
+    ros__parameters:
+        calibration: VLP16db.yaml
+        model: VLP16
+        # Indoor visualization and mapping need nearby walls.  Keep a small
+        # margin above the VLP-16 minimum range instead of discarding every
+        # return inside 0.9 m.
+        min_range: 0.35
+        # PK-3A mapping/navigation does not use returns beyond 30 m. Keeping
+        # the field cloud compact prevents the ROS 2 conversion path from
+        # falling behind the live sensor.
+        max_range: 30.0
+        view_direction: 0.0
+        fixed_frame: ""
+        target_frame: ""
+        # Match the previously working ROS 1 VLP16_points.launch. Consumers
+        # use XYZ fields and do not require a dense ring/image layout.
+        organize_cloud: false
+        # Live control needs the newest scan, never a backlog of old scans.
+        input_queue_depth: 1

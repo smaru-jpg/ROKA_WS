@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>roka_map_localization</name>
+  <version>0.1.0</version>
+  <description>Guarded fixed-PCD localization for the ROKA FAST-LIO2 stack.</description>
+  <maintainer email="ryoo@example.com">ryoo</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>pcl_conversions</depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_eigen</depend>
+  <depend>tf2_ros</depend>
+  <exec_depend>roka_robot_description</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

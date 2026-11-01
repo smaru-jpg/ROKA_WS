@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Independently reviewable watertight PK-3A solid module. -->
+<mujoco model="PK-3A solid module 3CV1_G1">
+  <compiler angle="radian"/>
+  <option timestep="0.002" integrator="implicitfast" gravity="0 0 -9.81"/>
+  <visual>
+    <headlight ambient="0.34 0.34 0.34" diffuse="0.76 0.76 0.76"/>
+    <quality shadowsize="1024" offsamples="1"/>
+    <global azimuth="135" elevation="-28" offwidth="1100" offheight="720"/>
+  </visual>
+  <statistic center="0 0 0.20" extent="1.611600"/>
+  <asset>
+    <texture name="ground_tex" type="2d" builtin="checker" width="128" height="128"
+             rgb1="0.40 0.41 0.42" rgb2="0.31 0.32 0.33"/>
+    <material name="ground_mat" texture="ground_tex" texrepeat="8 8"
+              texuniform="true" roughness="0.96"/>
+    <material name="module_mat" rgba="0.73 0.56 0.36 1"
+              specular="0.08" shininess="0.12" roughness="0.90"/>
+    <mesh name="module_visual" file="../../assets/visual/modules/3CV1_G1.obj" smoothnormal="false"/>
+    <hfield name="module_collision" file="../../assets/collision/modules/3CV1_G1.png"
+            size="0.406431382 0.465014144 0.874939863 0.030000000"/>
+  </asset>
+  <worldbody>
+    <light pos="-2 -3 5" dir="0.2 0.3 -1" directional="true" castshadow="false"/>
+    <geom name="ground" type="plane" pos="0 0 -0.032000" size="3 3 0.1"
+          rgba="0 0 0 0" friction="0.9 0.01 0.001"/>
+    <geom name="ground_visual" type="box" pos="0 0 -0.057000"
+          size="3 3 0.025" material="ground_mat" contype="0" conaffinity="0"/>
+    <body name="module">
+      <geom name="visual_3CV1_G1" type="mesh" mesh="module_visual" material="module_mat"
+            contype="0" conaffinity="0"/>
+      <geom name="track_3CV1_G1" type="hfield" hfield="module_collision"
+            pos="0.000000000 0.012837692 -0.032000000"
+            rgba="0 0 0 0" group="4" friction="1.1 0.01 0.001"
+            condim="6"
+            priority="1"
+            solmix="1"
+            solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2.0"/>
+      <site name="inlet_right" pos="-0.291712665 -0.452176452 0" size="0.01" rgba="0 0 1 0"/>
+      <site name="inlet_left" pos="-0.406431382 0.452176452 0" size="0.01" rgba="0 0 1 0"/>
+      <site name="outlet_right" pos="0.291712665 -0.452176452 0" size="0.01" rgba="1 0 0 0"/>
+      <site name="outlet_left" pos="0.406431382 0.452176452 0" size="0.01" rgba="1 0 0 0"/>
+    </body>
+    <camera name="module_view" pos="-1.611600 -1.611600 1.208700"
+            xyaxes="0.707107 -0.707107 0 0.408248 0.408248 0.816497"/>
+    <camera name="module_top" pos="0 0 2.256240" xyaxes="1 0 0 0 1 0"/>
+  </worldbody>
+</mujoco>

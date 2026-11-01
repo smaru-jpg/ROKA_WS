@@ -1,0 +1,11 @@
+schema_version: 2
+environment: inline
+mapping_backend: fastlio_sc_pgo
+acquisition_odometry_topic: /wheel/odom
+recorded_size_bytes: 5398412
+odom_cumulative_distance_m: 2.182046993338413
+maximum_map_odom_translation_jump_m: 0.0
+maximum_map_odom_yaw_jump_deg: 0.0
+md_disconnect_count: 0
+md_disconnect_total_sec: 0.0
+md_disconnect_max_sec: 0.0

@@ -1,0 +1,6 @@
+run,reset_keyframe,success,outcome,sim_duration_sec,wall_duration_sec,max_progress_pct,max_abs_lateral_error_m,rms_lateral_error_m,max_abs_heading_error_deg,max_abs_roll_deg,max_abs_pitch_deg,min_reference_height_delta_m,min_tire_clearance_m,recovery_count,recovery_time_sec,corridor_unavailable_samples,max_linear_command_mps,max_angular_command_radps,status_samples
+1,mapped_nominal,0,mapped corridor departure (0.451m),20.176,10.0,58.385,0.4514,0.1907,31.273,0.018,0.026,-0.0001,0.0,0,0.0,6,0.3,0.8,600
+2,mapped_left_8cm,0,mapped corridor departure (0.453m),19.178,9.5,57.764,0.4513,0.1883,31.346,0.014,0.026,-0.0001,0.0,0,0.0,3,0.3,0.8,570
+3,mapped_right_8cm,0,mapped corridor departure (0.452m),20.574,10.2,58.385,0.4518,0.1954,32.35,0.018,0.023,-0.0001,0.0,0,0.0,6,0.3,0.8,612
+4,mapped_yaw_left_8deg,0,mapped corridor departure (0.450m),17.174,8.5,56.524,0.4462,0.1773,28.787,0.015,0.02,-0.0001,0.0,0,0.0,4,0.3,0.8,510
+5,mapped_yaw_right_8deg,0,mapped corridor departure (0.453m),20.374,10.1,58.385,0.451,0.1867,31.32,0.013,0.024,-0.0001,0.0,0,0.0,4,0.3,0.8,606

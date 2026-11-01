@@ -1,0 +1,65 @@
+/**:
+  ros__parameters:
+    feature_extract_enable: false
+    # Indoor/track VLP-16 has only 16 vertical channels.  Retain every return
+    # and use a 10 cm surface grid; the old 2/20 cm combination left too few
+    # planar constraints and produced metres of false Z drift.
+    point_filter_num: 1
+    max_iteration: 4
+    filter_size_surf: 0.10
+    filter_size_map: 0.10
+    cube_side_length: 100.0
+    runtime_pos_log_enable: false
+    map_file_path: "/tmp/roka_fast_lio_map.pcd"
+
+    common:
+      lid_topic: "/velodyne_points"
+      imu_topic: "/imu/data"
+      # Preserve sensor clocks.  A calibrated constant offset is supplied here;
+      # never replace either stamp with node.now().
+      time_sync_en: false
+      time_offset_lidar_to_imu: 0.0
+      world_frame: "lio_odom"
+      body_frame: "base_link"
+      publish_tf: false
+
+    preprocess:
+      lidar_type: 2       # Velodyne
+      scan_line: 16       # VLP-16
+      scan_rate: 10
+      timestamp_unit: 0   # velodyne PointCloud2 time field is seconds
+      blind: 0.3
+
+    mapping:
+      acc_cov: 0.10
+      gyr_cov: 0.10
+      b_acc_cov: 0.0001
+      b_gyr_cov: 0.0001
+      fov_degree: 360.0
+      det_range: 80.0
+      extrinsic_est_en: false
+      # FAST-LIO expects LiDAR origin relative to IMU origin, expressed in
+      # IMU axes.  CAD model: 0.206625 - 0.112325 = 0.0943 m.
+      extrinsic_T: [0.0, 0.0, -0.0943]
+      extrinsic_R: [1.0, 0.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 0.0, 1.0]
+      # Used only to publish base_link poses/clouds instead of IMU-origin poses.
+      base_to_imu_T: [0.1815, 0.0, 0.206625]
+      base_to_imu_R: [1.0, 0.0, 0.0,
+                      0.0, 1.0, 0.0,
+                      0.0, 0.0, 1.0]
+
+    publish:
+      path_en: true
+      effect_map_en: false
+      map_en: false
+      scan_publish_en: true
+      dense_publish_en: false
+      scan_bodyframe_pub_en: true
+
+    pcd_save:
+      # No continuous accumulation occurs in ROKA.  The Trigger service
+      # snapshots the ikd-tree, downsamples it and writes one compressed PCD.
+      pcd_save_en: true
+      interval: 0

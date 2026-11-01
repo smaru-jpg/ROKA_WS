@@ -1,0 +1,20 @@
+schema_version: 1
+result: PASS
+source_pcd: map_dense.pcd
+surface_pcd: surface.pcd
+method: route_seeded_height_continuity
+resolution_m: 0.1
+track_width_m: 1.2
+corridor_half_width_m: 0.6
+maximum_surface_slope_deg: 55.0
+input_points: 6194
+corridor_points: 644
+surface_cells: 213
+rejected_corridor_cells: 57
+route_station_coverage: 0.9846153846153847
+surface_z_min_m: -0.31774184107780457
+surface_z_max_m: 0.009853363037109375
+neighbour_slope_p95_deg: 27.774101890353176
+limitations:
+- Only the corridor actually observed beside the recorded route is classified.
+- A flat capture validates processing but does not measure future track slope.

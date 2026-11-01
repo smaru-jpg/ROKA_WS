@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "purpose": "Source selection and tolerances for PK-3A closed-loop interface ports",
+  "sample_count": 101,
+  "tolerances": {
+    "target_height_error_m": 0.002,
+    "maximum_height_error_m": 0.01,
+    "maximum_span_error_m": 0.01,
+    "maximum_plan_error_m": 0.005
+  },
+  "modules": {
+    "3BA1": {
+      "config": "config/pk3a_modules.json",
+      "aliases": {
+        "inlet": "high_flat",
+        "outlet": "low_flat",
+        "right_edge": "roller_side_right",
+        "left_edge": "roller_side_left"
+      }
+    },
+    "3CV1": {
+      "config": "config/pk3a_modules.json",
+      "aliases": {
+        "inlet": "bank_cross_section_in",
+        "outlet": "bank_cross_section_out",
+        "right_edge": "high_outer_edge",
+        "left_edge": "low_inner_edge"
+      }
+    },
+    "3DB1": {
+      "config": "config/pk3a_modules.json",
+      "aliases": {
+        "inlet": "high_flat_in",
+        "outlet": "high_flat_out",
+        "right_edge": "bowl_side_right",
+        "left_edge": "bowl_side_left"
+      }
+    },
+    "3TA1L": {
+      "config": "config/pk3a_modules.json",
+      "aliases": {
+        "inlet": "low_end_cross_section",
+        "outlet": "high_end_cross_section",
+        "right_edge": "rectangular_flat",
+        "left_edge": "spline_bank"
+      }
+    },
+    "3TB1L": {
+      "config": "config/pk3a_modules.json",
+      "aliases": {
+        "inlet": "flat_low_end",
+        "outlet": "banked_high_end",
+        "right_edge": "low_angle_spline",
+        "left_edge": "high_angle_spline"
+      }
+    }
+  },
+  "required_module_pairs": [
+    ["3DB1", "3BA1"],
+    ["3BA1", "3BA1"],
+    ["3BA1", "3TA1L"],
+    ["3TA1L", "3TA1L"],
+    ["3TA1L", "3TB1L"],
+    ["3TB1L", "3CV1"],
+    ["3CV1", "3CV1"]
+  ]
+}

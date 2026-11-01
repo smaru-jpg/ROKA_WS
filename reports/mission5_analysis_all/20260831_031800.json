@@ -1,0 +1,41 @@
+{
+  "bag": "/home/ryoo/roka_ws/reports/mission5_runs/20260831_031800",
+  "duration_sec": 139.52909231185913,
+  "tracking_distance_m": 39.49427609191447,
+  "tracking_displacement_m": 39.02461559758947,
+  "tracking_yaw_change_deg": 544.5663233224216,
+  "wheel_distance_m": 39.495109511397004,
+  "wheel_yaw_change_deg": 736.7656880954606,
+  "final_tracking_vs_wheel_offset_m": 5.221410168078688,
+  "leader_trail_points": 253,
+  "leader_trail_length_m": 44.198814550993845,
+  "gap_min_m": 1.5785375823581802,
+  "gap_median_m": 3.305225030753718,
+  "gap_p95_m": 4.18089040350133,
+  "gap_max_m": 5.257387963091858,
+  "raw_max_linear_mps": 0.6,
+  "raw_max_angular_radps": 1.2,
+  "safe_max_linear_mps": 0.6,
+  "safe_max_angular_radps": 1.2,
+  "lifecycle_max_linear_mps": 0.0,
+  "arm_gate_max_linear_mps": 0.0,
+  "maximum_commanded_motor_rpm": null,
+  "maximum_raw_motor_rpm": 60.0,
+  "status_counts": {
+    "WAIT_PREFLIGHT": 1,
+    "SENSOR_FAULT": 1,
+    "ACQUIRE_MOVING_TARGET": 1,
+    "TRACKING_LOCKED": 14,
+    "OCCLUDED_LOCKED": 15,
+    "STOPPED_LOCKED": 1,
+    "LOST_LOCKED": 1,
+    "DISABLED": 1
+  },
+  "control_mode_counts": {
+    "STRAIGHT": 1314,
+    "TURN": 311
+  },
+  "local_curvature_p95_inv_m": 0.9153972706967963,
+  "heading_error_p95_deg": 135.89030326594963,
+  "cross_track_error_p95_m": 0.09482412451146888
+}

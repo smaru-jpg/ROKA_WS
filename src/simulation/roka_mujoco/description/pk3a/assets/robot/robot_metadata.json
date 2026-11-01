@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "name": "roka_mobile_manipulator",
+  "source": {
+    "step_filename": "ASSSEMBLEEE.STEP",
+    "step_size_bytes": 52568950,
+    "step_sha256": "0fd0568182259b99a6705721b63788f1e961223ffd80325033101e31caf0182d",
+    "stl_filename": "asssembleee.stl",
+    "stl_size_bytes": 16978684,
+    "stl_sha256": "9aa6887498c5ca2b0c91f64990e898027816ba5dc333120a20ccd973197eaf1c"
+  },
+  "step_inventory": {
+    "application_protocol": "AP214",
+    "millimetre_units_declared": true,
+    "product_count": 58,
+    "products": [
+      "0511-A110",
+      "375",
+      "413",
+      "86-0101 REV B ENVELOPE, VLP-16",
+      "[3D] PDIST120",
+      "[3D] PDIST120.step",
+      "[3D]HBLS2D02E0200-D206",
+      "ASSSEMBLEEE",
+      "base",
+      "bat",
+      "camera_mount",
+      "Component15.step",
+      "Component3(Mirror).step",
+      "Component3.step",
+      "DC12_A01_CVR_CABLE_5.stp",
+      "DC12_A01_SPACER_RING_1.stp",
+      "DUMMY_DC12.stp",
+      "eBom-FreeParts.step",
+      "FRAME",
+      "FRP54-A110.stp",
+      "frp54-h030.stp",
+      "FRP54-H221K",
+      "FRP54-H221K(2)",
+      "FRP54-I110K.stp",
+      "gripper_assemble",
+      "H54P-200_M54P-060.stp",
+      "hand",
+      "HINGE_FRP54-H002",
+      "HINGE_FRP54-H021",
+      "lidar_bottom.prt",
+      "m3X8 (1).step",
+      "m3X8 (2).step",
+      "m3X8 (3).step",
+      "m3X8.step",
+      "M3X8L-Standoff.step",
+      "m4X12 (1).step",
+      "m4X12 (2).step",
+      "m4X12 (3).step",
+      "m4X12.step",
+      "m6X20 (1).step",
+      "m6X20 (2).step",
+      "m6X20 (3).step",
+      "m6X20.step",
+      "MD200T, DMD200T.step",
+      "motor_case_maru_add",
+      "motorbracket.prt",
+      "NX05P_B03_HINGE-H-S-BA",
+      "PDIST120.step",
+      "PDIST2-PCB.step",
+      "plate",
+      "propile-2020 X 200mm",
+      "rack spur rectangular_am_Metric - Rack-spur - rectangular 1.5M 20PA 10FW 10PH 118L---SAll",
+      "RealSense_D435",
+      "robot_arm",
+      "spur gear_am_Metric - Spur gear 1.5M 20T 20PA 10FW ---S20N75H50L8N",
+      "WBH_M2_5X12.stp",
+      "XM,H-430_idler",
+      "XM,H-430_idler.stp"
+    ],
+    "assembly_occurrence_count": 98,
+    "manifold_solid_brep_count": 69,
+    "closed_shell_count": 119,
+    "product_definition_entity_count": 58,
+    "product_definition_reference_count": 330
+  },
+  "axis_transform": {
+    "description": "MuJoCo X=CAD X, Y=-CAD Z, Z=CAD Y",
+    "scale": 0.001,
+    "reference_cad_mm": [
+      -4.977757454,
+      -10.280687332,
+      842.500015259
+    ],
+    "matrix_cad_to_mujoco": [
+      [
+        0.001,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -0.001
+      ],
+      [
+        0.0,
+        0.001,
+        0.0
+      ]
+    ]
+  },
+  "source_mesh": {
+    "vertex_count_after_merge": 168325,
+    "face_count": 339572,
+    "connected_component_count": 216,
+    "bounds_cad_mm": [
+      [
+        -277.977753,
+        -114.31282,
+        569.825012
+      ],
+      [
+        571.769958,
+        489.425446,
+        1115.175049
+      ]
+    ],
+    "extents_cad_mm": [
+      849.747711,
+      603.738266,
+      545.350037
+    ],
+    "watertight": false
+  },
+  "body": {
+    "visual_vertex_count": 123265,
+    "visual_face_count": 249516,
+    "component_count": 152,
+    "visual_bounds_m": [
+      [
+        -0.23650001,
+        -0.187499985,
+        -0.014189161
+      ],
+      [
+        0.576747716,
+        0.187500015,
+        0.499706133
+      ]
+    ]
+  },
+  "wheels": {
+    "front_left": {
+      "position_m": [
+        0.169999999,
+        0.213574997,
+        0.000374983
+      ],
+      "cad_centre_mm": [
+        165.022242,
+        -9.905704,
+        628.925018
+      ],
+      "main_component_extents_mm": [
+        206.000011,
+        205.814369,
+        118.200012
+      ],
+      "component_count": 16,
+      "visual_vertex_count": 11265,
+      "visual_face_count": 22514
+    },
+    "front_right": {
+      "position_m": [
+        0.169999999,
+        -0.213574997,
+        0.000374983
+      ],
+      "cad_centre_mm": [
+        165.022242,
+        -9.905704,
+        1056.075012
+      ],
+      "main_component_extents_mm": [
+        206.000011,
+        205.814369,
+        118.200073
+      ],
+      "component_count": 16,
+      "visual_vertex_count": 11265,
+      "visual_face_count": 22514
+    },
+    "rear_left": {
+      "position_m": [
+        -0.169999999,
+        0.213574997,
+        0.000374983
+      ],
+      "cad_centre_mm": [
+        -174.977757,
+        -9.905704,
+        628.925018
+      ],
+      "main_component_extents_mm": [
+        205.999992,
+        205.814369,
+        118.200012
+      ],
+      "component_count": 16,
+      "visual_vertex_count": 11265,
+      "visual_face_count": 22514
+    },
+    "rear_right": {
+      "position_m": [
+        -0.169999999,
+        -0.213574997,
+        -0.001124949
+      ],
+      "cad_centre_mm": [
+        -174.977757,
+        -11.405636,
+        1056.075012
+      ],
+      "main_component_extents_mm": [
+        205.999992,
+        205.814369,
+        118.200073
+      ],
+      "component_count": 16,
+      "visual_vertex_count": 11265,
+      "visual_face_count": 22514
+    }
+  },
+  "exported_visual_face_count": 339572,
+  "collision_policy": "primitive boxes and cylinders only",
+  "sensors": {
+    "velodyne": {
+      "frame_id": "velodyne",
+      "data_origin_position_m": [
+        0.1815,
+        0.0,
+        0.112325
+      ],
+      "rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_status": "cad_mount_plus_official_37_7_mm_data_origin_verify_on_hardware"
+    },
+    "imu": {
+      "frame_id": "imu_link",
+      "position_m": [
+        0.1815,
+        0.0,
+        0.206625
+      ],
+      "rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mount_status": "operator_reported_same_xy_and_approximately_60_mm_above_vlp16_top"
+    }
+  },
+  "simulation_stage": {
+    "mobile_base": "four_independent_driven_wheels",
+    "arm": "locked_with_base_until_step_joint_axis_audit",
+    "commercial_sensor_geometry": "included_in_visual_mesh",
+    "collision_policy": "box_base_and_ellipsoid_wheels"
+  }
+}

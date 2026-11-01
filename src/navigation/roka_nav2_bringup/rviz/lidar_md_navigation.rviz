@@ -1,0 +1,249 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Tool Properties
+    Name: Tool Properties
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 30
+      Alpha: 0.5
+      Value: true
+    - Class: rviz_default_plugins/Map
+      Name: Map
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map
+      Alpha: 0.7
+      Color Scheme: map
+      Value: true
+    - Class: rviz_default_plugins/LaserScan
+      Name: Velodyne Scan
+      Enabled: true
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /scan_stabilized
+      Size (m): 0.03
+      Queue Size: 10
+      Value: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Velodyne 3D Points
+      Enabled: false
+      Topic:
+        Value: /velodyne_points
+      Style: Points
+      Size (Pixels): 2
+      Decay Time: 0.2
+      Position Transformer: XYZ
+      Color Transformer: AxisColor
+      Axis: Z
+      Value: false
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Live Accumulated 3D Map
+      Enabled: false
+      Topic:
+        Value: /map_3d/cloud
+      Style: Points
+      Size (Pixels): 2
+      Decay Time: 0
+      Position Transformer: XYZ
+      Color Transformer: AxisColor
+      Axis: Z
+      Value: false
+    - Class: rviz_default_plugins/Odometry
+      Name: Robot Motion (odom)
+      Enabled: true
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /odom
+      Keep: 100
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Approved Mapped Path
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/centerline
+      Line Style: Lines
+      Line Width: 0.08
+      Color: 0; 210; 255
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Traversed Approved Path
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/traversed_path
+      Line Style: Lines
+      Line Width: 0.11
+      Color: 40; 255; 80
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Corridor Left Boundary
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/corridor_left
+      Line Style: Lines
+      Line Width: 0.04
+      Color: 255; 220; 0
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Corridor Right Boundary
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/corridor_right
+      Line Style: Lines
+      Line Width: 0.04
+      Color: 255; 220; 0
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Curvature Limited Join
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/join_path
+      Line Style: Lines
+      Line Width: 0.10
+      Color: 255; 40; 220
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Actual Driven Trace
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/actual_path
+      Line Style: Lines
+      Line Width: 0.06
+      Color: 255; 255; 255
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Remaining Approved Path
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/remaining_path
+      Line Style: Lines
+      Line Width: 0.09
+      Color: 40; 100; 255
+      Value: true
+    - Class: rviz_default_plugins/Pose
+      Name: AMCL Robot Pose
+      Enabled: true
+      Alpha: 1
+      Color: 255; 40; 40
+      Head Length: 0.22
+      Head Radius: 0.10
+      Shaft Length: 0.42
+      Shaft Radius: 0.05
+      Shape: Arrow
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/localized_pose
+      Value: true
+    - Class: rviz_default_plugins/Pose
+      Name: Reference Lookahead Target
+      Enabled: true
+      Alpha: 1
+      Color: 255; 150; 0
+      Head Length: 0.18
+      Head Radius: 0.08
+      Shaft Length: 0.35
+      Shaft Radius: 0.04
+      Shape: Arrow
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/current_target
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Name: Track Progress
+      Enabled: true
+      Namespaces:
+        {}
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/progress_marker
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: false
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+    - Class: rviz_default_plugins/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz_default_plugins/SetGoal
+      Topic: /goal_pose
+    - Class: rviz_default_plugins/PublishPoint
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Angle: 0
+      Scale: 45
+      Target Frame: map
+      Value: TopDownOrtho (rviz)
+      X: -0.5
+      Y: -0.5

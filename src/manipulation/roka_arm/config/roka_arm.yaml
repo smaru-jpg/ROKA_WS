@@ -1,0 +1,35 @@
+roka_arm_controller:
+  ros__parameters:
+    # Verified by read-only Dynamixel ping on the competition hardware.
+    # FT89FBMQ: H54 IDs 11/12/13 @ 1 Mbps (RS-485)
+    # FT78LQH1: X-series IDs 1/4/6 @ 57,600 bps (TTL)
+    arm_serial_port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT89FBMQ-if00-port0
+    wrist_serial_port: /dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT78LQH1-if00-port0
+    connect_hardware: false
+    enable_motion: false
+    # Keep the last commanded pose held after normal node shutdown/Ctrl+C.
+    torque_off_on_exit: false
+
+    color_topic: /roka/arm_camera/color/image_raw
+    depth_topic: /roka/arm_camera/aligned_depth_to_color/image_raw
+    visualize: true
+    inference_device: auto
+    inference_rate_hz: 10.0
+    maximum_depth_age_sec: 0.12
+    target_class_ids: [0, 1]
+    # Section 2 uses repeated depth-confirmed detections; do not add a second
+    # vertical ROI gate that delays an otherwise reachable box.
+    activation_min_y_ratio: 0.0
+    auto_control_start: false
+
+    target_x: 355
+    target_y: 360
+    target_depth_mm: 250
+    y_delta: 15
+    x_command_interval: 0.15
+    y_command_interval: 0.25
+    z_command_interval: 0.15
+
+    # CAD reference only. Do not publish this TF until the real mount
+    # and RealSense frame convention have been measured.
+    camera_mount_reference_xyz_m: [0.53568, -0.00011, 0.43009]

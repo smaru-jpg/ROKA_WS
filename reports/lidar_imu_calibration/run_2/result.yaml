@@ -1,0 +1,67 @@
+schema_version: 2
+algorithm: LI-Init
+result: PASS
+selected_stage: batch_initialization
+rotation_lidar_in_imu_deg:
+- -0.810236
+- -0.454695
+- -0.11026
+rotation_lidar_in_imu_matrix:
+- - 0.999967
+  - 0.002036
+  - -0.007907
+- - -0.001924
+  - 0.999898
+  - 0.014155
+- - 0.007935
+  - -0.014139
+  - 0.999869
+translation_lidar_in_imu_m:
+- -0.092905
+- -0.072456
+- 0.19268
+time_offset_lidar_to_imu_sec: -0.128141
+raw_time_offset_lidar_to_imu_sec: -0.128141
+time_offset_policy: preserve_raw_li_init_until_two_run_branch_alignment
+time_offset_normalization:
+  raw_offset_sec: -0.128141
+  cut_frame_period_sec: 0.03333333333333333
+  nearest_whole_cut_frames: -4
+  phase_residual_sec: 0.005192333333333327
+translation_policy: diagnostic_only_cad_translation_is_retained
+refinement_diagnostics:
+  available: true
+  stable: true
+  rotation_change_deg: 1.8447517786613508
+  translation_change_m: 0.04804314212247155
+  limits:
+    rotation_warning_deg: 3.0
+    translation_warning_m: 0.15
+  reported_result:
+    stage: online_refinement
+    rotation_lidar_in_imu_deg:
+    - -1.273081
+    - 1.331519
+    - -0.082159
+    rotation_lidar_in_imu_matrix:
+    - - 0.999729
+      - 0.000917
+      - 0.023262
+    - - -0.001433
+      - 0.999753
+      - 0.022183
+    - - -0.023236
+      - -0.02221
+      - 0.999483
+    translation_lidar_in_imu_m:
+    - -0.099367
+    - -0.112661
+    - 0.218174
+    raw_time_offset_lidar_to_imu_sec: -0.128141
+    time_offset_lidar_to_imu_sec: -0.128141
+    time_offset_normalization:
+      raw_offset_sec: -0.128141
+      cut_frame_period_sec: 0.03333333333333333
+      nearest_whole_cut_frames: -4
+      phase_residual_sec: 0.005192333333333327
+source_result: /home/ryoo/roka_ws/reports/lidar_imu_calibration/run_2/Initialization_result.txt

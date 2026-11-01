@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-03T11:34:45+09:00",
+  "csv_file": "/home/ryoo/roka_ws/reports/mapped_route_020_control.csv",
+  "runs": 5,
+  "successes": 0,
+  "completion_rate": 0.0,
+  "worst_lateral_error_m": 0.4515,
+  "maximum_abs_roll_deg": 0.023,
+  "maximum_abs_pitch_deg": 0.035,
+  "decision": "FAIL",
+  "recommendation": "do_not_increase_speed"
+}

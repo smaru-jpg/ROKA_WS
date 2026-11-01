@@ -1,0 +1,104 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Metric Grid
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 20
+      Alpha: 0.25
+      Value: true
+    - Class: rviz_default_plugins/Map
+      Name: Growing Occupancy Map
+      Enabled: true
+      Topic:
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map
+      Alpha: 0.85
+      Color Scheme: map
+      Value: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Dense Forward LiDAR (2s accumulated)
+      Enabled: true
+      Topic:
+        Depth: 2
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /mapping/front_120_points
+      Style: Flat Squares
+      Size (Pixels): 4
+      Decay Time: 2.0
+      Position Transformer: XYZ
+      Color Transformer: AxisColor
+      Axis: Z
+      Selectable: false
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Recorded Robot Path
+      Enabled: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /track/recorded_path
+      Line Style: Lines
+      Line Width: 0.08
+      Color: 255; 210; 0
+      Value: true
+    - Class: rviz_default_plugins/Odometry
+      Name: Robot Pose
+      Enabled: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /odom
+      Keep: 1
+      Shape:
+        Alpha: 1
+        Axes Length: 0.45
+        Axes Radius: 0.04
+        Color: 255; 80; 80
+        Head Length: 0.15
+        Head Radius: 0.08
+        Shaft Length: 0.45
+        Shaft Radius: 0.04
+        Value: Arrow
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 32; 34; 38
+    Fixed Frame: map
+    Frame Rate: 20
+  Name: Mapping Growth
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+  Value: true
+Views:
+  Current:
+    Class: rviz_default_plugins/Orbit
+    Distance: 8
+    Focal Point:
+      X: 0
+      Y: 0
+      Z: 0.5
+    Name: Current View
+    Near Clip Distance: 0.01
+    Pitch: 0.55
+    Yaw: 0.80
+    Target Frame: base_footprint
+    Value: Orbit (rviz)

@@ -1,0 +1,23 @@
+# ROS 2/colcon generated outputs
+/build/
+/install/
+/log/
+/.roka_python/
+
+# Python/test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Incomplete and rollback map bundles; final maps remain tracked separately.
+/maps/.staging/
+/maps/.backup/
+/maps/*/.staging/
+/maps/*/.backup/
+
+# Editor/OS temporary files
+*~
+*.swp
+*.tmp
+.DS_Store

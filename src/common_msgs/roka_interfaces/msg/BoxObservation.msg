@@ -1,0 +1,10 @@
+std_msgs/Header header
+bool detected
+int32 class_id
+string class_name
+float32 confidence
+float32 center_x_ratio
+float32 center_y_ratio
+float32 depth_mm
+bool depth_valid
+bool activation_roi

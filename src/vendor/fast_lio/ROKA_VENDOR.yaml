@@ -1,0 +1,14 @@
+name: FAST_LIO
+upstream: https://github.com/hku-mars/FAST_LIO
+branch: ROS2
+commit: a4743b095409588842a5b30ddfa27e29d2f99164
+ikd_tree_commit: e2e3f4e9d3b95a9e66b1ba83dc98d4a05ed8a3c4
+license: BSD-3-Clause
+local_changes:
+  - Livox support is optional and disabled for the VLP-16 build.
+  - VLP-16 seconds-based per-point time is configured explicitly.
+  - Output pose and body cloud are transformed from IMU origin to base_link.
+  - TF publication is parameterized and disabled in the parallel mapping stack.
+  - Map save snapshots the ikd-tree and writes one binary-compressed PCD.
+  - Unbounded point accumulation and always-on debug files are disabled.
+

@@ -1,0 +1,53 @@
+
+mission:
+  name: "summer"
+
+camera:
+  type: "ros"
+  topic: "/roka/arm_camera/color/image_raw"
+  width: 640
+  height: 480
+  fps: 30
+
+model:
+  path: "models/box_0830.pt"
+  sha256: "cc4c52f9151bb1b765c38f7a7e225cb0f4267d67252a640ae72931a17bb8787b"
+  expected_classes: {0: box}
+  image_size: 640
+  device: "auto"
+  yolo_conf_threshold: 0.25
+
+inference:
+  detection_mode: "single"
+  timer_period_sec: 0.10
+
+display:
+  enabled: true
+
+ros:
+  result_topic: "/roka/vision/result"
+
+pipeline:
+  preprocess: []
+
+  detection:
+    - module: "mission_vision.filters.confidence_filter"
+      class: "ConfidenceFilter"
+      enabled: true
+      params:
+        threshold: 0.65
+
+    # Later example:
+    # - module: "mission_vision.filters.traffic_color_filter"
+    #   class: "TrafficColorFilter"
+    #   enabled: true
+    #   params:
+    #     min_color_ratio: 0.15
+
+  result:
+    - module: "mission_vision.filters.temporal_filter"
+      class: "TemporalFilter"
+      enabled: true
+      params:
+        window_size: 5
+        required_count: 3

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Level dynamics fixture for paths recorded by the real field mapping stack. -->
+<mujoco model="PK-3A mapped field path level test">
+  <compiler angle="radian"/>
+  <option timestep="0.002" integrator="implicitfast" gravity="0 0 -9.81"
+          cone="elliptic" solver="Newton" iterations="80" tolerance="1e-10"
+          impratio="5">
+    <flag multiccd="enable"/>
+  </option>
+  <visual>
+    <headlight diffuse="0.72 0.72 0.72" ambient="0.32 0.32 0.32"
+               specular="0.12 0.12 0.12"/>
+    <quality shadowsize="1024" offsamples="1"/>
+    <map znear="0.01" zfar="30"/>
+    <global azimuth="135" elevation="-35" offwidth="640" offheight="360"/>
+  </visual>
+  <statistic center="1.6 0.45 0.15" extent="4.5"/>
+  <asset>
+    <texture name="ground_tex" type="2d" builtin="checker" width="256" height="256"
+             rgb1="0.45 0.46 0.47" rgb2="0.36 0.37 0.38"/>
+    <material name="ground_mat" texture="ground_tex" texrepeat="12 8"
+              texuniform="true" reflectance="0.03" roughness="0.96"/>
+    <material name="robot_frame_mat" rgba="0.16 0.22 0.30 1"
+              specular="0.24" shininess="0.32" roughness="0.58"/>
+    <material name="robot_wheel_mat" rgba="0.035 0.040 0.045 1"
+              specular="0.06" shininess="0.08" roughness="0.94"/>
+    <mesh name="robot_base_visual"
+          file="../assets/robot/visual/base_and_locked_arm.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_front_left_visual"
+          file="../assets/robot/visual/wheel_front_left.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_front_right_visual"
+          file="../assets/robot/visual/wheel_front_right.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_rear_left_visual"
+          file="../assets/robot/visual/wheel_rear_left.obj" smoothnormal="true"/>
+    <mesh name="robot_wheel_rear_right_visual"
+          file="../assets/robot/visual/wheel_rear_right.obj" smoothnormal="true"/>
+  </asset>
+  <worldbody>
+    <light pos="1.5 -1 7" dir="0.1 0.2 -1" directional="true" castshadow="false"/>
+    <geom name="mapped_test_floor" type="plane" pos="1.5 0.4 0"
+          size="6 4 0.1" material="ground_mat" friction="0.9 0.01 0.001"
+          condim="6" priority="1" solref="0.008 1.1"
+          solimp="0.92 0.99 0.002 0.5 2.0"/>
+    <body name="base_link" pos="0 0 0.108" quat="1 0 0 0">
+      <freejoint name="floating_base_joint"/>
+      <inertial pos="0 0 0.18" mass="26" diaginertia="0.9 1.4 1.5"/>
+      <geom name="robot_base_visual_geom" type="mesh" mesh="robot_base_visual"
+            material="robot_frame_mat" mass="0" contype="0" conaffinity="0" group="0"/>
+      <geom name="robot_chassis_collision" type="box" pos="-0.005 0 0.142"
+            size="0.237 0.188 0.078" mass="0" rgba="0 0 0 0" group="3"
+            contype="1" conaffinity="1"/>
+      <geom name="robot_arm_pedestal_collision" type="box" pos="0.065 0 0.265"
+            size="0.065 0.075 0.105" mass="0" rgba="0 0 0 0" group="3"
+            contype="1" conaffinity="1"/>
+      <geom name="robot_arm_envelope_collision" type="box" pos="0.25 0 0.39"
+            size="0.19 0.075 0.075" mass="0" rgba="0 0 0 0" group="3"
+            contype="1" conaffinity="1"/>
+      <body name="front_left_wheel_link" pos="0.17 0.213574997 0">
+        <joint name="front_left_wheel_joint" type="hinge" axis="0 1 0"
+               limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="front_left_wheel_visual_geom" type="mesh"
+              mesh="robot_wheel_front_left_visual" material="robot_wheel_mat"
+              mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="front_left_wheel_collision" type="ellipsoid"
+              size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003"
+              condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2"
+              priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <body name="front_right_wheel_link" pos="0.17 -0.213574997 0">
+        <joint name="front_right_wheel_joint" type="hinge" axis="0 1 0"
+               limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="front_right_wheel_visual_geom" type="mesh"
+              mesh="robot_wheel_front_right_visual" material="robot_wheel_mat"
+              mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="front_right_wheel_collision" type="ellipsoid"
+              size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003"
+              condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2"
+              priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <body name="rear_left_wheel_link" pos="-0.17 0.213574997 0">
+        <joint name="rear_left_wheel_joint" type="hinge" axis="0 1 0"
+               limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="rear_left_wheel_visual_geom" type="mesh"
+              mesh="robot_wheel_rear_left_visual" material="robot_wheel_mat"
+              mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="rear_left_wheel_collision" type="ellipsoid"
+              size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003"
+              condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2"
+              priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <body name="rear_right_wheel_link" pos="-0.17 -0.213574997 0">
+        <joint name="rear_right_wheel_joint" type="hinge" axis="0 1 0"
+               limited="false" damping="0.15" frictionloss="0.05" armature="0.02"/>
+        <geom name="rear_right_wheel_visual_geom" type="mesh"
+              mesh="robot_wheel_rear_right_visual" material="robot_wheel_mat"
+              mass="0" contype="0" conaffinity="0" group="0"/>
+        <geom name="rear_right_wheel_collision" type="ellipsoid"
+              size="0.103 0.0591 0.103" mass="4.2" friction="1.05 0.015 0.003"
+              condim="6" solref="0.008 1.1" solimp="0.92 0.99 0.002 0.5 2"
+              priority="2" rgba="0 0 0 0" group="3" contype="1" conaffinity="1"/>
+      </body>
+      <site name="base_imu_site" pos="0.1815 0 0.206625" size="0.008"
+            rgba="0.2 0.8 1 0"/>
+      <camera name="driver_camera" pos="0.53568 -0.00011 0.43009"
+              xyaxes="0 -1 0 0 0 1" resolution="640 360" fovy="58"/>
+    </body>
+  </worldbody>
+  <actuator>
+    <velocity name="front_left_wheel_actuator" joint="front_left_wheel_joint"
+              kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265"
+              forcelimited="true" forcerange="-16 16"/>
+    <velocity name="front_right_wheel_actuator" joint="front_right_wheel_joint"
+              kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265"
+              forcelimited="true" forcerange="-16 16"/>
+    <velocity name="rear_left_wheel_actuator" joint="rear_left_wheel_joint"
+              kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265"
+              forcelimited="true" forcerange="-16 16"/>
+    <velocity name="rear_right_wheel_actuator" joint="rear_right_wheel_joint"
+              kv="800" ctrllimited="true" ctrlrange="-31.4159265 31.4159265"
+              forcelimited="true" forcerange="-16 16"/>
+  </actuator>
+  <sensor>
+    <framepos name="base_position" objtype="body" objname="base_link"/>
+    <framequat name="base_imu_quat" objtype="site" objname="base_imu_site"/>
+    <gyro name="base_imu_gyro" site="base_imu_site"/>
+    <accelerometer name="base_imu_accel" site="base_imu_site"/>
+  </sensor>
+  <keyframe>
+    <key name="mapped_nominal" qpos="0 0 0.108 1 0 0 0 0 0 0 0"/>
+    <key name="mapped_left_8cm" qpos="0 0.08 0.108 1 0 0 0 0 0 0 0"/>
+    <key name="mapped_right_8cm" qpos="0 -0.08 0.108 1 0 0 0 0 0 0 0"/>
+    <key name="mapped_yaw_left_8deg" qpos="0 0 0.108 0.99756405 0 0 0.06975647 0 0 0 0"/>
+    <key name="mapped_yaw_right_8deg" qpos="0 0 0.108 0.99756405 0 0 -0.06975647 0 0 0 0"/>
+  </keyframe>
+</mujoco>

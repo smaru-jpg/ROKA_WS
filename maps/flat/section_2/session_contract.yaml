@@ -1,0 +1,62 @@
+schema_version: 1
+data_contract:
+  schema_version: 1
+  topics:
+    lidar_packets: /velodyne_packets
+    lidar_points: /velodyne_points
+    imu: /imu/data
+    wheel_odometry: /wheel/odom
+    fused_odometry: /odom
+    lidar_inertial_odometry: /lio/odom
+    dynamic_tf: /tf
+    static_tf: /tf_static
+    recorded_path: /track/recorded_path
+    joy: /joy
+    manual_command: /cmd_vel_joy
+    motor_connected: /md/base_connected
+  qos:
+    sensor_inputs: sensor_data_best_effort
+    odometry: sensor_data_best_effort
+    state: reliable_volatile
+    static_state: reliable_transient_local
+  odometry_authority:
+    acquisition: /wheel/odom
+    flat_processing: /odom
+    track_processing: /lio/odom
+    flat_runtime: /odom
+    track_runtime: /lio/odom
+  tf_ownership:
+    base_link_to_sensors: robot_description_static
+    odom_to_base_link: wheel_imu_ekf
+    lio_map_to_lio_odom: fast_lio_offline_only
+    map_to_odom_flat: slam_toolbox_or_amcl_exactly_one
+    map_to_odom_track: fixed_pcd_localizer_exactly_one
+  offline_replay:
+    replay_static_tf: true
+    replay_dynamic_tf: false
+    excluded_dynamic_parent_frames:
+    - map
+    - lio_map
+data_contract_sha256: 3f210bbe17ea64cc3ea4ab887ead7304795a795f38acb224caafd7a1dc719e08
+hardware_config: /home/ryoo/roka_ws/install/roka_robot_description/share/roka_robot_description/config/pk3a_hardware.yaml
+hardware_config_sha256: ea44002ab5454d3f5f8ad43352917330acb158d7529de35c6e28a939c6e8b77f
+mapping_backend: slam_toolbox_2d
+environment: flat
+recorded_topics:
+- /velodyne_packets
+- /imu/data
+- /wheel/odom
+- /odom
+- /lio/odom
+- /tf
+- /tf_static
+- /joy
+- /cmd_vel_joy
+- /track/recorded_path
+- /terrain/state
+- /terrain/wheel_contact
+- /md/base_connected
+- /md/left/raw_state
+- /md/right/raw_state
+- /diagnostics
+acquisition_odometry_topic: /wheel/odom

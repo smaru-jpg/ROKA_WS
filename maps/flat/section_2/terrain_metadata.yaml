@@ -1,0 +1,20 @@
+schema_version: 1
+frame_id: odom
+topic: /terrain/static_map
+resolution: 0.1
+length: [12, 12]
+layers:
+  - elevation
+  - variance
+  - age
+  - normal_x
+  - normal_y
+  - normal_z
+  - slope
+  - longitudinal_slope
+  - lateral_slope
+  - roughness
+  - step_height
+  - confidence
+  - risk
+  - traversability

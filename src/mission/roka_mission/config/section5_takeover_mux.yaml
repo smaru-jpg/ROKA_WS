@@ -1,0 +1,13 @@
+section5_takeover_mux:
+  ros__parameters:
+    topics:
+      autonomy:
+        topic: /cmd_vel_mission5_raw
+        timeout: 0.30
+        priority: 10
+      joystick:
+        # Xbox B latches zero here; after the stop, LB + left stick owns this
+        # higher-priority input for direct manual recovery.
+        topic: /cmd_vel_joy
+        timeout: 0.50
+        priority: 100

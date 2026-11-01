@@ -1,0 +1,142 @@
+schema_version: 1
+status: SIMULATION_PRIOR_ONLY
+field_navigation_authorized: false
+reason: real 2D occupancy has no observed height; MuJoCo Z/slope is a low-confidence
+  prior
+fusion_policy:
+  xy_route: real_mapping
+  occupancy: real_2d_mapping
+  z_bank_grade_edge: mujoco_metric_arclength_prior
+  speed_schedule: mujoco_demonstration_envelope_provisional
+  live_field_override: VLP16+EBIMU+FAST-LIO/terrain mapper required
+alignment:
+  method: metric_arclength_same_start_module
+  start_module: S00_DB1
+  transferred_modules:
+  - S00_DB1
+  - S01_BA1
+  real_path_length_m: 2.850281416239965
+  simulation_reference_lap_length_m: 67.48300317738558
+  scale: 1.0
+transferred_terrain:
+  minimum_relative_elevation_m: -0.37536255083978176
+  maximum_relative_elevation_m: 0.0
+  maximum_absolute_cross_slope_deg: 0.19783525010781136
+  maximum_absolute_longitudinal_slope_deg: 32.249135360894115
+  minimum_provisional_speed_mps: 0.1
+  maximum_provisional_speed_mps: 0.55
+  planner_would_approve: false
+  outside_demonstrated_envelope_points: 4
+real_2d_map:
+  cell_count: 40000
+  known_cell_count: 10409
+  occupied_cell_count: 498
+  prior_corridor_cell_count: 2024
+terrain_prior_round_trip:
+  existing_pcd_terrain_extractor: PASS
+  cross_slope_residual_deg:
+    median: 0.20151116457332097
+    p95: 1.7911297665295793
+    maximum: 2.478778577244008
+  longitudinal_slope_residual_deg:
+    median: 1.4062429829507324
+    p95: 6.0443639041120285
+    maximum: 9.767958761183921
+real_recording_quality:
+  sensor_contract_result: PASS
+  vlp16_rate_hz: 9.915
+  imu_rate_hz: 100.0
+  wheel_odom_rate_hz: 20.062
+  lidar_imu_nearest_p95_ms: 4.73
+  sufficient_yaw_excitation: false
+  sufficient_roll_pitch_excitation: false
+  odom_cumulative_distance_m: 2.8728220898178862
+  maximum_map_odom_translation_jump_m: 0.05042192578211495
+  maximum_map_odom_yaw_jump_deg: 1.7996604345059142
+  md_disconnect_count: 0
+simulation_evidence:
+  reference_profile_points: 858
+  reference_lap_length_m: 67.48300317738558
+  dynamic_safety_status: provisional_mujoco_only_replace_with_field_envelope
+  dynamic_safety_inputs:
+  - name: fast_test01
+    source: datasets/xbox_demonstrations/fast_test01.csv
+    completed: true
+    sample_count: 4739
+  - name: fast_test01_2
+    source: datasets/xbox_demonstrations/fast_test01_2.csv
+    completed: true
+    sample_count: 6056
+  - name: lap01
+    source: datasets/xbox_demonstrations/lap01.csv
+    completed: false
+    sample_count: 3039
+  - name: lap01_2
+    source: datasets/xbox_demonstrations/lap01_2.csv
+    completed: true
+    sample_count: 7999
+  dynamic_safety_limits:
+    roll_warning_deg: 32.4
+    roll_critical_deg: 38.1
+    roll_hard_deg: 40.6
+    pitch_warning_deg: 27.8
+    pitch_critical_deg: 32.7
+    pitch_hard_deg: 34.8
+    absolute_roll_hard_deg: 85.0
+    absolute_pitch_hard_deg: 65.0
+    attitude_prediction_horizon_sec: 0.2
+    attitude_hard_hold_sec: 0.08
+  limitations:
+  - MuJoCo mass, center of mass, friction and tire compliance remain provisional
+  - absolute_pitch_hard_deg retains the MuJoCo gross inversion guard because no pitch-over
+    failure was recorded
+  - do not claim real-world safety until a separate field calibration and validation
+    run replace this file
+artifacts:
+  track_profile_sim_assisted.yaml:
+    path: /home/ryoo/roka_ws/reports/sim_assisted/section_2/track_profile_sim_assisted.yaml
+    sha256: 9ddf03ab4f9dd4fa025daedfc8800b3adeb3a87132ae4f653c5b21ef941a64d9
+    size_bytes: 38813
+  terrain_prior.pcd:
+    path: /home/ryoo/roka_ws/reports/sim_assisted/section_2/terrain_prior.pcd
+    sha256: 8dfe0e7acd9a3534afe3ea98329bf56986a29af11e7742b65cafe1993ce126e5
+    size_bytes: 46180
+  occupancy_3d.pcd:
+    path: /home/ryoo/roka_ws/reports/sim_assisted/section_2/occupancy_3d.pcd
+    sha256: 049fa0b2022adca1baf2cad4a287fa79f3b5dafcb17f4a21082539dbafa72733
+    size_bytes: 233503
+  hybrid_visual.pcd:
+    path: /home/ryoo/roka_ws/reports/sim_assisted/section_2/hybrid_visual.pcd
+    sha256: 4312c17c7f6ce03d5a098a9ea1cde57a42cf681af637bad121073219d056764f
+    size_bytes: 279498
+  hybrid_map.npz:
+    path: /home/ryoo/roka_ws/reports/sim_assisted/section_2/hybrid_map.npz
+    sha256: 8b2345c5554d08f96f954050dfeb510e5ce70a54f1e320aa841cf51e1bb79eee
+    size_bytes: 107572
+required_before_field_use:
+- register the real track start/module anchors to the MuJoCo course
+- replace prior Z/slope with dynamically validated FAST-LIO/SC-PGO PCD
+- compare live terrain residuals and reject the prior when inconsistent
+- approve the resulting real 3D route through the normal track map check
+inputs:
+  real_profile:
+    path: /home/ryoo/roka_ws/maps/flat/section_2/track_profile.yaml
+    sha256: 03b24f49c23b420c6d7c780d3f6c6fa3a0a4a3d76f91bc3cb90008c6ccbfb493
+  real_occupancy:
+    path: /home/ryoo/roka_ws/maps/flat/section_2/occupancy.yaml
+    sha256: acf9f975591f65b566c2b125276ad62bbe8d37c16a74dec146622c24afd2e216
+  simulation_profile:
+    path: /home/ryoo/roka_ws/maps/sim_pk3a_ground_truth/pk3a_risk_aware_profile_v2.yaml
+    sha256: 7fdfd9c415b98620dd1e1bc9b208f1bad5111a3e67a9449abd5d0372e9406858
+  demonstration_envelope:
+    path: /home/ryoo/roka_ws/models/traversability/traversability_envelope_v2.json
+    sha256: d8ad861f3486eab5930d7ffc575bedd59eb5a0deb2d8e4cdc0ce434f551819b6
+  mujoco_dynamic_safety:
+    path: /home/ryoo/roka_ws/models/traversability/mujoco_dynamic_safety_v1.json
+    sha256: 59daac81a3fd47c062c8e9237b6a58e82c64be7f2f5c78ff5569db06dc9c8536
+  real_sensor_contract:
+    path: /home/ryoo/roka_ws/maps/flat/section_2/sensor_contract.yaml
+    sha256: 2aa80c196afd1333a908d0c806cad526085128ca21ab20cd7bacf2c9aed671d9
+  real_session_metrics:
+    path: /home/ryoo/roka_ws/maps/flat/section_2/session_metrics.yaml
+    sha256: ba48074cd332b1c9c65df53b4192928ddc41bc7dd0629e08c291b900318090dc

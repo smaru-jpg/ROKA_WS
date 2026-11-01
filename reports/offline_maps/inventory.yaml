@@ -1,0 +1,100 @@
+schema_version: 1
+generated_date: '2026-09-02'
+policy:
+  playback_rate_for_quality_judgement: 1.0
+  merge_rule: different sessions are not fused without a shared global alignment
+  approved_runtime_maps_are_not_overwritten: true
+previews:
+  flat_2d_current: /home/ryoo/roka_ws/reports/offline_maps/previews/flat_2d_preview.png
+  track_3d_staging_diagnostic: /home/ryoo/roka_ws/reports/offline_maps/previews/track_3d_preview.png
+  three_dimensional_pass_reference: /home/ryoo/roka_ws/reports/offline_maps/previews/reference_pass/track_3d_preview.png
+flat_2d:
+  section_1_current:
+    source: /home/ryoo/roka_ws/maps/flat/section_1/sensors
+    source_metadata_sha256: 13c26e990e8eb0860d497c54b8dabec6dd4e7324d8322f8ec43a21017af4a503
+    duration_sec: 28.952
+    messages: 14577
+    result: READY
+    map: /home/ryoo/roka_ws/maps/flat/section_1/occupancy.yaml
+    dimensions_cells: [150, 139]
+    resolution_m: 0.05
+    route_length_m: 5.48
+  section_2_current:
+    source: /home/ryoo/roka_ws/maps/flat/section_2/sensors
+    source_metadata_sha256: 9c2d8acff7d3fda350da7908560b4624d080ec059acade18d33772e7e3a58202
+    duration_sec: 12.574
+    messages: 6009
+    result: READY
+    map: /home/ryoo/roka_ws/maps/flat/section_2/occupancy.yaml
+    dimensions_cells: [320, 125]
+    resolution_m: 0.05
+    route_length_m: 2.85
+  section_2_20260830_backup:
+    source: /home/ryoo/roka_ws/maps/flat/.backup/section_2/sensors
+    source_metadata_sha256: 058101a6215477707cc90746e7b2a308c1d458701b8e3d9a27a9ecec1a8dcf1a
+    duration_sec: 11.197
+    messages: 5217
+    result: READY_REFERENCE
+    map: /home/ryoo/roka_ws/maps/flat/.backup/section_2/occupancy.yaml
+    resolution_m: 0.05
+    route_length_m: 1.13
+three_dimensional:
+  section_1_from_flat_current:
+    source: /home/ryoo/roka_ws/maps/flat/section_1/sensors
+    result: DEGRADED
+    autonomy_eligible: false
+    map: /home/ryoo/roka_ws/maps/flat/section_1/derived/fastlio_sc_pgo/map.pcd
+    points: 3738
+    reason: FAST-LIO Z span 0.164 m exceeds the 0.150 m flat limit
+  section_2_from_flat_current:
+    source: /home/ryoo/roka_ws/maps/flat/section_2/sensors
+    result: DEGRADED
+    autonomy_eligible: false
+    map: /home/ryoo/roka_ws/maps/flat/section_2/derived/fastlio_sc_pgo/map.pcd
+    points: 5234
+    reason: FAST-LIO maximum pose step 0.247 m exceeds 0.100 m
+  section_2_from_20260830_backup:
+    source: /home/ryoo/roka_ws/maps/flat/.backup/section_2/sensors
+    result: READY_REFERENCE
+    autonomy_eligible: true
+    map: /home/ryoo/roka_ws/maps/flat/.backup/section_2/derived/fastlio_sc_pgo/map.pcd
+    points: 668
+    path_length_m: 1.354
+    maximum_step_m: 0.0335
+    z_span_m: 0.1192
+  section_2_track_staging:
+    source: /home/ryoo/roka_ws/maps/track/.staging/section_2/sensors
+    source_metadata_sha256: 6a30973decbb1e97facaef500a39e811e8d453ca8c386df22608482a29374ab8
+    duration_sec: 16.025
+    messages: 6747
+    result: DEGRADED
+    autonomy_eligible: false
+    map: /home/ryoo/roka_ws/maps/track/.staging/section_2/derived/fastlio_sc_pgo/map.pcd
+    points: 6483
+    reason: FAST-LIO maximum pose step 0.248 m exceeds 0.100 m
+calibration_only:
+  run_1:
+    source: /home/ryoo/roka_ws/reports/lidar_imu_calibration/run_1/sensors
+    duration_sec: 381.790
+    messages: 87274
+    diagnostic_map_1x: /home/ryoo/roka_ws/reports/offline_maps/calibration_run_1_3d_1x/map.pcd
+    points_1x: 23050
+    maximum_pose_step_m_1x: 0.1428
+    diagnostic_map_4x: /home/ryoo/roka_ws/reports/offline_maps/calibration_run_1_3d_4x_diagnostic/map.pcd
+    navigation_use: false
+    reason: calibration motion has no recorded navigation path and 1x replay exceeded the 0.100 m pose-step gate
+  run_2:
+    source: /home/ryoo/roka_ws/reports/lidar_imu_calibration/run_2/sensors
+    duration_sec: 277.278
+    messages: 65827
+    diagnostic_map_1x: /home/ryoo/roka_ws/reports/offline_maps/calibration_run_2_3d_1x/map.pcd
+    points_1x: 27164
+    maximum_pose_step_m_1x: 0.1192
+    diagnostic_map_4x: /home/ryoo/roka_ws/reports/offline_maps/calibration_run_2_3d_4x_diagnostic/map.pcd
+    navigation_use: false
+    reason: calibration motion has no recorded navigation path and 1x replay exceeded the 0.100 m pose-step gate
+excluded_from_mapping:
+  imu_six_face_bags: IMU-only calibration records; no LiDAR map can be formed
+  mission5_runs: no VLP-16 packet/cloud topic was recorded; trajectory analysis only
+  terrain_map_bags: one-message derived GridMap products, not raw mapping input
+  xbox_demonstrations: control demonstrations, not a synchronized LiDAR mapping session

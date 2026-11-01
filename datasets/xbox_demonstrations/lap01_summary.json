@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "csv_file": "datasets/xbox_demonstrations/lap01.csv",
+  "rows": 3713,
+  "enabled_rows": 3039,
+  "nonzero_command_rows": 2958,
+  "unsafe_rows": 324,
+  "maximum_abs_roll_deg": 179.507987109737,
+  "maximum_abs_pitch_deg": 34.751745373861425,
+  "minimum_actual_edge_m": 0.02500000037252903
+}

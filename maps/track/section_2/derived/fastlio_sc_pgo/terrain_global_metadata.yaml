@@ -1,0 +1,21 @@
+schema_version: 1
+source_pcd: /home/ryoo/roka_ws/maps/track/section_2/derived/.staging_fastlio_sc_pgo/map.pcd
+frame_id: map
+resolution_m: 0.1
+topic: /terrain/static_map
+layers:
+- elevation
+- elevation_inpainted
+- elevation_smooth
+- normal_vectors_x
+- normal_vectors_y
+- normal_vectors_z
+- slope
+- slope_deg
+- roughness
+- step_height
+- risk
+- traversability
+pipeline: ANYbotics grid_map_pcl + grid_map_filters
+role: full_optimized_pcd_review
+autonomy_approval_inherited: false

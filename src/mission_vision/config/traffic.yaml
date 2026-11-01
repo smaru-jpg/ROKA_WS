@@ -1,0 +1,78 @@
+mission:
+  name: "traffic"
+
+camera:
+  type: "ros"
+  topic: "/roka/arm_camera/color/image_raw"
+  width: 640
+  height: 480
+  fps: 30
+
+model:
+  path: "models/traffic_0831.pt"
+  sha256: "d463b849b9e9385380aace40e48ac9ecfbe55028f26b8667a8a9fa64ed518d50"
+  expected_classes: {0: blue, 1: red}
+  image_size: 640
+  device: "auto"
+  yolo_conf_threshold: 0.25
+
+inference:
+  detection_mode: "single"
+  timer_period_sec: 0.10
+
+display:
+  enabled: true
+
+ros:
+  result_topic: "/roka/vision/result"
+
+pipeline:
+  preprocess: []
+
+  detection:
+    - module: "mission_vision.filters.confidence_filter"
+      class: "ConfidenceFilter"
+      enabled: true
+      params:
+        threshold: 0.65
+
+    # The 0831 traffic HSV ranges are observation-only until D435 lighting
+    # tests establish final thresholds. Ratios appear in the debug overlay,
+    # but they do not reject an otherwise valid YOLO detection.
+    - module: "mission_vision.filters.hsv_ratio_filter"
+      class: "HSVRatioFilter"
+      enabled: true
+      params:
+        target_classes: ["blue"]
+        h_min: 90
+        h_max: 140
+        s_min: 50
+        s_max: 255
+        v_min: 50
+        v_max: 255
+        min_ratio: 0.0
+        reject_below: false
+        result_name: "blue_hsv"
+
+    - module: "mission_vision.filters.hsv_ratio_filter"
+      class: "HSVRatioFilter"
+      enabled: true
+      params:
+        target_classes: ["red"]
+        h_min: 170
+        h_max: 10
+        s_min: 50
+        s_max: 255
+        v_min: 50
+        v_max: 255
+        min_ratio: 0.0
+        reject_below: false
+        result_name: "red_hsv"
+
+  result:
+    - module: "mission_vision.filters.temporal_filter"
+      class: "TemporalFilter"
+      enabled: true
+      params:
+        window_size: 5
+        required_count: 3

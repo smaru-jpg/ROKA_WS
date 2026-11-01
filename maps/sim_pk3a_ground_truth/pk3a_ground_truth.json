@@ -1,0 +1,439 @@
+{
+  "schema_version": 1,
+  "source_scene": "src/simulation/roka_mujoco/description/pk3a/models/pk3a_closed_loop.xml",
+  "source_scene_sha256": "0ba32b40aaa6ae564bb06de9e2675cf677907ff2606c3023e5fc571b768f1df2",
+  "frame_id": "map",
+  "axis_convention": "+X forward at start, +Y left, +Z up",
+  "collision_geom_group": 4,
+  "track_geom_count": 64,
+  "track_geoms": {
+    "19": "track_S00_DB1",
+    "21": "track_S01_BA1",
+    "23": "track_S01_BA2",
+    "25": "track_S02_TA1",
+    "27": "track_S02_TB1",
+    "29": "track_S03_CV01",
+    "31": "track_S03_CV02",
+    "33": "track_S03_CV03",
+    "35": "track_S03_CV04",
+    "37": "track_S03_CV05",
+    "39": "track_S03_CV06",
+    "41": "track_S03_CV07",
+    "43": "track_S03_CV08",
+    "45": "track_S03_CV09",
+    "47": "track_S03_CV10",
+    "49": "track_S03_CV11",
+    "51": "track_S03_CV12",
+    "53": "track_S03_CV13",
+    "55": "track_S03_CV14",
+    "57": "track_S04_TB_EXIT",
+    "59": "track_S04_TA_EXIT",
+    "61": "track_S04_F_HALF",
+    "63": "track_S04_TA_ENTRY",
+    "65": "track_S04_TB_ENTRY",
+    "67": "track_S05_CV01",
+    "69": "track_S05_CV02",
+    "71": "track_S05_CV03",
+    "73": "track_S05_CV04",
+    "75": "track_S06_TB_EXIT",
+    "77": "track_S06_TA_EXIT",
+    "79": "track_S07_BA1",
+    "81": "track_S07_BA2",
+    "83": "track_S07_BA3",
+    "85": "track_S07_BA4",
+    "87": "track_S08_DB1",
+    "89": "track_S09_TA_ENTRY",
+    "91": "track_S09_TB_ENTRY",
+    "93": "track_S10_CV01",
+    "95": "track_S10_CV02",
+    "97": "track_S10_CV03",
+    "99": "track_S10_CV04",
+    "101": "track_S10_CV05",
+    "103": "track_S10_CV06",
+    "105": "track_S10_CV07",
+    "107": "track_S10_CV08",
+    "109": "track_S10_CV09",
+    "111": "track_S11_TB_EXIT",
+    "113": "track_S11_TA_EXIT",
+    "115": "track_S12_BA1",
+    "117": "track_S12_BA2",
+    "119": "track_S13_TA_ENTRY",
+    "121": "track_S13_TB_ENTRY",
+    "123": "track_S14_CV01",
+    "125": "track_S14_CV02",
+    "127": "track_S14_CV03",
+    "129": "track_S14_CV04",
+    "131": "track_S14_CV05",
+    "133": "track_S15_TB_EXIT",
+    "135": "track_S15_TA_EXIT",
+    "137": "track_S16_F_CLOSE",
+    "139": "track_S17_BA1",
+    "141": "track_S17_BA2",
+    "143": "track_S17_BA3",
+    "145": "track_S17_BA4"
+  },
+  "module_instances": [
+    {
+      "index": 0,
+      "id": "S00_DB1",
+      "module": "3DB1"
+    },
+    {
+      "index": 1,
+      "id": "S01_BA1",
+      "module": "3BA1"
+    },
+    {
+      "index": 2,
+      "id": "S01_BA2",
+      "module": "3BA1"
+    },
+    {
+      "index": 3,
+      "id": "S02_TA1",
+      "module": "3TA1L_C"
+    },
+    {
+      "index": 4,
+      "id": "S02_TB1",
+      "module": "3TB1L_C"
+    },
+    {
+      "index": 5,
+      "id": "S03_CV01",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 6,
+      "id": "S03_CV02",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 7,
+      "id": "S03_CV03",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 8,
+      "id": "S03_CV04",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 9,
+      "id": "S03_CV05",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 10,
+      "id": "S03_CV06",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 11,
+      "id": "S03_CV07",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 12,
+      "id": "S03_CV08",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 13,
+      "id": "S03_CV09",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 14,
+      "id": "S03_CV10",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 15,
+      "id": "S03_CV11",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 16,
+      "id": "S03_CV12",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 17,
+      "id": "S03_CV13",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 18,
+      "id": "S03_CV14",
+      "module": "3CV1_G1"
+    },
+    {
+      "index": 19,
+      "id": "S04_TB_EXIT",
+      "module": "3TB1L_C_M"
+    },
+    {
+      "index": 20,
+      "id": "S04_TA_EXIT",
+      "module": "3TA1L_C_M"
+    },
+    {
+      "index": 21,
+      "id": "S04_F_HALF",
+      "module": "F_HALF"
+    },
+    {
+      "index": 22,
+      "id": "S04_TA_ENTRY",
+      "module": "3TA1L_C_M"
+    },
+    {
+      "index": 23,
+      "id": "S04_TB_ENTRY",
+      "module": "3TB1L_C_M"
+    },
+    {
+      "index": 24,
+      "id": "S05_CV01",
+      "module": "3CV1_G2"
+    },
+    {
+      "index": 25,
+      "id": "S05_CV02",
+      "module": "3CV1_G2"
+    },
+    {
+      "index": 26,
+      "id": "S05_CV03",
+      "module": "3CV1_G2"
+    },
+    {
+      "index": 27,
+      "id": "S05_CV04",
+      "module": "3CV1_G2"
+    },
+    {
+      "index": 28,
+      "id": "S06_TB_EXIT",
+      "module": "3TB1L_C"
+    },
+    {
+      "index": 29,
+      "id": "S06_TA_EXIT",
+      "module": "3TA1L_C"
+    },
+    {
+      "index": 30,
+      "id": "S07_BA1",
+      "module": "3BA1"
+    },
+    {
+      "index": 31,
+      "id": "S07_BA2",
+      "module": "3BA1"
+    },
+    {
+      "index": 32,
+      "id": "S07_BA3",
+      "module": "3BA1"
+    },
+    {
+      "index": 33,
+      "id": "S07_BA4",
+      "module": "3BA1"
+    },
+    {
+      "index": 34,
+      "id": "S08_DB1",
+      "module": "3DB1"
+    },
+    {
+      "index": 35,
+      "id": "S09_TA_ENTRY",
+      "module": "3TA1L_C"
+    },
+    {
+      "index": 36,
+      "id": "S09_TB_ENTRY",
+      "module": "3TB1L_C"
+    },
+    {
+      "index": 37,
+      "id": "S10_CV01",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 38,
+      "id": "S10_CV02",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 39,
+      "id": "S10_CV03",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 40,
+      "id": "S10_CV04",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 41,
+      "id": "S10_CV05",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 42,
+      "id": "S10_CV06",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 43,
+      "id": "S10_CV07",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 44,
+      "id": "S10_CV08",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 45,
+      "id": "S10_CV09",
+      "module": "3CV1_G3"
+    },
+    {
+      "index": 46,
+      "id": "S11_TB_EXIT",
+      "module": "3TB1L_C_M"
+    },
+    {
+      "index": 47,
+      "id": "S11_TA_EXIT",
+      "module": "3TA1L_C_M"
+    },
+    {
+      "index": 48,
+      "id": "S12_BA1",
+      "module": "3BA1"
+    },
+    {
+      "index": 49,
+      "id": "S12_BA2",
+      "module": "3BA1"
+    },
+    {
+      "index": 50,
+      "id": "S13_TA_ENTRY",
+      "module": "3TA1L_C"
+    },
+    {
+      "index": 51,
+      "id": "S13_TB_ENTRY",
+      "module": "3TB1L_C"
+    },
+    {
+      "index": 52,
+      "id": "S14_CV01",
+      "module": "3CV1_G4"
+    },
+    {
+      "index": 53,
+      "id": "S14_CV02",
+      "module": "3CV1_G4"
+    },
+    {
+      "index": 54,
+      "id": "S14_CV03",
+      "module": "3CV1_G4"
+    },
+    {
+      "index": 55,
+      "id": "S14_CV04",
+      "module": "3CV1_G4"
+    },
+    {
+      "index": 56,
+      "id": "S14_CV05",
+      "module": "3CV1_G4"
+    },
+    {
+      "index": 57,
+      "id": "S15_TB_EXIT",
+      "module": "3TB1L_C_M"
+    },
+    {
+      "index": 58,
+      "id": "S15_TA_EXIT",
+      "module": "3TA1L_C_M"
+    },
+    {
+      "index": 59,
+      "id": "S16_F_CLOSE",
+      "module": "F_CLOSE"
+    },
+    {
+      "index": 60,
+      "id": "S17_BA1",
+      "module": "3BA1"
+    },
+    {
+      "index": 61,
+      "id": "S17_BA2",
+      "module": "3BA1"
+    },
+    {
+      "index": 62,
+      "id": "S17_BA3",
+      "module": "3BA1"
+    },
+    {
+      "index": 63,
+      "id": "S17_BA4",
+      "module": "3BA1"
+    }
+  ],
+  "resolution_m": 0.025,
+  "origin_xy_m": [
+    -16.900000000000002,
+    -13.625
+  ],
+  "size_cells": [
+    1088,
+    569
+  ],
+  "length_xy_m": [
+    27.200000000000003,
+    14.225000000000001
+  ],
+  "sampled_bounds_xy_m": [
+    -16.900000000000002,
+    10.3,
+    -13.625,
+    0.6000000000000014
+  ],
+  "valid_cell_count": 98221,
+  "collision_cell_count": 98976,
+  "excluded_hfield_apron_cell_count": 755,
+  "track_area_m2": 61.388125,
+  "minimum_elevation_m": 0.012199999764561653,
+  "maximum_elevation_m": 0.8432000279426575,
+  "maximum_slope_deg": 89.23604583740234,
+  "maximum_core_slope_deg": 89.23604583740234,
+  "maximum_neighbor_step_m": 0.06663990020751953,
+  "layers": [
+    "elevation",
+    "normal_x",
+    "normal_y",
+    "normal_z",
+    "slope_deg",
+    "step_height_m",
+    "edge_distance_m",
+    "collision_valid",
+    "rideable",
+    "valid",
+    "geom_id",
+    "module_index"
+  ]
+}

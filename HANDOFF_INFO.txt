@@ -1,0 +1,13 @@
+ROKA full portable handoff format: 3
+created_utc: 2026-09-03T23:10:34+00:00
+target: Ubuntu 22.04 / ROS 2 Humble / Python 3.10
+scope: source + maps + datasets + reports + models + simulation/reference
+excluded: build install log .roka_python and language/tool caches
+portable_file_count: 1780
+portable_uncompressed_bytes: 1037353704
+package_count: 28
+packages: fast_lio graph_based_slam lidar_imu_init lidarslam lidarslam_msgs mission_vision mujoco_ros2_control ndt_omp_ros2 roka_arm roka_fast_lio_localization roka_imu_driver roka_interfaces roka_map_localization roka_md_driver roka_mission roka_mujoco roka_nav2_bringup roka_nav_utils roka_robot_description roka_terrain_mapping roka_terrain_supervisor sc_pgo scanmatcher velodyne velodyne_driver velodyne_laserscan velodyne_msgs velodyne_pointcloud
+system dependencies: ./tools/install_system_dependencies_low_memory.sh
+staged build/install: ./tools/install_handoff.sh
+verify: roka verify
+YOLO locations: roka yolo-paths

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>sc_pgo</name>
+  <version>0.1.0</version>
+  <description>Scan Context and GTSAM pose graph backend hardened for ROKA PK-3A.</description>
+
+  <license>BSD</license>
+  <author email="taehun-kmu@kookmin.ac.kr">name</author>
+  <maintainer email="taehun-kmu@kookmin.ac.kr">name</maintainer>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>rosbag2</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>image_transport</depend>
+  <depend>cv_bridge</depend>
+  <depend>pcl_conversions</depend>
+  <depend>pcl_msgs</depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

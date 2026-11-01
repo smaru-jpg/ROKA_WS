@@ -1,0 +1,19 @@
+sim_mapped_profile_controller:
+  ros__parameters:
+    use_sim_time: true
+    odom_topic: /simulator/floating_base_state
+    cmd_vel_topic: /sim/cmd_vel_nav
+    status_topic: /sim/mapped_controller/status
+    auto_start: false
+    control_rate_hz: 30.0
+    lookahead_distance_m: 0.50
+    speed_scale: 1.0
+    maximum_linear_speed_mps: 0.30
+    maximum_angular_speed_radps: 0.80
+    linear_acceleration_mps2: 0.25
+    linear_deceleration_mps2: 0.40
+    maximum_cross_track_error_m: 0.28
+    maximum_roll_deg: 30.0
+    maximum_pitch_deg: 30.0
+    goal_tolerance_m: 0.14
+    odom_timeout_sec: 0.50

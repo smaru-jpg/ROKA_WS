@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-24T16:34:34+09:00",
+  "csv_file": "benchmarks/current_state_pk3a_2runs.csv",
+  "runs": 2,
+  "successes": 2,
+  "completion_rate": 1.0,
+  "worst_lateral_error_m": 0.1176,
+  "maximum_abs_roll_deg": 40.449,
+  "maximum_abs_pitch_deg": 32.55,
+  "decision": "PASS",
+  "recommendation": "manual_speed_step_test_allowed"
+}

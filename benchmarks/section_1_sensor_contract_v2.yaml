@@ -1,0 +1,156 @@
+schema_version: 2
+source: maps/section_1/sensors
+bag_fingerprint:
+  metadata_sha256: 0cf103fb1f0611fde311b1d06d6bed12b1c724ff500268cc86f352e550a604ee
+  data_files:
+  - name: sensors_0.db3.zstd
+    size_bytes: 8457384
+result: FAIL
+failures:
+- 'diagnostic topic was not recorded: /md/base_connected'
+- 'diagnostic topic was not recorded: /md/left/raw_state'
+- 'diagnostic topic was not recorded: /md/right/raw_state'
+- 'diagnostic topic was not recorded: /diagnostics'
+- wheel odometry pose covariance is zero or unavailable
+- wheel odometry twist covariance is zero or unavailable
+warnings: []
+topics:
+  /velodyne_packets:
+    type: velodyne_msgs/msg/VelodyneScan
+    expected_type: velodyne_msgs/msg/VelodyneScan
+    count: 254
+    rate_hz: 9.915
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: 101.049
+    record_minus_header_median_ms: 0.321
+    record_minus_header_p95_ms: 0.856
+    invalid_values: 0
+  /imu/data:
+    type: sensor_msgs/msg/Imu
+    expected_type: sensor_msgs/msg/Imu
+    count: 2447
+    rate_hz: 99.552
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: 10.0
+    record_minus_header_median_ms: -1.068
+    record_minus_header_p95_ms: 0.503
+    invalid_values: 0
+  /wheel/odom:
+    type: nav_msgs/msg/Odometry
+    expected_type: nav_msgs/msg/Odometry
+    count: 476
+    rate_hz: 20.036
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: 87.862
+    record_minus_header_median_ms: 0.302
+    record_minus_header_p95_ms: 0.875
+    invalid_values: 0
+  /tf:
+    type: tf2_msgs/msg/TFMessage
+    expected_type: tf2_msgs/msg/TFMessage
+    count: 3643
+    rate_hz: 0.0
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: null
+    record_minus_header_median_ms: null
+    record_minus_header_p95_ms: null
+    invalid_values: 0
+  /tf_static:
+    type: tf2_msgs/msg/TFMessage
+    expected_type: tf2_msgs/msg/TFMessage
+    count: 2
+    rate_hz: 0.0
+    header_backwards: 0
+    header_duplicates: 0
+    period_p95_ms: null
+    record_minus_header_median_ms: null
+    record_minus_header_p95_ms: null
+    invalid_values: 0
+  /md/base_connected:
+    type: null
+    expected_type: std_msgs/msg/Bool
+    count: 0
+    rate_hz: 0.0
+    invalid_values: 0
+  /md/left/raw_state:
+    type: null
+    expected_type: std_msgs/msg/Float64MultiArray
+    count: 0
+    rate_hz: 0.0
+    invalid_values: 0
+  /md/right/raw_state:
+    type: null
+    expected_type: std_msgs/msg/Float64MultiArray
+    count: 0
+    rate_hz: 0.0
+    invalid_values: 0
+  /diagnostics:
+    type: null
+    expected_type: diagnostic_msgs/msg/DiagnosticArray
+    count: 0
+    rate_hz: 0.0
+    invalid_values: 0
+velodyne_packets_per_scan:
+  minimum: 76
+  maximum: 76
+  median: 76.0
+lidar_imu_timing:
+  nearest_imu_minus_lidar_median_ms: 0.125
+  nearest_absolute_difference_p95_ms: 4.955
+calibration_excitation:
+  imu_peak_abs_gyro_radps:
+  - 0.0785
+  - 0.1187
+  - 0.2932
+  wheel_peak_abs_linear_mps: 0.3155
+  wheel_peak_abs_yaw_radps: 0.4087
+  sufficient_yaw_excitation: true
+  sufficient_roll_pitch_excitation: true
+imu_values:
+  acceleration_norm_mps2:
+    median: 9.7393
+    p05: 9.4485
+    p95: 10.0426
+  quaternion_norm:
+    minimum: 1.0
+    maximum: 1.0
+  covariance:
+    orientation_available_fraction: 1
+    angular_velocity_available_fraction: 1
+    linear_acceleration_available_fraction: 1
+wheel_odometry_covariance:
+  pose_nonzero_fraction: 0
+  twist_nonzero_fraction: 0
+md_feedback:
+  base_connected_false_samples: 0
+  controllers:
+    /md/left/raw_state:
+      samples: 0
+      peak_current_a: 0.0
+      nonzero_state_samples: 0
+    /md/right/raw_state:
+      samples: 0
+      peak_current_a: 0.0
+      nonzero_state_samples: 0
+diagnostics:
+  status_count: 0
+  error_status_count: 0
+tf_parents:
+  base_footprint:
+  - odom
+  base_link:
+  - odom
+  imu_link:
+  - base_link
+  odom:
+  - map
+  velodyne:
+  - base_link
+runtime_checks_still_required:
+- /velodyne_points fields x,y,z,intensity,ring,time
+- LiDAR-to-IMU physical time offset under sufficient angular motion
+- single live publisher ownership for dynamic TF

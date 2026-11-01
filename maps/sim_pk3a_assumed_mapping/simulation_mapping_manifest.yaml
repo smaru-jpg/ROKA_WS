@@ -1,0 +1,120 @@
+schema_version: 1
+created_utc: '2026-09-02T21:43:29.244898+00:00'
+status: SIMULATED_MAPPING_READY_FOR_RVIZ
+mapping_backend_assumption: VLP16_120deg+EBIMU+wheel_odom+FAST_LIO2+SC_PGO
+route_source: successful_manual_xbox_demonstration
+success_csv: /home/ryoo/roka_ws/datasets/xbox_demonstrations/lap01_2.csv
+failure_csvs_used_for_risk_only:
+- /home/ryoo/roka_ws/datasets/xbox_demonstrations/lap01.csv
+- /home/ryoo/roka_ws/datasets/xbox_demonstrations/fast_test01.csv
+- /home/ryoo/roka_ws/datasets/xbox_demonstrations/fast_test01_2.csv
+field_navigation_authorized: false
+reason: MuJoCo map and demonstrations are not real field observations
+route:
+  points: 789
+  length_m: 66.68849445006096
+  closure_distance_m: 0.061222811720498725
+  maximum_abs_roll_deg: 39.80588113983064
+  maximum_abs_pitch_deg: 32.285412115449894
+  maximum_risk: 0.8823529411764707
+  module_risk_summary:
+  - module_id: S17_BA4
+    sample_count: 22
+    maximum_risk: 0.8823529411764707
+    mean_risk: 0.18450763972296158
+    high_risk_sample_count: 2
+  - module_id: S14_CV01
+    sample_count: 8
+    maximum_risk: 0.75
+    mean_risk: 0.53125
+    high_risk_sample_count: 5
+  - module_id: S13_TB_ENTRY
+    sample_count: 14
+    maximum_risk: 0.7291666666666667
+    mean_risk: 0.3845669515379669
+    high_risk_sample_count: 3
+  - module_id: S06_TA_EXIT
+    sample_count: 14
+    maximum_risk: 0.7142857142857142
+    mean_risk: 0.3925131219248512
+    high_risk_sample_count: 5
+  - module_id: S12_BA2
+    sample_count: 22
+    maximum_risk: 0.703125
+    mean_risk: 0.5209958128992219
+    high_risk_sample_count: 16
+  - module_id: S05_CV02
+    sample_count: 8
+    maximum_risk: 0.6785714285714285
+    mean_risk: 0.3986766435957594
+    high_risk_sample_count: 1
+  - module_id: S05_CV01
+    sample_count: 11
+    maximum_risk: 0.6490384615384616
+    mean_risk: 0.49890009602904684
+    high_risk_sample_count: 5
+  - module_id: S13_TA_ENTRY
+    sample_count: 14
+    maximum_risk: 0.625
+    mean_risk: 0.45057478366426734
+    high_risk_sample_count: 8
+  - module_id: S05_CV04
+    sample_count: 8
+    maximum_risk: 0.576923076923077
+    mean_risk: 0.4289196175111609
+    high_risk_sample_count: 2
+  - module_id: S06_TB_EXIT
+    sample_count: 14
+    maximum_risk: 0.576923076923077
+    mean_risk: 0.35433312111516374
+    high_risk_sample_count: 2
+  - module_id: S14_CV02
+    sample_count: 8
+    maximum_risk: 0.5208333333333334
+    mean_risk: 0.40857578476477185
+    high_risk_sample_count: 2
+virtual_lidar:
+  total_rideable_cells: 98221
+  visible_cells_before_dropout: 98221
+  observed_cells: 90316
+  coverage_fraction: 1.0
+  horizontal_fov_deg: 120.0
+  vertical_fov_deg:
+  - -16.0
+  - 15.0
+  range_m:
+  - 0.3
+  - 25.0
+  dropout_fraction: 0.08
+  noise_stddev_m:
+  - 0.004
+  - 0.004
+  - 0.006
+products:
+  map.pcd:
+    size_bytes: 568031
+    sha256: aa5e78a42f08921d89422891f3716ea0cc92390cbfb688a945031b5668d51f00
+  map_dense.pcd:
+    size_bytes: 3334170
+    sha256: babadd61f2dad8548538dac6d3ae3f5ec734a1adfcc54e115469eb883564b906
+  surface.pcd:
+    size_bytes: 3341098
+    sha256: 806d2e803faeb2b68a178ba99354e521d38bda05ea589d81776d148758ac62c8
+  occupancy.pgm:
+    size_bytes: 619088
+    sha256: a8db6d40858242782dd7b504e9d3da9cc66bd5c92d40d2db47bb03bd9cda83aa
+  occupancy.yaml:
+    size_bytes: 149
+    sha256: 60c5db48e85383a5c24309625f37b2e940ae045ada530e38ad806225d355370f
+  pose_graph.g2o:
+    size_bytes: 5993
+    sha256: 8ba463b44079ba1a2b3d31f64e7cf9b1b5e72dbed0fb8703ce772a60566a96b9
+  track_profile.yaml:
+    size_bytes: 669171
+    sha256: 00ca67450f62feafdae698cb93f5be1305785f565511a99ad5bd6894f2485f7f
+  surface_extraction.yaml:
+    size_bytes: 545
+    sha256: a1c0333ed25ce77a475fa9e3ef24bd51ab11180cefdddd6d40b0f0579bb14cee
+  terrain_global_metadata.yaml:
+    size_bytes: 192
+    sha256: 645429575055303758ea43faf6ad037c5486b175c627f0d0bdba8c944591622a

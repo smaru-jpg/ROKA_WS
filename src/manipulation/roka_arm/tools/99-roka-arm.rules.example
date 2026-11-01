@@ -1,0 +1,5 @@
+# Replace both placeholders with the exact serial values shown by:
+#   ls -l /dev/serial/by-id
+# Never match only idVendor/idProduct; the two MD200T adapters are also FTDI.
+SUBSYSTEM=="tty", ATTRS{serial}=="ROKA_ARM_RS485_SERIAL", SYMLINK+="roka_arm_rs485", GROUP="dialout", MODE="0660"
+SUBSYSTEM=="tty", ATTRS{serial}=="ROKA_ARM_TTL_SERIAL", SYMLINK+="roka_arm_ttl", GROUP="dialout", MODE="0660"
